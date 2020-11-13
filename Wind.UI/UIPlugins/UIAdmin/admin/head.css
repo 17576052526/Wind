@@ -1,0 +1,10 @@
+﻿.head{display:flex;}
+.logo{width:220px;height:50px;line-height:50px;text-align:center;font-size: 16px;color:#D8E8F2;background-color:#367FA9;}
+.logo:hover{background-color:#357CA5;}
+.navbar{flex:1;height:50px;display:flex;background-color:#3C8DBC;}
+.navbar-btn{line-height:50px;padding:0px 10px;color: #D8E8F2;display:inline-block;position:relative;}
+.navbar-btn:hover{background-color:#367FA9;color:#fff;}
+.navbar-label{position:absolute;top:6px;right:3px;padding:1px 3px;line-height:1;border-radius:3px;color:#fff;background-color:#5CB85C;}
+@media (max-width:560px){
+    .logo{display:none;}
+}

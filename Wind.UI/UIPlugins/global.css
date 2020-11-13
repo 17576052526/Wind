@@ -1,0 +1,91 @@
+﻿/* 全局css文件，用于辅助布局 */
+/* 默认样式 */
+html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0px;padding: 0px;}
+*,*::before,*::after {box-sizing: border-box;}  /* 高度和宽度包括border-width和padding的值 */
+body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.42857143;color: #333;}
+html,body{height:100%;}
+ol,ul{list-style: none;}
+a{color:inherit;text-decoration: none;}
+select[disabled], button[disabled], input[type="button"][disabled], input[type="checkbox"][disabled], input[type="radio"][disabled] {opacity: 0.65;cursor: not-allowed;}
+/* 类样式 */
+.dvm{display:inline-block;vertical-align:middle;}
+.textR{text-align:right;}
+.textC{text-align:center;}
+.lineH1 {line-height:1;}
+.lineH12 {line-height:1.2;}
+.lineH13 {line-height:1.333;}
+.lineH15 {line-height:1.5;}
+
+.container{max-width:1200px;margin-left:auto;margin-right:auto;padding-left:10px;padding-right:10px;overflow:hidden;}
+.height100{height:100%;}
+
+.floatL,.floatLg>*{float:left;}
+.floatR,.floatRg>*{float:right;}
+.floatLg:after,.floatRg:after,.clear:after{display:table;content:" ";clear:both;}  /* 清除浮动 */
+
+/* 弹性布局 */
+.flex,.flexWrap,.flexCol,.flexBet,.flexAro{display:flex;}
+.flex1{flex:1;min-width:0;min-height:0;/*此处加min-width:0，是为了解决子元素超出宽度，父元素宽度也会溢出*/}
+.flexWrap{flex-wrap:wrap;}
+.flexCol{flex-direction:column;}
+.flexBet {justify-content:space-between;}
+.flexAro {justify-content:space-around;}
+/* padding */
+.padding5{padding:5px;}
+.padding10{padding:10px;}
+.padding15{padding:15px;}
+.padding20{padding:20px;}
+.paddingL5 {padding-left:5px;}
+.paddingL10 {padding-left:10px;}
+.paddingL15 {padding-left:15px;}
+.paddingL20 {padding-left:20px;}
+.paddingT5 {padding-top:5px;}
+.paddingT10 {padding-top:10px;}
+.paddingT15 {padding-top:15px;}
+.paddingT20 {padding-top:20px;}
+
+.paddingLR5 {padding-left:5px;padding-right:5px;}
+.paddingLR10 {padding-left:10px;padding-right:10px;}
+.paddingLR15 {padding-left:15px;padding-right:15px;}
+.paddingLR20 {padding-left:20px;padding-right:20px;}
+.paddingLR30 {padding-left:30px;padding-right:30px;}
+
+.paddingTB5 {padding-top:5px;padding-bottom:5px;}
+.paddingTB10 {padding-top:10px;padding-bottom:10px;}
+.paddingTB15 {padding-top:15px;padding-bottom:15px;}
+.paddingTB20 {padding-top:20px;padding-bottom:20px;}
+.paddingTB30 {padding-top:30px;padding-bottom:30px;}
+/* margin */
+.marginT5 {margin-top:5px;}
+.marginT10 {margin-top:10px;}
+.marginT15 {margin-top:15px;}
+.marginT20 {margin-top:20px;}
+.marginT30 {margin-top:30px;}
+
+.marginL5 {margin-left:5px;}
+.marginL10 {margin-left:10px;}
+.marginL15 {margin-left:15px;}
+.marginL20 {margin-left:20px;}
+.marginL30 {margin-left:30px;}
+
+.marginLR3g{margin-left:-3px;margin-right:-3px;}
+.marginLR5g{margin-left:-5px;margin-right:-5px;}
+.marginLR8g{margin-left:-8px;margin-right:-8px;}
+.marginLR10g{margin-left:-10px;margin-right:-10px;}
+.marginLR15g{margin-left:-15px;margin-right:-15px;}
+.marginLR3g>*{margin-left:3px;margin-right:3px;}
+.marginLR5g>*{margin-left:5px;margin-right:5px;}
+.marginLR8g>*{margin-left:8px;margin-right:8px;}
+.marginLR10g>*{margin-left:10px;margin-right:10px;}
+.marginLR15g>*{margin-left:15px;margin-right:15px;}
+
+.marginTB3g{margin-top:-3px;margin-bottom:-3px;}
+.marginTB5g{margin-top:-5px;margin-bottom:-5px;}
+.marginTB8g{margin-top:-8px;margin-bottom:-8px;}
+.marginTB10g{margin-top:-10px;margin-bottom:-10px;}
+.marginTB15g{margin-top:-15px;margin-bottom:-15px;}
+.marginTB3g>*{margin-top:3px;margin-bottom:3px;}
+.marginTB5g>*{margin-top:5px;margin-bottom:5px;}
+.marginTB8g>*{margin-top:8px;margin-bottom:8px;}
+.marginTB10g>*{margin-top:10px;margin-bottom:10px;}
+.marginTB15g>*{margin-top:15px;margin-bottom:15px;}

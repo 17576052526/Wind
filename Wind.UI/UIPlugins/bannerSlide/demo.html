@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <style type="text/css">
+        /*非必要样式*/
+        * {margin: 0px;padding: 0px;box-sizing: border-box;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="bannerSlide.css" />
+</head>
+<body>
+    <div class="bannerSlide" style="width:500px;height:300px;">
+        <div class="bannerSlideBox">
+            <ul>
+                <li style="background-color:#000;"></li>
+                <li style="background-color:#4cff00;"></li>
+                <li style="background-color:blue;"></li>
+            </ul>
+        </div>
+        <!--按钮-->
+        <ol></ol>
+    </div>
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="bannerSlide.js"></script>
+    <script type="text/javascript">
+        $('.bannerSlide').bannerSlide({
+            interval: 5000,
+            speed: 500,
+            isHoverStop: false,    //悬浮其上停止计时器，移动端一定要是false
+            callback: null
+        });
+    </script>
+</body>
+</html>

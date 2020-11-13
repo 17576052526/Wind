@@ -1,0 +1,142 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Data;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
+/// <summary>
+/// 扩展方法，调用时必须“对象实例.xxx()”
+/// </summary>
+public static class Extend
+{
+    #region Cookie 操作
+    /// <summary>
+    /// 设置Cookie
+    /// </summary>
+    /// <param name="hour">过期时间（单位：小时），默认关闭浏览器过期</param>
+    public static void SetCookie(this Controller cur, string key, string value, double? hour = null)
+    {
+        if (hour == null)
+        {
+            cur.HttpContext.Response.Cookies.Append(key, value);
+        }
+        else
+        {
+            cur.HttpContext.Response.Cookies.Append(key, value, new CookieOptions { Expires = DateTime.Now.AddHours(hour.Value) });
+        }
+    }
+
+    /// <summary>
+    /// 获取Cookie
+    /// </summary>
+    public static string GetCookie(this Controller cur, string key)
+    {
+        cur.HttpContext.Request.Cookies.TryGetValue(key, out string value);
+        return value;
+    }
+
+    /// <summary>
+    /// 删除Cookie
+    /// </summary>
+    public static void DeleteCookie(this Controller cur, string key)
+    {
+        cur.HttpContext.Response.Cookies.Delete(key);
+    }
+    #endregion
+
+}
+
+/// <summary>
+/// 公用辅助类
+/// </summary>
+public class Base
+{
+    //文件上传---代码已迁移到Common控制器
+    //文件下载---代码已迁移到Common控制器
+
+    
+    #region Json与字符串的互换
+    /// <summary>
+    /// DataTable 转json字符串
+    /// </summary>
+    public static string DataTable_Json(DataTable dt)
+    {
+        StringBuilder JsonStr = new StringBuilder();     //  [{"ID":1,"Title":"a{a"},{"ID":2,"Title":"b]b"},{"ID":3,"Title":"c\"c"}]
+        JsonStr.Append("[");
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            JsonStr.Append("{");
+            for (int j = 0; j < dt.Columns.Count; j++)
+            {
+                JsonStr.Append("\"");
+                JsonStr.Append(dt.Columns[j].ColumnName);
+                JsonStr.Append("\":\"");
+                JsonStr.Append(dt.Rows[i][j].ToString());
+                JsonStr.Append("\",");
+            }
+            JsonStr.Remove(JsonStr.Length - 1, 1);
+            JsonStr.Append("},");
+        }
+        JsonStr.Remove(JsonStr.Length - 1, 1);   //删除最后一个字符串
+        JsonStr.Append("]");
+        return JsonStr.ToString();
+    }
+    /// <summary>
+    /// DataRow 转json字符串
+    /// </summary>
+    public static string DataRow_Json(DataRow dr)
+    {
+        System.Text.StringBuilder str = new System.Text.StringBuilder("{");
+        for (int i = 0; i < dr.Table.Columns.Count; i++)
+        {
+            str.Append("\"");
+            str.Append(dr.Table.Columns[i].ColumnName);
+            str.Append("\":");
+            str.Append("\"");
+            str.Append(dr[i]);
+            str.Append("\",");
+        }
+        str.Remove(str.Length - 1, 1);
+        str.Append("}");
+        return str.ToString();
+    }
+    #endregion
+
+    #region 加密 解密
+    /// <summary>
+    /// 加密
+    /// </summary>
+    public static string Encry(string content)
+    {
+        string key = "wfnk5kfp";//密钥，加密解密密钥必须一致，只能填8位
+        byte[] val = Encoding.UTF8.GetBytes(content);
+        byte[] KeyByte = Encoding.UTF8.GetBytes(key);
+        byte[] IVByte = { 0xB3, 0x24, 0x36, 0x82, 0x17, 0xDF, 0x48, 0x93 };
+        DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+        MemoryStream ms = new MemoryStream();
+        CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(KeyByte, IVByte), CryptoStreamMode.Write);
+        cs.Write(val, 0, val.Length);
+        cs.FlushFinalBlock();
+        return Convert.ToBase64String(ms.ToArray());
+    }
+
+    /// <summary>
+    /// 解密
+    /// </summary>
+    public static string Decrypt(string content)
+    {
+        string key = "wfnk5kfp";//密钥，加密解密密钥必须一致，只能填8位
+        byte[] val = Convert.FromBase64String(content);
+        byte[] KeyByte = Encoding.UTF8.GetBytes(key);
+        byte[] IVByte = { 0xB3, 0x24, 0x36, 0x82, 0x17, 0xDF, 0x48, 0x93 };
+        DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+        MemoryStream ms = new MemoryStream();
+        CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(KeyByte, IVByte), CryptoStreamMode.Write);
+        cs.Write(val, 0, val.Length);
+        cs.FlushFinalBlock();
+        return Encoding.UTF8.GetString(ms.ToArray());
+    }
+    #endregion
+}

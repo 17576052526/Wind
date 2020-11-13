@@ -1,0 +1,11 @@
+/.vs
+/Wind.UI/bin
+/Wind.UI/obj
+/Common/bin
+/Common/obj
+/Wind.Model/bin
+/Wind.Model/obj
+/Wind.DAL/bin
+/Wind.DAL/obj
+/DMSCCore/bin
+/DMSCCore/obj
