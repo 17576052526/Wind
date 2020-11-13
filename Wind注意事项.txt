@@ -1,0 +1,2 @@
+Bundler & Minifier  用来压缩合并css、js的 Visual Studio插件，如果没安装，请先安装，Wind有用到
+如果生成不了，右键 bundleconfig.json 选择 Bundler & Minifier 选择 Product Output Files

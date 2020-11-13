@@ -1,0 +1,10 @@
+[
+  {
+    "outputFileName": "wwwroot/Admin/Css/index.css",
+    "inputFiles": [
+      "UIPlugins/font/css/fontello.css",
+      "UIPlugins/UI/UI.css",
+      "Areas/Admin/Css/Layout.css"
+    ]
+  }
+]
