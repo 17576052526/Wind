@@ -29,17 +29,14 @@ namespace Wind.UI
             //AddRazorPages(); //Page页面用这个，包含 AddMvcCore()
             //AddMvc();//既有MVC又有Page页面用这个，包含 AddControllersWithViews() 及 AddRazorPages() 功能。功能最全
 
-            //Razor页面、Mvc视图需要此配置
-            services.AddRazorPages();
-            //配置 Razor页面配置能Post提交（不配置会报400），MVC和WebApi不需要配置
-            services.AddMvc().AddRazorPagesOptions(s =>
+            services.AddMvc()
+            //配置 Razor页面能Post提交（不配置会报400），MVC和WebApi不需要此配置
+            .AddRazorPagesOptions(s =>
             {
                 s.Conventions.ConfigureFilter(new Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute());
-            });
-            //配置控制器 WebApi需要此配置
-            services.AddControllers();
-            //webApi 返回json默认是首字母小写，加此代码返回原样字段
-            services.AddControllersWithViews().AddJsonOptions(p => { p.JsonSerializerOptions.PropertyNamingPolicy = null; });
+            })
+            //webApi 返回json原样字段返回，默认是首字母小写
+            .AddJsonOptions(p => { p.JsonSerializerOptions.PropertyNamingPolicy = null; });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
