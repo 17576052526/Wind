@@ -23,6 +23,12 @@ namespace Wind.UI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //AddMvcCore(); //最基础的核心服务
+            //AddControllers(); //WebApi模式用这个，包含 AddMvcCore()
+            //AddControllersWithViews(); //标准MVC模式用这个，包含 AddControllers()
+            //AddRazorPages(); //Page页面用这个，包含 AddMvcCore()
+            //AddMvc();//既有MVC又有Page页面用这个，包含 AddControllersWithViews() 及 AddRazorPages() 功能。功能最全
+
             //Razor页面、Mvc视图需要此配置
             services.AddRazorPages();
             //配置 Razor页面配置能Post提交（不配置会报400），MVC和WebApi不需要配置
