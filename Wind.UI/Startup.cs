@@ -51,15 +51,19 @@ namespace Wind.UI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //------------默认配置-------------//
-            if (env.IsDevelopment())
+            //错误页面配置
+            if (env.IsDevelopment())//if (env.IsDevelopment()) 用来判断是开发环境还是发布环境
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();//页面直接显示异常信息
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error500");//500错误页面配置
+                app.UseStatusCodePagesWithReExecute("/Error404");//404错误页面配置
             }
 
             app.UseRouting();
 
-            //------------自定义配置-------------//
             //wwwroot 目录配置（静态资源目录）
             app.UseStaticFiles();
             //根目录下所有静态资源都可以访问
