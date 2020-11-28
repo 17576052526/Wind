@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Error\404.html" />
+    <Content Remove="wwwroot\Error\500.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Error\404.html" />
+    <None Include="wwwroot\Error\500.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Wind.DAL\Wind.DAL.csproj" />
     <ProjectReference Include="..\Wind.Model\Wind.Model.csproj" />
