@@ -58,8 +58,8 @@ namespace Wind.UI
             }
             else
             {
-                app.UseExceptionHandler("/Error/500");//500¥ÌŒÛ“≥√Ê≈‰÷√
-                app.UseStatusCodePagesWithReExecute("/Error/404");//404¥ÌŒÛ“≥√Ê≈‰÷√
+                app.UseExceptionHandler("/Error/500.html");//500¥ÌŒÛ“≥√Ê≈‰÷√
+                app.UseStatusCodePagesWithReExecute("/Error/404.html");//404¥ÌŒÛ“≥√Ê≈‰÷√
             }
 
             app.UseRouting();
