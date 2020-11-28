@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -37,6 +38,15 @@ namespace Wind.UI
             })
             //webApi 返回json原样字段返回，默认是首字母小写
             .AddJsonOptions(p => { p.JsonSerializerOptions.PropertyNamingPolicy = null; });
+
+            //配置身份认证
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
+            {
+                //config.Cookie.HttpOnly = true; //设置之后js不能通过脚本读取cookie
+                //config.ExpireTimeSpan = TimeSpan.FromMinutes(20);//设置过期时间
+                config.Cookie.Name = "AdminUser";
+                config.LoginPath = "/Admin/Login";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -69,7 +79,12 @@ namespace Wind.UI
             //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Areas/admin")),
             //    RequestPath = new PathString(value: "/admin")
             //});
-            //配置 MVC、Razor页面、WebApi
+
+            //配置身份认证，必须要写在app.UseRouting();之后，app.UseEndpoints() 之前
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            //配置 路由
             app.UseEndpoints(endpoints =>
             {
                 //配置Razor页面路由
