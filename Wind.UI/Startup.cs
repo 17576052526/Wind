@@ -47,6 +47,9 @@ namespace Wind.UI
                 config.Cookie.Name = "AdminUser";
                 config.LoginPath = "/Admin/Login";
             });
+
+            //配置能使用 Session
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -87,7 +90,8 @@ namespace Wind.UI
             //配置身份认证，必须要写在app.UseRouting();之后，app.UseEndpoints() 之前
             app.UseAuthentication();
             app.UseAuthorization();
-
+            //配置能使用 Session，必须要写在app.UseEndpoints() 之前
+            app.UseSession();
             //配置 路由
             app.UseEndpoints(endpoints =>
             {
