@@ -142,7 +142,23 @@ public class Base
     #endregion
 
     #region 缓存
-    private static MemoryCache Cache = null;
+    private static MemoryCache _Cache;
+    private static MemoryCache Cache
+    {
+        get
+        {
+            if (_Cache == null)
+            {
+                _Cache = new MemoryCache(new MemoryCacheOptions()
+                {
+                    //SizeLimit = 1000,//缓存最大为份数
+                    //CompactionPercentage = 0.2,//缓存满了时，压缩20%（即删除 SizeLimit*CompactionPercentage份优先级低的缓存项）
+                    //ExpirationScanFrequency = TimeSpan.FromSeconds(60)//每隔多久查找一次过期项，默认一分钟查找一次
+                });
+            }
+            return _Cache;
+        }
+    }
     /// <summary>
     /// 设置缓存
     /// </summary>
@@ -150,15 +166,6 @@ public class Base
     /// <param name="absolutely">true：绝对过期时间，false：相对过期时间（还未过期被访问则刷新过期时间）</param>
     public static void SetCache(string key, string value, int expirationTime = 20, bool absolutely = true)
     {
-        if (Cache == null)
-        {
-            Cache = new MemoryCache(new MemoryCacheOptions()
-            {
-                //SizeLimit = 1000,//缓存最大为份数
-                //CompactionPercentage = 0.2,//缓存满了时，压缩20%（即删除 SizeLimit*CompactionPercentage份优先级低的缓存项）
-                //ExpirationScanFrequency = TimeSpan.FromSeconds(60)//每隔多久查找一次过期项，默认一分钟查找一次
-            });
-        }
         if (absolutely)
         {
             Cache.Set(key, value, TimeSpan.FromMinutes(expirationTime));//绝对过期时间
