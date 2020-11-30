@@ -164,7 +164,7 @@ public class Base
     /// </summary>
     /// <param name="expirationTime">过期时间（单位分钟）</param>
     /// <param name="absolutely">true：绝对过期时间，false：相对过期时间（还未过期被访问则刷新过期时间）</param>
-    public static void SetCache(string key, string value, int expirationTime = 20, bool absolutely = true)
+    public static void SetCache(object key, object value, int expirationTime = 20, bool absolutely = true)
     {
         if (absolutely)
         {
@@ -181,7 +181,7 @@ public class Base
     /// <summary>
     /// 获取缓存
     /// </summary>
-    public static object GetCache(string key)
+    public static object GetCache(object key)
     {
         return Cache.Get(key);
     }
