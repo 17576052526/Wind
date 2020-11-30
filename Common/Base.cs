@@ -185,5 +185,12 @@ public class Base
     {
         return Cache.Get(key);
     }
+    /// <summary>
+    /// 移除缓存
+    /// </summary>
+    public static void RemoveCache(object key)
+    {
+        Cache.Remove(key);
+    }
     #endregion
 }
