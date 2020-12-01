@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -121,5 +125,47 @@ namespace Wind.UI.Controllers
             return File(CreateImage(code), "image/Jpeg");//生成图片并输出到客户端
         }
         #endregion
+
+        //登录（不用于WebApi，WebApi登录另写）
+        public IActionResult Login(string userName, string userPwd, string verifyCode)
+        {
+            //判断验证码
+            string key = Request.HttpContext.Connection.RemoteIpAddress + "_LoginCount";
+            int count = Convert.ToInt32(Base.GetCache(key)) + 1;
+            Base.SetCache(key, count);
+            if (count > 5)//第六次开始验证验证码
+            {
+                if (verifyCode != HttpContext.Session.GetString("VerifyCode"))
+                {
+                    return Content("-2");
+                }
+            }
+            //判断用户名密码
+            DataTable dt = DbHelper.Select("select * from Sys_Admin where UserName=@UserName and UserPwd=@UserPwd", new { UserName = userName, UserPwd = Base.Encry(userPwd) });
+            if (dt.Rows.Count > 0)
+            {
+                DataRow dr = dt.Rows[0];
+                //存储用户信息（存储到cookie）
+                var claims = new List<Claim>(){
+                    new Claim(ClaimTypes.Name, (string)dr["UserName"]),
+                    //new Claim("FullName", "bbb"),
+                    //new Claim(ClaimTypes.Role, "Administrator"),
+                };
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                //发放登录凭证
+                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                //往 HttpContext.User.Claims 里面添加值
+                //HttpContext.User.AddIdentity(new ClaimsIdentity(new List<Claim>() { new Claim("qwe", "ffffffff") }));
+                //获取用户信息
+                //string name = HttpContext.User.Claims.First(s => s.Type == "qwe").Value;
+
+                Base.RemoveCache(key);
+                return Content("1");
+            }
+            else
+            {
+                return Content(count > 4 ? "-3" : "-1");
+            }
+        }
     }
 }
