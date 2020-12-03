@@ -45,6 +45,45 @@ body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px
 .txt{background-color:transparent;border:none;outline:none;flex:1;padding-left:5px;}
 .btn{width:100%;padding: 8px 10px;text-align: center;border: 1px solid #48B8A2;border-radius: 20px;background-color: #30C3A6;color: #fff;user-select: none;}
     </style>
+    <script type="text/javascript">
+        //ajax
+        function ajax(url, data, fn) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, false);
+            // 添加http头，发送信息至服务器时内容编码类型
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200 || xhr.status == 304) {
+                        // console.log(xhr.responseText);
+                        fn(xhr.responseText);
+                    }
+                }
+            }
+            xhr.send(data);
+        }
+        //登录
+        function login() {
+            document.getElementById('loading').style.display = 'inline-block';
+            var userName = document.getElementById('userName').value;
+            var userPwd = document.getElementById('userPwd').value;
+            var verifyCode = document.getElementById('verifyCode').value;
+            if (userName.length == 0) {
+                alert('请输入用户名');
+            } else if (userPwd.length == 0) {
+                alert('请输入密码');
+            }else if (document.getElementById('verifyCodeBox').style.display != 'none' && verifyCode.length == 0) {
+                alert('请输入验证码');
+            }
+            //绑定 login() ,ajax请求地址，document.getElementById 的id
+            ajax('/Common/Login', 'userName=' + userName + '&userPwd=' + userPwd, function (msg) {
+                document.getElementById('loading').style.display = 'none';
+                if (msg == -1) {
+                    alert('用户名或密码错误');
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="box-center">
