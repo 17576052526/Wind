@@ -40,8 +40,8 @@ body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px
 .box-center{display:flex;justify-content:center;align-items:center;height:100vh;padding:10px 20px;}
 .contact{width:100%;max-width:370px;padding:20px 30px;background-color:rgba(255,255,255,.2);border-radius:4px;}
 .title{margin-bottom:20px;padding:15px 0px;font-size:18px; text-align:center;color:#fff;}
-.row{margin-bottom:20px;}
-.txt-box{border:1px solid #ccc;background-color:#fff;border-radius:20px;padding:7px 8px;display:flex;}
+.row{margin-bottom:20px;display:flex;align-items:center;}
+.txt-box{border:1px solid #ccc;background-color:#fff;border-radius:20px;padding:7px 8px;}
 .txt{background-color:transparent;border:none;outline:none;flex:1;padding-left:5px;}
 .btn{width:100%;padding: 8px 10px;text-align: center;border: 1px solid #48B8A2;border-radius: 20px;background-color: #30C3A6;color: #fff;user-select: none;}
     </style>
@@ -53,6 +53,7 @@ body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px
             <div class="row txt-box"><i class="icon-user"></i><input type="text" placeholder="请输入登录名" class="txt" /></div>
             <div class="row txt-box"><i class="icon-lock"></i><input type="password" placeholder="请输入密码" class="txt" /></div>
             <div class="row txt-box"><i class="icon-shield"></i><input type="text" placeholder="请输入验证码" class="txt" /><img src="/Common/VerifyCode" style="margin-top:-3px;margin-bottom:-3px;" title="看不清? 换一张" onclick="this.src='/Common/VerifyCode?id='+Math.random()" /></div>
+            <div class="row">&nbsp;&nbsp;<input type="checkbox" id="chePwd" /><label for="chePwd" style="color:#f5f5f5;">记住密码</label></div>
             <div class="row"><button class="btn"><i class="icon-spin4 animate-spin"></i>登录</button></div>
         </div>
     </div>
