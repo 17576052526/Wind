@@ -135,7 +135,7 @@ namespace Wind.UI.Controllers
             Base.SetCache(key, count);
             if (count > 5)//第六次开始验证验证码
             {
-                if (verifyCode != HttpContext.Session.GetString("VerifyCode"))
+                if (verifyCode.ToUpper() != HttpContext.Session.GetString("VerifyCode"))
                 {
                     return Content("-2");
                 }
