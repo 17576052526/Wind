@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Admin\Login.html" />
     <Content Remove="wwwroot\Error\404.html" />
     <Content Remove="wwwroot\Error\500.html" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Admin\Login.html" />
     <None Include="wwwroot\Error\404.html" />
     <None Include="wwwroot\Error\500.html" />
   </ItemGroup>
