@@ -3,6 +3,8 @@ Devart T4 Editor  T4 高亮插件
 此类库和Wind无业务关联，Wind不引用此类库
 此类库是起辅助作用的
 
+UIBlock 文件夹是页面布局块，例如：登录页面、后台页面头部、后台页面左边，主要要达到的效果是：后台头部、左边导航栏复用，企业官网头部、企业官网各个布局块的复用
+UIPlugins 是扩展插件
 
 jquery.js 是用来给 UIPlugins 下的插件引用的，和 Wind中的 jquery.js 无关
 global.css 是用来给 UIBlock 下的块引用的，尽可能的和 Wind中的 global.css 保持一致，以Wind中的 global.css为准
