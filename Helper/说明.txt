@@ -1,0 +1,4 @@
+﻿此类库必须是.net framework的，因为DMSC必须要 .net framework 的
+Devart T4 Editor  T4 高亮插件
+此类库和Wind无业务关联，Wind不引用此类库
+此类库是起辅助作用的
