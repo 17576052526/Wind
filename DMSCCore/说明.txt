@@ -1,3 +1,0 @@
-﻿此类库必须是.net framework的
-此文件夹是代码生成器的核心部分
-Devart T4 Editor  T4 高亮插件
