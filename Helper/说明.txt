@@ -2,3 +2,9 @@
 Devart T4 Editor  T4 高亮插件
 此类库和Wind无业务关联，Wind不引用此类库
 此类库是起辅助作用的
+
+
+jquery.js 是用来给 UIPlugins 下的插件引用的，和 Wind中的 jquery.js 无关
+global.css 是用来给 UIBlock 下的块引用的，尽可能的和 Wind中的 global.css 保持一致，以Wind中的 global.css为准
+UI.css 在Helper 下是作为插件存在的，要与Wind下的UI.css保持一致，以 Wind中的UI.css为准
+其他不常用的插件以Helper中的为准，Wind中升级，Helper下自己看着办，不一定要升级
