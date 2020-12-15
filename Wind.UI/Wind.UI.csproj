@@ -21,7 +21,7 @@
     <None Include="wwwroot\Admin\Css\font\font\fontello.ttf" />
     <None Include="wwwroot\Admin\Css\font\font\fontello.woff" />
     <None Include="wwwroot\Admin\Css\font\font\fontello.woff2" />
-    <None Include="wwwroot\Admin\Css\Layout.css" />
+    <None Include="wwwroot\Admin\Css\index.css" />
     <None Include="wwwroot\Admin\Login.html" />
     <None Include="wwwroot\Error\404.html" />
     <None Include="wwwroot\Error\500.html" />
