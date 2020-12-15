@@ -58,27 +58,11 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .form-item>span:first-child{width:80px;padding-right:10px;}
 .form-item>*:nth-child(2){flex:1;min-width:190px;width:0;/* width:0防止<select>超长时，布局错乱 */}
 /* 输入框 */
-.input-text{
-    padding: 7px 10px;
-    font-size: 14px;
-    color: #555;
-    border: 1px solid #d2d6de;
-    vertical-align: middle;
-    outline:none;
-}
+.input-text{padding: 7px 10px;font-size: 14px;color: #555;border: 1px solid #d2d6de;vertical-align: middle;outline:none;}
 .input-text:focus {border-color: #3C8DBC;}
 /* 表格 */
-.table {
-    min-width: 100%;
-    border-spacing: 0;
-    border: 1px solid #ddd;
-}
-.table th,.table td{
-    padding: 8px;
-    line-height: 1.42857143;
-    border-bottom: 1px solid #ddd;
-    border-right:1px solid #ddd;
-}
+.table {min-width: 100%;border-spacing: 0;border: 1px solid #ddd;}
+.table th,.table td{padding: 8px;line-height: 1.42857143;border-bottom: 1px solid #ddd;border-right:1px solid #ddd;}
 .table tr:last-child td{border-bottom:none;}
 .table tr>*:last-child{border-right:none;}
 .table thead tr:last-child th{border-bottom:2px solid #ddd;}
@@ -86,20 +70,9 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .table tbody tr:hover td {background-color:#f5f5f5;}
 .table td img{max-width:100%;max-height:30px;margin-top:-12px;margin-bottom:-10px;}
 /* box 框 */
-.box,.box-default,.box-primary,.box-success,.box-info,.box-danger,.box-warning {
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    border-radius: 3px;
-    /*不要overflow:hidden;*/
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-}
+.box,.box-default,.box-primary,.box-success,.box-info,.box-danger,.box-warning {box-shadow: 0 1px 1px rgba(0,0,0,0.1);border-radius: 3px;/*不要overflow:hidden;*/background-color: #fff;display: flex;flex-direction: column;}
 .box-head {padding: 10px 10px;border-bottom: 1px solid #eee;color:#444;}
-.box-body {
-    padding: 10px 10px;
-    flex-grow: 1; /*此处不能用flex:1*/
-    overflow: auto; /*overflow:auto;和min-height:0至少要存在一个，否则内容超出，高度会跟着变化*/
-}
+.box-body {padding: 10px 10px;flex-grow: 1; /*此处不能用flex:1*/overflow: auto; /*overflow:auto;和min-height:0至少要存在一个，否则内容超出，高度会跟着变化*/}
 .box-foot {border-top: 1px solid #eee;padding: 10px 10px;text-align: center;}
 .box-default{border-top:3px solid #D2D6DE;}
 .box-primary {border-top:3px solid #3c8dbc;}
@@ -122,27 +95,7 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .pager>a.pager-none{background-color:#fff;opacity:0.65;cursor:not-allowed;}
 .pager>a.pager-active{background-color:#eee;cursor:default;}
 /* .fixed-center-box是遮罩层，子节点自动居中 */
-.fixed-center-box {
-    background-color: rgba(255,255,255,.3);
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    z-index:100;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+.fixed-center-box {background-color: rgba(255,255,255,.3);position: absolute;left: 0px;top: 0px;z-index:100;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;}
 /* 浮动居中，无遮罩层，不能用作鼠标移动div */
-.fixed-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index:1;
-    transform: translateX(-50%) translateY(-50%);
-    box-shadow:0px 0px 7px #ccc;
-}
-.fixed{
-    position: absolute;left:0px;top:0px;z-index:1;box-shadow:0px 0px 7px #ccc;
-}
+.fixed-center {position: absolute;top: 50%;left: 50%;z-index:1;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 7px #ccc;}
+.fixed{position: absolute;left:0px;top:0px;z-index:1;box-shadow:0px 0px 7px #ccc;}
