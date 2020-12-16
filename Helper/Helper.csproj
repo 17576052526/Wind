@@ -64,6 +64,9 @@
     <Content Include="UIBlock\img\logo.png" />
     <Content Include="UIBlock\list-img1.html" />
     <Content Include="UIBlock\Login.html" />
+    <Content Include="UIPlugins\alert\alert.css" />
+    <Content Include="UIPlugins\alert\alert.js" />
+    <Content Include="UIPlugins\alert\demo.html" />
     <Content Include="UIPlugins\banner-fade\banner-fade.css" />
     <Content Include="UIPlugins\banner-fade\banner-fade.js" />
     <Content Include="UIPlugins\banner-fade\demo.html" />
