@@ -17,3 +17,12 @@ $(document).on('click', '.tree-switch', function () {
         box.addClass('tree-active');
     }
 });
+//左边显示隐藏 .left-switch 开关按钮  #left 显示隐藏的块
+$('.left-switch').on('click', function () {
+    var cur = $('#left');
+    if (cur.css('display') == 'none') {
+        cur.css('display', 'block');
+    } else {
+        cur.css('display', 'none');
+    }
+});
