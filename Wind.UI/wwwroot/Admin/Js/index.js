@@ -18,7 +18,7 @@ $(document).on('click', '.tree-switch', function () {
     }
 });
 //左边显示隐藏 .left-switch 开关按钮  #left 显示隐藏的块
-$('.left-switch').on('click', function () {
+$(document).on('click','.left-switch', function () {
     var cur = $('#left');
     if (cur.css('display') == 'none') {
         cur.css('display', 'block');
