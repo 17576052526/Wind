@@ -1,4 +1,4 @@
-﻿//左边搜索框搜索事件  .tree-search 输入框，.tree 树的项，.tree-box 子级的父级，tree-active 打开，注意：不能在节点用style 属性设置display，如果要设置显示隐藏请用类样式设置
+﻿//树结构搜索插件  .tree-search 输入框，.tree 树的项，.tree-box 子级的父级，tree-active 打开，注意：不能在节点用style 属性设置display，如果要设置显示隐藏请用类样式设置
 $(document).on('focus', '.tree-search', function () {
     function search(str) {
         $('.tree').each(function () {
