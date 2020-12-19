@@ -35,6 +35,7 @@ $(document).on('focus', '.tree-search', function () {
             var che = box.children(':contains("' + str + '")');
             if (che.length > 0) {
                 $this.css('display', '').addClass('tree-active');
+                box.css('display', '');
                 che.css('display', '');
                 box.children().not(che).css('display', 'none');
             } else {
