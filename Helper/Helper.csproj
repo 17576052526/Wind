@@ -132,6 +132,7 @@
     <Content Include="UIPlugins\tr-checked\tr-checked.js" />
     <Content Include="UIPlugins\tree\demo.html" />
     <Content Include="UIPlugins\tree\demo1.html" />
+    <Content Include="UIPlugins\tree\tree-search.js" />
     <Content Include="UIPlugins\tree\tree.css" />
     <Content Include="UIPlugins\tree\tree.js" />
     <Content Include="UIPlugins\tree\tree1.css" />
