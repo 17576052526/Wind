@@ -1,7 +1,7 @@
 ﻿/*
     复选框选中父级<tr>添加类样式
         .check-item 触发事件的复选框
-        .tr-checked 选中时添加在<tr>上的类样式
+        .checked-tr 选中时添加在<tr>上的类样式
 */
 //js修改checked属性也能触发change事件（这段代码容易引发未知的bug，一般不用）
 /*
@@ -17,9 +17,9 @@ $.propHooks.checked = {
 //复选框选中，tr添加类样式
 $(document).on('change', '.check-item', function () {
     if ($(this).prop('checked')) {
-        $(this).closest('tr').addClass('tr-checked');
+        $(this).closest('tr').addClass('checked-tr');
     }
     else {
-        $(this).closest('tr').removeClass('tr-checked');
+        $(this).closest('tr').removeClass('checked-tr');
     }
 });
