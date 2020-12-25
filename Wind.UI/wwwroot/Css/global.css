@@ -1,12 +1,10 @@
-﻿/* 全局css文件，用于辅助布局 */
-/* 默认样式 */
+﻿/* 布局css，用于辅助布局 */
 html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0px;padding: 0px;}
 *,*::before,*::after {box-sizing: border-box;}  /* 高度和宽度包括border-width和padding的值 */
 body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.42857143;color: #333;}
 html,body{height:100%;}
 ol,ul{list-style: none;}
 a{color:inherit;text-decoration: none;}
-select[disabled], button[disabled], input[type="button"][disabled], input[type="checkbox"][disabled], input[type="radio"][disabled] {opacity: 0.65;cursor: not-allowed;}
 /* 类样式 */
 .dvm{display:inline-block;vertical-align:middle;}
 .textR{text-align:right;}
