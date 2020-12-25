@@ -138,9 +138,8 @@
     <Content Include="UIPlugins\tree\tree1.css" />
     <Content Include="UIPlugins\AdminUI\Admin\default.html" />
     <Content Include="UIPlugins\AdminUI\Admin\edit.html" />
-    <Content Include="UIPlugins\AdminUI\Admin\head.css" />
+    <Content Include="UIPlugins\AdminUI\Admin\index.css" />
     <Content Include="UIPlugins\AdminUI\Admin\index.html" />
-    <Content Include="UIPlugins\AdminUI\Admin\left.css" />
     <Content Include="UIPlugins\AdminUI\Admin\list.html" />
     <Content Include="UIPlugins\AdminUI\UI\demo.html" />
     <Content Include="UIPlugins\AdminUI\UI\UI.css" />

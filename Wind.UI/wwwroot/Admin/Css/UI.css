@@ -1,12 +1,8 @@
-﻿/* UI样式，例如：表格样式、按钮样式、输入框样式，不包括布局样式（修改页面布局，此文件不需要动） */
-
-/* 默认样式 */
+﻿/* 用于后台管理系统的UI框架，包含但不限于（表格、表单、按钮、box框），不包括布局样式（更改页面布局不需要修改此文件） */
 html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0px;padding: 0px;}
 *,*::before,*::after {box-sizing: border-box;}  /* 高度和宽度包括border-width和padding的值 */
 body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.42857143;color: #333;background-color: #ECF0F5;}
 html,body{height:100%;}
-ol,ul{list-style: none;}
-a{color:inherit;text-decoration: none;}
 select[disabled], button[disabled], input[type="button"][disabled], input[type="checkbox"][disabled], input[type="radio"][disabled] {opacity: 0.65;cursor: not-allowed;}
 /*预防高度撑开*/
 .h-pre{margin-top:-12px;margin-bottom:-10px;}
