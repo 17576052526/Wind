@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="animation-showHide.css" />
+</head>
+<body>
+    <!--
+        框显示隐藏动画
+        .animation-visbHid 用来设置一开始就是隐藏的元素（只能用这个设置隐藏，不能用display:none，或另外写visibility:visible有优先级问题）
+        .animation-show 显示框的动画
+        .animation-hide 隐藏框的动画
+        -->
+    <input type="button" value="显示" onclick="$('#aa').addClass('animation-show').removeClass('animation-hide')" />
+    <input type="button" value="隐藏" onclick="$('#aa').addClass('animation-hide').removeClass('animation-show')" />
+
+    <div id="aa" class="animation-visbHid">11111</div>
+
+    <script type="text/javascript" src="../jquery.js"></script>
+</body>
+</html>
