@@ -67,6 +67,8 @@
     <Content Include="UIPlugins\alert\alert.css" />
     <Content Include="UIPlugins\alert\alert.js" />
     <Content Include="UIPlugins\alert\demo.html" />
+    <Content Include="UIPlugins\animation-showHide\animation-showHide.css" />
+    <Content Include="UIPlugins\animation-showHide\demo.html" />
     <Content Include="UIPlugins\banner-fade\banner-fade.css" />
     <Content Include="UIPlugins\banner-fade\banner-fade.js" />
     <Content Include="UIPlugins\banner-fade\demo.html" />
