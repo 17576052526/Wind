@@ -3,17 +3,6 @@ using System;
 using System.IO;
 
 /// <summary>
-/// 分页视图实体类，该类和分页控件无关，仅用于控制器传递数据到视图
-/// </summary>
-public class PageModel
-{
-    public int DataCount { set; get; }
-    public int PageSize { set; get; }
-    public int PageIndex { set; get; }
-    public object DataList { set; get; }//此处不用List<T> 是用于兼容 DataTable 类型
-}
-
-/// <summary>
 /// 分页控件 .net core版
 /// </summary>
 public static class PagerClass
