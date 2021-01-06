@@ -45,7 +45,7 @@ namespace Wind.UI
                 //config.Cookie.HttpOnly = true; //设置之后js不能通过脚本读取cookie
                 //config.ExpireTimeSpan = TimeSpan.FromMinutes(20);//设置过期时间
                 config.Cookie.Name = "AdminUser";
-                config.LoginPath = "/Admin/Login";
+                config.LoginPath = "/Admin/Login.html";
             });
 
             //配置能使用 Session
