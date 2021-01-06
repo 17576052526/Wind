@@ -21,7 +21,7 @@ namespace Wind.UI.Areas.Admin.Pages
         /// <summary>
         /// 分页-总数据量
         /// </summary>
-        public int PageCount { set; get; }
+        public int DataCount { set; get; }
         /// <summary>
         /// 分页-当前页码
         /// </summary>
