@@ -52,6 +52,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Template.txt</LastGenOutput>
     </Content>
+    <Content Include="DMSCTemp\_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>_Model.txt</LastGenOutput>
+    </Content>
+    <Content Include="DMSCTemp\_Model.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Model.tt</DependentUpon>
+    </Content>
     <Content Include="UIBlock\Error\404.html" />
     <Content Include="UIBlock\Error\500.html" />
     <Content Include="UIBlock\foot1.html" />
