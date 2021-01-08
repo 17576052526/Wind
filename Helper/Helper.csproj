@@ -41,12 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DMSCCore\DbHelper.cs" />
     <Compile Include="DMSCCore\DMSC.cs" />
     <Compile Include="DMSCCore\Model.cs" />
     <Compile Include="DMSCCore\SqlServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DMSCTemp\Template.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Template.txt</LastGenOutput>
+    </Content>
     <Content Include="UIBlock\Error\404.html" />
     <Content Include="UIBlock\Error\500.html" />
     <Content Include="UIBlock\foot1.html" />
@@ -153,11 +158,15 @@
     <Content Include="说明.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DMSCTemp\MultipleOutputHelper.ttinclude" />
     <None Include="UIPlugins\font\config.json" />
     <None Include="UIPlugins\font\font\fontello.eot" />
     <None Include="UIPlugins\font\font\fontello.ttf" />
     <None Include="UIPlugins\font\font\fontello.woff" />
     <None Include="UIPlugins\font\font\fontello.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

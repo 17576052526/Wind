@@ -1,0 +1,23 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ output extension=".txt" #>
+<#@ include file="$(ProjectDir)\DMSCTemp\MultipleOutputHelper.ttinclude"#>
+<#@ assembly name="$(SolutionDir)Helper\bin\Debug\Helper.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="DMSCCore" #>
+<#@ import namespace="System.IO" #>
+
+<#
+	string projectPath = Host.ResolveAssemblyReference("$(SolutionDir)"); //获取当前路径
+	//Program.AppConfigPath=projectPath+"App.config";//必须先设置路径才能调用Program里面的方法
+    
+    List<Table> list=DMSC.Main();  //获取表集合
+	var manager = Manager.Create(Host, GenerationEnvironment);
+	foreach(Table table in list){
+		manager.StartNewFile(table.Name+".cs");  //必须放在输出的字符串之前
+#>
+文件模板内容
+<#
+		manager.EndBlock();  //结束输出文件
+	}
+	manager.Process(true);   //执行编译
+#>
