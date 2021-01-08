@@ -1,15 +1,13 @@
 ﻿<#@ template debug="false" hostspecific="True" language="C#" #>
 <#@ output extension=".txt" #>
-<#@ include file="$(ProjectDir)\DMSCTemp\MultipleOutputHelper.ttinclude"#>
+<#@ include file="$(ProjectDir)DMSCTemp\MultipleOutputHelper.ttinclude"#>
 <#@ assembly name="$(SolutionDir)Helper\bin\Debug\Helper.dll" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="DMSCCore" #>
 <#@ import namespace="System.IO" #>
 
 <#
-	string projectPath = Host.ResolveAssemblyReference("$(SolutionDir)"); //获取当前路径
-	//Program.AppConfigPath=projectPath+"App.config";//必须先设置路径才能调用Program里面的方法
-    
+	//string projectPath = Host.ResolveAssemblyReference("$(SolutionDir)"); //获取当前路径
     List<Table> list=DMSC.Main();  //获取表集合
 	var manager = Manager.Create(Host, GenerationEnvironment);
 	foreach(Table table in list){
