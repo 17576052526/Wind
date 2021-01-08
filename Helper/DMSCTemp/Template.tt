@@ -7,7 +7,7 @@
 <#@ import namespace="System.IO" #>
 
 <#
-	//string projectPath = Host.ResolveAssemblyReference("$(SolutionDir)"); //获取当前路径
+	//string path = Host.ResolveAssemblyReference("$(SolutionDir)"); //获取当前路径
     List<Table> list=DMSC.Main();  //获取表集合
 	var manager = Manager.Create(Host, GenerationEnvironment);
 	foreach(Table table in list){
