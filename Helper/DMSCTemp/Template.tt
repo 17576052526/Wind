@@ -17,5 +17,5 @@
 <#
 		manager.EndBlock();  //结束输出文件
 	}
-	manager.Process(true);   //执行编译
+	manager.Process(true,false);   //执行编译
 #>
