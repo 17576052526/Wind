@@ -62,10 +62,10 @@ namespace DMSCCore
         /// SqlServer 数据类型与C# 数据类型对应键值对，key:SqlType类型，value:C#类型
         /// </summary>
         public static readonly Dictionary<string, string> SqlTypeToCType = new Dictionary<string, string> {
-            { "int","int" }, {"varchar","string" },{"bit","bool" } ,{"datetime","DateTime?" },{"decimal","decimal" },{"float","double" },
-            {"image","byte[]" },{"money","Single" },{ "ntext","string" },{"nvarchar","string" },{"smalldatetime","DateTime?" },{"smallint","Int16" },
-            {"text","string" },{"bigint","Int64" },{"binary","byte[]" },{"char" ,"string"},{"nchar","string" },{"numeric" ,"decimal"},{ "real","Single" },
-            {"smallmoney","Single" }, {"sql_variant","object" },{"timestamp","byte[]" },{"tinyint","byte" },{"uniqueidentifier","Guid" },{"varbinary","byte[]" }
+            { "int","int?" }, {"varchar","string" },{"bit","bool?" } ,{"datetime","DateTime?" },{"decimal","decimal?" },{"float","double?" },
+            {"image","byte[]" },{"money","Single?" },{ "ntext","string" },{"nvarchar","string" },{"smalldatetime","DateTime?" },{"smallint","Int16?" },
+            {"text","string" },{"bigint","Int64?" },{"binary","byte[]" },{"char" ,"string"},{"nchar","string" },{"numeric" ,"decimal?"},{ "real","Single?" },
+            {"smallmoney","Single?" }, {"sql_variant","object" },{"timestamp","byte[]" },{"tinyint","byte?" },{"uniqueidentifier","Guid?" },{"varbinary","byte[]" }
         };
     }
 }
