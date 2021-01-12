@@ -86,15 +86,14 @@ namespace Wind.DAL
         {
             order = !String.IsNullOrEmpty(order) ? order : "Test.ID desc";
             where = !String.IsNullOrEmpty(where) ? "where " + where : null;
-            StringBuilder sql = new StringBuilder();
-            sql.AppendLine("with tab as(");
-            sql.AppendLine("select Test.*,Types.TypesTitle,row_number() over(order by " + order + ") as SysRowNum from Test");
-            sql.AppendLine("left join Types on(Test.TypesID=Types.ID)");
-            /*多表联查写在此处*/
-            sql.AppendLine(where);
-            sql.AppendLine(")");
-            sql.AppendLine("select * from tab where SysRowNum between " + ((index - 1) * size + 1) + " and " + (index * size));  //这句代码不用变
-            return DbHelper.Select<Test>(sql.ToString(), param);
+            string sql = $@"
+with tab as(
+select Test.*,Types.TypesTitle,row_number() over(order by {order}) as SysRowNum from Test
+left join Types on(Test.TypesID=Types.ID) {where}
+)
+select * from tab where SysRowNum between {(index - 1) * size + 1} and {index * size}
+";
+            return DbHelper.Select<Test>(sql, param);
         }
 
         /// <summary>
