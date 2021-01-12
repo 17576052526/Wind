@@ -63,30 +63,25 @@ public sealed class DbHelper
     }
 
     /// <summary>
-    /// 执行事务，场合一：一条sql 多条param，场合二：多条sql，param=null
+    /// 执行事务，一条sql 多条param，用于批量增、删、改
     /// </summary>
     /// <param name="sql"></param>
     /// <param name="param"></param>
-    public static void ExecuteTran(string sql, IEnumerable<object> param = null)
+    public static int ExecuteTran(string sql, IEnumerable<object> param)
     {
+        int count = 0;
         ExecuteTran((IDbCommand comm) =>
         {
             comm.CommandText = sql;
-            if (param != null)
+            foreach (object m in param)
             {
-                foreach (object m in param)
-                {
-                    ObjectToParam(comm, m);//此处不用判断空
-                    comm.ExecuteNonQuery();
-                    comm.Parameters.Clear();//如果不清除添加相同的变量会出错
-                }
-            }
-            else
-            {
-                comm.ExecuteNonQuery();
+                comm.Parameters.Clear();//如果不清除添加相同的变量会出错
+                ObjectToParam(comm, m);//填充参数到command
+                count += comm.ExecuteNonQuery();
             }
             return true;
         });
+        return count;
     }
     /// <summary>
     /// 执行事务
