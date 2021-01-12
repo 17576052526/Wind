@@ -77,9 +77,9 @@ public sealed class DbHelper
                 foreach (object m in param)
                 {
                     ObjectToParam(comm, m);//此处不用判断空
-                        comm.ExecuteNonQuery();
+                    comm.ExecuteNonQuery();
                     comm.Parameters.Clear();//如果不清除添加相同的变量会出错
-                    }
+                }
             }
             else
             {
