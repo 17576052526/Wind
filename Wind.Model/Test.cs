@@ -10,11 +10,11 @@ namespace Wind.Model
         /// <summary>
         /// 内码
         /// </summary>
-        public int ID { set; get; }
+        public int? ID { set; get; }
         /// <summary>
         /// 所属类型（外键）
         /// </summary>
-        public int TypesID { set; get; }
+        public int? TypesID { set; get; }
         /// <summary>
         /// 标题
         /// </summary>
@@ -30,15 +30,15 @@ namespace Wind.Model
         /// <summary>
         /// 数量
         /// </summary>
-        public int Num { set; get; }
+        public int? Num { set; get; }
         /// <summary>
         /// 价格
         /// </summary>
-        public decimal Price { set; get; }
+        public decimal? Price { set; get; }
         /// <summary>
         /// 是否选中
         /// </summary>
-        public bool Che { set; get; }
+        public bool? Che { set; get; }
         /// <summary>
         /// 描述
         /// </summary>
