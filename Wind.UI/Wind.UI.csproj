@@ -29,8 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\Wind.DAL\Wind.DAL.csproj" />
-    <ProjectReference Include="..\Wind.Model\Wind.Model.csproj" />
+    <ProjectReference Include="..\DbOrm\DbOrm.csproj" />
   </ItemGroup>
 
 </Project>

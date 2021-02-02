@@ -52,14 +52,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Template.txt</LastGenOutput>
     </Content>
-    <Content Include="DMSCTemp\_Model.tt">
+    <Content Include="DMSCTemp\_DbOrm.Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>_Model.txt</LastGenOutput>
+      <LastGenOutput>_DbOrm.Model.txt</LastGenOutput>
     </Content>
-    <Content Include="DMSCTemp\_Model.txt">
+    <Content Include="DMSCTemp\_DbOrm.Model.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>_Model.tt</DependentUpon>
+      <DependentUpon>_DbOrm.Model.tt</DependentUpon>
     </Content>
     <Content Include="UIBlock\Error\404.html" />
     <Content Include="UIBlock\Error\500.html" />

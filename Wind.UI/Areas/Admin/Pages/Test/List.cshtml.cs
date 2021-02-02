@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using DbOrm;
+using DbOrm.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Wind.DAL;
 
 namespace Wind.UI.Areas.Admin.Pages.Test
 {
@@ -48,14 +49,16 @@ namespace Wind.UI.Areas.Admin.Pages.Test
                 return _param;
             }
         }
-        public List<Wind.Model.Test> List;
+        public List<Test_Main> List;
         public void OnGet(int page = 1)
         {
             this.PageIndex = page;//获取页码
             //取数
-            TestDAL dal = new TestDAL();
-            List = dal.SelectPage(page, BasePageModel.PageSize, Where, Param, Request.Query["order"]);
-            this.DataCount = dal.SelectCount(Where, Param);
+            using (DB db=new DB())
+            {
+                this.DataCount=(int)db.Selects("count(*)").From("Test_Main").Where(Where).QueryScalar(Param);
+                this.List = db.Selects().From("Test_Main").Query<Test_Main>(Param);
+            }
         }
     }
 }

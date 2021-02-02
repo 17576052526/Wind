@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using DbOrm;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
@@ -141,13 +142,13 @@ namespace Wind.UI.Controllers
                 }
             }
             //判断用户名密码
-            DataTable dt = DbHelper.Select("select * from Sys_Admin where UserName=@UserName and UserPwd=@UserPwd", new { UserName = userName, UserPwd = Base.Encry(userPwd) });
-            if (dt.Rows.Count > 0)
+            List<dynamic> list = DB.Query("select * from Sys_Admin where UserName=@UserName and UserPwd=@UserPwd", new { UserName = userName, UserPwd = Base.Encry(userPwd) });
+            if (list.Count > 0)
             {
-                DataRow dr = dt.Rows[0];
+                dynamic model = list[0];
                 //存储用户信息（存储到cookie）
                 var claims = new List<Claim>(){
-                    new Claim(ClaimTypes.Name, (string)dr["UserName"]),
+                    new Claim(ClaimTypes.Name, model.UserName),
                     //new Claim("FullName", "bbb"),
                     //new Claim(ClaimTypes.Role, "Administrator"),
                 };

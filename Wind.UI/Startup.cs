@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DbOrm;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,7 +20,7 @@ namespace Wind.UI
         public Startup(IConfiguration configuration)
         {
             //∂¡»° appsettings.json ≈‰÷√Œƒº˛
-            DbHelper.ConnString = configuration.GetValue<string>("ConnString");
+            DB.ConnString = configuration.GetValue<string>("ConnString");
         }
 
         public void ConfigureServices(IServiceCollection services)
