@@ -11,7 +11,7 @@
     List<Table> list=DMSC.Main();  //获取表集合
 	var manager = Manager.Create(Host, GenerationEnvironment);
 	foreach(Table table in list){
-		string dire=solutionDir+"Wind.Model\\"+table.Name.Substring(0,table.Name.IndexOf('_'))+"\\";
+		string dire=solutionDir+"DbOrm\\"+table.Name.Substring(0,table.Name.IndexOf('_'))+"\\";
         string path=dire+table.Name+".Designer.cs";
 		if (!Directory.Exists(dire)) { Directory.CreateDirectory(dire); }
         if(File.Exists(path)){File.Delete(path);}
@@ -26,13 +26,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
+using System.Text;
 
-namespace Wind.Model
+namespace DbOrm.Model
 {
     /// <summary>
     /// <#=table.Description#>
     /// </summary>
-    public partial class <#=table.Name#>
+    public partial class <#=table.Name#> : IDAL
     {
 <#        foreach(Column column in table.Column){ #>
         /// <summary>
@@ -40,6 +41,26 @@ namespace Wind.Model
         /// </summary>
         public <#=column.CType#> <#=column.Name#> { set; get; }
 <#        }#>
+        /// <summary>
+        /// 新增
+        /// </summary>
+        internal override string Insert()
+        {
+            return "insert into <#=table.Name#>(<#bool b=true;foreach(Column c in table.Column.Where(s=>!s.IsIdentity)){if(b){Write(c.Name);b=false;}else{Write(','+c.Name);}} #>) values(<#b=true;foreach(Column c in table.Column.Where(s=>!s.IsIdentity)){if(b){Write('@'+c.Name);b=false;}else{Write(",@"+c.Name);}} #>)";
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        internal override string Update()
+        {
+            StringBuilder str = new StringBuilder();
+<#        foreach(Column c in table.Column){ #>
+            if (<#=c.Name#> != null) { str.AppendLine(",<#=c.Name#>=@<#=c.Name#>"); }
+<#        }#>
+
+            return "update Test set " + str.Remove(0, 1);
+        }
     }
 }
 
@@ -54,7 +75,7 @@ manager.StartNewFile(dire+table.Name+".cs");//开始输出
 //----------------------------
 using System;
 
-namespace Wind.Model
+namespace DbOrm.Model
 {
     /// <summary>
     /// <#=table.Description #>
