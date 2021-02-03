@@ -19,8 +19,11 @@ namespace DbOrm
         internal abstract string Insert();
         internal abstract string Update();
     }
-    //SqlBuilder 的查询有两种实现方式：第一种，直接在SqlBuilder里面调用DB的底层查询，第二种，在DB里面写一个 Qyery(SqlBuilder sql) 的方法，这样可以不传Command，分页参数在Query里面填充
+
+    public class TNull { }
+
     #region Sql构造器
+    //SqlBuilder 的查询有两种实现方式：第一种，直接在SqlBuilder里面调用DB的底层查询，第二种，在DB里面写一个 Qyery(SqlBuilder sql) 的方法，这样可以不传Command，分页参数在Query里面填充
     public class SqlBuilder
     {
         private IDbCommand _Command;
@@ -85,7 +88,7 @@ namespace DbOrm
         /// <summary>
         /// 跳过多少条，返回之后的多少条
         /// </summary>
-        public SqlBuilder Page(int skipCount,int takeCount)
+        public SqlBuilder Page(int skipCount, int takeCount)
         {
             this._SkipCount = skipCount;
             this._TakeCount = takeCount;
@@ -129,61 +132,61 @@ namespace DbOrm
         {
             if (_IsClose)
             {
-                try { return DB.Query<T, TNull, TNull, TNull, TNull, TNull, TNull,T>(_Command, this.ToString(),(t1, t2, t3, t4, t5, t6, t7) => { return t1; }, param); }
+                try { return DB.Query<T, TNull, TNull, TNull, TNull, TNull, TNull, T>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { return t1; }, param); }
                 finally { _Command.Connection.Close(); }
             }
             return DB.Query<T, TNull, TNull, TNull, TNull, TNull, TNull, T>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { return t1; }, param);
         }
-        public List<T1> Query<T1,T2>(Action<T1,T2> func, object param = null)
+        public List<T1> Query<T1, T2>(Action<T1, T2> func, object param = null)
         {
             if (_IsClose)
             {
-                try { return DB.Query<T1, T2, TNull, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1,t2); return t1; }, param); }
+                try { return DB.Query<T1, T2, TNull, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2); return t1; }, param); }
                 finally { _Command.Connection.Close(); }
             }
             return DB.Query<T1, T2, TNull, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2); return t1; }, param);
         }
-        public List<T1> Query<T1, T2,T3>(Action<T1, T2,T3> func, object param = null)
+        public List<T1> Query<T1, T2, T3>(Action<T1, T2, T3> func, object param = null)
         {
             if (_IsClose)
             {
-                try { return DB.Query<T1, T2, T3, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2,t3); return t1; }, param); }
+                try { return DB.Query<T1, T2, T3, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3); return t1; }, param); }
                 finally { _Command.Connection.Close(); }
             }
             return DB.Query<T1, T2, T3, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3); return t1; }, param);
         }
-        public List<T1> Query<T1, T2, T3,T4>(Action<T1, T2, T3,T4> func, object param = null)
+        public List<T1> Query<T1, T2, T3, T4>(Action<T1, T2, T3, T4> func, object param = null)
         {
             if (_IsClose)
             {
-                try { return DB.Query<T1, T2, T3, T4, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3,t4); return t1; }, param); }
+                try { return DB.Query<T1, T2, T3, T4, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4); return t1; }, param); }
                 finally { _Command.Connection.Close(); }
             }
             return DB.Query<T1, T2, T3, T4, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4); return t1; }, param);
         }
-        public List<T1> Query<T1, T2, T3, T4,T5>(Action<T1, T2, T3, T4,T5> func, object param = null)
+        public List<T1> Query<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> func, object param = null)
         {
             if (_IsClose)
             {
-                try { return DB.Query<T1, T2, T3, T4, T5, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4,t5); return t1; }, param); }
+                try { return DB.Query<T1, T2, T3, T4, T5, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5); return t1; }, param); }
                 finally { _Command.Connection.Close(); }
             }
             return DB.Query<T1, T2, T3, T4, T5, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5); return t1; }, param);
         }
-        public List<T1> Query<T1, T2, T3, T4, T5,T6>(Action<T1, T2, T3, T4, T5,T6> func, object param = null)
+        public List<T1> Query<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> func, object param = null)
         {
             if (_IsClose)
             {
-                try { return DB.Query<T1, T2, T3, T4, T5, T6, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5,t6); return t1; }, param); }
+                try { return DB.Query<T1, T2, T3, T4, T5, T6, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6); return t1; }, param); }
                 finally { _Command.Connection.Close(); }
             }
             return DB.Query<T1, T2, T3, T4, T5, T6, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6); return t1; }, param);
         }
-        public List<T1> Query<T1, T2, T3, T4, T5, T6,T7>(Action<T1, T2, T3, T4, T5, T6,T7> func, object param = null)
+        public List<T1> Query<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> func, object param = null)
         {
             if (_IsClose)
             {
-                try { return DB.Query<T1, T2, T3, T4, T5, T6, T7, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6,t7); return t1; }, param); }
+                try { return DB.Query<T1, T2, T3, T4, T5, T6, T7, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6, t7); return t1; }, param); }
                 finally { _Command.Connection.Close(); }
             }
             return DB.Query<T1, T2, T3, T4, T5, T6, T7, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6, t7); return t1; }, param);
@@ -212,27 +215,10 @@ select * from __tab where __RowNum between @__start and @__end
         }
     }
     #endregion
-    //1.实例函数调用之后统一不关闭连接，using() Dispose()关闭连接
-    //2.静态方法统一调用之后就关闭连接
-    //3.最底层函数不关闭连接，最底层函数不对外调用，最底层函数提供给实例基函数和静态基函数调用
-    public class TNull { }
-    /// <summary>
-    /// 数据库增、删、改、查，调用存储过程用 exec 存储过程名 参数一 参数二 
-    /// </summary>
-    public sealed class DB : IDisposable
+
+    public partial class DB
     {
-        #region 实例扩展方法（调用之后不关闭数据库连接，由 using(){}关闭数据库连接）
-        public IDbConnection Connection;
-        public IDbCommand Command;
-        public DB()
-        {
-            Connection = CreateConnection();
-            Command = Connection.CreateCommand();
-        }
-        public void Dispose()
-        {
-            Connection.Close();
-        }
+        #region 实例扩展方法，调用之后不关闭数据库连接，由外面关闭
         public int Inserts(IDAL model)
         {
             return this.ExecuteNonQuerys(model.Insert(), model);
@@ -240,21 +226,19 @@ select * from __tab where __RowNum between @__start and @__end
         public int Updates(IDAL model, string where, object param = null)
         {
             AddParameter(Command, model);
-            AddParameter(Command, param);
-            string sql = model.Update() + " where " + where;
-            return this.ExecuteNonQuerys(sql);
+            return this.ExecuteNonQuerys(model.Update() + " where " + where, param);
         }
         public int Deletes<T>(string where, object param = null) where T : IDAL
         {
-            return this.ExecuteNonQuerys("delete " + typeof(T).Name + " " + where, param);
+            return this.ExecuteNonQuerys($"delete from {typeof(T).Name} where {where}", param);
         }
         public SqlBuilder Selects(string column = "*")
         {
             return new SqlBuilder(Command).Select(column);
         }
         #endregion
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #region 静态扩展方法（调用之后关闭数据库连接）
+
+        #region 静态扩展方法，调用之后关闭数据库连接
         public static int Insert(IDAL model)
         {
             return ExecuteNonQuery(model.Insert(), model);
@@ -266,15 +250,13 @@ select * from __tab where __RowNum between @__start and @__end
             {
                 IDbCommand cmd = conn.CreateCommand();
                 AddParameter(cmd, model);
-                AddParameter(cmd, param);
-                string sql = model.Update() + " where " + where;
-                return ExecuteNonQuery(cmd, sql);
+                return ExecuteNonQuery(cmd, model.Update() + " where " + where, param);
             }
         }
 
         public static int Delete<T>(string where, object param = null) where T : IDAL
         {
-            return ExecuteNonQuery("delete " + typeof(T).Name + " " + where, param);
+            return ExecuteNonQuery($"delete from {typeof(T).Name} where {where}", param);
         }
         //select 不用 where T : IDAL
         public static SqlBuilder Select(string column = "*")
@@ -282,8 +264,23 @@ select * from __tab where __RowNum between @__start and @__end
             return new SqlBuilder().Select(column);
         }
         #endregion
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #region 实例基函数
+    }
+
+    public partial class DB : IDisposable
+    {
+        public IDbConnection Connection;
+        public IDbCommand Command;
+        public DB()
+        {
+            Connection = CreateConnection();
+            Command = Connection.CreateCommand();
+        }
+        public void Dispose()
+        {
+            Connection.Close();
+        }
+
+        #region 实例基函数，调用之后不关闭数据库连接，由外面关闭
         /// <summary>
         /// 执行sql语句，返回受影响的行
         /// </summary>
@@ -344,8 +341,8 @@ select * from __tab where __RowNum between @__start and @__end
             return Query<T1, T2, T3, T4, T5, T6, T7, T1>(Command, sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6, t7); return t1; }, param);
         }
         #endregion
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #region 静态基函数
+
+        #region 静态基函数，调用之后关闭数据库连接
         /// <summary>
         /// 执行sql语句，返回受影响的行
         /// </summary>
@@ -424,8 +421,10 @@ select * from __tab where __RowNum between @__start and @__end
             }
         }
         #endregion
-        //////////////////////////////////////////////////////////////////////////////////////////////////
-        #region 最底层基函数，不对外调用，实例基函数和静态基函数都调用最底层函数,不关闭数据库连接，由外层关闭（多个增删改查用同一个连接）或事务调用
+    }
+
+    public partial class DB
+    {
         //"Data Source=.;Initial Catalog=Wind;uid=sa;pwd=123456";   //用户名密码连接
         //"Data Source=.;Initial Catalog=Wind;Integrated Security=True";   //Windows身份验证，本地应用程序可用，但在 IIS中不可用，因为权限不够，可修改应用程序池进程模型标识提高权限
         /// <summary>
@@ -439,6 +438,7 @@ select * from __tab where __RowNum between @__start and @__end
         {
             return new Microsoft.Data.SqlClient.SqlConnection(ConnString);
         }
+        #region 最底层函数，不对外调用，实例基函数和静态基函数都调用最底层函数,不关闭数据库连接，由外层关闭，共用同一个数据库连接，传入Command 是因为Command中可以存在事务、Sql参数、数据库连接对象
         //执行sql语句，返回受影响的行
         internal static int ExecuteNonQuery(IDbCommand cmd, string sql, object param = null)
         {
@@ -446,7 +446,7 @@ select * from __tab where __RowNum between @__start and @__end
             AddParameter(cmd, param);
             if (cmd.Connection.State == ConnectionState.Closed) { cmd.Connection.Open(); } else if (cmd.Connection.State == ConnectionState.Broken) { cmd.Connection.Close(); cmd.Connection.Open(); }
             int count = cmd.ExecuteNonQuery();
-            cmd.Parameters.Clear();//这样就允许外面对Parmeter添加，且用相同的command调用不会出现参数相同
+            cmd.Parameters.Clear();//防止多次使用同一个 Command且添加相同的参数名的
             return count;
         }
         //执行sql查询，返回第一行第一列
@@ -456,7 +456,7 @@ select * from __tab where __RowNum between @__start and @__end
             AddParameter(cmd, param);
             if (cmd.Connection.State == ConnectionState.Closed) { cmd.Connection.Open(); } else if (cmd.Connection.State == ConnectionState.Broken) { cmd.Connection.Close(); cmd.Connection.Open(); }
             object obj = cmd.ExecuteScalar();
-            cmd.Parameters.Clear();//这样就允许外面对Parmeter添加，且用相同的command调用不会出现参数相同
+            cmd.Parameters.Clear();//防止多次使用同一个 Command且添加相同的参数名的
             return obj;
         }
         //执行sql查询，返回 DataReader对象
@@ -466,17 +466,17 @@ select * from __tab where __RowNum between @__start and @__end
             AddParameter(cmd, param);
             if (cmd.Connection.State == ConnectionState.Closed) { cmd.Connection.Open(); } else if (cmd.Connection.State == ConnectionState.Broken) { cmd.Connection.Close(); cmd.Connection.Open(); }
             IDataReader reader = cmd.ExecuteReader();
-            cmd.Parameters.Clear();//这样就允许外面对Parmeter添加，且用相同的command调用不会出现参数相同
+            cmd.Parameters.Clear();//防止多次使用同一个 Command且添加相同的参数名的
             return reader;
         }
         //添加Sql参数
-        internal static void AddParameter(IDbCommand comm, object model)
+        internal static void AddParameter(IDbCommand cmd, object model)
         {
             if (model != null)
             {
                 foreach (var p in model.GetType().GetProperties())
                 {
-                    var param = comm.CreateParameter();
+                    var param = cmd.CreateParameter();
                     object val = p.GetValue(model, null);//获取属性值
                     //根据属性的类型设置Parameter 的DbType和size，只设置String类型的其他类型让其自动设置，如果不设置string类型每次size会根据value的长度自动设置，这样不会重用执行计划（网上说的没测试）
                     if (p.PropertyType == typeof(String))
@@ -486,19 +486,22 @@ select * from __tab where __RowNum between @__start and @__end
                     //设置Parameter属性
                     param.ParameterName = '@' + p.Name;
                     param.Value = val != null ? val : DBNull.Value;//value要在最后设置，不要在设置size之前设置
-                    comm.Parameters.Add(param);
+                    cmd.Parameters.Add(param);
                 }
             }
         }
+        #endregion
+
+        #region DataReader->Model 查询且转实体类
         /*
-         *性能测试结果：
-         *                                反射               Expression或Emit      SqlDataReader手写填充实体类      SqlDataAdapter.Fill()      SqlDataReader填充DataTable
-         *  调用1次查询113万条数据      7500毫秒              3500毫秒                  3500毫秒                       5100毫秒                  3500毫秒
-         *  查询15条耗时比例            11                     8                                                                                   8
-         *  
-         * 结论：Expression或Emit生成IL 接近手写效率，查询大量数据 Expression或Emit 比反射快一倍
-         *       查询小量数据（15条） Expression或Emit生成委托方式比反射快20%-30%，Expression或Emit生成委托方式，缓存一千个委托占 11Mb内存
-         */
+        *性能测试结果：
+        *                                反射               Expression或Emit      SqlDataReader手写填充实体类      SqlDataAdapter.Fill()      SqlDataReader填充DataTable
+        *  调用1次查询113万条数据      7500毫秒              3500毫秒                  3500毫秒                       5100毫秒                  3500毫秒
+        *  查询15条耗时比例            11                     8                                                                                   8
+        *  
+        * 结论：Expression或Emit生成IL 接近手写效率，查询大量数据 Expression或Emit 比反射快一倍
+        *       查询小量数据（15条） Expression或Emit生成委托方式比反射快20%-30%，Expression或Emit生成委托方式，缓存一千个委托占 11Mb内存
+        */
         /// <summary>
         /// 查询数据，不对外开放，调用此方法需要外面关闭数据库连接
         /// </summary>
@@ -731,6 +734,6 @@ select * from __tab where __RowNum between @__start and @__end
         }
         #endregion
         #endregion
-    }
 
+    }
 }
