@@ -59,7 +59,7 @@ namespace DbOrm.Model
             if (<#=c.Name#> != null) { str.AppendLine(",<#=c.Name#>=@<#=c.Name#>"); }
 <#        }#>
 
-            return "update Test set " + str.Remove(0, 1);
+            return "update <#=table.Name#> set " + str.Remove(0, 1);
         }
     }
 }
