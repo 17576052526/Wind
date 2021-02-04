@@ -20,7 +20,7 @@ namespace DbOrm
         internal abstract string Update();
     }
 
-    public class TNull { }
+    internal class TNull { }
 
     #region Sql构造器
     //SqlBuilder 的查询有两种实现方式：第一种，直接在SqlBuilder里面调用DB的底层查询，第二种，在DB里面写一个 Qyery(SqlBuilder sql) 的方法，这样可以不传Command，分页参数在Query里面填充
@@ -268,8 +268,8 @@ select * from __tab where __RowNum between @__start and @__end
 
     public partial class DB : IDisposable
     {
-        public IDbConnection Connection;
-        public IDbCommand Command;
+        private IDbConnection Connection;
+        private IDbCommand Command;
         public DB()
         {
             Connection = CreateConnection();
