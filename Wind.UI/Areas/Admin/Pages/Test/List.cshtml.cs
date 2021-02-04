@@ -20,10 +20,10 @@ namespace Wind.UI.Areas.Admin.Pages.Test
             {
                 if (_where == null)
                 {
-                    _where += !String.IsNullOrEmpty(Request.Query["Title"]) ? " and Test.Title like @Title" : null;
-                    _where += !String.IsNullOrEmpty(Request.Query["TypesID"]) ? " and Test.TypesID = @TypesID" : null;
-                    _where += !String.IsNullOrEmpty(Request.Query["Dates1"]) ? " and Test.Dates >= @Dates1" : null;
-                    _where += !String.IsNullOrEmpty(Request.Query["Dates2"]) ? " and Test.Dates <= @Dates2" : null;
+                    _where += !String.IsNullOrEmpty(Request.Query["MainName"]) ? " and Test_Main.MainName like @MainName" : null;
+                    _where += !String.IsNullOrEmpty(Request.Query["Test_Type_ID"]) ? " and Test_Main.Test_Type_ID = @Test_Type_ID" : null;
+                    _where += !String.IsNullOrEmpty(Request.Query["CreateTime1"]) ? " and Test_Main.CreateTime >= @CreateTime1" : null;
+                    _where += !String.IsNullOrEmpty(Request.Query["CreateTime2"]) ? " and Test_Main.CreateTime <= @CreateTime2" : null;
 
                     _where = Regex.Replace(_where, @"^\s*and", "", RegexOptions.IgnoreCase);
                 }
@@ -40,10 +40,10 @@ namespace Wind.UI.Areas.Admin.Pages.Test
                 {
                     _param = new
                     {
-                        Title = "%" + Request.Query["Title"] + "%",
-                        TypesID = Request.Query["TypesID"],
-                        Dates1 = Request.Query["Dates1"],
-                        Dates2 = Request.Query["Dates2"],
+                        MainName = "%" + Request.Query["MainName"].ToString() + "%",
+                        Test_Type_ID = Request.Query["Test_Type_ID"].ToString(),
+                        CreateTime1 = Request.Query["CreateTime1"].ToString(),
+                        CreateTime2 = Request.Query["CreateTime2"].ToString(),
                     };
                 }
                 return _param;
@@ -57,7 +57,7 @@ namespace Wind.UI.Areas.Admin.Pages.Test
             using (DB db=new DB())
             {
                 this.DataCount=(int)db.Selects("count(*)").From("Test_Main").Where(Where).QueryScalar(Param);
-                this.List = db.Selects().From("Test_Main").Query<Test_Main>(Param);
+                this.List = db.Selects().From("Test_Main").Where(Where).Query<Test_Main>(Param);
             }
         }
     }
