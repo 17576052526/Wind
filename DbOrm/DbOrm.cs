@@ -225,7 +225,7 @@ select * from __tab where __RowNum between @__start and @__end
         }
         public int Updates(IDAL model, string where, object param = null)
         {
-            AddParameter(Command, model);
+            AddParameter(Command, model, true);
             return this.ExecuteNonQuerys(model.Update() + " where " + where, param);
         }
         public int Deletes<T>(string where, object param = null) where T : IDAL
@@ -249,7 +249,7 @@ select * from __tab where __RowNum between @__start and @__end
             using (IDbConnection conn = CreateConnection())
             {
                 IDbCommand cmd = conn.CreateCommand();
-                AddParameter(cmd, model);
+                AddParameter(cmd, model, true);
                 return ExecuteNonQuery(cmd, model.Update() + " where " + where, param);
             }
         }
@@ -469,25 +469,24 @@ select * from __tab where __RowNum between @__start and @__end
             cmd.Parameters.Clear();//防止多次使用同一个 Command且添加相同的参数名的
             return reader;
         }
-        //添加Sql参数
-        internal static void AddParameter(IDbCommand cmd, object model)
+        //添加Sql参数，isIgNull：是否属性值为 null的不参与构造，true 不参与构造，false 参与构造
+        internal static void AddParameter(IDbCommand cmd, object model, bool isIgNull = false)
         {
-            if (model != null)
+            if (model == null) { return; }
+            foreach (var p in model.GetType().GetProperties())
             {
-                foreach (var p in model.GetType().GetProperties())
+                object val = p.GetValue(model);//获取属性值
+                if (isIgNull && val == null) { continue; }
+                var param = cmd.CreateParameter();
+                //根据属性的类型设置Parameter 的DbType和size，只设置String类型的其他类型让其自动设置，如果不设置string类型每次size会根据value的长度自动设置，这样不会重用执行计划（网上说的没测试）
+                if (val is String)
                 {
-                    var param = cmd.CreateParameter();
-                    object val = p.GetValue(model, null);//获取属性值
-                    //根据属性的类型设置Parameter 的DbType和size，只设置String类型的其他类型让其自动设置，如果不设置string类型每次size会根据value的长度自动设置，这样不会重用执行计划（网上说的没测试）
-                    if (p.PropertyType == typeof(String))
-                    {
-                        param.Size = val == null || ((string)val).Length <= 4000 ? 4000 : -1;
-                    }
-                    //设置Parameter属性
-                    param.ParameterName = '@' + p.Name;
-                    param.Value = val != null ? val : DBNull.Value;//value要在最后设置，不要在设置size之前设置
-                    cmd.Parameters.Add(param);
+                    param.Size = ((string)val).Length <= 4000 ? 4000 : -1;
                 }
+                //设置Parameter属性
+                param.ParameterName = '@' + p.Name;
+                param.Value = val ?? DBNull.Value;//value要在最后设置，不要在设置size之前设置
+                cmd.Parameters.Add(param);
             }
         }
         #endregion
