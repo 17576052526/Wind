@@ -198,7 +198,7 @@ namespace DbOrm
             if (_TakeCount > 0) { str.Append($",row_number() over(order by {_OrderBy ?? "(select 0)"}) as __RowNum"); }//分页的序号列
             str.Append(" from ").Append(_Table);
             str.AppendLine(this._Join);
-            if (_Where != null) { str.Append(" where ").Append(_Where); }
+            if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
             if (_TakeCount == 0 && _OrderBy != null) { str.Append(" order by ").Append(_OrderBy.TrimEnd(',')); }//如果有分页排序则在上面构建好了
             //分页必须在最后构造
             if (_TakeCount > 0)
