@@ -97,14 +97,14 @@ namespace DbOrm
         /// <summary>
         /// 查询第一行第一例
         /// </summary>
-        public object QueryScalar(object param = null)
+        public T QueryScalar<T>(object param = null)
         {
             if (_IsClose)
             {
-                try { return DB.ExecuteScalar(_Command, this.ToString(), param); }
+                try { return (T)DB.ExecuteScalar(_Command, this.ToString(), param); }
                 finally { _Command.Connection.Close(); }
             }
-            return DB.ExecuteScalar(_Command, this.ToString(), param);
+            return (T)DB.ExecuteScalar(_Command, this.ToString(), param);
         }
         //查询实体不关注多表联查
         /// <summary>
@@ -291,9 +291,9 @@ select * from __tab where __RowNum between @__start and @__end
         /// <summary>
         /// 执行Select查询语句，返回第一行第一列
         /// </summary>
-        public object ExecuteScalars(string sql, object param = null)
+        public T ExecuteScalars<T>(string sql, object param = null)
         {
-            return ExecuteScalar(Command, sql, param);
+            return (T)ExecuteScalar(Command, sql, param);
         }
         //事务不用委托的方式实现，因为太不灵活了
         public void BeginTransaction()
@@ -356,11 +356,11 @@ select * from __tab where __RowNum between @__start and @__end
         /// <summary>
         /// 执行Select查询语句，返回第一行第一列
         /// </summary>
-        public static object ExecuteScalar(string sql, object param = null)
+        public static T ExecuteScalar<T>(string sql, object param = null)
         {
             using (IDbConnection conn = CreateConnection())
             {
-                return ExecuteScalar(conn.CreateCommand(), sql, param);
+                return (T)ExecuteScalar(conn.CreateCommand(), sql, param);
             }
         }
 
