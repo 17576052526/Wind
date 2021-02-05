@@ -65,14 +65,14 @@ namespace DbOrm
             this._Where = where;
             return this;
         }
-        public SqlBuilder LeftJoin(string table, string joinWhere)
+        public SqlBuilder LeftJoin<T>(string joinWhere)
         {
-            this._Join += $"\nleft join {table} on {joinWhere}";
+            this._Join += $"\nleft join {typeof(T).Name} on {joinWhere}";
             return this;
         }
-        public SqlBuilder InnerJoin(string table, string joinWhere)
+        public SqlBuilder InnerJoin<T>(string joinWhere)
         {
-            this._Join += $"\ninner join {table} on {joinWhere}";
+            this._Join += $"\ninner join {typeof(T).Name} on {joinWhere}";
             return this;
         }
         public SqlBuilder OrderAsc(string columnName)
@@ -232,9 +232,9 @@ select * from __tab where __RowNum between @__start and @__end
         {
             return this.ExecuteNonQuerys($"delete from {typeof(T).Name} where {where}", param);
         }
-        public SqlBuilder Selects(string column = "*")
+        public SqlBuilder Selects<T>(string column = "*")
         {
-            return new SqlBuilder(Command).Select(column);
+            return new SqlBuilder(Command).Select(column).From(typeof(T).Name);
         }
         #endregion
 
@@ -259,9 +259,9 @@ select * from __tab where __RowNum between @__start and @__end
             return ExecuteNonQuery($"delete from {typeof(T).Name} where {where}", param);
         }
         //select 不用 where T : IDAL
-        public static SqlBuilder Select(string column = "*")
+        public static SqlBuilder Select<T>(string column = "*")
         {
-            return new SqlBuilder().Select(column);
+            return new SqlBuilder().Select(column).From(typeof(T).Name);
         }
         #endregion
     }
