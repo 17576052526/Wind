@@ -54,10 +54,14 @@ namespace Wind.UI.Areas.Admin.Pages.Test
         {
             this.PageIndex = page;//获取页码
             //取数
-            using (DB db=new DB())
+            using (DB db = new DB())
             {
-                this.DataCount=(int)db.Selects("count(*)").From("Test_Main").Where(Where).QueryScalar(Param);
-                this.List = db.Selects().From("Test_Main").Where(Where).Query<Test_Main>(Param);
+                var sql = db.Selects("count(*)")
+                    .From("Test_Main")
+                    .LeftJoin("Test_Type", "Test_Main.Test_Type_ID=Test_Type.ID")
+                    .Where(Where);
+                this.DataCount = (int)sql.QueryScalar(Param);
+                this.List = sql.Select("*").Page((PageIndex - 1) * PageSize, PageSize).Query<Test_Main, Test_Type>((m, t) => m.Type = t, Param);
             }
         }
     }
