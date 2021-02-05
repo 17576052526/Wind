@@ -56,12 +56,14 @@ namespace Wind.UI.Areas.Admin.Pages.Test
             //È¡Êý
             using (DB db = new DB())
             {
-                var sql = db.Selects("count(*)")
-                    .From("Test_Main")
-                    .LeftJoin("Test_Type", "Test_Main.Test_Type_ID=Test_Type.ID")
+                var sql = db.Selects<Test_Main>("count(*)")
+                    .LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID")
                     .Where(Where);
-                this.DataCount = (int)sql.QueryScalar(Param);
-                this.List = sql.Select("*").Page((PageIndex - 1) * PageSize, PageSize).Query<Test_Main, Test_Type>((m, t) => m.Type = t, Param);
+                this.DataCount = sql.QueryScalar<int>(Param);
+
+                this.List = sql.Select("Test_Main.*,Test_Type.TypeName")
+                    .Page((PageIndex - 1) * PageSize, PageSize)
+                    .Query<Test_Main, Test_Type>((m, t) => m.Type = t, Param);
             }
         }
     }
