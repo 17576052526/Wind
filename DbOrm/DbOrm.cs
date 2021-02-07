@@ -511,7 +511,7 @@ select * from __tab where __RowNum between @__start and @__end
                 List<dynamic> list = new List<dynamic>();
                 while (reader.Read())
                 {
-                    IDictionary<string, object> model = new ExpandoObject();
+                    IDictionary<string, object> model = new ExpandoObject();//new ExpandoObject() 作为 dynamic时在查询大量数据（100万数据量）时性能较低，与委托反射耗时比为 7:4，因为每次都要验证键是否存在
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         model.TryAdd(reader.GetName(i), reader.GetValue(i));//TryAdd 如果有相同列名，不会报错
