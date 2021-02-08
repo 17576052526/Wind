@@ -503,358 +503,119 @@ select * from __tab where __RowNum between @__start and @__end
         */
 
         #region 查询 DataReader->dynamic，此处没用 new ExpandoObject()，因为性能太低了，查询100万数据，耗时比为 7:3
-        private sealed partial class DapperTable
+        private class DbTable
         {
-            string[] fieldNames;
-            readonly Dictionary<string, int> fieldNameLookup;
+            private readonly Dictionary<string, int> columnLookup;
+            public int ColumnCount { get { return columnLookup.Count; } }
+            public string[] Columns { get { return columnLookup.Keys.Select(s => s).ToArray(); } }
 
-
-            internal string[] FieldNames { get { return fieldNames; } }
-
-
-            public DapperTable(string[] fieldNames)
+            public DbTable(string[] columnNames)
             {
-                if (fieldNames == null) throw new ArgumentNullException("fieldNames");
-                this.fieldNames = fieldNames;
-
-
-                fieldNameLookup = new Dictionary<string, int>(fieldNames.Length, StringComparer.Ordinal);
-                // if there are dups, we want the **first** key to be the "winner" - so iterate backwards
-                for (int i = fieldNames.Length - 1; i >= 0; i--)
+                columnLookup = new Dictionary<string, int>(columnNames.Length, StringComparer.Ordinal);
+                //多个相同的列，已第一个为准
+                for (int i = columnNames.Length - 1; i >= 0; i--)
                 {
-                    string key = fieldNames[i];
-                    if (key != null) fieldNameLookup[key] = i;
+                    string key = columnNames[i];
+                    if (key != null) { columnLookup[key] = i; }//相同的键第一次是添加第二次是修改
                 }
             }
 
-
             internal int IndexOfName(string name)
             {
-                int result;
-                return (name != null && fieldNameLookup.TryGetValue(name, out result)) ? result : -1;
+                return (name != null && columnLookup.TryGetValue(name, out int result)) ? result : -1;
             }
+
             internal int AddField(string name)
             {
-                if (name == null) throw new ArgumentNullException("name");
-                if (fieldNameLookup.ContainsKey(name)) throw new InvalidOperationException("Field already exists: " + name);
-                int oldLen = fieldNames.Length;
-                Array.Resize(ref fieldNames, oldLen + 1); // yes, this is sub-optimal, but this is not the expected common case
-                fieldNames[oldLen] = name;
-                fieldNameLookup[name] = oldLen;
-                return oldLen;
+                return columnLookup[name] = columnLookup.Count;
             }
-
-
-
-
-            internal bool FieldExists(string key)
-            {
-                return key != null && fieldNameLookup.ContainsKey(key);
-            }
-
-
-            public int FieldCount { get { return fieldNames.Length; } }
         }
-
-
-        sealed partial class DapperRowMetaObject : System.Dynamic.DynamicMetaObject
+        sealed partial class DbRowMetaObject : DynamicMetaObject
         {
-            static readonly MethodInfo getValueMethod = typeof(IDictionary<string, object>).GetProperty("Item").GetGetMethod();
-            static readonly MethodInfo setValueMethod = typeof(DapperRow).GetMethod("SetValue", new Type[] { typeof(string), typeof(object) });
+            static readonly MethodInfo getValueMethod = typeof(DbRow).GetMethod("GetValue", new Type[] { typeof(string) });
+            static readonly MethodInfo setValueMethod = typeof(DbRow).GetMethod("SetValue", new Type[] { typeof(string), typeof(object) });
 
+            public DbRowMetaObject(Expression expression, BindingRestrictions restrictions, object value) : base(expression, restrictions, value) { }
 
-            public DapperRowMetaObject(
-                System.Linq.Expressions.Expression expression,
-                System.Dynamic.BindingRestrictions restrictions
-                )
-                : base(expression, restrictions)
+            DynamicMetaObject CallMethod(MethodInfo method, Expression[] parameters)
             {
-            }
-
-
-            public DapperRowMetaObject(
-                System.Linq.Expressions.Expression expression,
-                System.Dynamic.BindingRestrictions restrictions,
-                object value
-                )
-                : base(expression, restrictions, value)
-            {
-            }
-
-
-            System.Dynamic.DynamicMetaObject CallMethod(
-                MethodInfo method,
-                System.Linq.Expressions.Expression[] parameters
-                )
-            {
-                var callMethod = new System.Dynamic.DynamicMetaObject(
-                    System.Linq.Expressions.Expression.Call(
-                        System.Linq.Expressions.Expression.Convert(Expression, LimitType),
+                var callMethod = new DynamicMetaObject(
+                    Expression.Call(
+                        Expression.Convert(Expression, LimitType),
                         method,
                         parameters),
-                    System.Dynamic.BindingRestrictions.GetTypeRestriction(Expression, LimitType)
+                    BindingRestrictions.GetTypeRestriction(Expression, LimitType)
                     );
                 return callMethod;
             }
 
-
-            public override System.Dynamic.DynamicMetaObject BindGetMember(System.Dynamic.GetMemberBinder binder)
+            //获取
+            public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
             {
-                var parameters = new System.Linq.Expressions.Expression[]
+                var parameters = new Expression[]
                                      {
-                                         System.Linq.Expressions.Expression.Constant(binder.Name)
+                                         Expression.Constant(binder.Name)
                                      };
 
-
                 var callMethod = CallMethod(getValueMethod, parameters);
-
-
                 return callMethod;
             }
 
+            //调用方法
+            //public override DynamicMetaObject BindInvokeMember(InvokeMemberBinder binder, DynamicMetaObject[] args) { throw new Exception("未实现此方法"); }
 
-            // Needed for Visual basic dynamic support
-            public override System.Dynamic.DynamicMetaObject BindInvokeMember(System.Dynamic.InvokeMemberBinder binder, System.Dynamic.DynamicMetaObject[] args)
+            //设置
+            public override DynamicMetaObject BindSetMember(SetMemberBinder binder, DynamicMetaObject value)
             {
-                var parameters = new System.Linq.Expressions.Expression[]
+                var parameters = new Expression[]
                                      {
-                                         System.Linq.Expressions.Expression.Constant(binder.Name)
-                                     };
-
-
-                var callMethod = CallMethod(getValueMethod, parameters);
-
-
-                return callMethod;
-            }
-
-
-            public override System.Dynamic.DynamicMetaObject BindSetMember(System.Dynamic.SetMemberBinder binder, System.Dynamic.DynamicMetaObject value)
-            {
-                var parameters = new System.Linq.Expressions.Expression[]
-                                     {
-                                         System.Linq.Expressions.Expression.Constant(binder.Name),
+                                         Expression.Constant(binder.Name),
                                          value.Expression,
                                      };
 
-
                 var callMethod = CallMethod(setValueMethod, parameters);
-
-
                 return callMethod;
             }
         }
 
-
-        private sealed partial class DapperRow
-            : System.Dynamic.IDynamicMetaObjectProvider
-            , IDictionary<string, object>
+        private sealed class DbRow : IDynamicMetaObjectProvider
         {
-            readonly DapperTable table;
+            readonly DbTable table;
             object[] values;
-
-
-            public DapperRow(DapperTable table, object[] values)
+            public DbRow(DbTable table, object[] values)
             {
-                if (table == null) throw new ArgumentNullException("table");
-                if (values == null) throw new ArgumentNullException("values");
                 this.table = table;
                 this.values = values;
             }
-            private sealed class DeadValue
+            public object SetValue(string key, object value)//此方法一定要有返回
             {
-                public static readonly DeadValue Default = new DeadValue();
-                private DeadValue() { }
-            }
-            int ICollection<KeyValuePair<string, object>>.Count
-            {
-                get
-                {
-                    int count = 0;
-                    for (int i = 0; i < values.Length; i++)
-                    {
-                        if (!(values[i] is DeadValue)) count++;
-                    }
-                    return count;
-                }
-            }
-
-
-            public bool TryGetValue(string name, out object value)
-            {
-                var index = table.IndexOfName(name);
-                if (index < 0)
-                { // doesn't exist
-                    value = null;
-                    return false;
-                }
-                // exists, **even if** we don't have a value; consider table rows heterogeneous
-                value = index < values.Length ? values[index] : null;
-                if (value is DeadValue)
-                { // pretend it isn't here
-                    value = null;
-                    return false;
-                }
-                return true;
-            }
-
-
-
-
-            System.Dynamic.DynamicMetaObject System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(
-                System.Linq.Expressions.Expression parameter)
-            {
-                return new DapperRowMetaObject(parameter, System.Dynamic.BindingRestrictions.Empty, this);
-            }
-
-
-            public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
-            {
-                var names = table.FieldNames;
-                for (var i = 0; i < names.Length; i++)
-                {
-                    object value = i < values.Length ? values[i] : null;
-                    if (!(value is DeadValue))
-                    {
-                        yield return new KeyValuePair<string, object>(names[i], value);
-                    }
-                }
-            }
-
-
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
-
-
-            #region Implementation of ICollection<KeyValuePair<string,object>>
-
-
-            void ICollection<KeyValuePair<string, object>>.Add(KeyValuePair<string, object> item)
-            {
-                IDictionary<string, object> dic = this;
-                dic.Add(item.Key, item.Value);
-            }
-
-
-            void ICollection<KeyValuePair<string, object>>.Clear()
-            { // removes values for **this row**, but doesn't change the fundamental table
-                for (int i = 0; i < values.Length; i++)
-                    values[i] = DeadValue.Default;
-            }
-
-
-            bool ICollection<KeyValuePair<string, object>>.Contains(KeyValuePair<string, object> item)
-            {
-                object value;
-                return TryGetValue(item.Key, out value) && Equals(value, item.Value);
-            }
-
-
-            void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
-            {
-                foreach (var kv in this)
-                {
-                    array[arrayIndex++] = kv; // if they didn't leave enough space; not our fault
-                }
-            }
-
-
-            bool ICollection<KeyValuePair<string, object>>.Remove(KeyValuePair<string, object> item)
-            {
-                IDictionary<string, object> dic = this;
-                return dic.Remove(item.Key);
-            }
-
-
-            bool ICollection<KeyValuePair<string, object>>.IsReadOnly
-            {
-                get { return false; }
-            }
-
-
-            #endregion
-
-
-            #region Implementation of IDictionary<string,object>
-
-
-            bool IDictionary<string, object>.ContainsKey(string key)
-            {
-                int index = table.IndexOfName(key);
-                if (index < 0 || index >= values.Length || values[index] is DeadValue) return false;
-                return true;
-            }
-
-
-            void IDictionary<string, object>.Add(string key, object value)
-            {
-                SetValue(key, value, true);
-            }
-
-
-            bool IDictionary<string, object>.Remove(string key)
-            {
-                int index = table.IndexOfName(key);
-                if (index < 0 || index >= values.Length || values[index] is DeadValue) return false;
-                values[index] = DeadValue.Default;
-                return true;
-            }
-
-
-            object IDictionary<string, object>.this[string key]
-            {
-                get { object val; TryGetValue(key, out val); return val; }
-                set { SetValue(key, value, false); }
-            }
-
-
-            public object SetValue(string key, object value)
-            {
-                return SetValue(key, value, false);
-            }
-            private object SetValue(string key, object value, bool isAdd)
-            {
-                if (key == null) throw new ArgumentNullException("key");
-                int index = table.IndexOfName(key);
+                var index = table.IndexOfName(key);
                 if (index < 0)
                 {
                     index = table.AddField(key);
-                }
-                else if (isAdd && index < values.Length && !(values[index] is DeadValue))
-                {
-                    // then semantically, this value already exists
-                    throw new ArgumentException("An item with the same key has already been added", "key");
-                }
-                int oldLength = values.Length;
-                if (oldLength <= index)
-                {
-                    // we'll assume they're doing lots of things, and
-                    // grow it to the full width of the table
-                    Array.Resize(ref values, table.FieldCount);
-                    for (int i = oldLength; i < values.Length; i++)
-                    {
-                        values[i] = DeadValue.Default;
-                    }
+                    Array.Resize(ref values, table.ColumnCount);//增加数组长度
                 }
                 return values[index] = value;
             }
 
-
-            ICollection<string> IDictionary<string, object>.Keys
+            public object GetValue(string key)
             {
-                get { return this.Select(kv => kv.Key).ToArray(); }
+                var index = table.IndexOfName(key);
+                if (index < 0)
+                {
+                    throw new Exception("Key不存在");
+                }
+                return values[index];
             }
-
-
-            ICollection<object> IDictionary<string, object>.Values
+            public bool ContainsKey(string key)
             {
-                get { return this.Select(kv => kv.Value).ToArray(); }
+                var index = table.IndexOfName(key);
+                return index != -1 && index < values.Length;
             }
-
-
-            #endregion
+            public DynamicMetaObject GetMetaObject(Expression parameter)
+            {
+                return new DbRowMetaObject(parameter, System.Dynamic.BindingRestrictions.Empty, this);
+            }
         }
         /// <summary>
         /// 查询数据，不对外开放，调用此方法需要外面关闭数据库连接
@@ -864,12 +625,12 @@ select * from __tab where __RowNum between @__start and @__end
             using (IDataReader reader = ExecuteReader(cmd, sql, param))
             {
                 List<dynamic> list = new List<dynamic>();
-                var columns = new DapperTable(Enumerable.Range(0, reader.FieldCount).Select(s => reader.GetName(s)).ToArray());
+                var table = new DbTable(Enumerable.Range(0, reader.FieldCount).Select(s => reader.GetName(s)).ToArray());
                 while (reader.Read())
                 {
                     object[] values = new object[reader.FieldCount];//不要放到外边
                     reader.GetValues(values);
-                    list.Add(new DapperRow(columns, values));
+                    list.Add(new DbRow(table, values));
                 }
                 return list;
             }
