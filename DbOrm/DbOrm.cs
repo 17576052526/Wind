@@ -525,7 +525,7 @@ select * from __tab where __RowNum between @__start and @__end
                 return (name != null && columnLookup.TryGetValue(name, out int result)) ? result : -1;
             }
 
-            internal int AddField(string name)
+            internal int AddColumn(string name)
             {
                 return columnLookup[name] = columnLookup.Count;
             }
@@ -592,7 +592,7 @@ select * from __tab where __RowNum between @__start and @__end
                 var index = table.IndexOfName(key);
                 if (index < 0)
                 {
-                    index = table.AddField(key);
+                    index = table.AddColumn(key);
                     Array.Resize(ref values, table.ColumnCount);//增加数组长度
                 }
                 return values[index] = value;
