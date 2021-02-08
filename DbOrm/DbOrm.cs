@@ -507,7 +507,7 @@ select * from __tab where __RowNum between @__start and @__end
         {
             private readonly Dictionary<string, int> columnLookup;
             public int ColumnCount { get { return columnLookup.Count; } }
-            public string[] Columns { get { return columnLookup.Keys.Select(s => s).ToArray(); } }
+            public string[] Columns { get { return columnLookup.Keys.ToArray(); } }
 
             public DbTable(string[] columnNames)
             {
