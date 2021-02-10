@@ -506,10 +506,10 @@ select * from __tab where __RowNum between @__start and @__end
         private class DbTable
         {
             private readonly Dictionary<string, int> columnLookup;
-            public int ColumnCount { get { return columnLookup.Count; } }
-            public string[] Columns { get { return columnLookup.Keys.ToArray(); } }
+            internal int ColumnCount { get { return columnLookup.Count; } }
+            internal string[] Columns { get { return columnLookup.Keys.ToArray(); } }
 
-            public DbTable(string[] columnNames)
+            internal DbTable(string[] columnNames)
             {
                 columnLookup = new Dictionary<string, int>(columnNames.Length, StringComparer.Ordinal);
                 //多个相同的列，已第一个为准
@@ -522,7 +522,7 @@ select * from __tab where __RowNum between @__start and @__end
 
             internal int IndexOfName(string name)
             {
-                return (name != null && columnLookup.TryGetValue(name, out int result)) ? result : -1;
+                return columnLookup.TryGetValue(name, out int result) ? result : -1;
             }
 
             internal int AddColumn(string name)
