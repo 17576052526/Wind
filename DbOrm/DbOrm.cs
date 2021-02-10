@@ -605,13 +605,13 @@ select * from __tab where __RowNum between @__start and @__end
                 {
                     throw new Exception("Key不存在");
                 }
+                else if (index >= values.Length)
+                {
+                    return null;
+                }
                 return values[index];
             }
-            public bool ContainsKey(string key)
-            {
-                var index = table.IndexOfName(key);
-                return index != -1 && index < values.Length;
-            }
+
             public DynamicMetaObject GetMetaObject(Expression parameter)
             {
                 return new DbRowMetaObject(parameter, System.Dynamic.BindingRestrictions.Empty, this);
