@@ -62,8 +62,7 @@ namespace Wind.UI.Areas.Admin.Pages.Test
                 this.DataCount = sql.QueryScalar<int>(Param);
 
                 this.List = sql.Select("Test_Main.*,Test_Type.TypeName")
-                    .Page((PageIndex - 1) * PageSize, PageSize)
-                    .Query<Test_Main, Test_Type>((m, t) => m.Type = t, Param);
+                    .Query((PageIndex - 1) * PageSize, PageSize, Param);
             }
         }
     }
