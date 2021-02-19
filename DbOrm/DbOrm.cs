@@ -19,203 +19,136 @@ namespace DbOrm
         internal abstract string Insert();
         internal abstract string Update();
     }
-
-    internal class TNull { }
-
-    #region Sql构造器
-    //SqlBuilder 的查询有两种实现方式：第一种，直接在SqlBuilder里面调用DB的底层查询，第二种，在DB里面写一个 Qyery(SqlBuilder sql) 的方法，这样可以不传Command，分页参数在Query里面填充
-    public class SqlBuilder
+    #region 查询构造器
+    public class SqlBuilder<T>
     {
-        private IDbCommand _Command;
-        private string _Column;
-        private string _Table;
+        private IDbCommand Command;
+        private string Column;
+        private string Table;
         private string _Where;
-        private string _Join;
-        private string _OrderBy;
-        private int _SkipCount;//跳过多少条（分页用到）   ，此处不用 startIndex 起始索引，因为不同数据库的起始索引是不一样的
-        private int _TakeCount;//返回之后的多少条（分页用到）
-        private bool _IsClose;//执行sql之后是否关闭数据库连接，true：关闭，false：不关闭
-        /// <summary>
-        /// Command == null 执行sql之后关闭数据库连接，Command != null 执行sql之后不关闭数据库连接
-        /// </summary>
+        private string Join;
+        private string OrderBy;
+        private int SkipCount;//跳过多少条（分页用到）   ，此处不用 startIndex 起始索引，因为不同数据库的起始索引是不一样的
+        private int TakeCount;//返回之后的多少条（分页用到）
+        private bool IsClose;//执行sql之后是否关闭数据库连接，true：关闭，false：不关闭
+        private List<Type> Types;
         internal SqlBuilder(IDbCommand cmd = null)
         {
+            Types = new List<Type>() { typeof(T) };
             if (cmd == null)
             {
-                this._Command = DB.CreateConnection().CreateCommand();
-                _IsClose = true;
+                this.Command = DB.CreateConnection().CreateCommand();
+                this.IsClose = true;
             }
             else
             {
-                this._Command = cmd;
+                this.Command = cmd;
             }
         }
-        public SqlBuilder Select(string column)
+        public SqlBuilder<T> Select(string column)
         {
-            this._Column = column;
+            this.Column = column;
             return this;
         }
-        public SqlBuilder From(string table)
+        public SqlBuilder<T> From(string table)
         {
-            this._Table = table;
+            this.Table = table;
             return this;
         }
-        public SqlBuilder Where(string where)
+        public SqlBuilder<T> Where(string where)
         {
             this._Where = where;
             return this;
         }
-        public SqlBuilder LeftJoin<T>(string joinWhere)
+        public SqlBuilder<T> LeftJoin<TJoin>(string joinWhere)
         {
-            this._Join += $"\nleft join {typeof(T).Name} on {joinWhere}";
+            this.Types.Add(typeof(TJoin));
+            this.Join += $"\nleft join {typeof(TJoin).Name} on {joinWhere}";
             return this;
         }
-        public SqlBuilder InnerJoin<T>(string joinWhere)
+        public SqlBuilder<T> InnerJoin<TJoin>(string joinWhere)
         {
-            this._Join += $"\ninner join {typeof(T).Name} on {joinWhere}";
+            this.Types.Add(typeof(TJoin));
+            this.Join += $"\ninner join {typeof(TJoin).Name} on {joinWhere}";
             return this;
         }
-        public SqlBuilder OrderAsc(string columnName)
+        public SqlBuilder<T> OrderAsc(string columnName)
         {
-            this._OrderBy += $"{Regex.Replace(columnName, "\\s", "")} asc,";//正则表达式去掉空白字符，防止sql注入
+            this.OrderBy += $"{Regex.Replace(columnName, "\\s", "")} asc,";//正则表达式去掉空白字符，防止sql注入
             return this;
         }
-        public SqlBuilder OrderDesc(string columnName)
+        public SqlBuilder<T> OrderDesc(string columnName)
         {
-            this._OrderBy += $"{Regex.Replace(columnName, "\\s", "")} desc,";//正则表达式去掉空白字符，防止sql注入
-            return this;
-        }
-        /// <summary>
-        /// 跳过多少条，返回之后的多少条
-        /// </summary>
-        public SqlBuilder Page(int skipCount, int takeCount)
-        {
-            this._SkipCount = skipCount;
-            this._TakeCount = takeCount;
+            this.OrderBy += $"{Regex.Replace(columnName, "\\s", "")} desc,";//正则表达式去掉空白字符，防止sql注入
             return this;
         }
         /// <summary>
         /// 查询第一行第一例
         /// </summary>
-        public T QueryScalar<T>(object param = null)
+        public TReturn QueryScalar<TReturn>(object param = null)
         {
-            if (_IsClose)
+            if (this.IsClose)
             {
-                try { return (T)DB.ExecuteScalar(_Command, this.ToString(), param); }
-                finally { _Command.Connection.Close(); }
+                try { return (TReturn)DB.ExecuteScalar(this.Command, this.ToString(), param); }
+                finally { this.Command.Connection.Close(); }
             }
-            return (T)DB.ExecuteScalar(_Command, this.ToString(), param);
+            return (TReturn)DB.ExecuteScalar(this.Command, this.ToString(), param);
         }
-        //查询实体不关注多表联查
         /// <summary>
-        /// 查询满足条件的第一行
+        /// 查询
         /// </summary>
-        public T QueryFirstRow<T>(object param = null)
+        public List<T> Query(object param = null)
         {
-            if (_IsClose)
+            if (IsClose)
             {
-                try { return DB.Query<T, TNull, TNull, TNull, TNull, TNull, TNull, T>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { return t1; }, param)[0]; }
-                finally { _Command.Connection.Close(); }
+                try { return DB.Query<T>(Command, this.ToString(), param, Types.ToArray()); }
+                finally { Command.Connection.Close(); }
             }
-            return DB.Query<T, TNull, TNull, TNull, TNull, TNull, TNull, T>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { return t1; }, param)[0];
+            return DB.Query<T>(Command, this.ToString(), param, Types.ToArray());
         }
-        public List<dynamic> Query(object param = null)
+        /// <summary>
+        /// 跳过 skipCount条，返回连续的 takeCount条
+        /// </summary>
+        /// <param name="skipCount">跳过的条数</param>
+        /// <param name="takeCount">返回连续的条数</param>
+        public List<T> Query(int skipCount, int takeCount, object param = null)
         {
-            if (_IsClose)
-            {
-                try { return DB.Query(_Command, this.ToString(), param); }
-                finally { _Command.Connection.Close(); }
-            }
-            return DB.Query(_Command, this.ToString(), param);
+            this.SkipCount = skipCount;
+            this.TakeCount = takeCount;
+            return Query(param);
         }
-        public List<T> Query<T>(object param = null)
+        /// <summary>
+        /// 查询第一行
+        /// </summary>
+        public T QueryFirstRow(object param = null)
         {
-            if (_IsClose)
-            {
-                try { return DB.Query<T, TNull, TNull, TNull, TNull, TNull, TNull, T>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { return t1; }, param); }
-                finally { _Command.Connection.Close(); }
-            }
-            return DB.Query<T, TNull, TNull, TNull, TNull, TNull, TNull, T>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { return t1; }, param);
-        }
-        public List<T1> Query<T1, T2>(Action<T1, T2> func, object param = null)
-        {
-            if (_IsClose)
-            {
-                try { return DB.Query<T1, T2, TNull, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2); return t1; }, param); }
-                finally { _Command.Connection.Close(); }
-            }
-            return DB.Query<T1, T2, TNull, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2); return t1; }, param);
-        }
-        public List<T1> Query<T1, T2, T3>(Action<T1, T2, T3> func, object param = null)
-        {
-            if (_IsClose)
-            {
-                try { return DB.Query<T1, T2, T3, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3); return t1; }, param); }
-                finally { _Command.Connection.Close(); }
-            }
-            return DB.Query<T1, T2, T3, TNull, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3); return t1; }, param);
-        }
-        public List<T1> Query<T1, T2, T3, T4>(Action<T1, T2, T3, T4> func, object param = null)
-        {
-            if (_IsClose)
-            {
-                try { return DB.Query<T1, T2, T3, T4, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4); return t1; }, param); }
-                finally { _Command.Connection.Close(); }
-            }
-            return DB.Query<T1, T2, T3, T4, TNull, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4); return t1; }, param);
-        }
-        public List<T1> Query<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> func, object param = null)
-        {
-            if (_IsClose)
-            {
-                try { return DB.Query<T1, T2, T3, T4, T5, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5); return t1; }, param); }
-                finally { _Command.Connection.Close(); }
-            }
-            return DB.Query<T1, T2, T3, T4, T5, TNull, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5); return t1; }, param);
-        }
-        public List<T1> Query<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> func, object param = null)
-        {
-            if (_IsClose)
-            {
-                try { return DB.Query<T1, T2, T3, T4, T5, T6, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6); return t1; }, param); }
-                finally { _Command.Connection.Close(); }
-            }
-            return DB.Query<T1, T2, T3, T4, T5, T6, TNull, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6); return t1; }, param);
-        }
-        public List<T1> Query<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> func, object param = null)
-        {
-            if (_IsClose)
-            {
-                try { return DB.Query<T1, T2, T3, T4, T5, T6, T7, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6, t7); return t1; }, param); }
-                finally { _Command.Connection.Close(); }
-            }
-            return DB.Query<T1, T2, T3, T4, T5, T6, T7, T1>(_Command, this.ToString(), (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6, t7); return t1; }, param);
+            this.TakeCount = 1;
+            return Query(param)[0];
         }
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.Append("select ").Append(_Column);
-            if (_TakeCount > 0) { str.Append($",row_number() over(order by {_OrderBy ?? "(select 0)"}) as __RowNum"); }//分页的序号列
-            str.Append(" from ").Append(_Table);
-            str.AppendLine(this._Join);
+            str.Append("select ").Append(Column);
+            if (TakeCount > 0) { str.Append($",row_number() over(order by {OrderBy ?? "(select 0)"}) as _RowNum"); }//分页的序号列
+            str.Append(" from ").Append(Table);
+            str.AppendLine(this.Join);
             if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
-            if (_TakeCount == 0 && _OrderBy != null) { str.Append(" order by ").Append(_OrderBy.TrimEnd(',')); }//如果有分页排序则在上面构建好了
+            if (TakeCount == 0 && OrderBy != null) { str.Append(" order by ").Append(OrderBy.TrimEnd(',')); }//如果有分页排序则在上面构建好了
             //分页必须在最后构造
-            if (_TakeCount > 0)
+            if (TakeCount > 0)
             {
-                DB.AddParameter(_Command, new { __start = _SkipCount + 1, __end = _SkipCount + _TakeCount });//添加分页参数
+                DB.AddParameter(Command, new { _start = SkipCount + 1, _end = SkipCount + TakeCount });//添加分页参数
                 return $@"
-with __tab as(
+with _tab as(
 {str}
 )
-select * from __tab where __RowNum between @__start and @__end
+select * from _tab where _RowNum between @_start and @_end
 ";
             }
             return str.ToString();
         }
     }
     #endregion
-
     public partial class DB
     {
         #region 实例扩展方法，调用之后不关闭数据库连接，由外面关闭
@@ -232,9 +165,9 @@ select * from __tab where __RowNum between @__start and @__end
         {
             return this.ExecuteNonQuerys($"delete from {typeof(T).Name} where {where}", param);
         }
-        public SqlBuilder Selects<T>(string column = "*")
+        public SqlBuilder<T> Selects<T>(string column = "*")
         {
-            return new SqlBuilder(Command).Select(column).From(typeof(T).Name);
+            return new SqlBuilder<T>(Command).Select(column).From(typeof(T).Name);
         }
         #endregion
 
@@ -259,13 +192,12 @@ select * from __tab where __RowNum between @__start and @__end
             return ExecuteNonQuery($"delete from {typeof(T).Name} where {where}", param);
         }
         //select 不用 where T : IDAL
-        public static SqlBuilder Select<T>(string column = "*")
+        public static SqlBuilder<T> Select<T>(string column = "*")
         {
-            return new SqlBuilder().Select(column).From(typeof(T).Name);
+            return new SqlBuilder<T>().Select(column).From(typeof(T).Name);
         }
         #endregion
     }
-
     public partial class DB : IDisposable
     {
         private IDbConnection Connection;
@@ -314,32 +246,25 @@ select * from __tab where __RowNum between @__start and @__end
         }
         public List<T> Querys<T>(string sql, object param = null)
         {
-            return Query<T, TNull, TNull, TNull, TNull, TNull, TNull, T>(Command, sql, (t1, t2, t3, t4, t5, t6, t7) => { return t1; }, param);
+            return Query<T>(Command, sql, param, new Type[] { typeof(T) });
         }
-        public List<T1> Querys<T1, T2>(string sql, Action<T1, T2> func, object param = null)
+        public List<T1> Querys<T1, T2>(string sql, object param = null)
         {
-            return Query<T1, T2, TNull, TNull, TNull, TNull, TNull, T1>(Command, sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2); return t1; }, param);
+            return Query<T1>(Command, sql, param, new Type[] { typeof(T1), typeof(T2) });
         }
-        public List<T1> Querys<T1, T2, T3>(string sql, Action<T1, T2, T3> func, object param = null)
+        public List<T1> Querys<T1, T2, T3>(string sql, object param = null)
         {
-            return Query<T1, T2, T3, TNull, TNull, TNull, TNull, T1>(Command, sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3); return t1; }, param);
+            return Query<T1>(Command, sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3) });
         }
-        public List<T1> Querys<T1, T2, T3, T4>(string sql, Action<T1, T2, T3, T4> func, object param = null)
+        public List<T1> Querys<T1, T2, T3, T4>(string sql, object param = null)
         {
-            return Query<T1, T2, T3, T4, TNull, TNull, TNull, T1>(Command, sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4); return t1; }, param);
+            return Query<T1>(Command, sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) });
         }
-        public List<T1> Querys<T1, T2, T3, T4, T5>(string sql, Action<T1, T2, T3, T4, T5> func, object param = null)
+        public List<T1> Querys<T1, T2, T3, T4, T5>(string sql, object param = null)
         {
-            return Query<T1, T2, T3, T4, T5, TNull, TNull, T1>(Command, sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5); return t1; }, param);
+            return Query<T1>(Command, sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) });
         }
-        public List<T1> Querys<T1, T2, T3, T4, T5, T6>(string sql, Action<T1, T2, T3, T4, T5, T6> func, object param = null)
-        {
-            return Query<T1, T2, T3, T4, T5, T6, TNull, T1>(Command, sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6); return t1; }, param);
-        }
-        public List<T1> Querys<T1, T2, T3, T4, T5, T6, T7>(string sql, Action<T1, T2, T3, T4, T5, T6, T7> func, object param = null)
-        {
-            return Query<T1, T2, T3, T4, T5, T6, T7, T1>(Command, sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6, t7); return t1; }, param);
-        }
+
         #endregion
 
         #region 静态基函数，调用之后关闭数据库连接
@@ -375,54 +300,40 @@ select * from __tab where __RowNum between @__start and @__end
         {
             using (IDbConnection conn = CreateConnection())
             {
-                return Query<T, TNull, TNull, TNull, TNull, TNull, TNull, T>(conn.CreateCommand(), sql, (t1, t2, t3, t4, t5, t6, t7) => { return t1; }, param);
+                return Query<T>(conn.CreateCommand(), sql, param, new Type[] { typeof(T) });
             }
         }
-        public static List<T1> Query<T1, T2>(string sql, Action<T1, T2> func, object param = null)
+        public static List<T1> Query<T1, T2>(string sql, object param = null)
         {
             using (IDbConnection conn = CreateConnection())
             {
-                return Query<T1, T2, TNull, TNull, TNull, TNull, TNull, T1>(conn.CreateCommand(), sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2); return t1; }, param);
+                return Query<T1>(conn.CreateCommand(), sql, param, new Type[] { typeof(T1), typeof(T2) });
             }
         }
-        public static List<T1> Query<T1, T2, T3>(string sql, Action<T1, T2, T3> func, object param = null)
+        public static List<T1> Query<T1, T2, T3>(string sql, object param = null)
         {
             using (IDbConnection conn = CreateConnection())
             {
-                return Query<T1, T2, T3, TNull, TNull, TNull, TNull, T1>(conn.CreateCommand(), sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3); return t1; }, param);
+                return Query<T1>(conn.CreateCommand(), sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3) });
             }
         }
-        public static List<T1> Query<T1, T2, T3, T4>(string sql, Action<T1, T2, T3, T4> func, object param = null)
+        public static List<T1> Query<T1, T2, T3, T4>(string sql, object param = null)
         {
             using (IDbConnection conn = CreateConnection())
             {
-                return Query<T1, T2, T3, T4, TNull, TNull, TNull, T1>(conn.CreateCommand(), sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4); return t1; }, param);
+                return Query<T1>(conn.CreateCommand(), sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) });
             }
         }
-        public static List<T1> Query<T1, T2, T3, T4, T5>(string sql, Action<T1, T2, T3, T4, T5> func, object param = null)
+        public static List<T1> Query<T1, T2, T3, T4, T5>(string sql, object param = null)
         {
             using (IDbConnection conn = CreateConnection())
             {
-                return Query<T1, T2, T3, T4, T5, TNull, TNull, T1>(conn.CreateCommand(), sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5); return t1; }, param);
+                return Query<T1>(conn.CreateCommand(), sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) });
             }
         }
-        public static List<T1> Query<T1, T2, T3, T4, T5, T6>(string sql, Action<T1, T2, T3, T4, T5, T6> func, object param = null)
-        {
-            using (IDbConnection conn = CreateConnection())
-            {
-                return Query<T1, T2, T3, T4, T5, T6, TNull, T1>(conn.CreateCommand(), sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6); return t1; }, param);
-            }
-        }
-        public static List<T1> Query<T1, T2, T3, T4, T5, T6, T7>(string sql, Action<T1, T2, T3, T4, T5, T6, T7> func, object param = null)
-        {
-            using (IDbConnection conn = CreateConnection())
-            {
-                return Query<T1, T2, T3, T4, T5, T6, T7, T1>(conn.CreateCommand(), sql, (t1, t2, t3, t4, t5, t6, t7) => { func(t1, t2, t3, t4, t5, t6, t7); return t1; }, param);
-            }
-        }
+
         #endregion
     }
-
     public partial class DB
     {
         //"Data Source=.;Initial Catalog=Wind;uid=sa;pwd=123456";   //用户名密码连接
@@ -491,9 +402,8 @@ select * from __tab where __RowNum between @__start and @__end
         }
         #endregion
 
-        #region DataReader->Model 查询且转实体类
         /*
-        *性能测试结果：
+        *查询性能测试结果：
         *                                反射               Expression或Emit      SqlDataReader手写填充实体类      SqlDataAdapter.Fill()      SqlDataReader填充DataTable
         *  调用1次查询113万条数据      7500毫秒              3500毫秒                  3500毫秒                       5100毫秒                  3500毫秒
         *  查询15条耗时比例            11                     8                                                                                   8
@@ -658,7 +568,6 @@ select * from __tab where __RowNum between @__start and @__end
             List<RelationModel>[] list = new List<RelationModel>[types.Length];
             for (int i = 0; i < types.Length; i++)//遍历T1-T7的类
             {
-                if (types[i] == typeof(TNull)) { break; }//如果遇到 TNull就退出循环（因为后面的一定也是 TNull）
                 List<RelationModel> col = new List<RelationModel>();//当前类的匹配到的属性填充到此
                 foreach (var m in types[i].GetProperties())//遍历属性
                 {
@@ -682,108 +591,86 @@ select * from __tab where __RowNum between @__start and @__end
         }
         #endregion
 
-        #region 查询 DataReader->Model（反射方式）
-        private static T GetModel<T>(IDataReader reader, List<RelationModel> relationList)
+        #region 多表联查，实体类与属性的关系
+        //实例所对应的属性
+        private class ModelAttrRelation
         {
-            if (relationList == null) { return default(T); }
-            T t = (T)Activator.CreateInstance(typeof(T));//创建实体类对象
-            foreach (var r in relationList)//给实体类的每个属性赋值
-            {
-                if (!reader.IsDBNull(r.DbIndex))
-                {
-                    object val = reader.GetValue(r.DbIndex);
-                    r.Property.SetValue(t, r.PropertyType != r.DbType ? Convert.ChangeType(val, r.PropertyType) : val);
-                }
-            }
-            return t;
+            //实例
+            public int Case { set; get; }
+            //赋值给第几个对象
+            public int Obj { set; get; }
+            //哪个属性
+            public PropertyInfo Property { set; get; }
         }
-        /// <summary>
-        /// 查询数据，反射方式把数据填充到List，不对外开放，调用此方法需要外面关闭数据库连接
-        /// </summary>
-        internal static List<TReturn> Query1<T1, T2, T3, T4, T5, T6, T7, TReturn>(IDbCommand cmd, string sql, Func<T1, T2, T3, T4, T5, T6, T7, TReturn> func, object param = null)
+        private static List<ModelAttrRelation> GetModelAttrRelations(Type[] types, Type returnType)
         {
-            using (IDataReader reader = ExecuteReader(cmd, sql, param))
+            List<ModelAttrRelation> modelAttrRelation = new List<ModelAttrRelation>();
+            for (int i = 0; i < types.Length; i++)
             {
-                List<RelationModel>[] relationList = DbModelRelation(reader, new Type[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7) });//获取实体类属性与数据库字段对应关系
-                List<TReturn> list = new List<TReturn>();
-                T1 t1; T2 t2; T3 t3; T4 t4; T5 t5; T6 t6; T7 t7;//临时变量，放在 while外面
-                while (reader.Read())
+                Type t = types[i];
+                if (t == returnType) { continue; }
+                bool b = true;
+                //查找关系
+                for (int j = 0; j < types.Length; j++)
                 {
-                    t1 = GetModel<T1>(reader, relationList[0]);
-                    t2 = GetModel<T2>(reader, relationList[1]);
-                    t3 = GetModel<T3>(reader, relationList[2]);
-                    t4 = GetModel<T4>(reader, relationList[3]);
-                    t5 = GetModel<T5>(reader, relationList[4]);
-                    t6 = GetModel<T6>(reader, relationList[5]);
-                    t7 = GetModel<T7>(reader, relationList[6]);
-
-                    list.Add(func(t1, t2, t3, t4, t5, t6, t7));//指定实体类之间的关系
+                    if (i == j) { continue; }
+                    foreach (var m in types[j].GetProperties())
+                    {
+                        if (t == m.PropertyType && !modelAttrRelation.Any(s => s.Property == m))
+                        {
+                            modelAttrRelation.Add(new ModelAttrRelation() { Case = i, Obj = j, Property = m });
+                            b = false;
+                            j = types.Length;//退出外层循环
+                            break;
+                        }
+                    }
                 }
-                return list;
+                if (b) { throw new Exception($"未找到与{t.Name}关联的属性"); }
             }
+            return modelAttrRelation;
         }
         #endregion
 
         #region 查询 DataReader->Model（表达式树方式）
-        private static readonly ConcurrentDictionary<Identity, Action<IDataReader, TModels>> FuncCache = new ConcurrentDictionary<Identity, Action<IDataReader, TModels>>();
-        /// <summary>
-        /// 查询数据，Expression 生成委托方式填充数据到List，不对外开放，调用此方法需要外面关闭数据库连接
-        /// </summary>
-        internal static List<TReturn> Query<T1, T2, T3, T4, T5, T6, T7, TReturn>(IDbCommand cmd, string sql, Func<T1, T2, T3, T4, T5, T6, T7, TReturn> func, object param = null)
+        private static readonly ConcurrentDictionary<Identity, Func<IDataReader, object>> FuncCache = new ConcurrentDictionary<Identity, Func<IDataReader, object>>();
+        internal static List<T> Query<T>(IDbCommand cmd, string sql, object param, Type[] types)
         {
             using (IDataReader reader = ExecuteReader(cmd, sql, param))
             {
-                Type[] types = new Type[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7) };
                 //构造 Identity
                 StringBuilder cols = new StringBuilder();
                 for (int i = 0; i < reader.FieldCount; i++) { cols.AppendLine(reader.GetName(i)); }
                 Identity identity = new Identity(types, cols.ToString());
                 //获取委托
-                Action<IDataReader, TModels> getModelFunc;
-                if (!FuncCache.TryGetValue(identity, out getModelFunc))
+                Func<IDataReader, object> func;
+                if (!FuncCache.TryGetValue(identity, out func))
                 {
-                    getModelFunc = GetFunc(reader, types);
-                    FuncCache[identity] = getModelFunc;
+                    func = GetFunc<T>(reader, types);
+                    FuncCache[identity] = func;
                 }
                 //DataReader 读取数据
-                List<TReturn> list = new List<TReturn>();
-                TModels models = new TModels();//临时变量
+                List<T> list = new List<T>();
                 while (reader.Read())
                 {
-                    getModelFunc(reader, models);//获取数据并填充到 TModels
-                    list.Add(func((T1)models.T1, (T2)models.T2, (T3)models.T3, (T4)models.T4, (T5)models.T5, (T6)models.T6, (T7)models.T7));//指定类与类之间的关系
+                    list.Add((T)func(reader));//指定类与类之间的关系
                 }
                 return list;//不要用yield return，用 yield 每次foreach 都会查一遍数据库
             }
         }
-
-        //因为 out T1 t1 在表达式树中没找到对应的用法，Action<>  在表达式树中也没找到对应调用方式，所以才用这种方式
-        private class TModels
-        {
-            public object T1 { set; get; }
-            public object T2 { set; get; }
-            public object T3 { set; get; }
-            public object T4 { set; get; }
-            public object T5 { set; get; }
-            public object T6 { set; get; }
-            public object T7 { set; get; }
-        }
         //表达式树生成映射委托
-        private static Action<IDataReader, TModels> GetFunc(IDataReader reader, Type[] types)
+        private static Func<IDataReader, object> GetFunc<T>(IDataReader reader, Type[] types)
         {
             List<RelationModel>[] relationList = DbModelRelation(reader, types);//获取关系
             List<Expression> block = new List<Expression>();//表达式块的集合
             //声明方法参数
             var rea = Expression.Parameter(typeof(IDataRecord));// IDataRecord 是 IDataReader 的父类，此处必须是IDataRecord，否则会报错
-            var tModels = Expression.Parameter(typeof(TModels));
             //变量列表
-            List<ParameterExpression> variableList = new List<ParameterExpression>();
+            ParameterExpression[] variableList = new ParameterExpression[types.Length];
             for (int i = 0; i < relationList.Length; i++)
             {
-                if (relationList[i] == null) { break; }
                 var model = Expression.Variable(types[i]);//var model; 声明实体类变量
                 block.Add(Expression.Assign(model, Expression.New(types[i]))); //model=new Model();实体类赋值
-                variableList.Add(model);//添加到变量列表
+                variableList[i] = model;//添加到变量列表
                 //给实体类的属性赋值
                 foreach (var r in relationList[i])
                 {
@@ -805,17 +692,23 @@ select * from __tab where __RowNum between @__start and @__end
                         )
                     ));
                 }
-                block.Add(Expression.Assign(Expression.Property(tModels, "T" + (i + 1)), model)); //赋值给 TModels的属性
+            }
+            //实例赋值给别的类的属性
+            List<ModelAttrRelation> modelAttrList = GetModelAttrRelations(types, typeof(T));//多表联查实体类与属性的关系
+            foreach (var m in modelAttrList)
+            {
+                block.Add(Expression.Assign(Expression.Property(variableList[m.Obj], m.Property), variableList[m.Case]));
             }
             //创建返回表达式（return model）
-            //var returnLabel = Expression.Label(type);
-            //block.Add(Expression.Return(returnLabel, model));
-            //block.Add(Expression.Label(returnLabel, Expression.Default(type)));
+            var returnLabel = Expression.Label(typeof(T));
+            block.Add(Expression.Return(returnLabel, variableList[Array.IndexOf(types, typeof(T))]));
+            block.Add(Expression.Label(returnLabel, Expression.Default(typeof(T))));
+
             var body = Expression.Block(
                     variableList,// 变量添加到块中
                     block
                 );
-            return Expression.Lambda<Action<IDataReader, TModels>>(body, rea, tModels).Compile();
+            return Expression.Lambda<Func<IDataReader, object>>(body, rea).Compile();
         }
         //Type[]不存（节省内存空间，一开始就有获取 HashCode），sql 只存列名（防止条件不同而存多个委托）
         private class Identity : IEquatable<Identity>
@@ -828,7 +721,6 @@ select * from __tab where __RowNum between @__start and @__end
                 this.hashCode = cols.GetHashCode() * 17;//为避免偶然相等，所以乘以质数
                 foreach (var m in types)
                 {
-                    if (m == typeof(TNull)) { break; }
                     this.hashCode = this.hashCode + m.GetHashCode() * 17;
                 }
             }
@@ -847,7 +739,6 @@ select * from __tab where __RowNum between @__start and @__end
                 return hashCode;
             }
         }
-        #endregion
         #endregion
 
     }
