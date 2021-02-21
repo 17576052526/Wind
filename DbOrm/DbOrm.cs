@@ -212,7 +212,7 @@ select * from _tab where _RowNum between @_start and @_end
             }
             catch
             {
-                tran.Rollback();
+                if (tran != null) { tran.Rollback(); }
                 return -1;
             }
             finally { conn.Close(); }
