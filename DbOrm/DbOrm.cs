@@ -156,6 +156,21 @@ select * from _tab where _RowNum between @_start and @_end
         {
             return this.ExecuteNonQuerys(model.Insert(), model);
         }
+        public int Inserts(IEnumerable<IDAL> list)
+        {
+            this.BeginTransaction();
+            try
+            {
+                int count = 0;
+                foreach (IDAL m in list)
+                {
+                    count += this.ExecuteNonQuerys(m.Insert(), m);
+                }
+                this.Commit();
+                return count;
+            }
+            catch { this.Rollback(); return -1; }
+        }
         public int Updates(IDAL model, string where, object param = null)
         {
             AddParameter(Command, model, true);
@@ -176,7 +191,32 @@ select * from _tab where _RowNum between @_start and @_end
         {
             return ExecuteNonQuery(model.Insert(), model);
         }
+        public static int Insert(IEnumerable<IDAL> list)
+        {
+            IDbConnection conn = CreateConnection();
+            IDbCommand cmd = conn.CreateCommand();
+            IDbTransaction tran = null;
+            try
+            {
+                conn.Open();
+                tran = conn.BeginTransaction();
+                cmd.Transaction = tran;
 
+                int count = 0;
+                foreach (var m in list)
+                {
+                    count += ExecuteNonQuery(cmd, m.Insert(), m);
+                }
+                tran.Commit();
+                return count;
+            }
+            catch
+            {
+                tran.Rollback();
+                return -1;
+            }
+            finally { conn.Close(); }
+        }
         public static int Update(IDAL model, string where, object param = null)
         {
             using (IDbConnection conn = CreateConnection())
