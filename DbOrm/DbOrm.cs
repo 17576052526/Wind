@@ -230,6 +230,7 @@ select * from _tab where _RowNum between @_start and @_end
         //事务不用委托的方式实现，因为太不灵活了
         public void BeginTransaction()
         {
+            if (Connection.State == ConnectionState.Closed) { Connection.Open(); } else if (Connection.State == ConnectionState.Broken) { Connection.Close(); Connection.Open(); }
             Command.Transaction = Connection.BeginTransaction();
         }
         public void Commit()
