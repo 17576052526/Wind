@@ -180,7 +180,7 @@ select * from _tab where _RowNum between @_start and @_end
         {
             return this.ExecuteNonQuerys($"delete from {typeof(T).Name} where {where}", param);
         }
-        public SqlBuilder<T> Selects<T>(string column = "*")
+        public SqlBuilder<T> Selects<T>(string column = "*") where T : IDAL
         {
             return new SqlBuilder<T>(Command).Select(column).From(typeof(T).Name);
         }
@@ -231,8 +231,8 @@ select * from _tab where _RowNum between @_start and @_end
         {
             return ExecuteNonQuery($"delete from {typeof(T).Name} where {where}", param);
         }
-        //select 不用 where T : IDAL
-        public static SqlBuilder<T> Select<T>(string column = "*")
+
+        public static SqlBuilder<T> Select<T>(string column = "*") where T : IDAL
         {
             return new SqlBuilder<T>().Select(column).From(typeof(T).Name);
         }
