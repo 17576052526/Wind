@@ -65,5 +65,10 @@ namespace Wind.UI.Areas.Admin.Pages.Test
                     .Query((PageIndex - 1) * PageSize, PageSize, Param);
             }
         }
+        //?handler=Delete
+        public void OnPostDelete()
+        {
+            DB.Delete<Test_Main>("ID in (@ID)", new { ID = Request.Form["ID"].ToString() });
+        }
     }
 }
