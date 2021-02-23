@@ -50,9 +50,8 @@ namespace Wind.UI.Areas.Admin.Pages.Test
             }
         }
         public List<Test_Main> List;
-        public void OnGet(int page = 1)
+        public void OnGet()
         {
-            this.PageIndex = page;//获取页码
             //取数
             using (DB db = new DB())
             {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,13 @@ namespace Wind.UI.Areas.Admin.Pages
         /// 分页-总数据量
         /// </summary>
         public int DataCount { set; get; }
+
+        private int pageIndex = 1;
         /// <summary>
         /// 分页-当前页码
         /// </summary>
-        public int PageIndex { set; get; }
-
+        [BindProperty(SupportsGet = true)]//url参数自动赋值给属性
+        public int PageIndex { set => pageIndex = value; get => pageIndex; }
         /// <summary>
         /// 共用的代码写在构造函数中
         /// </summary>
