@@ -65,10 +65,10 @@ namespace Wind.UI.Areas.Admin.Pages.Test
             }
         }
         //?handler=Delete
-        public void OnPostDelete()
+        public void OnPostDelete(string Query)//Query：上一次请求url上 ?后面的参数
         {
             DB.Delete<Test_Main>("ID in (@ID)", new { ID = Request.Form["ID"].ToString() });
-            Response.Redirect("List" + Request.QueryString);
+            Response.Redirect("List" + Query);
         }
     }
 }
