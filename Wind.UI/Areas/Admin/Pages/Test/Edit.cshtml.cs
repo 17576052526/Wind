@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Wind.UI.Areas.Admin.Pages.Test
 {
-    public class EditModel : PageModel
+    public class EditModel : EditPageModel
     {
         public void OnGet()
         {
