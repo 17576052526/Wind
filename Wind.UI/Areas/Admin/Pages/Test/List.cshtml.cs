@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Wind.UI.Areas.Admin.Pages.Test
 {
-    public class ListModel : BasePageModel
+    public class ListModel : ListPageModel
     {
         //²éÑ¯Ìõ¼þ
         private string _where;

@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 namespace Wind.UI.Areas.Admin.Pages
 {
     /// <summary>
-    /// PageModel 基类，后台其他页面的 PageModel类继承该类（公共部分写到此类当中，例如：权限控制，判断是否有登录）
+    /// 列表页基类（公共部分写到此类当中，例如：权限控制，判断是否有登录）
     /// </summary>
     [Authorize]//验证是否有登录
-    //[ValidateInput(false)]  //用于不验证富文本控件提交过来的 html字符串
-    public class BasePageModel: PageModel
+    public class ListPageModel: PageModel
     {
         /// <summary>
         /// 分页-每页显示的数据量
@@ -33,7 +32,7 @@ namespace Wind.UI.Areas.Admin.Pages
         /// <summary>
         /// 共用的代码写在构造函数中
         /// </summary>
-        public BasePageModel()
+        public ListPageModel()
         {
 
         }
