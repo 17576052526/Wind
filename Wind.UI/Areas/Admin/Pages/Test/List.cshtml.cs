@@ -64,11 +64,13 @@ namespace Wind.UI.Areas.Admin.Pages.Test
                     .Query((PageIndex - 1) * PageSize, PageSize, Param);
             }
         }
-        //?handler=Delete
-        public void OnPostDelete(string Query)//Query：上一次请求url上 ?后面的参数
+
+        //删除，在页面头部加上 @page "{handler}"，/list/Delete 就可访问，否则要 /list?handler=Delete才能访问
+        public void OnPostDelete()
         {
             DB.Delete<Test_Main>("ID in (@ID)", new { ID = Request.Form["ID"].ToString() });
-            Response.Redirect("List" + Query);
+            Response.Redirect("List" + Request.QueryString);
         }
+
     }
 }
