@@ -41,10 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DMSCCore\DbHelper.cs" />
-    <Compile Include="DMSCCore\DMSC.cs" />
-    <Compile Include="DMSCCore\Model.cs" />
-    <Compile Include="DMSCCore\SqlServer.cs" />
+    <Compile Include="DMSCTemp\DBMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
