@@ -171,6 +171,9 @@ select * from _tab where _RowNum between @_start and @_end
             }
             catch { this.Rollback(); return -1; }
         }
+        /// <summary>
+        /// 修改，不能将列值修改为 NULL值，如果要修改某列值为NULL值，请用 ExecuteNonQuery()
+        /// </summary>
         public int Updates(IDAL model, string where, object param = null)
         {
             AddParameter(Command, model, true);
@@ -217,6 +220,9 @@ select * from _tab where _RowNum between @_start and @_end
             }
             finally { conn.Close(); }
         }
+        /// <summary>
+        /// 修改，不能将列值修改为 NULL值，如果要修改某列值为NULL值，请用 ExecuteNonQuery()
+        /// </summary>
         public static int Update(IDAL model, string where, object param = null)
         {
             using (IDbConnection conn = CreateConnection())
@@ -375,6 +381,7 @@ select * from _tab where _RowNum between @_start and @_end
 
         #endregion
     }
+    //调用存储过程 用exec
     public partial class DB
     {
         //"Data Source=.;Initial Catalog=Wind;uid=sa;pwd=123456";   //用户名密码连接
@@ -490,7 +497,7 @@ select * from _tab where _RowNum between @_start and @_end
 
             DynamicMetaObject CallMethod(MethodInfo method, Expression[] parameters)
             {
-                var callMethod = new DynamicMetaObject(
+                var callMethod = new DynamicMetaObject(//此处报错，赋值时需要强转为object类型
                     Expression.Call(
                         Expression.Convert(Expression, LimitType),
                         method,
@@ -544,6 +551,9 @@ select * from _tab where _RowNum between @_start and @_end
                 if (index < 0)
                 {
                     index = table.AddColumn(key);
+                }
+                if (index >= values.Length)
+                {
                     Array.Resize(ref values, table.ColumnCount);//增加数组长度
                 }
                 return values[index] = value;
@@ -552,11 +562,11 @@ select * from _tab where _RowNum between @_start and @_end
             public object GetValue(string key)
             {
                 var index = table.IndexOfName(key);
-                if (index < 0)
+                if (index < 0)//无key则报错
                 {
                     throw new Exception("Key不存在");
                 }
-                else if (index >= values.Length)
+                else if (index >= values.Length)//无值返回 null，例如：第一行新加了一列，第二行则没加
                 {
                     return null;
                 }
