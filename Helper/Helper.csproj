@@ -41,13 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DMSCTemp\DBMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DMSCTemp\Template.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Template.txt</LastGenOutput>
+    </Content>
+    <Content Include="DMSCTemp\Template.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Template.tt</DependentUpon>
     </Content>
     <Content Include="DMSCTemp\_DbOrm.Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -164,6 +168,7 @@
     <Content Include="说明.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DMSCTemp\GetDBMsg.ttinclude" />
     <None Include="DMSCTemp\MultipleOutputHelper.ttinclude" />
     <None Include="UIPlugins\font\config.json" />
     <None Include="UIPlugins\font\font\fontello.eot" />

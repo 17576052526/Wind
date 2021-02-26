@@ -1,17 +1,17 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace DMSCCore
-{
-    #region æ•°æ®åº“è¾…åŠ©ç±»
+<#@ assembly name="System.Data"
+#><#@ import namespace="System"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="System.Data"
+#><#@ import namespace="System.IO"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Text.RegularExpressions"
+#><#+
+//Èç¹ûÒª²âÊÔ¡¢ĞŞ¸Ä±¾ÎÄ¼ş´úÂë£¬°Ñ´úÂë¸´ÖÆµ½¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞò£¬¸ÄÍêÖ®ºóÔÚ·Å½øÀ´
+    #region Êı¾İ¿â¸¨ÖúÀà
     public sealed class DbHelper
     {
         /// <summary>
-        /// æ•°æ®åº“è¿æ¥å­—ç¬¦ä¸²
+        /// Êı¾İ¿âÁ¬½Ó×Ö·û´®
         /// </summary>
         public static readonly string ConnString = ((Func<string>)(() =>
         {
@@ -19,7 +19,7 @@ namespace DMSCCore
             return Regex.Match(str, "(?<=\"ConnString\"\\s*:\\s*\")[^\"]+(?=\")").Value;
         }))();
         /// <summary>
-        /// åˆ›å»º Connectionï¼Œé€šè¿‡åˆ›å»ºä¸åŒç±»å‹çš„å®ä¾‹æ¥è¾¾åˆ°è°ƒç”¨ä¸åŒç±»å‹çš„æ•°æ®åº“
+        /// ´´½¨ Connection£¬Í¨¹ı´´½¨²»Í¬ÀàĞÍµÄÊµÀıÀ´´ïµ½µ÷ÓÃ²»Í¬ÀàĞÍµÄÊı¾İ¿â
         /// </summary>
         public static IDbConnection CreateConnection()
         {
@@ -28,7 +28,7 @@ namespace DMSCCore
 
 
         /// <summary>
-        /// æŸ¥è¯¢æ•°æ®ï¼Œä»¥ DataTableè¿”å›æŸ¥è¯¢ç»“æœ
+        /// ²éÑ¯Êı¾İ£¬ÒÔ DataTable·µ»Ø²éÑ¯½á¹û
         /// </summary>
         public static DataTable Select(string sql, CommandType type = CommandType.Text)
         {
@@ -41,7 +41,7 @@ namespace DMSCCore
             {
                 conn.Open();
                 reader = comm.ExecuteReader();
-                //----------------å¼€å§‹å¡«å……----------------//
+                //----------------¿ªÊ¼Ìî³ä----------------//
                 DataTable dt = new DataTable();
                 int fieldCount = reader.FieldCount;
                 for (int i = 0; i < fieldCount; i++)
@@ -68,114 +68,114 @@ namespace DMSCCore
     }
     #endregion
 
-    #region å®ä½“ç±»
+    #region ÊµÌåÀà
     public class Table
     {
         /// <summary>
-        /// è¡¨å
+        /// ±íÃû
         /// </summary>
         public string Name { set; get; }
         /// <summary>
-        /// è¡¨è¯´æ˜
+        /// ±íËµÃ÷
         /// </summary>
         public string Description { set; get; }
         /// <summary>
-        /// ä¸»é”®ï¼ˆåˆ—åï¼‰
+        /// Ö÷¼ü£¨ÁĞÃû£©
         /// </summary>
         public string PrimaryKey { set; get; }
         /// <summary>
-        /// è¡¨ä¸­çš„åˆ—
+        /// ±íÖĞµÄÁĞ
         /// </summary>
         public List<Column> Column { set; get; }
-        /********************************** è§£æå‡ºæ¥çš„æ•°æ® **********************************/
+        /********************************** ½âÎö³öÀ´µÄÊı¾İ **********************************/
         /// <summary>
-        /// å½“å‰è¡¨çš„æ˜ç»†è¡¨
+        /// µ±Ç°±íµÄÃ÷Ï¸±í
         /// </summary>
         public List<string> DtlTable { set; get; }
     }
 
     /// <summary>
-    /// åˆ—
+    /// ÁĞ
     /// </summary>
     public class Column
     {
         /// <summary>
-        /// åˆ—å
+        /// ÁĞÃû
         /// </summary>
         public string Name { set; get; }
         /// <summary>
-        /// åˆ—è¯´æ˜
+        /// ÁĞËµÃ÷
         /// </summary>
         public string Description { set; get; }
         /// <summary>
-        /// æ˜¯å¦æ˜¯è‡ªå¢åˆ—ï¼ˆä¸ä¸»é”®æ— å…³ï¼Œè‡ªå¢åˆ—ä¸å‚ä¸ insertï¼‰
+        /// ÊÇ·ñÊÇ×ÔÔöÁĞ£¨ÓëÖ÷¼üÎŞ¹Ø£¬×ÔÔöÁĞ²»²ÎÓë insert£©
         /// </summary>
         public bool IsIdentity { set; get; }
         /// <summary>
-        /// æ•°æ®åº“ä¸­çš„ç±»å‹
+        /// Êı¾İ¿âÖĞµÄÀàĞÍ
         /// </summary>
         public string Type { set; get; }
         /// <summary>
-        /// å­—æ®µé•¿åº¦
+        /// ×Ö¶Î³¤¶È
         /// </summary>
         public int Length { set; get; }
         /// <summary>
-        /// æ˜¯å¦å…è®¸ç©º
+        /// ÊÇ·ñÔÊĞí¿Õ
         /// </summary>
         public bool IsNull { set; get; }
         /// <summary>
-        /// C#å¯¹åº”çš„ç±»å‹
+        /// C#¶ÔÓ¦µÄÀàĞÍ
         /// </summary>
         public string CType { set; get; }
-        /********************************** è§£æå‡ºæ¥çš„æ•°æ® **********************************/
+        /********************************** ½âÎö³öÀ´µÄÊı¾İ **********************************/
         /// <summary>
-        /// å¤–é”®è¡¨è¡¨åï¼Œä¸æ˜¯å¤–é”®å°±æ˜¯null
+        /// Íâ¼ü±í±íÃû£¬²»ÊÇÍâ¼ü¾ÍÊÇnull
         /// </summary>
         public string ForeignKeyTable { set; get; }
         /// <summary>
-        /// å¤–é”®è¡¨æ˜¾ç¤ºçš„åˆ—å
+        /// Íâ¼ü±íÏÔÊ¾µÄÁĞÃû
         /// </summary>
         public string ForeignKeyName { set; get; }
         /// <summary>
-        /// å¤–é”®è¡¨æ˜¾ç¤ºçš„åˆ—åæè¿°
+        /// Íâ¼ü±íÏÔÊ¾µÄÁĞÃûÃèÊö
         /// </summary>
         public string ForeignKeyDescription { set; get; }
         /// <summary>
-        /// æ˜¯å¦æœ‰æœç´¢æ¡†ï¼ˆåˆ—è¡¨é¡µæœç´¢ï¼‰
+        /// ÊÇ·ñÓĞËÑË÷¿ò£¨ÁĞ±íÒ³ËÑË÷£©
         /// </summary>
         public bool IsSearch { set; get; }
         /// <summary>
-        /// æ˜¯å¦æ˜¯å›¾ç‰‡åˆ—
+        /// ÊÇ·ñÊÇÍ¼Æ¬ÁĞ
         /// </summary>
         public bool IsImg { set; get; }
         /// <summary>
-        /// æ˜¯å¦æ˜¯æ–‡ä»¶åˆ—
+        /// ÊÇ·ñÊÇÎÄ¼şÁĞ
         /// </summary>
         public bool IsFile { set; get; }
         /// <summary>
-        /// æ˜¯å¦æ˜¯<textarea>æ¡†
+        /// ÊÇ·ñÊÇ<textarea>¿ò
         /// </summary>
         public bool IsDesc { set; get; }
     }
     #endregion
 
-    #region è·å– SqlServeræ•°æ®åº“ç›¸å…³ä¿¡æ¯
+    #region »ñÈ¡ SqlServerÊı¾İ¿âÏà¹ØĞÅÏ¢
     public class SqlServer
     {
         /// <summary>
-        /// è·å–Sql Server æ•°æ®åº“è¡¨å’Œå­—æ®µ
+        /// »ñÈ¡Sql Server Êı¾İ¿â±íºÍ×Ö¶Î
         /// </summary>
         /// <returns></returns>
         public static List<Table> Main()
         {
-            //æŸ¥è¯¢æ‰€æœ‰è¡¨
+            //²éÑ¯ËùÓĞ±í
             StringBuilder tableSql = new StringBuilder();
             tableSql.AppendLine("select a.name,b.value,d.column_name from sys.tables a ");
             tableSql.AppendLine("left join sys.extended_properties b on (a.object_id = b.major_id AND b.minor_id = 0) ");
             tableSql.AppendLine("left join information_schema.table_constraints c on(a.name=c.table_name and c.constraint_type='PRIMARY KEY')");
             tableSql.AppendLine("left join information_schema.constraint_column_usage d on(c.constraint_name = d.constraint_name)");
             DataTable tableDt = DbHelper.Select(tableSql.ToString());
-            //æŸ¥è¯¢æ‰€æœ‰è¡¨çš„æ‰€æœ‰åˆ—
+            //²éÑ¯ËùÓĞ±íµÄËùÓĞÁĞ
             StringBuilder columnSql = new StringBuilder();
             columnSql.AppendLine("select sys.columns.name Name, sys.types.name Type, sys.columns.max_length Length, sys.columns.is_nullable IsNull,");
             columnSql.AppendLine("(select value from sys.extended_properties where sys.extended_properties.major_id = sys.columns.object_id and sys.extended_properties.minor_id = sys.columns.column_id) as Description ,");
@@ -183,17 +183,17 @@ namespace DMSCCore
             columnSql.AppendLine("sys.tables.name TableName");
             columnSql.AppendLine("from sys.columns, sys.tables, sys.types where sys.columns.object_id = sys.tables.object_id and sys.columns.system_type_id=sys.types.system_type_id AND sys.types.name<>'sysname' order by sys.tables.name,sys.columns.column_id");
             DataTable columnDt = DbHelper.Select(columnSql.ToString());
-            //éå†è¡¨
+            //±éÀú±í
             List<Table> list = new List<Table>();
             foreach (DataRow tableDr in tableDt.Rows)
             {
                 Table tableModel = new Table();
-                tableModel.Name = Convert.ToString(tableDr["name"]);//è¡¨å
-                tableModel.Description = Convert.ToString(tableDr["value"]);//è¡¨è¯´æ˜
-                tableModel.PrimaryKey = Convert.ToString(tableDr["column_name"]);//ä¸»é”®
-                tableModel.Column = new List<Column>();//è¡¨çš„åˆ—é›†åˆ
-                //éå†å½“å‰è¡¨çš„åˆ—
-                foreach (DataRow dr in columnDt.Rows)//columnDtæ˜¯æ‰€æœ‰è¡¨çš„åˆ—
+                tableModel.Name = Convert.ToString(tableDr["name"]);//±íÃû
+                tableModel.Description = Convert.ToString(tableDr["value"]);//±íËµÃ÷
+                tableModel.PrimaryKey = Convert.ToString(tableDr["column_name"]);//Ö÷¼ü
+                tableModel.Column = new List<Column>();//±íµÄÁĞ¼¯ºÏ
+                //±éÀúµ±Ç°±íµÄÁĞ
+                foreach (DataRow dr in columnDt.Rows)//columnDtÊÇËùÓĞ±íµÄÁĞ
                 {
                     if (tableModel.Name == Convert.ToString(dr["TableName"]))
                     {
@@ -214,7 +214,7 @@ namespace DMSCCore
         }
 
         /// <summary>
-        /// SqlServer æ•°æ®ç±»å‹ä¸C# æ•°æ®ç±»å‹å¯¹åº”é”®å€¼å¯¹ï¼Œkey:SqlTypeç±»å‹ï¼Œvalue:C#ç±»å‹
+        /// SqlServer Êı¾İÀàĞÍÓëC# Êı¾İÀàĞÍ¶ÔÓ¦¼üÖµ¶Ô£¬key:SqlTypeÀàĞÍ£¬value:C#ÀàĞÍ
         /// </summary>
         public static readonly Dictionary<string, string> SqlTypeToCType = new Dictionary<string, string> {
             { "int","int?" }, {"varchar","string" },{"bit","bool?" } ,{"datetime","DateTime?" },{"decimal","decimal?" },{"float","double?" },
@@ -228,11 +228,11 @@ namespace DMSCCore
     public class DMSC
     {
         /// <summary>
-        /// å…¥å£æ–¹æ³•
+        /// Èë¿Ú·½·¨
         /// </summary>
         public static List<Table> Main()
         {
             return SqlServer.Main();
         }
     }
-}
+ #>

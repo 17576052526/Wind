@@ -1,9 +1,8 @@
 ﻿<#@ template debug="false" hostspecific="True" language="C#" #>
 <#@ output extension=".txt" #>
 <#@ include file="$(ProjectDir)DMSCTemp\MultipleOutputHelper.ttinclude"#>
-<#@ assembly name="$(SolutionDir)Helper\bin\Debug\Helper.dll" #>
+<#@ include file="$(ProjectDir)DMSCTemp\GetDBMsg.ttinclude"#>
 <#@ import namespace="System.Linq" #>
-<#@ import namespace="DMSCCore" #>
 <#@ import namespace="System.IO" #>
 
 <#
