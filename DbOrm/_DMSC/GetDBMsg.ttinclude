@@ -8,16 +8,12 @@
 #><#+
 //如果要测试、修改本文件代码，把代码复制到控制台应用程序，改完之后在放进来
     #region 数据库辅助类
-    public sealed class DbHelper
+    public class DbHelper
     {
         /// <summary>
         /// 数据库连接字符串
         /// </summary>
-        public static readonly string ConnString = ((Func<string>)(() =>
-        {
-            string str = File.ReadAllText(Environment.CurrentDirectory + "/Wind.UI/appsettings.json");
-            return Regex.Match(str, "(?<=\"ConnString\"\\s*:\\s*\")[^\"]+(?=\")").Value;
-        }))();
+        public static string ConnString;
         /// <summary>
         /// 创建 Connection，通过创建不同类型的实例来达到调用不同类型的数据库
         /// </summary>
