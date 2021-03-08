@@ -221,11 +221,11 @@
 	<item>
 		<id>tree</id>
 		<name>树结构</name>
-		<preview>/UIPlugins/tree/demo1.html</preview>
-		<see>/UIPlugins/tree/demo1.html</see>
+		<preview>/UIPlugins/tree/demo.html</preview>
+		<see>/UIPlugins/tree/demo.html</see>
 		<see>/UIPlugins/tree/tree.js</see>
 		<see>/UIPlugins/tree/tree-search.js</see>
-		<see>/UIPlugins/tree/tree1.css</see>
+		<see>/UIPlugins/tree/tree.css</see>
 	</item>
 	<item>
 		<id>upload</id>
