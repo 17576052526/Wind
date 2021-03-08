@@ -1,4 +1,7 @@
-﻿.tree-box {padding-left: 20px;border-left: 2px solid #ccc;margin-left: 10px;display: none;}
+﻿.tree-switch:before{content:"";position:absolute;left:3px;top:50%;margin-top:-6px;border:6px solid transparent;border-left-color:#aaa;transition:all .3s;}
+.tree-active>.tree-switch:before,.tree-active>*>.tree-switch:before{transform:rotate(90deg);left:0px;margin-top:-3px;}
+.tree-btn{padding-left:15px;position:relative;}
+.tree-box{padding-left:20px;}
+/* tree.js必要样式 */
+.tree-box{display: none;}
 .tree-active > .tree-box {display: block;}
-.tree-btn {padding: 5px 10px;border: 1px solid #ddd;border-radius: 3px;position: relative;}
-.tree-btn:after {content: "";height: 2px;width: 20px;background-color: #ccc;position: absolute;left: -21px;top: 15px;}
