@@ -130,12 +130,12 @@
     <Content Include="UIPlugins\tab\tab.js" />
     <Content Include="UIPlugins\checked-tr\demo.html" />
     <Content Include="UIPlugins\checked-tr\checked-tr.js" />
-    <Content Include="UIPlugins\tree\demo.html" />
     <Content Include="UIPlugins\tree\demo1.html" />
+    <Content Include="UIPlugins\tree\demo.html" />
     <Content Include="UIPlugins\tree\tree-search.js" />
-    <Content Include="UIPlugins\tree\tree.css" />
-    <Content Include="UIPlugins\tree\tree.js" />
     <Content Include="UIPlugins\tree\tree1.css" />
+    <Content Include="UIPlugins\tree\tree.js" />
+    <Content Include="UIPlugins\tree\tree.css" />
     <Content Include="UIPlugins\AdminUIPage\default.html" />
     <Content Include="UIPlugins\AdminUIPage\edit.html" />
     <Content Include="UIPlugins\AdminUIPage\index.css" />
