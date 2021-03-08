@@ -1,7 +1,0 @@
-﻿.tree-switch:before{content:"";position:absolute;left:3px;top:50%;margin-top:-6px;border:6px solid transparent;border-left-color:#aaa;transition:all .3s;}
-.tree-active>.tree-switch:before,.tree-active>*>.tree-switch:before{transform:rotate(90deg);left:0px;margin-top:-3px;}
-.tree-btn{padding-left:15px;position:relative;}
-.tree-box{padding-left:20px;}
-/* tree.js必要样式 */
-.tree-box{display: none;}
-.tree-active > .tree-box {display: block;}
