@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link rel="stylesheet" type="text/css" href="tab.css" />
 </head>
 <body>
     <!--
@@ -15,16 +16,16 @@
         -->
     <div class="tab">
         <div>
-            <div>其他内容</div>
-            <div>其他内容</div>
-            <div>其他内容</div>
             <div class="tab-item tab-active">选项一</div>
             <div class="tab-item">选项二</div>
             <div class="tab-item">选项三</div>
         </div>
-        <div class="tab-content">选项一内容</div>
-        <div class="tab-content">选项二内容</div>
-        <div class="tab-content">选项三内容</div>
+        <div>
+            <!--css中有写.tab-content:first-child，第一个节点必须要有 class="tab-content"-->
+            <div class="tab-content">内容一</div>
+            <div class="tab-content">内容二</div>
+            <div class="tab-content">内容三</div>
+        </div>
     </div>
 
 
