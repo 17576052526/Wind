@@ -126,6 +126,7 @@
     <Content Include="UIPlugins\tab\demo-tab-iframe.html" />
     <Content Include="UIPlugins\tab\demo.html" />
     <Content Include="UIPlugins\tab\tab-iframe.js" />
+    <Content Include="UIPlugins\tab\tab.css" />
     <Content Include="UIPlugins\tab\tab.js" />
     <Content Include="UIPlugins\checked-tr\demo.html" />
     <Content Include="UIPlugins\checked-tr\checked-tr.js" />
