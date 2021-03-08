@@ -1,0 +1,9 @@
+﻿.bannerSlide {position: relative;}
+.bannerSlideBox {width: 100%;height: 100%;overflow: hidden;}
+.bannerSlide ul, .bannerSlide ul li {height: 100%;}
+.bannerSlide ul li {float: left;list-style: none;position:relative;}
+.bannerSlide ul:after, .bannerSlide ol:after {display: table;content: " ";clear: both;}
+/* 按钮 */
+.bannerSlide ol {position: absolute;left: 50%;bottom: 20px;}
+.bannerSlide ol li {width: 20px;height: 20px;border-radius: 50%;float: left;margin: 0px 7px;border: 5px solid #aaa;cursor: pointer;list-style: none;}
+.bannerSlide .bannerSlideCurBtn {background-color: red;border-width: 0px;}

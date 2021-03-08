@@ -1,0 +1,37 @@
+﻿@page "{id}"
+@model Plugins.Pages.SeeModel
+@{
+    Layout = "_Layout";
+}
+@section head{
+    <link rel="stylesheet" type="text/css" href="/css/see-merge.min.css" />
+}
+@section body{
+    <script type="text/javascript" src="/js/see-merge.min.js"></script>
+}
+<div class="padding10 height100">
+    <div class="box tab height100">
+        <div class="tab-box">
+            @if (Model.DataModel.Preview != null)
+            {<div class="tab-item tab-active">预览</div>}
+            @foreach (var m in Model.DataModel.See)
+            {
+                <div class="tab-item">@m.Substring(m.LastIndexOf('/') + 1)</div>
+            }
+        </div>
+        <div class="box-body">
+            @if (Model.DataModel.Preview != null)
+            {
+            <div class="tab-content height100">
+                <iframe src="@Model.DataModel.Preview" style="height:100%;width:100%;border:none;display:block;"></iframe>
+            </div>
+            }
+            @foreach (var m in Model.DataModel.See)
+            {
+                <div class="tab-content height100">
+                    <textarea readonly="readonly" class="textarea">@System.IO.File.ReadAllText(Plugins.Pages.Data.WebRootPath+m)</textarea>
+                </div>
+            }
+        </div>
+    </div>
+</div>

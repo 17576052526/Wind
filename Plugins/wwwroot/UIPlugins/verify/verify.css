@@ -1,0 +1,2 @@
+﻿.verify-msg {border-radius: 4px;background-color: #d9534f;color: #fff;padding: 6px 12px;margin-left: 12px;}
+.verify-msg::after {content: "";position: absolute;left: -17px;top: 8px;border: 8px solid transparent;border-right: 10px solid #d9534f;}

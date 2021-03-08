@@ -1,0 +1,39 @@
+[
+  /***************************  布局页  ***************************/
+  {
+    "outputFileName": "wwwroot/css/layout-merge.css", //css
+    "inputFiles": [
+      "wwwroot/css/layout.css", //手写的
+      //第三方插件，global.css 页面直接引用
+      "wwwroot/lib/font/css/fontello.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/layout-merge.js", //js
+    "inputFiles": [
+      "wwwroot/js/layout.js", //手写的
+      //第三方插件，jquery 页面直接引用
+      "wwwroot/lib/tree/tree.js",
+      "wwwroot/lib/tree/tree-search.js"
+    ]
+  },
+
+  /***************************  预览页  ***************************/
+  {
+    "outputFileName": "wwwroot/css/see-merge.css", //css
+    "inputFiles": [
+      "wwwroot/css/see.css", //手写的
+      //第三方插件，global.css 页面直接引用
+      "wwwroot/lib/AdminUI/UI.css",
+      "wwwroot/lib/tab/tab.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/see-merge.js", //js
+    "inputFiles": [
+      "wwwroot/js/see.js", //手写的
+      //第三方插件，jquery 页面直接引用
+      "wwwroot/lib/tab/tab.js"
+    ]
+  }
+]

@@ -3,11 +3,7 @@
 /Wind.UI/obj
 /Common/bin
 /Common/obj
-/Wind.Model/bin
-/Wind.Model/obj
-/Wind.DAL/bin
-/Wind.DAL/obj
-/Helper/bin
-/Helper/obj
 /DbOrm/bin
 /DbOrm/obj
+/Plugins/bin
+/Plugins/obj

@@ -1,0 +1,37 @@
+﻿.loading1{width: 60px;height: 40px;display: flex;justify-content: space-between;align-items: center;}
+.loading1>span{width: 8px;height:100%;border-radius:4px;background:lightgreen;animation:loading1 1s ease infinite;}
+@keyframes loading1 {
+    0%,100% {height: 40px;background: lightgreen;}
+    50% {height: 70px;background: lightblue;}
+}
+.loading1>span:nth-child(2) {animation-delay: 0.2s;}
+.loading1>span:nth-child(3) {animation-delay: 0.4s;}
+.loading1>span:nth-child(4) {animation-delay: 0.6s;}
+.loading1>span:nth-child(5) {animation-delay: 0.8s;}
+
+.loading2{width: 150px;height: 15px;position: relative;}
+.loading2>span{position: absolute;width: 15px;height: 100%;border-radius: 50%;background: lightgreen;animation: loading2 1.04s ease-in infinite alternate;}
+@keyframes loading2{
+    0%{opacity: 1;transform: translateX(0px);}
+    100%{opacity: 0.2;transform: translateX(150px);}
+}
+.loading2>span:nth-child(1){animation-delay:0.13s;}
+.loading2>span:nth-child(2){animation-delay:0.26s;}
+.loading2>span:nth-child(3){animation-delay:0.39s;}
+.loading2>span:nth-child(4){animation-delay:0.52s;}
+.loading2>span:nth-child(5){animation-delay:0.65s;}
+
+.loading3{width: 100px;height: 100px;position: relative;}
+.loading3>span{width: 20px;height: 20px;border-radius: 50%;background: lightgreen;position: absolute;animation: loading3 1.04s ease infinite;}
+@keyframes loading3{
+    0%{transform: scale(1.2);opacity: 1;}
+    100%{transform: scale(.3);opacity: 0.5;}
+}
+.loading3>span:nth-child(1){left: 0;top: 50%;margin-top:-10px;animation-delay:0.13s;}
+.loading3>span:nth-child(2){left: 14px;top: 14px;animation-delay:0.26s;}
+.loading3>span:nth-child(3){left: 50%;top: 0;margin-left: -10px;animation-delay:0.39s;}
+.loading3>span:nth-child(4){top: 14px;right:14px;animation-delay:0.52s;}
+.loading3>span:nth-child(5){right: 0;top: 50%;margin-top:-10px;animation-delay:0.65s;}
+.loading3>span:nth-child(6){right: 14px;bottom:14px;animation-delay:0.78s;}
+.loading3>span:nth-child(7){bottom: 0;left: 50%;margin-left: -10px;animation-delay:0.91s;}
+.loading3>span:nth-child(8){bottom: 14px;left: 14px;animation-delay:1.04s;}

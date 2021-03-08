@@ -1,0 +1,2 @@
+﻿.table-resize{position:relative;}
+.table-resize .table-resize-move{cursor:col-resize;width:8px;position:absolute;right:0px;top:0px;bottom:0px;z-index:1;}

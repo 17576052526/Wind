@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="input-search.css" />
+    <style type="text/css">
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        ul, ol {list-style: none;font-size: 14px;}
+
+        /******************/
+
+    </style>
+</head>
+<body>
+    <!--
+    描述：输入框搜索下拉
+
+    -->
+    <br /><br /><br /><br /><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="input-search" />
+
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="input-search.js"></script>
+    <script type="text/javascript">
+        //调用插件 参数一：url地址（注意：查询字符是直接跟在url后面，所以最后是searchVal=），参数二：解析json的方法，参数三：点击下拉触发的事件
+        $('.input-search').inputSearch('http://localhost:8088/HZHY/QueryEpartServlet?clientid=BCF_-2121702503_1597913712299&searchVal=', function (msg) {
+            msg = JSON.parse(msg);
+            if (msg.state == 'success') {
+                var arr = [];
+                for (var m of msg.data) {
+                    arr.push({ value: m.ITEMNO, text: m.ITEMNO + ':' + m.MAKTX });
+                }
+                return arr;
+            } else {
+                alert(msg.mess);
+            }
+        }, function () {
+                alert('点击下拉了');
+        });
+    </script>
+</body>
+</html>

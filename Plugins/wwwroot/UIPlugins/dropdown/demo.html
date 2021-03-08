@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        /*非必要样式*/
+        *{margin:0px;padding:0px;box-sizing:border-box;}
+        body{font-size:14px;line-height:1.42857143;color:#333;}
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="dropdown.css" />
+</head>
+<body>
+    <!--
+    下拉CSS（独立的）
+        .dropdown  父级框
+        .dropdown-box 下拉项的父级框
+        .dropdown-item 下拉项
+    -->
+
+    <!--
+    点击当前节点，第一个隐藏的子节点显示
+         .click-show 当前节点绑定类样式
+         .click-hide 需要点击隐藏的子节点绑定
+    -->
+    <!--按钮下拉框-->
+    <div class="dropdown click-show">
+        <button>下拉按钮点击显示</button>
+        <div class="dropdown-box">
+            <div class="dropdown-item click-hide">选项或按钮</div>
+            <div class="dropdown-item">选项或按钮</div>
+            <div class="dropdown-item click-hide">选项或按钮</div>
+        </div>
+    </div>
+
+    <!--
+    悬浮在当前节点上，第一个隐藏的子节点显示
+         .hover-show 当前节点绑定类样式
+         .click-hide 需要点击隐藏的子节点绑定
+    -->
+    <!--按钮下拉框-->
+    <div class="dropdown hover-show">
+        <button>下拉按钮悬浮显示</button>
+        <div class="dropdown-box">
+            <div class="dropdown-item click-hide">选项或按钮</div>
+            <div class="dropdown-item click-hide">选项或按钮</div>
+            <div class="dropdown-item click-hide">选项或按钮</div>
+        </div>
+    </div>
+
+    <!--
+        按键弹开显示
+ .key-show 当前节点绑定类样式
+ .click-hide 需要点击隐藏的子节点绑定
+    
+
+
+    显示隐藏由，.click-show或 .hover-show 控制
+        下拉数据绑定，自己手动另外写代码绑定
+    -->
+    <!--输入下拉框-->
+    <div class="dropdown key-show">
+        <input type="text" />
+        <div class="dropdown-box" style="max-height:300px;max-width:300px;">
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品A产品A产品A产品A产品A产品A产品A产品A产品A产品A</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品B</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品C</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品B</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品C</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品B</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品C</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品B</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品C</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品B</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品C</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品B</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品C</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品C</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品B</div>
+            <div class="dropdown-item click-hide"><input type="checkbox" />产品C</div>
+        </div>
+    </div>
+
+    <!--表格下拉框-->
+    <div class="dropdown click-show">
+        <input type="text" />
+        <table class="dropdown-box">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" /></th>
+                    <th>姓名</th>
+                    <th>部门</th>
+                    <th>年龄</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>王某某</td>
+                    <td>开发部</td>
+                    <td>111</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>王某某</td>
+                    <td>开发部</td>
+                    <td>111</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="click-show.js"></script>
+    <script type="text/javascript" src="hover-show.js"></script>
+    <script type="text/javascript" src="key-show.js"></script>
+</body>
+</html>

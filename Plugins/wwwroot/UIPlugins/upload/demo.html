@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>当前进度：<span id="pro"></span></div>
+    <input type="button" value="上传按钮" onclick="upload()" />
+
+
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="upload.js"></script>
+
+    <script type="text/javascript">
+        function upload() {
+/*
+上传文件，参数如下：
+    url：上传的url地址，
+    accept：<input type="file">标签的 accept属性值 表示可以选的文件类型
+    multiple：是否一次可以选多个文件，true 多个，false 单个
+    success：上传成功的回调，
+    progress：当前已上传的百分比（进度）
+*/
+            $.upload('http://test.wind6.com/', ".jpg,.png,.rar", null, function (msg) {
+                alert('上传成功，服务器返回的消息：' + msg);
+            }, function (progress) {
+                $('#pro').html(progress);
+            })
+        }
+    </script>
+</body>
+</html>
