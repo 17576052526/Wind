@@ -5,7 +5,8 @@
     "inputFiles": [
       "wwwroot/css/layout.css", //手写的
       //第三方插件，global.css 页面直接引用
-      "wwwroot/lib/font/css/fontello.css"
+      "wwwroot/lib/font/css/fontello.css",
+      "wwwroot/lib/tree/tree.css"
     ]
   },
   {

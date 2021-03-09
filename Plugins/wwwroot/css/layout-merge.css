@@ -107,3 +107,5 @@
 .icon-spinner:before { content: '\f110'; } /* '' */
 .icon-sort_by_attributes:before { content: '\f160'; } /* '' */
 .icon-sort_by_attributes_alt:before { content: '\f161'; } /* '' */
+.tree-box{display: none;}
+.tree-active > .tree-box {display: block;}
