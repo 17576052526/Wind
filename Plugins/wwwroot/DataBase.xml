@@ -226,6 +226,7 @@
 		<see>/UIPlugins/tree/tree.js</see>
 		<see>/UIPlugins/tree/tree-search.js</see>
 		<see>/UIPlugins/tree/tree.css</see>
+		<see>/UIPlugins/tree/tree-style.css</see>
 	</item>
 	<item>
 		<id>upload</id>

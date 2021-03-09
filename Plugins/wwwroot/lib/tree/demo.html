@@ -7,24 +7,25 @@
         * {margin: 0px;padding: 0px;box-sizing: border-box;}
         *:after, *:before {box-sizing: border-box;}
     </style>
-    <link rel="stylesheet" type="text/css" href="tree.css" />
+    <link rel="stylesheet" type="text/css" href="tree.css" /><!--必要样式-->
+    <link rel="stylesheet" type="text/css" href="tree-style.css" /><!--非必要样式，用于设置外观-->
 </head>
 <body>
     <!--
-        js 树结构显示隐藏插件
+        tree.js 树结构显示隐藏插件
             .tree 每一个项（项的类样式）
             .tree-switch 触发显示隐藏的按钮
             .tree-box 子项的父级
             .tree-active 激活（显示）的样式
 
-        树结构搜索插件
+        tree-search.js 树结构搜索插件
             .tree-search 搜索输入框
             .tree 树的项
             .tree-box 子级的父级.
             .tree-active 打开子节点
             注意：不能在节点用 style设置display，如果要设置 display 用类样式设置
         
-        树结构布局css
+        tree-style.css 树结构布局css
             .tree-box 子项的父级
             .tree-active 激活（显示）的样式
             .tree-btn 按钮样式
