@@ -1,5 +1,5 @@
 ﻿此代码生成器是用来生成实体类的
 用法：
-1.从GitHub（下载地址：） 上下载 _DMSC文件夹放到项目跟目录
+1.从GitHub（下载地址：https://github.com/17576052526/Wind/tree/main/DbOrm） 上下载 _DMSC文件夹放到项目跟目录
 2.修改 appsettings.json 的连接字符串
 3.打开 _DbOrm.Model.tt 按Ctrl+s 保存，会自动生成实体类
