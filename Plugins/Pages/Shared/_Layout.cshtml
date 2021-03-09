@@ -15,7 +15,7 @@
             <div class="logo">WindAdmin | 数据管理中心</div>
             <div class="navbar">
                 <div class="flex1">
-                    <div class="navbar-btn"><i class="icon-reorder"></i></div>
+                    <div class="navbar-btn" onclick="$('#left').toggle()"><i class="icon-reorder"></i></div>
                 </div>
                 <div class="navbar-btn"><i class="icon-envelope"></i><span class="navbar-label">8</span></div>
                 <div class="navbar-btn"><i class="icon-bell"></i><span class="navbar-label">15</span></div>
@@ -26,7 +26,7 @@
         </div>
         <div class="flex1 flex">
             <!--左边-->
-            <div class="left">
+            <div class="left" id="left">
                 <div class="search"><input type="text" placeholder="搜索..." /><i class="icon-search"></i></div>
                 <ul class="nav">
                     <li class="nav-active">
