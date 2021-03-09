@@ -17,11 +17,11 @@
 .search>i{position:absolute;right:5px;top:50%;margin-top:-10px;color:#999;}
 .nav{color:#b8c7ce;}
 .nav-btn{padding: 10px 5px 10px 12px;display:block;cursor:pointer;border-left:3px solid transparent;position:relative;}
-.nav-active .nav-btn{border-left-color:#3C8DBC;background-color:#1E282C;color:#fff;}
+.tree-active .nav-btn{border-left-color:#3C8DBC;background-color:#1E282C;color:#fff;}
 .nav-btn:hover{background-color:#1E282C;color:#fff;}
 .nav-btn::before{margin-right:10px;}
-.nav-btn::after{content:'\f104';font-family:"fontello";position:absolute;right:15px;top:50%;margin-top:-10px;}
-.nav-active .nav-btn::after{transform:rotate(-90deg);}
+.nav-btn::after{content:'\f104';font-family:"fontello";position:absolute;right:15px;top:50%;margin-top:-10px;transition:transform 0.3s;}
+.tree-active .nav-btn::after{transform:rotate(-90deg);}
 .nav-child-btn{padding:5px 5px 5px 15px;background-color:#2C3B41;display:block;}
 .nav-child-btn:hover{color:#fff;}
 .nav-child-btn::before{margin-right:10px;}
