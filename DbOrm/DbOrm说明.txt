@@ -41,6 +41,9 @@ int count2 = DB.ExecuteScalar<int>("select count(*) from Test_Main");
 List<Test_Main> list4 = DB.Query<Test_Main>("select * from Test_Main where MainName=@MainName", new { MainName = "aa" });
 //多表联查
 List<Test_Main> list5 = DB.Query<Test_Main, Test_Type>("select * from Test_Main left join Test_Type on Test_Main.Test_Type_ID=Test_Type.ID");
+//用动态类型
+List<dynamic> list0 = DB.Query("select * from Test_Main");
+string MainName1 = list0[0].MainName;
 //调用存储过程，用 exec调用
 List<Test_Main> list6 = DB.Query<Test_Main>("exec SelectTest_Main @MainName", new { MainName = "aa" });
 //以上都是静态方法，调用一次就关闭数据库连接了
