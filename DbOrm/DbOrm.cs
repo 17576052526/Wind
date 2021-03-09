@@ -393,7 +393,7 @@ select * from _tab where _RowNum between @_start and @_end
         /// <summary>
         /// 创建 Connection，通过创建不同类型的实例来达到调用不同类型的数据库
         /// </summary>
-        public static IDbConnection CreateConnection()
+        internal static IDbConnection CreateConnection()
         {
             return new Microsoft.Data.SqlClient.SqlConnection(ConnString);
         }
