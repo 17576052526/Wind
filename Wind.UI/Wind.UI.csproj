@@ -5,31 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Admin\Css\font\config.json" />
-    <Content Remove="wwwroot\Admin\Css\font\font\fontello.eot" />
-    <Content Remove="wwwroot\Admin\Css\font\font\fontello.ttf" />
-    <Content Remove="wwwroot\Admin\Css\font\font\fontello.woff" />
-    <Content Remove="wwwroot\Admin\Css\font\font\fontello.woff2" />
-    <Content Remove="wwwroot\Admin\Login.html" />
-    <Content Remove="wwwroot\Error\404.html" />
-    <Content Remove="wwwroot\Error\500.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\Admin\Css\font\config.json" />
-    <None Include="wwwroot\Admin\Css\font\font\fontello.eot" />
-    <None Include="wwwroot\Admin\Css\font\font\fontello.ttf" />
-    <None Include="wwwroot\Admin\Css\font\font\fontello.woff" />
-    <None Include="wwwroot\Admin\Css\font\font\fontello.woff2" />
-    <None Include="wwwroot\Admin\Css\index.css" />
-    <None Include="wwwroot\Admin\Login.html" />
-    <None Include="wwwroot\Error\404.html" />
-    <None Include="wwwroot\Error\500.html" />
+    <Content Remove="bundleconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\DbOrm\DbOrm.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
   </ItemGroup>
 
 </Project>

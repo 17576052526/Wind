@@ -25,6 +25,3 @@
 .nav-child-btn{padding:5px 5px 5px 15px;background-color:#2C3B41;display:block;}
 .nav-child-btn:hover{color:#fff;}
 .nav-child-btn::before{margin-right:10px;}
-
-.tree-box{display: none;}
-.tree-active > .tree-box {display: block;}
