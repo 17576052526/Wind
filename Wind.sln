@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wind.UI", "Wind.UI\Wind.UI.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbOrm", "DbOrm\DbOrm.csproj", "{0670BA1F-0689-4D27-95BE-E08554946869}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "Plugins\Plugins.csproj", "{2E6A5443-57A3-4171-99C1-23609D1B757F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugins", "Plugins\Plugins.csproj", "{2E6A5443-57A3-4171-99C1-23609D1B757F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
