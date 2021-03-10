@@ -30,6 +30,15 @@
                 <div class="search"><input type="text" placeholder="搜索..." class="tree-search" /><i class="icon-search"></i></div>
                 <ul class="nav">
                     <li class="tree tree-active">
+                        <div class="nav-btn icon-folder_open tree-switch">插件</div>
+                        <ol class="tree-box">
+                            @foreach (var m in Plugins.Pages.Data.List)
+                            {
+                                <li><a href="/see/@m.Key" class="nav-child-btn icon-circle_blank">@m.Value.Name</a></li>
+                            }
+                        </ol>
+                    </li>
+                    @*<li class="tree tree-active">
                         <div class="nav-btn icon-folder_open tree-switch">一级菜单</div>
                         <ol class="tree-box">
                             <li><a target="main" href="../UI/demo.html" class="nav-child-btn icon-circle_blank">UI demo</a></li>
@@ -37,16 +46,7 @@
                             <li><a target="main" href="../admin/list.html" class="nav-child-btn icon-circle_blank">列表页</a></li>
                             <li><a target="main" href="../admin/edit.html" class="nav-child-btn icon-circle_blank">编辑页</a></li>
                         </ol>
-                    </li>
-                    <li class="tree tree-active">
-                        <div class="nav-btn icon-folder_open tree-switch">一级菜单</div>
-                        <ol class="tree-box">
-                            <li><a target="main" href="../UI/demo.html" class="nav-child-btn icon-circle_blank">UI demo</a></li>
-                            <li><a target="main" href="../admin/default.html" class="nav-child-btn icon-circle_blank">首页</a></li>
-                            <li><a target="main" href="../admin/list.html" class="nav-child-btn icon-circle_blank">列表页</a></li>
-                            <li><a target="main" href="../admin/edit.html" class="nav-child-btn icon-circle_blank">编辑页</a></li>
-                        </ol>
-                    </li>
+                    </li>*@
                 </ul>
             </div>
             <!--右边-->
