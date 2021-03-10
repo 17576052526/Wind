@@ -7,6 +7,21 @@
 -->
 <node>
 	<item>
+		<id>DbOrm</id>
+		<name>DbOrm</name>
+		<see>/ServerPlugins/DbOrm/DbOrm说明.txt</see>
+		<see>/ServerPlugins/DbOrm/DbOrm.cs</see>
+	</item>
+	<item>
+		<id>DbOrmDmsc</id>
+		<name>DbOrm代码生成器</name>
+		<see>/ServerPlugins/DbOrm/_DMSC/代码生成说明.txt</see>
+		<see>/ServerPlugins/DbOrm/_DMSC/_DbOrm.Model.tt</see>
+		<see>/ServerPlugins/DbOrm/_DMSC/appsettings.json</see>
+		<see>/ServerPlugins/DbOrm/_DMSC/GetDBMsg.ttinclude</see>
+		<see>/ServerPlugins/DbOrm/_DMSC/MultipleOutputHelper.ttinclude</see>
+	</item>
+	<item>
 		<id>global</id>
 		<name>辅助布局Css</name>
 		<see>/UIPlugins/global.css</see>

@@ -1,0 +1,21 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ output extension=".txt" #>
+<#@ include file="$(ProjectDir)_DMSC\MultipleOutputHelper.ttinclude"#>
+<#@ include file="$(ProjectDir)_DMSC\GetDBMsg.ttinclude"#>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+
+<#
+	//string solutionDir = Host.ResolveAssemblyReference("$(SolutionDir)"); //获取当前解决方案路径
+    //string projectDir = Host.ResolveAssemblyReference("$(ProjectDir)"); //获取当前项目路径
+    List<Table> list=DMSC.Main();  //获取表集合
+	var manager = Manager.Create(Host, GenerationEnvironment);
+	foreach(Table table in list){
+		manager.StartNewFile(table.Name+".cs");  //必须放在输出的字符串之前
+#>
+文件模板内容
+<#
+		manager.EndBlock();  //结束输出文件
+	}
+	manager.Process(true,false);   //执行编译
+#>
