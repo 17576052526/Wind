@@ -60,10 +60,6 @@ public class Pager
     /// 上一页、下一页不能点击时的按钮的样式
     /// </summary>
     public string NoCheFLBTClass { set; get; }
-    /// <summary>
-    /// url参数（url?之后的字符串）
-    /// </summary>
-    internal string Query { set; get; }
     internal string UrlFirst { set; get; }
     internal string UrlLast { set; get; }
     //用于输出字符到页面
@@ -85,17 +81,6 @@ public class Pager
 
     public void Start()
     {
-        //计算 UrlFirst、UrlLast
-        var arr = Regex.Split(Query, "(?<=[?&]page=)[^&]*", RegexOptions.IgnoreCase);//拆分成page参数前后
-        if (arr.Length > 1)//url中存在page参数
-        {
-            UrlFirst = arr[0];
-            UrlLast = arr[1];
-        }
-        else//url中不存在page参数
-        {
-            UrlFirst = (Query.Length > 0 ? Query + '&' : '?') + "page=";
-        }
         //开始输出标签
         Writer.Write("<div class='" + CssClass + "'>");
         TagWrite();
@@ -169,18 +154,43 @@ public class Pager
 public static class PagerStatic
 {
     /// <summary>
-    /// 分页控件（不支持路由分页）
+    /// Url分页
     /// </summary>
     /// <param name="model">分页实体类</param>
-    /// <returns></returns>
     public static object Pager(this IHtmlHelper helper, Pager model)
     {
         var request = helper.ViewContext.HttpContext.Request;
-        model.Query = request.QueryString.Value;
+        string query = request.QueryString.Value;
+        int pageIndex = Convert.ToInt32(request.Query["page"]);
+        model.PageIndex = pageIndex < 1 ? 1 : pageIndex > model.PageCount ? model.PageCount : pageIndex;
         model.Writer = helper.ViewContext.Writer;
-        string pageIndex = request.Query["page"];
-        model.PageIndex = pageIndex == null ? 1 : Convert.ToInt32(pageIndex);
-        if (model.PageIndex > model.PageCount) { model.PageIndex = model.PageCount; }
+        //计算 UrlFirst、UrlLast
+        var arr = Regex.Split(query, "(?<=[?&]page=)[^&]*", RegexOptions.IgnoreCase);//拆分成page参数前后
+        if (arr.Length > 1)//url中存在page参数
+        {
+            model.UrlFirst = arr[0];
+            model.UrlLast = arr[1];
+        }
+        else//url中不存在page参数
+        {
+            model.UrlFirst = (query.Length > 0 ? query + '&' : '?') + "page=";
+        }
+        model.Start();
+        return null;
+    }
+
+    /// <summary>
+    /// 路由分页
+    /// </summary>
+    /// <param name="href">连接地址，不包括url参数</param>
+    /// <param name="pageIndex">当前页码</param>
+    /// <param name="model">分页实体类</param>
+    public static object Pager(this IHtmlHelper helper, string href, int pageIndex, Pager model)
+    {
+        model.UrlFirst = href;
+        model.UrlLast = helper.ViewContext.HttpContext.Request.QueryString.Value;
+        model.PageIndex = pageIndex > model.PageCount ? model.PageCount : pageIndex;
+        model.Writer = helper.ViewContext.Writer;
         model.Start();
         return null;
     }
