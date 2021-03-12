@@ -187,7 +187,7 @@ public static class PagerStatic
     /// <param name="model">分页实体类</param>
     public static object Pager(this IHtmlHelper helper, string href, int pageIndex, Pager model)
     {
-        model.UrlFirst = href;
+        model.UrlFirst = href + '/';
         model.UrlLast = helper.ViewContext.HttpContext.Request.QueryString.Value;
         model.PageIndex = pageIndex > model.PageCount ? model.PageCount : pageIndex;
         model.Writer = helper.ViewContext.Writer;
