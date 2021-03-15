@@ -22,7 +22,7 @@
         <div class="box-body">
             @if (Model.DataModel.Preview != null)
             {
-            <div class="tab-content">
+            <div class="tab-content height100">
                 <iframe src="@Model.DataModel.Preview" style="height:100%;width:100%;border:none;display:block;"></iframe>
             </div>
             }
@@ -43,6 +43,10 @@
                     else if (suffix == "cs")
                     {
                         <pre><code class="language-csharp">@Html.Raw(System.IO.File.ReadAllText(Plugins.Pages.Data.WebRootPath+m))</code></pre>
+                    }
+                    else
+                    {
+                        <pre><code class="language-txt">@Html.Raw(System.IO.File.ReadAllText(Plugins.Pages.Data.WebRootPath+m))</code></pre>
                     }
                 </div>
             }
