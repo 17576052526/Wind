@@ -28,7 +28,7 @@
             }
             @foreach (var m in Model.DataModel.See)
             {
-                <div class="tab-content">
+                <div class="tab-content height100">
                     @{
                         string suffix = m.Substring(m.LastIndexOf('.')+1);
                     }
@@ -46,7 +46,7 @@
                     }
                     else
                     {
-                        <pre><code class="language-txt">@Html.Raw(System.IO.File.ReadAllText(Plugins.Pages.Data.WebRootPath+m))</code></pre>
+                        <textarea readonly="readonly" class="textarea">@System.IO.File.ReadAllText(Plugins.Pages.Data.WebRootPath+m)</textarea>
                     }
                 </div>
             }

@@ -1,4 +1,3 @@
-//暂无代码
 /*
     树结构显示隐藏
         .tree 每一个项（项的类样式）
@@ -74,3 +73,4 @@ $(document).on('focus', '.tree-search', function () {
     //输入框选中文本，IE11不支持
     this.setSelectionRange(0, this.value.length);
 });
+//暂无代码
