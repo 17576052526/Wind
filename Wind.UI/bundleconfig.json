@@ -3,19 +3,19 @@
   {
     "outputFileName": "wwwroot/Admin/Css/index-merge.css",
     "inputFiles": [
-      "wwwroot/Admin/Css/index.css", //手写
-      //第三方
       "wwwroot/lib/font/css/fontello.css",
-      "wwwroot/lib/tree/tree.css"
+      "wwwroot/lib/tree/tree.css",
+      //手写的放后面
+      "wwwroot/Admin/Css/index.css"
     ]
   },
   {
     "outputFileName": "wwwroot/Admin/Js/index-merge.js",
     "inputFiles": [
-      "wwwroot/Admin/Js/index.js", //手写
-      //第三方
       "wwwroot/lib/tree/tree.js",
-      "wwwroot/lib/tree/tree-search.js"
+      "wwwroot/lib/tree/tree-search.js",
+      //手写的放后面
+      "wwwroot/Admin/Js/index.js"
     ]
   },
   /******************** List、Edit共用的 Css库 ********************/
