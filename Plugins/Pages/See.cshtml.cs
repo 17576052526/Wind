@@ -61,7 +61,7 @@ namespace Plugins.Pages
         public void OnGet(string id)
         {
             DataModel = Data.List[id];
-
+            ViewData["Title"] = DataModel.Name;
         }
     }
 }
