@@ -22,14 +22,28 @@
         <div class="box-body">
             @if (Model.DataModel.Preview != null)
             {
-            <div class="tab-content height100">
+            <div class="tab-content">
                 <iframe src="@Model.DataModel.Preview" style="height:100%;width:100%;border:none;display:block;"></iframe>
             </div>
             }
             @foreach (var m in Model.DataModel.See)
             {
-                <div class="tab-content height100">
-                    <textarea readonly="readonly" class="textarea">@System.IO.File.ReadAllText(Plugins.Pages.Data.WebRootPath+m)</textarea>
+                <div class="tab-content">
+                    @{
+                        string suffix = m.Substring(m.LastIndexOf('.')+1);
+                    }
+                    @if (suffix=="css"||suffix=="js")
+                    {
+                        <pre><code class="language-@suffix">@Html.Raw(System.IO.File.ReadAllText(Plugins.Pages.Data.WebRootPath+m))</code></pre>
+                    }
+                    else if (suffix == "html")
+                    {
+                        <pre data-src="@m"></pre>
+                    }
+                    else if (suffix == "cs")
+                    {
+                        <pre><code class="language-csharp">@Html.Raw(System.IO.File.ReadAllText(Plugins.Pages.Data.WebRootPath+m))</code></pre>
+                    }
                 </div>
             }
         </div>

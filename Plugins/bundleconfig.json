@@ -26,7 +26,8 @@
       "wwwroot/css/see.css", //手写的
       //第三方插件，global.css 页面直接引用
       "wwwroot/lib/AdminUI/UI.css",
-      "wwwroot/lib/tab/tab.css"
+      "wwwroot/lib/tab/tab.css",
+      "wwwroot/lib/prism/prism.css"
     ]
   },
   {
@@ -34,7 +35,8 @@
     "inputFiles": [
       "wwwroot/js/see.js", //手写的
       //第三方插件，jquery 页面直接引用
-      "wwwroot/lib/tab/tab.js"
+      "wwwroot/lib/tab/tab.js",
+      "wwwroot/lib/prism/prism.js"
     ]
   }
 ]
