@@ -252,6 +252,6 @@ script[type='text/plain'][class*='language-'] {
 }
 
 
-.textarea{height:100%;width:100%;border:none;display:block;outline:none;resize:none;color:#333;}
+.textarea{height:100%;width:100%;border:none;display:block;outline:none;resize:none;color:#444;}
 /*修改 prism的样式*/
 pre[class*="language-"]{margin:0 0;}
