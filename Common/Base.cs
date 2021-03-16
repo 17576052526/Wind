@@ -47,6 +47,19 @@ public static class Extend
     }
     #endregion
 
+    /// <summary>
+    /// 时间格式化（第三方扩展代码）
+    /// </summary>
+    /// <param name="format">格式，例如：2020-02-02 的格式为 yyyy-MM-dd</param>
+    public static string ToString(this DateTime? cur, string format)
+    {
+        if (cur.HasValue)
+        {
+            return cur.Value.ToString(format);
+        }
+        return null;
+    }
+
 }
 
 /// <summary>
