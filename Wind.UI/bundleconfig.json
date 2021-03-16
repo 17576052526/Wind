@@ -25,5 +25,12 @@
       "wwwroot/lib/AdminUI/UI.css",
       "wwwroot/lib/font/css/fontello.css"
     ]
+  },
+  /******************** List“≥√Ê js ********************/
+  {
+    "outputFileName": "wwwroot/Admin/js/list-merge.js",
+    "inputFiles": [
+      "wwwroot/Admin/Js/list.js"
+    ]
   }
 ]

@@ -23,7 +23,7 @@ public class Pager
     /// <summary>
     /// 当前页的索引
     /// </summary>
-    public int PageIndex { set; get; }
+    internal int PageIndex { set; get; }
     /// <summary>
     /// 显示页码按钮的个数
     /// </summary>

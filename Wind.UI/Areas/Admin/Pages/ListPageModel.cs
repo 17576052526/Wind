@@ -14,21 +14,20 @@ namespace Wind.UI.Areas.Admin.Pages
     [Authorize]//验证是否有登录
     public class ListPageModel: PageModel
     {
+        public static readonly int pageSize = 15;
         /// <summary>
         /// 分页-每页显示的数据量
         /// </summary>
-        public static readonly int PageSize = 15;
+        public int PageSize { get => pageSize; }
         /// <summary>
         /// 分页-总数据量
         /// </summary>
         public int DataCount { set; get; }
 
-        private int pageIndex = 1;
         /// <summary>
         /// 分页-当前页码
         /// </summary>
-        [BindProperty(SupportsGet = true)]//url参数自动赋值给属性
-        public int PageIndex { set => pageIndex = value; get => pageIndex; }
+        public int PageIndex { get { string page = Request.Query["page"]; return page != null ? Convert.ToInt32(page) : 1; } }//注意 page参数名只能用 Request.Query["page"]取值，OnGet(string page) 取不到值
         /// <summary>
         /// 共用的代码写在构造函数中
         /// </summary>
