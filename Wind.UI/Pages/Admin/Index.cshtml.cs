@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Wind.UI.Areas.Admin.Pages
+namespace Wind.UI.Pages.Admin
 {
     [Authorize]
     public class IndexModel : PageModel

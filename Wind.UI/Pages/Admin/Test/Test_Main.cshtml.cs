@@ -8,9 +8,9 @@ using DbOrm.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Wind.UI.Areas.Admin.Pages.Test
+namespace Wind.UI.Pages.Admin.Test
 {
-    public class ListModel : ListPageModel
+    public class Test_MainModel : ListPageModel
     {
         //²éÑ¯Ìõ¼þ
         private string _where;

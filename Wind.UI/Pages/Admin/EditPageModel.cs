@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Wind.UI.Areas.Admin.Pages
+namespace Wind.UI.Pages.Admin
 {
     /// <summary>
     /// 编辑页基类（公共部分写到此类当中，例如：权限控制，判断是否有登录）

@@ -7,9 +7,9 @@ using DbOrm.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Wind.UI.Areas.Admin.Pages.Test
+namespace Wind.UI.Pages.Admin.Test
 {
-    public class EditModel : EditPageModel
+    public class Test_MainEditModel : EditPageModel
     {
         public Test_Main Model;
         public void OnGet(string id)
