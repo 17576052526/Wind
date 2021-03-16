@@ -161,11 +161,11 @@ public static class PagerStatic
     {
         var request = helper.ViewContext.HttpContext.Request;
         string query = request.QueryString.Value;
-        int pageIndex = Convert.ToInt32(request.Query["page"]);
+        int pageIndex = Convert.ToInt32(request.Query["pn"]);//page 参数名 在.net core 中不能 OnGet(int page) 接收，所以此处用pn做为参数名
         model.PageIndex = pageIndex < 1 ? 1 : pageIndex > model.PageCount ? model.PageCount : pageIndex;
         model.Writer = helper.ViewContext.Writer;
         //计算 UrlFirst、UrlLast
-        var arr = Regex.Split(query, "(?<=[?&]page=)[^&]*", RegexOptions.IgnoreCase);//拆分成page参数前后
+        var arr = Regex.Split(query, "(?<=[?&]pn=)[^&]*", RegexOptions.IgnoreCase);//拆分成page参数前后
         if (arr.Length > 1)//url中存在page参数
         {
             model.UrlFirst = arr[0];
@@ -173,7 +173,7 @@ public static class PagerStatic
         }
         else//url中不存在page参数
         {
-            model.UrlFirst = (query.Length > 0 ? query + '&' : '?') + "page=";
+            model.UrlFirst = (query.Length > 0 ? query + '&' : '?') + "pn=";
         }
         model.Start();
         return null;
