@@ -20,7 +20,7 @@ namespace Wind.UI.Pages.Admin.Test
             {
                 if (_where == null)
                 {
-                    _where += !String.IsNullOrEmpty(Request.Query["MainName"]) ? " and Test_Main.MainName like @MainName" : null;
+                    _where += !String.IsNullOrEmpty(Request.Query["MainID"]) ? " and Test_Main.MainID like @MainID" : null;
                     _where += !String.IsNullOrEmpty(Request.Query["Test_Type_ID"]) ? " and Test_Main.Test_Type_ID = @Test_Type_ID" : null;
                     _where += !String.IsNullOrEmpty(Request.Query["CreateTime1"]) ? " and Test_Main.CreateTime >= @CreateTime1" : null;
                     _where += !String.IsNullOrEmpty(Request.Query["CreateTime2"]) ? " and Test_Main.CreateTime <= @CreateTime2" : null;
@@ -40,7 +40,7 @@ namespace Wind.UI.Pages.Admin.Test
                 {
                     _param = new
                     {
-                        MainName = "%" + Request.Query["MainName"].ToString() + "%",
+                        MainName = "%" + Request.Query["MainID"].ToString() + "%",
                         Test_Type_ID = Request.Query["Test_Type_ID"].ToString(),
                         CreateTime1 = Request.Query["CreateTime1"].ToString(),
                         CreateTime2 = Request.Query["CreateTime2"].ToString(),

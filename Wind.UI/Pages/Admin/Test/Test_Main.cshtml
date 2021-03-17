@@ -26,7 +26,7 @@
             <div class="box-body flexCol">
                 <form method="get">
                     <div class="marginLR3g">
-                        <input type="text" class="input-text" name="MainName" placeholder="标题" value="@Request.Query["MainName"]" />
+                        <input type="text" class="input-text" name="MainID" placeholder="编号" value="@Request.Query["MainID"]" />
                         @Html.DropDownList("Test_Type_ID", DB.Select<Test_Type>("ID,TypeName").Query().Select<Test_Type, SelectListItem>(s => new SelectListItem(s.TypeName, s.ID.ToString(), s.ID.ToString() == Request.Query["Test_Type_ID"])), "请选择类型", new { @class = "input-text" })
                         <input type="date" class="input-text" name="CreateTime1" placeholder="起始创建时间" value="@Request.Query["CreateTime1"]" />-
                         <input type="date" class="input-text" name="CreateTime2" placeholder="结束创建时间" value="@Request.Query["CreateTime2"]" />
