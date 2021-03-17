@@ -66,10 +66,22 @@ namespace Wind.UI.Pages.Admin.Test
         }
 
         //删除，在页面头部加上 @page "{handler}"，/list/Delete 就可访问，否则要 /list?handler=Delete才能访问
-        public void OnPostDelete()
+        public IActionResult OnPostDelete()
         {
-            DB.Delete<Test_Main>("ID in (@ID)", new { ID = Request.Form["ID"].ToString() });
-            Response.Redirect("List" + Request.QueryString);
+            using (DB db = new DB())
+            {
+                db.BeginTransaction();
+                try
+                {
+                    foreach (var m in Request.Form["checkID"])
+                    {
+                        db.Deletes<Test_Main>("ID=@ID", new { ID = m });
+                    }
+                    db.Commit();
+                }
+                catch { db.Rollback();throw; }
+            }
+            return Redirect(Request.Path.Value.Remove(Request.Path.Value.LastIndexOf('/')) + Request.QueryString);
         }
 
     }
