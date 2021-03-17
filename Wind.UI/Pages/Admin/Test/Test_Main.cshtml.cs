@@ -40,7 +40,7 @@ namespace Wind.UI.Pages.Admin.Test
                 {
                     _param = new
                     {
-                        MainName = "%" + Request.Query["MainID"].ToString() + "%",
+                        MainID = "%" + Request.Query["MainID"].ToString() + "%",
                         Test_Type_ID = Request.Query["Test_Type_ID"].ToString(),
                         CreateTime1 = Request.Query["CreateTime1"].ToString(),
                         CreateTime2 = Request.Query["CreateTime2"].ToString(),
