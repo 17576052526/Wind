@@ -4,8 +4,6 @@ html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0px;padding: 0px;}
 body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.42857143;color: #333;background-color: #ECF0F5;}
 html,body{height:100%;}
 select[disabled], button[disabled], input[type="button"][disabled], input[type="checkbox"][disabled], input[type="radio"][disabled] {opacity: 0.65;cursor: not-allowed;}
-a{color: #337ab7;text-decoration: none;}
-a:hover{text-decoration: underline;}
 /*预防高度撑开*/
 .h-pre{margin-top:-12px;margin-bottom:-10px;}
 /* 按钮 */
@@ -21,7 +19,6 @@ a:hover{text-decoration: underline;}
     user-select: none;
     outline:none;
 }
-.btn:hover,.btn-primary:hover,.btn-success:hover,.btn-info:hover,.btn-danger:hover,.btn-warning:hover{text-decoration: none;}
 .btn-lg{padding: 10px 16px;font-size: 18px;line-height: 1.3333333;border-radius: 6px;}
 .btn-xs{padding: 2px 6px;font-size: 12px;line-height: 1.5;}
 
@@ -68,6 +65,8 @@ a:hover{text-decoration: underline;}
 .table th {text-align:left;white-space: nowrap;/*th不换行，最小宽度为th内容宽度*/}
 .table tbody tr:hover td {background-color:#f5f5f5;}
 .table td img{max-width:100%;max-height:30px;margin-top:-12px;margin-bottom:-10px;}
+.table a{color: #337ab7;text-decoration: none;}
+.table a:hover{text-decoration: underline;}
 /* box 框 */
 .box,.box-default,.box-primary,.box-success,.box-info,.box-danger,.box-warning {box-shadow: 0 1px 1px rgba(0,0,0,0.1);border-radius: 3px;/*不要overflow:hidden;*/background-color: #fff;display: flex;flex-direction: column;}
 .box-head {padding: 10px 10px;border-bottom: 1px solid #eee;color:#444;}
