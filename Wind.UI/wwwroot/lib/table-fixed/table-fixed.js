@@ -1,22 +1,4 @@
-+function ($) {
-    //绑定全选
-    $(document).on('change', '.check-all', function () {
-        var cur = $(this);
-        cur.closest('.check-box').find('.check-item').prop('checked', cur.prop('checked'));
-    });
-    //所有的都选择就勾上全选，否则去掉全选
-    $(document).on('change', '.check-item', function () {
-        var cur = $(this);
-        var checked = cur.prop('checked');
-        var box = cur.closest('.check-box');
-        if (checked && box.find('.check-item:not(:checked)').length == 0) {
-            box.find('.check-all').prop('checked', true);
-        } else if (!checked) {
-            box.find('.check-all').prop('checked', false);
-        }
-    });
-}(jQuery)
-/*
+﻿/*
  表格固定行和固定列
     1.<table>外面加 <div class="table-fixed" style="max-height:300px">
     2.<th>是要被固定的行
@@ -42,12 +24,3 @@
         });
     });
 }(jQuery)
-//批量删除
-function checkDelete() {
-    var check = $('#form [name="checkID"]:checked');
-    if (check.length == 0) {
-        alert('请选择删除的行');
-    } else {
-        $('#form').submit();
-    }
-}

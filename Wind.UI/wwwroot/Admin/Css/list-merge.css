@@ -1,0 +1,13 @@
+.table-fixed{border:1px solid #ddd;overflow:auto;/* 容器边框在.table-fixed 上设置，不要在table上设置 */}
+.table-fixed table{
+    border-spacing: 0;
+    border-collapse: separate;/*必须设置 separate */
+    /*<table> 上边有设置固定就不能设置border-top的边框,同理左右也是一样，可设置在 .table-fixed 上 */
+    border-top:none;
+    border-left:none;
+    border-right:none;
+}
+.table-fixed th{background-color:#fff;}
+/*固定列css*/
+th.table-fixed-col{position:relative;z-index:1;}
+.table-fixed-col:not(th){background-color:#fff;}

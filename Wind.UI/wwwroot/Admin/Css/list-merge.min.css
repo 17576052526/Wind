@@ -1,0 +1,1 @@
+.table-fixed{border:1px solid #ddd;overflow:auto}.table-fixed table{border-spacing:0;border-collapse:separate;border-top:none;border-left:none;border-right:none}.table-fixed th{background-color:#fff}th.table-fixed-col{position:relative;z-index:1}.table-fixed-col:not(th){background-color:#fff}
