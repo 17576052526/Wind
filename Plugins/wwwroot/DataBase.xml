@@ -154,7 +154,9 @@
 		<name>loading效果</name>
 		<preview>/UIPlugins/loading/loading.html</preview>
 		<see>/UIPlugins/loading/loading.html</see>
-		<see>/UIPlugins/loading/loading.css</see>
+		<see>/UIPlugins/loading/loading1.css</see>
+		<see>/UIPlugins/loading/loading2.css</see>
+		<see>/UIPlugins/loading/loading3.css</see>
 	</item>
 	<item>
 		<id>loading1</id>
@@ -162,7 +164,7 @@
 		<preview>/UIPlugins/loading/demo.html</preview>
 		<see>/UIPlugins/loading/demo.html</see>
 		<see>/UIPlugins/loading/loading.js</see>
-		<see>/UIPlugins/loading/loading.css</see>
+		<see>/UIPlugins/loading/loading1.css</see>
 	</item>
 	<item>
 		<id>move-box</id>
