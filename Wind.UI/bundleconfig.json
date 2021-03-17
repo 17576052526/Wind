@@ -18,12 +18,21 @@
       "wwwroot/Admin/Js/index.js"
     ]
   },
-  /******************** List、Edit共用的 Css库 ********************/
+  /******************** List、Edit共用的库 ********************/
   {
     "outputFileName": "wwwroot/Admin/Css/listedit-merge.css",
     "inputFiles": [
       "wwwroot/lib/AdminUI/UI.css",
-      "wwwroot/lib/font/css/fontello.css"
+      "wwwroot/lib/font/css/fontello.css",
+      "wwwroot/lib/loading/loading1.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Admin/js/listedit-merge.js",
+    "inputFiles": [
+      "wwwroot/lib/loading/loading.js",
+      //手写的放后面
+      "wwwroot/Admin/Js/listedit.js"
     ]
   },
   /******************** List页面 ********************/
