@@ -2,7 +2,10 @@
 .table-fixed table{
     border-spacing: 0;
     border-collapse: separate;/*必须设置 separate */
-    border:none;/*<table>上不能设置 border，可设置在 .table-fixed 上 */
+    /*<table> 上边有设置固定就不能设置border-top的边框,同理左右也是一样，可设置在 .table-fixed 上 */
+    border-top:none;
+    border-left:none;
+    border-right:none;
 }
 .table-fixed th{background-color:#fff;}
 /*固定列css*/
