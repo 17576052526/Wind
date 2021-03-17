@@ -1,5 +1,7 @@
 ﻿@page
 @model Wind.UI.Pages.Admin.Test.Test_MainEditModel
+@using DbOrm
+@using DbOrm.Model
 
 <!DOCTYPE html>
 <html>
@@ -12,47 +14,61 @@
 </head>
 <body>
     <div class="padding10 height100">
-        <div class="box height100">
-            <div class="box-head flex">
-                <div class="flex1">销售订单编辑</div>
-                <div class="marginLR3g">
-                    <input type="button" value="提交" class="btn-primary h-pre" />
-                    <input type="button" value="重置" class="btn h-pre" />
+        <form method="post">
+            <div class="box height100">
+                <div class="box-head flex">
+                    <div class="flex1">销售订单编辑</div>
+                    <div class="marginLR3g">
+                        <input type="submit" value="提交" class="btn-primary h-pre" />
+                        <input type="reset" value="重置" class="btn h-pre" />
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="form-row">
+                        <label class="form-item">
+                            <span>编号</span>
+                            @Html.TextBoxFor(s => s.Model.MainID, new { @class = "input-text" })
+                        </label>
+                        <label class="form-item">
+                            <span>名称</span>
+                            @Html.TextBoxFor(s => s.Model.MainName, new { @class = "input-text" })
+                        </label>
+                        <label class="form-item">
+                            <span>类型</span>
+                            @Html.DropDownListFor(s => s.Model.Test_Type_ID, DB.Select<Test_Type>("ID,TypeName").Query().Select<Test_Type, SelectListItem>(s => new SelectListItem(s.TypeName, s.ID.ToString(), s.ID.ToString() == Request.Query["Test_Type_ID"])), "请选择", new { @class = "input-text" })
+                        </label>
+                        <label class="form-item">
+                            <span>数量</span>
+                            @Html.TextBoxFor(s => s.Model.Quantity, new { @class = "input-text" })
+                        </label>
+                        <label class="form-item">
+                            <span>金额</span>
+                            @Html.TextBoxFor(s => s.Model.Amount, new { @class = "input-text" })
+                        </label>
+                        <label class="form-item">
+                            <span>是否离职</span>
+                            @Html.CheckBox("Model.IsShow",Model.Model!=null&&Model.Model.IsShow!=null?Model.Model.IsShow.Value:false)
+                        </label>
+                        <label class="form-item">
+                            <span>图片</span>
+                            @Html.TextBoxFor(s => s.Model.Img, new { @class = "input-text" })
+                        </label>
+                        <label class="form-item">
+                            <span>文件</span>
+                            @Html.TextBoxFor(s => s.Model.Files, new { @class = "input-text" })
+                        </label>
+                        <label class="form-item">
+                            <span>备注</span>
+                            @Html.TextAreaFor(s => s.Model.Remark, new { @class = "input-text" })
+                        </label>
+                        <label class="form-item">
+                            <span>日期</span>
+                            <input type="date" value="@(Model.Model!=null?Model.Model.CreateTime.ToString("yyyy-MM-dd"):"")" class="input-text" />
+                        </label>
+                    </div>
                 </div>
             </div>
-            <div class="box-body">
-                <div class="form-row">
-                    <label class="form-item">
-                        <span>姓名</span>
-                        <input type="text" class="input-text" />
-                    </label>
-                    <label class="form-item">
-                        <span>部门</span>
-                        <input type="text" class="input-text" />
-                    </label>
-                    <label class="form-item">
-                        <span>是否离职</span>
-                        <input type="checkbox" />
-                    </label>
-                    <label class="form-item">
-                        <span>公司</span>
-                        <input type="text" class="input-text" />
-                    </label>
-                    <label class="form-item">
-                        <span>性别</span>
-                        <input type="text" class="input-text" />
-                    </label>
-                    <label class="form-item">
-                        <span>年龄</span>
-                        <input type="text" class="input-text" />
-                    </label>
-                    <label class="form-item">
-                        <span>联系方式</span>
-                        <input type="text" class="input-text" />
-                    </label>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>
