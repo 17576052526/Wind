@@ -72,16 +72,10 @@ namespace DbOrm
             this.Join += $"\ninner join {typeof(TJoin).Name} on {joinWhere}";
             return this;
         }
-        public SqlBuilder<T> OrderAsc(string columnName)
+        public SqlBuilder<T> OrderBy(string orderByColumn)
         {
-            if (!Regex.IsMatch(columnName, @"^(\w+|\[\w+\]|\w+\.(\w+|\[\w+\]))$")) { throw new Exception($"字符串”{columnName}“存在sql注入风险"); }
-            this._OrderBy += $"{columnName} asc,";
-            return this;
-        }
-        public SqlBuilder<T> OrderDesc(string columnName)
-        {
-            if (!Regex.IsMatch(columnName, @"^(\w+|\[\w+\]|\w+\.(\w+|\[\w+\]))$")) { throw new Exception($"字符串”{columnName}“存在sql注入风险"); }
-            this._OrderBy += $"{columnName} desc,";
+            if (!Regex.IsMatch(orderByColumn, @"^(\w+|\[\w+\]|\w+\.(\w+|\[\w+\]))(\s+(asc|desc))?$", RegexOptions.IgnoreCase)) { throw new Exception($"字符串”{orderByColumn}“存在sql注入风险"); }
+            this._OrderBy += orderByColumn + ',';
             return this;
         }
         /// <summary>
