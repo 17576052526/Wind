@@ -19,7 +19,7 @@
             <div class="box-head flex">
                 <div class="flex1">销售订单查询</div>
                 <div class="marginLR3g">
-                    <a href="Test_MainEdit?url=@Request.Path" class="btn-primary h-pre"><i class="icon-plus"></i>新建</a>
+                    <a href="Test_MainEdit?url=@System.Net.WebUtility.UrlEncode(Request.Path)" class="btn-primary h-pre"><i class="icon-plus"></i>新建</a>
                     <a href="javascript:checkDelete()" class="btn-danger h-pre"><i class="icon-remove"></i>删除</a>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                                 {
                                     <tr>
                                         <td class="table-fixed-col"><input type="checkbox" class="check-item" name="checkID" value="@m.ID" /></td>
-                                        <td><a href="Test_MainEdit?id=@m.ID&url=@(Request.Path+Request.QueryString)">@m.MainID</a></td>
+                                        <td><a href="Test_MainEdit?id=@m.ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">@m.MainID</a></td>
                                         <td>@m.MainName</td>
                                         <td>@m.Type.TypeName</td>
                                         <td>@m.Quantity</td>

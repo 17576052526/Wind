@@ -44,7 +44,7 @@ namespace Wind.UI.Pages.Admin.Test
 
                 DB.Update(model, "ID=@ID", new { ID = id });
             }
-            return Redirect(Regex.Match(Request.QueryString.Value, "(?<=url=).+", RegexOptions.IgnoreCase).Value);
+            return Redirect(Request.Query["url"]);
         }
     }
 }
