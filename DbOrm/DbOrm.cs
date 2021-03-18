@@ -125,7 +125,7 @@ namespace DbOrm
         {
             StringBuilder str = new StringBuilder();
             str.Append("select ").Append(Column);
-            if (TakeCount > 0) { str.Append($",row_number() over(order by {_OrderBy ?? "(select 0)"}) as _RowNum"); }//分页的序号列
+            if (TakeCount > 0) { str.Append($",row_number() over(order by {(_OrderBy == null ? "(select 0)" : _OrderBy.TrimEnd(','))}) as _RowNum"); }//分页的序号列
             str.Append(" from ").Append(Table);
             str.AppendLine(this.Join);
             if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
