@@ -13,9 +13,10 @@ function checkDelete() {
 $(function () {
     var orderby = queryString('orderby');
     if (orderby != null && orderby.length > 0) {
+        orderby = orderby.replace('+', ' ');
         $('#searchForm').append('<input type="hidden" name="orderby" id="__hiddenOrderby" value="' + orderby + '" />');
         //加倒叙排序类样式
-        var arr = orderby.split(/\++/);
+        var arr = orderby.split(/\s+/);
         if (arr.length > 1 && arr[1].toLowerCase() == 'desc') {
             $('.orderby[orderby="' + arr[0] + '"]').addClass('orderby-desc')
         } else {
