@@ -74,12 +74,14 @@ namespace DbOrm
         }
         public SqlBuilder<T> OrderAsc(string columnName)
         {
-            this.OrderBy += $"{Regex.Replace(columnName, "\\s", "")} asc,";//正则表达式去掉空白字符，防止sql注入
+            if (!Regex.IsMatch(columnName, @"^(\w+|\[\w+\]|\w+\.(\w+|\[\w+\]))$")) { throw new Exception($"字符串”{columnName}“存在sql注入风险"); }
+            this.OrderBy += $"{columnName} asc,";
             return this;
         }
         public SqlBuilder<T> OrderDesc(string columnName)
         {
-            this.OrderBy += $"{Regex.Replace(columnName, "\\s", "")} desc,";//正则表达式去掉空白字符，防止sql注入
+            if (!Regex.IsMatch(columnName, @"^(\w+|\[\w+\]|\w+\.(\w+|\[\w+\]))$")) { throw new Exception($"字符串”{columnName}“存在sql注入风险"); }
+            this.OrderBy += $"{columnName} desc,";
             return this;
         }
         /// <summary>
