@@ -11,3 +11,14 @@
 /*固定列css*/
 th.table-fixed-col{position:relative;z-index:1;}
 .table-fixed-col:not(th){background-color:#fff;}
+
+/*排序*/
+.orderby{cursor:pointer;}
+.orderby:before {
+    font-family: "fontello";
+    font-weight: normal;
+    margin-right: .2em;
+    content: '\f0dc';
+}
+.orderby-asc:before{content:'\f160';}
+.orderby-desc:before{content:'\f161';}

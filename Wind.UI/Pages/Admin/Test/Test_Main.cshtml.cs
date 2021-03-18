@@ -60,6 +60,10 @@ namespace Wind.UI.Pages.Admin.Test
                     .Where(Where);
                 this.DataCount = sql.QueryScalar<int>(Param);
 
+                if (Request.Query["orderby"].Count > 0)
+                {
+                    sql = sql.OrderBy(Request.Query["orderby"]);
+                }
                 this.List = sql.Select("Test_Main.*,Test_Type.TypeName")
                     .Query((PageIndex - 1) * PageSize, PageSize, Param);
             }

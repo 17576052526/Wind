@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="box-body flexCol">
-                <form method="get">
+                <form method="get" id="searchForm">
                     <div class="marginLR3g">
                         <input type="text" class="input-text" name="MainID" placeholder="编号" value="@Request.Query["MainID"]" />
                         @Html.DropDownList("Test_Type_ID", DB.Select<Test_Type>("ID,TypeName").Query().Select<Test_Type, SelectListItem>(s => new SelectListItem(s.TypeName, s.ID.ToString(), s.ID.ToString() == Request.Query["Test_Type_ID"])), "请选择类型", new { @class = "input-text" })
@@ -39,8 +39,8 @@
                             <thead>
                                 <tr>
                                     <th class="table-fixed-col"><input type="checkbox" class="check-all" /></th>
-                                    <th>编号</th>
-                                    <th>名称</th>
+                                    <th orderby="MainID" class="orderby">编号</th>
+                                    <th orderby="MainName" class="orderby">名称</th>
                                     <th>类型名称</th>
                                     <th>数量</th>
                                     <th>价格</th>

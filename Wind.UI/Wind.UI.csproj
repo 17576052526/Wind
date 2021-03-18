@@ -16,6 +16,8 @@
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <None Include="wwwroot\lib\check\check.js" />
+    <None Include="wwwroot\lib\font\font\fontello.svg" />
+    <None Include="wwwroot\lib\font\font\fontello.woff2" />
     <None Include="wwwroot\lib\loading\loading.js" />
     <None Include="wwwroot\lib\table-fixed\table-fixed.js" />
   </ItemGroup>

@@ -48,8 +48,9 @@
   {
     "outputFileName": "wwwroot/Admin/css/list-merge.css",
     "inputFiles": [
-      "wwwroot/lib/table-fixed/table-fixed.css"
+      "wwwroot/lib/table-fixed/table-fixed.css",
       //手写的放后面
+      "wwwroot/Admin/Css/list.css"
     ]
   }
 ]
