@@ -48,6 +48,8 @@ function checkDelete() {
     if (check.length == 0) {
         alert('请选择删除的行');
     } else {
-        $('#form').submit();
+        if (confirm('确定删除？')) {
+            $('#form').submit();
+        }
     }
 }
