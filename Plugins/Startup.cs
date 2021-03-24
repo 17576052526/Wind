@@ -63,7 +63,7 @@ namespace Plugins
                 app.UseExceptionHandler("/Error/500.html");//500错误页面配置
                 app.UseStatusCodePagesWithReExecute("/Error/404.html");//404错误页面配置
 
-                app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());//http重定向到https
+                //app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());//http重定向到https
             }
 
             app.UseRouting();
