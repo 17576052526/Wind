@@ -27,7 +27,7 @@ namespace DbOrm
         private string Table;
         private string _Where;
         private string Join;
-        private string OrderBy;
+        private string _OrderBy;
         private int SkipCount;//跳过多少条（分页用到）   ，此处不用 startIndex 起始索引，因为不同数据库的起始索引是不一样的
         private int TakeCount;//返回之后的多少条（分页用到）
         private bool IsClose;//执行sql之后是否关闭数据库连接，true：关闭，false：不关闭
@@ -72,14 +72,10 @@ namespace DbOrm
             this.Join += $"\ninner join {typeof(TJoin).Name} on {joinWhere}";
             return this;
         }
-        public SqlBuilder<T> OrderAsc(string columnName)
+        public SqlBuilder<T> OrderBy(string orderByColumn)
         {
-            this.OrderBy += $"{Regex.Replace(columnName, "\\s", "")} asc,";//正则表达式去掉空白字符，防止sql注入
-            return this;
-        }
-        public SqlBuilder<T> OrderDesc(string columnName)
-        {
-            this.OrderBy += $"{Regex.Replace(columnName, "\\s", "")} desc,";//正则表达式去掉空白字符，防止sql注入
+            if (!Regex.IsMatch(orderByColumn, @"^(\w+|\[\w+\]|\w+\.(\w+|\[\w+\]))(\s+(asc|desc))?$", RegexOptions.IgnoreCase)) { throw new Exception($"字符串”{orderByColumn}“存在sql注入风险"); }
+            this._OrderBy += orderByColumn + ',';
             return this;
         }
         /// <summary>
@@ -129,11 +125,11 @@ namespace DbOrm
         {
             StringBuilder str = new StringBuilder();
             str.Append("select ").Append(Column);
-            if (TakeCount > 0) { str.Append($",row_number() over(order by {OrderBy ?? "(select 0)"}) as _RowNum"); }//分页的序号列
+            if (TakeCount > 0) { str.Append($",row_number() over(order by {(_OrderBy == null ? "(select 0)" : _OrderBy.TrimEnd(','))}) as _RowNum"); }//分页的序号列
             str.Append(" from ").Append(Table);
             str.AppendLine(this.Join);
             if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
-            if (TakeCount == 0 && OrderBy != null) { str.Append(" order by ").Append(OrderBy.TrimEnd(',')); }//如果有分页排序则在上面构建好了
+            if (TakeCount == 0 && _OrderBy != null) { str.Append(" order by ").Append(_OrderBy.TrimEnd(',')); }//如果有分页排序则在上面构建好了
             //分页必须在最后构造
             if (TakeCount > 0)
             {
