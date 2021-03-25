@@ -260,4 +260,10 @@
 		<see>/UIPlugins/verify/verify.js</see>
 		<see>/UIPlugins/verify/verify.css</see>
 	</item>
+	<item>
+		<id>editor</id>
+		<name>富文本编辑器</name>
+		<preview>/UIPlugins/editor/demo.html</preview>
+		<see>/UIPlugins/editor/demo.html</see>
+	</item>
 </node>
