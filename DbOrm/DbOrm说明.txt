@@ -26,7 +26,7 @@ List<Test_Main> list2 = DB.Select<Test_Main>().Query(10, 15);//跳过前面10条
 List<Test_Main> list3 = DB.Select<Test_Main>("ID,MainName,TypeName")//ID,MainName是 Test_Main表的字段，TypeName 是Test_Type表的字段
     .LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID")
     .Where("MainName like @MainName")
-    .OrderDesc("ID")//排序
+    .OrderBy("ID desc")//排序
     .Query(10, 15, new { MainName = "%标题%" });//跳过前10条，返回剩余的15条，第三个参数是条件的参数
 //读取数据
 Test_Main m = list3[0];
