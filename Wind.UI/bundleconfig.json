@@ -52,5 +52,19 @@
       //手写的放后面
       "wwwroot/Admin/Css/list.css"
     ]
+  },
+  /******************** Edit页面 ********************/
+  {
+    "outputFileName": "wwwroot/Admin/js/edit-merge.js",
+    "inputFiles": [
+      "wwwroot/lib/upload/upload.js",
+      "wwwroot/lib/upload/upload-img.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Admin/css/edit-merge.css",
+    "inputFiles": [
+      "wwwroot/lib/upload/upload-img.css"
+    ]
   }
 ]
