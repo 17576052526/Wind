@@ -34,7 +34,7 @@
                 contentType: false,
                 processData: false,
                 success: param.success,
-                error: function () { alert('上传失败，可能原因：\n1.跨域问题\n2.上传的文件太大\n3.url地址错误'); },
+                error: function () { alert('上传失败，可能原因：\n1.跨域问题\n2.上传的文件太大\n3.上传接口地址错误'); },
                 xhr: function () {
                     var xhr = $.ajaxSettings.xhr();
                     param.progress && xhr.upload.addEventListener('progress', function (e) {

@@ -247,9 +247,18 @@
 	</item>
 	<item>
 		<id>upload</id>
-		<name>文件上传</name>
+		<name>文件上传-基本</name>
 		<preview>/UIPlugins/upload/demo.html</preview>
 		<see>/UIPlugins/upload/demo.html</see>
+		<see>/UIPlugins/upload/upload.js</see>
+	</item>
+	<item>
+		<id>upload-img</id>
+		<name>图片上传</name>
+		<preview>/UIPlugins/upload/upload-imgDemo.html</preview>
+		<see>/UIPlugins/upload/upload-imgDemo.html</see>
+		<see>/UIPlugins/upload/upload-img.js</see>
+		<see>/UIPlugins/upload/upload-img.css</see>
 		<see>/UIPlugins/upload/upload.js</see>
 	</item>
 	<item>
