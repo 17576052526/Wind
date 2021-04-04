@@ -198,6 +198,25 @@ public class Base
     {
         return Cache.Get(key);
     }
+
+    /// <summary>
+    /// 获取缓存，如果没有，则调用取数方法去取数然后存入缓存
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <param name="func">取数据方法</param>
+    public static TCache GetCache<TCache>(object key, Func<TCache> func, int expirationTime = 20)
+    {
+        TCache list;
+        if (!Cache.TryGetValue(key, out list))
+        {
+            list = func();
+            Cache.Set(key, list, new MemoryCacheEntryOptions
+            {
+                SlidingExpiration = TimeSpan.FromMinutes(expirationTime),//相对过期时间，此处固定使用20分钟过期
+            });
+        }
+        return list;
+    }
     /// <summary>
     /// 移除缓存
     /// </summary>

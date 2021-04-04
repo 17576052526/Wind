@@ -8,6 +8,7 @@ using System.Text;
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 using System.Dynamic;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace DbOrm
 {
@@ -143,6 +144,69 @@ select * from _tab where _RowNum between @_start and @_end
             }
             return str.ToString();
         }
+
+        #region 缓存
+        private static MemoryCache _Cache;
+        //使用 MemoryCache需要安装 Microsoft.Extensions.Caching.Memory
+        private static MemoryCache Cache
+        {
+            get
+            {
+                if (_Cache == null)
+                {
+                    _Cache = new MemoryCache(new MemoryCacheOptions()
+                    {
+                        //SizeLimit = 1000,//缓存最大为份数
+                        //CompactionPercentage = 0.2,//缓存满了时，压缩20%（即删除 SizeLimit*CompactionPercentage份优先级低的缓存项）
+                        //ExpirationScanFrequency = TimeSpan.FromSeconds(60)//每隔多久查找一次过期项，默认一分钟查找一次
+                    });
+                }
+                return _Cache;
+            }
+        }
+        //获取缓存，func：取数据方法
+        private static TCache GetCache<TCache>(object key, Func<TCache> func)
+        {
+            TCache list;
+            if (!Cache.TryGetValue(key, out list))
+            {
+                list = func();
+                Cache.Set(key, list, new MemoryCacheEntryOptions
+                {
+                    SlidingExpiration = TimeSpan.FromMinutes(20),//相对过期时间，此处固定使用20分钟过期
+                });
+            }
+            return list;
+        }
+        /// <summary>
+        /// 查询，先找缓存，如果没找到去数据库查然后在存入缓存
+        /// </summary>
+        public List<T> QueryCache(object param = null)
+        {
+            return GetCache<List<T>>(this.ToString(), () => Query(param));
+        }
+        /// <summary>
+        /// 查询，跳过 skipCount条，返回连续的 takeCount条，先找缓存，如果没找到去数据库查然后在存入缓存
+        /// </summary>
+        public List<T> QueryCache(int skipCount, int takeCount, object param = null)
+        {
+            return GetCache<List<T>>(this.ToString(), () => Query(skipCount, takeCount, param));
+        }
+        /// <summary>
+        /// 查询第一行第一列，先找缓存，如果没找到去数据库查然后在存入缓存
+        /// </summary>
+        public TReturn QueryScalarCache<TReturn>(object param = null)
+        {
+            return GetCache<TReturn>(this.ToString(), () => QueryScalar<TReturn>(param));
+        }
+        /// <summary>
+        /// 查询第一行，先找缓存，如果没找到去数据库查然后在存入缓存
+        /// </summary>
+        public T QueryFirstRowCache(object param = null)
+        {
+            return GetCache<T>(this.ToString(), () => QueryFirstRow(param));
+        }
+        #endregion
     }
     #endregion
     public partial class DB
