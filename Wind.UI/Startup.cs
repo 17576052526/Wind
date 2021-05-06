@@ -33,10 +33,12 @@ namespace Wind.UI
             //AddMvc();//既有MVC又有Page页面用这个，包含 AddControllersWithViews() 及 AddRazorPages() 功能。功能最全
 
             services.AddMvc()
-            //配置 Razor页面能Post提交（不配置会报400），MVC和WebApi不需要此配置
             .AddRazorPagesOptions(s =>
             {
+                //配置 Razor页面能Post提交（不配置会报400），MVC和WebApi不需要此配置
                 s.Conventions.ConfigureFilter(new Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute());
+                //配置 Razor路由
+                //s.Conventions.AddPageRoute("/admin/index", "/");//参数一：实际地址，参数二：浏览器输入的地址  ，根据参数二的地址去匹配参数一的路径，参数一不支持通配符，参数二支持通配符
             })
             //webApi 返回json原样字段返回，默认是首字母小写
             .AddJsonOptions(p => { p.JsonSerializerOptions.PropertyNamingPolicy = null; });
@@ -105,6 +107,12 @@ namespace Wind.UI
                 endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
                 //配置 webApi路由
                 endpoints.MapControllers();
+                //设置地址重定向，例如：浏览器输入 aaa.com 重定向到 aaa.com/admin
+                endpoints.MapGet("/", async context =>
+                {
+                    context.Response.Redirect("/admin");
+                    await context.Response.WriteAsync(String.Empty);
+                });
             });
         }
     }
