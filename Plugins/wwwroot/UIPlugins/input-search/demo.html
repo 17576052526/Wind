@@ -4,46 +4,34 @@
     <meta charset="utf-8" />
     <title></title>
 
-    <link rel="stylesheet" type="text/css" href="input-search.css" />
     <style type="text/css">
-        * {
-            padding: 0px;
-            margin: 0px;
-            box-sizing: border-box;
-        }
-
-        ul, ol {list-style: none;font-size: 14px;}
-
-        /******************/
-
+        /*非必要样式*/
+        *{padding:0px;margin:0px;box-sizing:border-box;}
     </style>
+    <link rel="stylesheet" type="text/css" href="input-search.css" />
 </head>
 <body>
     <!--
-    描述：输入框搜索下拉
-
+    搜索框输入查询下拉显示
     -->
-    <br /><br /><br /><br /><br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="input-search" />
-
+    <input type="text" class="input-search" />
 
     <script type="text/javascript" src="../jquery.js"></script>
     <script type="text/javascript" src="input-search.js"></script>
     <script type="text/javascript">
-        //调用插件 参数一：url地址（注意：查询字符是直接跟在url后面，所以最后是searchVal=），参数二：解析json的方法，参数三：点击下拉触发的事件
-        $('.input-search').inputSearch('http://localhost:8088/HZHY/QueryEpartServlet?clientid=BCF_-2121702503_1597913712299&searchVal=', function (msg) {
-            msg = JSON.parse(msg);
-            if (msg.state == 'success') {
+        $('.input-search').inputSearch({
+            //type: 'get',//请求方式，默认get请求
+            //data: '',//请求参数
+            url: '/default/index',//请求地址
+            toJson: function (msg) {//接口返回的数据转换成可用的json格式
                 var arr = [];
-                for (var m of msg.data) {
-                    arr.push({ value: m.ITEMNO, text: m.ITEMNO + ':' + m.MAKTX });
+                for (var i = 0; i < msg.length; i++) {
+                    arr.push({ value: msg[i].ID, text: msg[i].Name });
                 }
                 return arr;
-            } else {
-                alert(msg.mess);
+            }, dropClick: function (val, text) {//点击下拉执行的事件
+                alert(val+"----"+text);
             }
-        }, function () {
-                alert('点击下拉了');
         });
     </script>
 </body>
