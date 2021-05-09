@@ -22,7 +22,7 @@
         $('.input-search').inputSearch({
             //type: 'get',//请求方式，默认get请求
             //data: '',//请求参数
-            url: '/default/index',//请求地址
+            url: '/default/index?val=',//请求地址
             toJson: function (msg) {//接口返回的数据转换成可用的json格式
                 var arr = [];
                 for (var i = 0; i < msg.length; i++) {
