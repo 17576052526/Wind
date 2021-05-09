@@ -12,7 +12,7 @@
 
     function search() {
         var val = cur.val();
-        if (val.length == 0) { return; }
+        if (val.length == 0) { $('#__inputSearch4725').remove(); return; }
         $.ajax({
             type: param.type,
             url: param.url,
