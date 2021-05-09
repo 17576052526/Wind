@@ -15,7 +15,7 @@
         if (val.length == 0) { $('#__inputSearch4725').remove(); return; }
         $.ajax({
             type: param.type,
-            url: param.url,
+            url: param.url + val,
             data: param.data,
             success: function (msg) {
                 $('#__inputSearch4725').remove();
