@@ -13,7 +13,7 @@
         }, interval || 2000);
     }
     $.fn.loadingStop = function () {
-        this.children('.fixed-center-box').remove();
+        this.children('.loading-box').remove();
         clearTimeout(_loading_timer);
     }
 }(jQuery)
