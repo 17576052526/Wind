@@ -94,6 +94,6 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .pager>a.pager-active{background-color:#eee;cursor:default;}
 /* .fixed-center-box是遮罩层，子节点自动居中 */
 .fixed-center-box {background-color: rgba(255,255,255,.3);position: absolute;left: 0px;top: 0px;z-index:100;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;}
-/* 浮动居中，无遮罩层，不能用作鼠标移动div */
+/* 浮动居中，无遮罩层 */
 .fixed-center {position: absolute;top: 50%;left: 50%;z-index:1;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 7px #ccc;}
 .fixed{position: absolute;left:0px;top:0px;z-index:1;box-shadow:0px 0px 7px #ccc;}
