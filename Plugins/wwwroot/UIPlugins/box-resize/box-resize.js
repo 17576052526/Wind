@@ -5,14 +5,14 @@
         if (!cur.is('[box-resize-init]')) {
             cur.attr('box-resize-init', '');
             cur
-                .append('<span class="box-resize-top" style="position:absolute;top:-5px;left:0px;width:100%;height:9px;cursor:n-resize;"></span>')
-                .append('<span class="box-resize-right" style="position:absolute;right:-5px;top:0px;width:9px;height:100%;cursor:e-resize;"></span>')
-                .append('<span class="box-resize-bottom" style="position:absolute;bottom:-5px;left:0px;width:100%;height:9px;cursor:s-resize;"></span>')
-                .append('<span class="box-resize-left" style="position:absolute;left:-5px;top:0px;width:9px;height:100%;cursor:w-resize;"></span>')
-                .append('<span class="box-resize-top box-resize-left" style="position:absolute;top:-5px;left:-5px;width:9px;height:9px;cursor:nw-resize;"></span>')
-                .append('<span class="box-resize-top box-resize-right" style="position:absolute;top:-5px;right:-5px;width:9px;height:9px;cursor:ne-resize;"></span>')
-                .append('<span class="box-resize-bottom box-resize-left" style="position:absolute;bottom:-5px;left:-5px;width:9px;height:9px;cursor:sw-resize;"></span>')
-                .append('<span class="box-resize-bottom box-resize-right" style="position:absolute;bottom:-5px;right:-5px;width:9px;height:9px;cursor:se-resize;"></span>');
+                .append('<span class="box-resize-top" style="position:absolute;top:0px;left:0px;width:100%;height:9px;cursor:n-resize;"></span>')
+                .append('<span class="box-resize-right" style="position:absolute;right:0px;top:0px;width:9px;height:100%;cursor:e-resize;"></span>')
+                .append('<span class="box-resize-bottom" style="position:absolute;bottom:0px;left:0px;width:100%;height:9px;cursor:s-resize;"></span>')
+                .append('<span class="box-resize-left" style="position:absolute;left:0px;top:0px;width:9px;height:100%;cursor:w-resize;"></span>')
+                .append('<span class="box-resize-top box-resize-left" style="position:absolute;top:0px;left:0px;width:9px;height:9px;cursor:nw-resize;"></span>')
+                .append('<span class="box-resize-top box-resize-right" style="position:absolute;top:0px;right:0px;width:9px;height:9px;cursor:ne-resize;"></span>')
+                .append('<span class="box-resize-bottom box-resize-left" style="position:absolute;bottom:0px;left:0px;width:9px;height:9px;cursor:sw-resize;"></span>')
+                .append('<span class="box-resize-bottom box-resize-right" style="position:absolute;bottom:0px;right:0px;width:9px;height:9px;cursor:se-resize;"></span>');
             //去除 transform 上的 translateX，translateY 值设置到 left和top上
             var t = cur.css('transform');
             if (t != 'none') {
