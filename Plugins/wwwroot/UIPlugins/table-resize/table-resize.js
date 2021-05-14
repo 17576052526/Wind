@@ -21,8 +21,10 @@
     });
     //添加节点
     $(document).on('mouseenter', '.table-resize', function () {
-        if ($(this).children('.table-resize-move').length == 0) {
-            $(this).append('<span class="table-resize-move"></span>');
+        var cur = $(this);
+        if (cur.children('.table-resize-move').length == 0) {
+            cur.css('position', 'relative');
+            cur.append('<span class="table-resize-move" style="cursor:col-resize;width:8px;position:absolute;right:0px;top:0px;bottom:0px;z-index:1;"></span>');
         }
     });
 }(jQuery)
