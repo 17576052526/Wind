@@ -1,4 +1,5 @@
 ﻿/*
+ 弹出框最大化或最小化
          .box-zoom 父级框
          .box-zoom-btn 按钮，触发最大化最小化事件
          .box-zoom-btn-active 最大化时按钮样式
