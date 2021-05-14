@@ -13,6 +13,16 @@
                 .append('<span class="box-resize-top box-resize-right" style="position:absolute;top:-5px;right:-5px;width:9px;height:9px;cursor:ne-resize;"></span>')
                 .append('<span class="box-resize-bottom box-resize-left" style="position:absolute;bottom:-5px;left:-5px;width:9px;height:9px;cursor:sw-resize;"></span>')
                 .append('<span class="box-resize-bottom box-resize-right" style="position:absolute;bottom:-5px;right:-5px;width:9px;height:9px;cursor:se-resize;"></span>');
+            //去除 transform 上的 translateX，translateY 值设置到 left和top上
+            var t = cur.css('transform');
+            if (t != 'none') {
+                t = t.match(/\(.+\)/)[0];
+                t = t.substr(1, t.length - 2);
+                var arr = t.split(',');
+                cur.css('left', parseFloat(cur.css('left')) + parseFloat(arr[4]));
+                cur.css('top', parseFloat(cur.css('top')) + parseFloat(arr[5]));
+                cur.css({ 'transform': 'none' });
+            }
         }
     })
     //鼠标按下
