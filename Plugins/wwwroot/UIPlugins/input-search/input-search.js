@@ -21,7 +21,7 @@
                 $('#__inputSearch4725').remove();
                 var arr = param.toJson(msg);
                 if (arr.length > 0) {
-                    var box = $('<ul class="inputSearchBox" id="__inputSearch4725" style="position:absolute;left:' + cur.offset().left + 'px;top:' + (cur.offset().top + cur.outerHeight()) + 'px;min-width:' + cur.outerWidth() + 'px"></ul>').appendTo(document.body);
+                    var box = $('<ul class="inputSearchBox" id="__inputSearch4725" style="position:absolute;z-index:1;left:' + cur.offset().left + 'px;top:' + (cur.offset().top + cur.outerHeight()) + 'px;min-width:' + cur.outerWidth() + 'px"></ul>').appendTo(document.body);
                     for (var i = 0; i < arr.length; i++) {
                         box.append('<li value="' + arr[i].value + '">' + arr[i].text.replace(val, function (s) { return '<span>' + s + '</span>'; }) + '</li>');
                     }
