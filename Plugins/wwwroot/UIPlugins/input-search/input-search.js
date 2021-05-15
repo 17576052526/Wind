@@ -9,6 +9,7 @@
 
     var cur = this;
     var timer = null;
+    this.attr('autocomplete', 'off');//关闭浏览器自动填充
 
     function search() {
         var val = cur.val();
