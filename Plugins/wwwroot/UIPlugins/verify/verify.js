@@ -9,7 +9,7 @@
         //弹出消息框
         function msgBox(str) {
             if (box.length == 0) {
-                var po = $('<span msgBox style="height:100%;"><span class="verify-msg" style="position:fixed;"></span></span>').insertAfter(cur);//此处这样做，是为了解决父级隐藏（有选项卡），消息框定位不准确问题，要用fixed定位
+                var po = $('<span msgBox style="height:100%;position: relative;"><span class="verify-msg" style="position:absolute;white-space:nowrap;"></span></span>').insertAfter(cur);
                 box = po.children();
             }
             box.html(str);
@@ -29,6 +29,7 @@
     }
     //失去焦点验证
     $(document).on('blur', '[verify]', function () { verifyByNode($(this)) });
+    $(document).on('focus', '[verify]', function () { $(this).parent().children('[msgbox]').remove(); });
     //验证方法
     $.fn.verify = function () {
         var isAdopt = true;
