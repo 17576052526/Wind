@@ -14,17 +14,18 @@ $('.table-tree').each(function () {
         btn.css('margin-left', (length * 20) + 'px');//设置缩进
         //显示隐藏
         if (!$(this).hasClass('table-tree-active')) {
-            cur.find('[treekey^="' + key + '"]').not(this).hide();
+            cur.find('[treekey^="' + key + '|"]').hide();
         }
         //事件绑定
         btn.on('click', function () {
             var curNode = $(this);
             var tr = curNode.closest('tr');
             var k = tr.attr('treekey');
-            var chil = cur.find('[treekey^="' + k + '"]');
+            var chil = cur.find('[treekey^="' + k + '|"]');
             if (tr.hasClass('table-tree-active')) {
-                chil.not(tr).hide();
+                chil.hide();
                 chil.removeClass('table-tree-active');
+                tr.removeClass('table-tree-active');
             } else {
                 chil.each(function () {
                     if ($(this).attr('treekey').substr(k.length).lastIndexOf('|') == 0) {
