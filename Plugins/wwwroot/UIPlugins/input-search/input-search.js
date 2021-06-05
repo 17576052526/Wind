@@ -46,7 +46,7 @@
         cur.off({ 'keydown': keydown, 'blur': blur });
     }
     this.on('focus', function () {
-        search();
         cur.on({ 'keydown': keydown, 'blur': blur });
+        search();
     })
 }
