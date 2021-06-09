@@ -14,10 +14,6 @@ $(document).on('click', '.tree-switch', function () {
         box.removeClass('tree-active');
         child.slideUp(300);
     } else {
-        //其他显示的隐藏
-        var active = box.parent().children('.tree-active');
-        active.children('.tree-box').css('display', 'block').slideUp(300);
-        active.removeClass('tree-active');
         //当前显示
         child.slideDown(300);
         box.addClass('tree-active');
