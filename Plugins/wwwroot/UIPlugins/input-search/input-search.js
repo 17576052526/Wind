@@ -41,12 +41,13 @@
         clearTimeout(timer);
         timer = setTimeout(search, 300);
     }
-    function blur() {
+    //blur 不要在 focus 中绑定，因为有时不会触发
+    this.on('blur', function () {
         $('#__inputSearch4725').remove();
-        cur.off({ 'keydown': keydown, 'blur': blur });
-    }
+        cur.off({ 'keydown': keydown });
+    })
     this.on('focus', function () {
-        cur.on({ 'keydown': keydown, 'blur': blur });
+        cur.on({ 'keydown': keydown });
         search();
     })
 }
