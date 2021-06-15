@@ -37,17 +37,16 @@
             }
         });
     }
-    function keydown() {
+    this.on('keydown', function () {
         clearTimeout(timer);
         timer = setTimeout(search, 300);
-    }
-    //blur 不要在 focus 中绑定，因为有时不会触发
-    this.on('blur', function () {
-        $('#__inputSearch4725').remove();
-        cur.off({ 'keydown': keydown });
     })
     this.on('focus', function () {
-        cur.on({ 'keydown': keydown });
         search();
     })
+    this.on('click', function (e) {
+        e.stopPropagation();
+    })
 }
+//隐藏，此处没用blur 设置隐藏，因为blur有时不触发
+$(document).on('click', function () { $('#__inputSearch4725').remove(); })
