@@ -43,12 +43,10 @@
     }
     function blur() {
         $('#__inputSearch4725').remove();
-        cur.off({ 'keydown': keydown });
-        $(document).off('click', blur);
+        cur.off({ 'keydown': keydown, 'blur': blur });
     }
     this.on('focus', function () {
-        cur.on({ 'keydown': keydown });
-        $(document).on('click', blur);//此处没有绑定在输入框的失去焦点上，因为有时失去焦点没触发
+        cur.on({ 'keydown': keydown, 'blur': blur });
         search();
     })
 }
