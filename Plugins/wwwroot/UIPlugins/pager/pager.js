@@ -3,16 +3,17 @@
          参数2：dataCount：总共多少条数据
          参数3：fun：点击分页按钮触发的方法
          参数4（非必填）：pageNum：最多显示多少个分页按钮
+         参数5：curIndex：当前所在页码，默认1
                 类样式：
                     .pager-none 上一页下一页按钮不能点时的类样式
                     .pager-active 被激活的页码按钮
          */
-$.fn.pager = function (pageSize, dataCount, fun, pageNum) {
+$.fn.pager = function (pageSize, dataCount, fun, pageNum, curIndex) {
     var box = this;
     var pageCount = dataCount % pageSize == 0 ? dataCount / pageSize : parseInt(dataCount / pageSize) + 1;//总的页码数量
     pageNum = pageNum || 7;
     pageNum = pageCount < pageNum ? pageCount : pageNum;
-    var index = 1;//当前的页码
+    var index = curIndex || 1;//当前的页码
     //构造按钮
     function structBtn(pageIndex, text, className) {
         box.append('<a href="javascript:void(0)" pageindex="' + pageIndex + '" class="' + className + '">' + text + '</a>');
