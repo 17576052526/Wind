@@ -10,6 +10,8 @@
 +function ($) {
     $('.table-fixed').each(function () {
         var scrollTop = 0, scrollLeft = 0;
+        if ($(this).is('[tableFixed]')) { return; }//绑定过就不在绑定
+        $(this).attr('tableFixed', '');//标记该节点已经绑定过此插件
         $(this).on('scroll', function () {//scroll绑定在document上无效
             var cur = $(this);
             var top = cur.scrollTop();
