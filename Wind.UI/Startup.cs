@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -72,6 +73,18 @@ namespace Wind.UI
             }
 
             app.UseRouting();
+
+            //设置哪些类型文件可以下载
+            //var provider = new FileExtensionContentTypeProvider();
+            //provider.Mappings[".ocf"] = "application/x-msdownload";
+            //provider.Mappings[".CATProduct"] = "application/x-msdownload";
+            //provider.Mappings[".SLDASM"] = "application/x-msdownload";
+            //provider.Mappings[".SLDDRW"] = "application/x-msdownload";
+            //provider.Mappings[".SLDPRT"] = "application/x-msdownload";
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    ContentTypeProvider = provider,
+            //});
 
             //wwwroot 目录配置（静态资源目录）
             app.UseStaticFiles();
