@@ -6,6 +6,7 @@ html,body{height:100%;}
 ol,ul{list-style: none;}
 a{color:inherit;text-decoration: none;}
 /* 类样式 */
+.hidEll {white-space:nowrap; text-overflow: ellipsis;overflow: hidden;}
 .dvm{display:inline-block;vertical-align:middle;}
 .textR{text-align:right;}
 .textC{text-align:center;}
