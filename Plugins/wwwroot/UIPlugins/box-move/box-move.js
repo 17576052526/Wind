@@ -14,6 +14,16 @@ $(document).on('mousedown', '.box-move-switch', function (e) {
         y = e.clientY - offset.top;
         box.css({ 'position': 'absolute', 'left': offset.left, 'top': offset.top });
     } else {
+        //去除 transform 上的 translateX，translateY 值设置到 left和top上，是为了 e.clientY - y > 0 这个判断有效
+        var t = box.css('transform');
+        if (t != 'none') {
+            t = t.match(/\(.+\)/)[0];
+            t = t.substr(1, t.length - 2);
+            var arr = t.split(',');
+            box.css('left', parseFloat(box.css('left')) + parseFloat(arr[4]));
+            box.css('top', parseFloat(box.css('top')) + parseFloat(arr[5]));
+            box.css({ 'transform': 'none' });
+        }
         x = e.clientX - parseInt(box.css('left'));
         y = e.clientY - parseInt(box.css('top'));
     }
