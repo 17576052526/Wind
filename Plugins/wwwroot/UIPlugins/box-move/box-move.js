@@ -20,7 +20,7 @@ $(document).on('mousedown', '.box-move-switch', function (e) {
     //设置body
     $(document.body).css({ 'user-select': 'none', 'cursor': 'move' });
     //鼠标移动
-    function mousemove(e) { box.css({ 'left': e.clientX - x, 'top': e.clientY - y }); }
+    function mousemove(e) { box.css({ 'left': e.clientX - x, 'top': e.clientY - y > 0 ? e.clientY - y : 0 }); }//往上移动不能超出边界（不然移动不回来）
     //鼠标松开
     function mouseup(e) {
         $(document.body).css({ 'user-select': '', 'cursor': '' });
