@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        /*非必要样式*/
+        * {margin:0;padding:0;box-sizing:border-box;}
+    </style>
+    <!--非必要样式-皮肤，可用 UI.css 中的样式代替-->
+    <link rel="stylesheet" type="text/css" href="confirm1.css" />
+    <!--必要样式-->
+    <link rel="stylesheet" type="text/css" href="confirm.css" />
+</head>
+<body>
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <!--鼠标移动弹出框插件-->
+    <script type="text/javascript" src="../box-move/box-move.js"></script>
+    <!--确认框插件-->
+    <script type="text/javascript" src="confirm.js"></script>
+    <script type="text/javascript">
+        $.confirm('确定删除？', function () { alert('点击了确定') }, '提示1111', function () { alert('点击了取消') });
+    </script>
+</body>
+</html>
