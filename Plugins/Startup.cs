@@ -102,6 +102,12 @@ namespace Plugins
                 endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
                 //配置 webApi路由
                 endpoints.MapControllers();
+                //设置地址重定向，例如：浏览器输入 aaa.com 重定向到 aaa.com/admin
+                endpoints.MapGet("/", async context =>
+                {
+                    context.Response.Redirect("/see/alert");
+                    await context.Response.WriteAsync(String.Empty);
+                });
             });
         }
     }
