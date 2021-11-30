@@ -27,9 +27,11 @@
             cur.css('position', 'relative');
             cur.append('<span class="table-resize-move" style="cursor:col-resize;width:8px;position:absolute;right:0px;top:0px;bottom:0px;z-index:1;"></span>');
         }
-
+    });
+    //初始化列宽（不能在悬浮其上的时候初始化列宽）
+    $(document).on('mousedown', '.table-resize', function () {
         //初始化每一列的列宽（如果不设置，在拉动时，如果有剩余宽度会平分给所有的列，其他列也会跟着宽度发生变化），最后一列宽度自适应，剩余宽度给最后一列
-        var headTr = cur.closest('tr');
+        var headTr = $(this).closest('tr');
         var table = headTr.closest('table');
         if (!table.is('[table-resize-init]')) {
             table.attr('table-resize-init', '');
@@ -52,5 +54,5 @@
             //最后一列不设宽度
             table.find('tr').find('th:last,td:last').css('width', '');
         }
-    });
+    })
 }(jQuery)
