@@ -35,22 +35,13 @@
         var table = headTr.closest('table');
         if (!table.is('[table-resize-init]')) {
             table.attr('table-resize-init', '');
-            //记录列宽，（不读取第一行，其他全用第一行的列宽，因为存在跨列的情况）
-            var arr = []
-            table.find('tr').each(function (i) {
-                arr[i] = [];
-                $(this).children().each(function (j) {
-                    arr[i][j] = $(this).css('width');
-                });
-            });
-            //写入列宽
-            table.find('tr').each(function (i) {
-                $(this).children().each(function (j) {
-                    var obj = $(this);
-                    obj.css('width', arr[i][j]);
-                    obj.children('.table-resize-item').css('width', obj.width())
-                });
-            });
+            //设置第一行列宽
+            table.find('tr:eq(0)').children().each(function () {
+                var obj = $(this);
+                var child = obj.children('.table-resize-item');
+                obj.css('width', obj.css('width'));
+                child.css('width', child.css('width'))
+            })
             //最后一列不设宽度
             table.find('tr').find('th:last,td:last').css('width', '');
         }
