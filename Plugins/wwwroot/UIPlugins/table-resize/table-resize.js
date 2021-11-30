@@ -36,7 +36,7 @@
         if (!table.is('[table-resize-init]')) {
             table.attr('table-resize-init', '');
             //设置第一行列宽
-            table.find('tr:eq(0)').children().each(function () {
+            headTr.children().each(function () {
                 var obj = $(this);
                 var child = obj.children('.table-resize-item');
                 obj.css('width', obj.css('width'));
