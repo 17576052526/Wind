@@ -10,7 +10,7 @@
         _loading_timer.push(setTimeout(function () {
             cur.append('<div class="loading-box"><div class="loading1"><span></span><span></span><span></span><span></span><span></span></div></div>');
             if (cur.css('position') == 'static') { cur.css('position', 'relative') }
-        }, interval || 2000));
+        }, interval || 1500));
     }
     $.fn.loadingStop = function () {
         this.children('.loading-box').eq(0).remove();
