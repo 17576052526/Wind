@@ -94,3 +94,9 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .pager>a:last-child{border-top-right-radius:3px;border-bottom-right-radius:3px;}
 .pager>a.pager-none{background-color:#fff;opacity:0.65;cursor:not-allowed;}
 .pager>a.pager-active{background-color:#eee;cursor:default;}
+
+/* .fixed-center-box是遮罩层，子节点居中，不能放到 global.css，存在优先级问题 */
+.fixed-center-box {background-color: rgba(255,255,255,.3);position: absolute;left: 0px;top: 0px;z-index:100;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;}
+/* 浮动居中，无遮罩层 */
+.fixed-center {position: fixed;top: 50%;left: 50%;z-index:100;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 10px #aaa;}
+.fixed{position: fixed;left:0px;top:0px;z-index:100;box-shadow:0px 0px 10px #aaa;}

@@ -30,13 +30,6 @@ a{color:inherit;text-decoration: none;}
 .flexCol{flex-direction:column;}
 .flexBet {justify-content:space-between;}
 .flexAro {justify-content:space-around;}
-
-/* .fixed-center-box是遮罩层，子节点自动居中 */
-.fixed-center-box {background-color: rgba(255,255,255,.3);position: absolute;left: 0px;top: 0px;z-index:100;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;}
-/* 浮动居中，无遮罩层 */
-.fixed-center {position: fixed;top: 50%;left: 50%;z-index:100;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 10px #aaa;}
-.fixed{position: fixed;left:0px;top:0px;z-index:100;box-shadow:0px 0px 10px #aaa;}
-
 /* padding */
 .padding5{padding:5px;}
 .padding10{padding:10px;}
