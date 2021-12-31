@@ -9,6 +9,7 @@ $.confirm = function (content, yesFunc, title, noFunc) {
     //关闭弹出框
     function close() {
         $('#confirm_394,#confirm_815').remove()
+        $(document).off('keyup', enter)
     }
     //添加遮罩层
     $(document.body).append('<div style="position:fixed;left:0px;top:0px;z-index:100; width:100%;height:100%;" id="confirm_394"></div>');
@@ -28,4 +29,10 @@ $.confirm = function (content, yesFunc, title, noFunc) {
     //关闭弹出框react 中不能直接在dome中加onclick,所以改用jquery绑定
     var boxHead = $('<div class="box-head box-move-switch" style="display:flex;justify-content:space-between;"><div>' + (title || '消息提示') + '</div></div>').prependTo(box)
     $('<span class="confirm-remove">+</span>').appendTo(boxHead).on('click', close)
+
+    //回车关闭弹出框
+    function enter(e) {
+        if (e.keyCode == 13) { close(); yesFunc && yesFunc(); }
+    }
+    $(document).on('keyup', enter)
 }
