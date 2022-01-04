@@ -59,7 +59,7 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 /* 表格 */
 .table {min-width: 100%;border-spacing: 0;border: 1px solid #ddd;}
 .table th,.table td{padding: 8px;line-height: 1.42857143;border-bottom: 1px solid #ddd;border-right:1px solid #ddd;}
-.table tr:last-child td{border-bottom:none;}
+.table tr:last-child>td{border-bottom:none;}
 .table tr>*:last-child{border-right:none;}
 .table thead tr:last-child th{border-bottom:2px solid #ddd;}
 .table th {text-align:left;white-space: nowrap;/*th不换行，最小宽度为th内容宽度*/}
