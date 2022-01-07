@@ -11,3 +11,4 @@
 /*固定列css*/
 th.table-fixed-col{position:relative;z-index:1;}
 .table-fixed-col:not(th){background-color:#fff;}
+tr:hover td{background:inherit;}/*固定的列，悬浮其上有背景色*/
