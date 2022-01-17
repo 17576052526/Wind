@@ -1,17 +1,21 @@
-﻿/* 后台管理系统的UI库，采用rem布局 */
+﻿/*后台UI库，rem布局*/
 html {font-size:62.5%;}/*调整此处可以改变整体布局大小，62.5%==10px，默认是16px*/
-html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0px;padding: 0px;}
-*,::before,::after {box-sizing: border-box;}  /* 高度和宽度包括border-width和padding的值 */
-body{font-size: 1.4rem;line-height: 1.42857143;color: #333;background-color: #f4f6f9;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0;padding: 0;}
+*,::before,::after {box-sizing: border-box;}/*高度和宽度包括border-width和padding的值*/
+body{font-size: 1.3rem;line-height: 1.3;color: #333;background-color: #f4f6f9;font-family: "Microsoft YaHei";/*不能用Arial，按钮行高对不齐*/}
 html,body{height:100%;}
+ol,ul{list-style: none;}
+a{color:#337ab7;text-decoration: none;}
+a:hover{color:#0056b3;}
 select[disabled], button[disabled], input[type="button"][disabled], input[type="checkbox"][disabled], input[type="radio"][disabled] {opacity: 0.65;cursor: not-allowed;}
 /*预防高度撑开，不用rem也可以*/
 .h-pre{margin-top:-12px;margin-bottom:-10px;}
 /* 按钮 */
 .btn-default,.btn-primary,.btn-success,.btn-info,.btn-danger,.btn-warning{
-    line-height: 1.42857143;
+    line-height: 1.3;
     padding: 0.5rem 1rem;
-    font-size:1.4rem;
+    font-size:1.3rem;
+    font-family: inherit;/*解决行高对不齐问题*/
     border-radius: 3px;
     border:1px solid transparent;
     display: inline-block;
@@ -20,8 +24,8 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
     user-select: none;
     outline:none;
 }
-.btn-lg{padding: 1rem 1.6rem;font-size: 1.8rem;line-height: 1.3333333;border-radius: 6px;}
-.btn-xs{padding: 0.2rem 0.6rem;font-size: 1.2rem;line-height: 1.5;}
+.btn-lg{padding: 0.7rem 1.2rem;font-size: 1.7rem;}
+.btn-xs{padding: 0.3rem 0.6rem;font-size: 1.2rem;}
 
 .btn-default{color: #444;background-color: #f4f4f4;border-color: #ddd;}
 .btn-default:hover{background-color: #e7e7e7;border-color: #adadad;}
@@ -51,41 +55,42 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .form-row{display:flex;flex-wrap:wrap;}
 .form-row>.form-item{flex-grow:1;min-width:25%;}
 .form-row>.form-item:nth-child(4n+3):last-child{width:100%;flex-basis:auto;}
-.form-item{padding:0.5rem 1rem;display:flex;align-items:center;}
+.form-item{padding:0.4rem 0.8rem;display:flex;align-items:center;}
 .form-item>span:first-child{width:8rem;padding-right:1rem;}
 .form-item>*:nth-child(2){flex:1;min-width:19rem;width:0;/* width:0防止<select>超长时，布局错乱 */}
 /* 输入框 */
-.input-text{padding: 0.7rem 1rem;font-size: 1.4rem;color: #555;border: 1px solid #ced4da;border-radius:3px;vertical-align: middle;outline:none;}
+.input-text{padding: 0.5rem 1rem;line-height:1.3;font-size: 1.3rem;color: #555;border: 1px solid #ced4da;border-radius:3px;vertical-align: middle;outline:none;}
 .input-text:focus {border-color: #3C8DBC;}
 /* 表格 */
 .table {min-width: 100%;border-spacing: 0;border: 1px solid #ddd;}
-.table th,.table td{padding: 0.8rem;line-height: 1.42857143;border-bottom: 1px solid #ddd;border-right:1px solid #ddd;}
+.table th,.table td{padding:0.7rem 0.7rem;line-height: 1.3;border-bottom: 1px solid #ddd;border-right:1px solid #ddd;}
 .table tr:last-child>td{border-bottom:none;}
 .table tr>*:last-child{border-right:none;}
 .table thead tr:last-child th{border-bottom:2px solid #ddd;}
 .table th {text-align:left;white-space: nowrap;/*th不换行，最小宽度为th内容宽度*/}
 .table tbody tr:hover {background-color:#f5f5f5;}
 .table td img{max-width:100%;max-height:3rem;margin-top:-12px;margin-bottom:-10px;}
-.table a{color: #337ab7;text-decoration: none;}
-.table a:hover{text-decoration: underline;}
 /* box 框 */
 .box,.box-default,.box-primary,.box-success,.box-info,.box-danger,.box-warning {box-shadow: 0px 0px 1px rgba(0,0,0,0.125), 0px 1px 3px rgba(0,0,0,0.2);border-radius: 4px;/*不要overflow:hidden;*/background-color: #fff;display: flex;flex-direction: column;}
-.box-head {padding: 1rem 1rem;border-bottom: 1px solid rgba(0,0,0,.125);color:#444;}
-.box-body {padding: 1rem 1rem;flex-grow: 1; /*此处不能用flex:1*/overflow: auto; /*overflow:auto;和min-height:0至少要存在一个，否则内容超出，高度会跟着变化*/}
-.box-foot {background-color: rgba(0,0,0,.03);padding: 1rem 1rem;text-align: center;}
-.box-default{border-top:3px solid #D2D6DE;}
+.box-head {padding: 0.8rem 0.8rem;border-bottom: 1px solid rgba(0,0,0,.125);color:#444;}
+.box-body {padding: 0.8rem 0.8rem;flex-grow: 1; /*此处不能用flex:1*/overflow: auto; /*overflow:auto;和min-height:0至少要存在一个，否则内容超出，高度会跟着变化*/}
+.box-foot {background-color: rgba(0,0,0,.03);padding: 0.8rem 0.8rem;text-align: center;}
+.box-default{border-top:3px solid #888;}
 .box-primary {border-top:3px solid #3c8dbc;}
 .box-success {border-top:3px solid #00a65a;}
 .box-info {border-top:3px solid #00c0ef;}
 .box-danger {border-top:3px solid #dd4b39;}
 .box-warning {border-top:3px solid #f39c12;}
-.box-0{padding:0px;}
 /*选项卡*/
 .tab-box{display:flex;border-bottom: 1px solid #dee2e6;}
-.tab-item{padding:0.7rem 1.5rem 1rem 1.5rem;border-top-left-radius:4px;border-top-right-radius:4px;border-top:3px solid transparent;border-left:1px solid transparent;border-right:1px solid transparent;cursor:pointer;}
+.tab-item{padding:0.8rem 1.5rem 0.5rem 1.5rem;border-bottom:3px solid transparent;cursor:pointer;user-select: none;}
+.tab-item:hover{color:#999;}
+.tab-active{border-bottom-color:#3C8DBC;margin-bottom:-1px;}
+/*.tab-box{display:flex;border-bottom: 1px solid #dee2e6;}
+.tab-item{padding:0.5rem 1.5rem 0.8rem 1.5rem;border-top-left-radius:4px;border-top-right-radius:4px;border-top:3px solid transparent;border-left:1px solid transparent;border-right:1px solid transparent;cursor:pointer;user-select: none;}
 .tab-item:hover{color:#999;}
 .tab-active{border-top-color:#3C8DBC;border-left-color:#dee2e6;border-right-color:#dee2e6;background-color:#fff;margin-bottom:-1px;}
-.tab-item:first-child{border-left:none;}
+.tab-item:first-child{border-left:none;}*/
 /*分页按钮*/
 .pager{display:flex;}
 .pager>a{padding:0.6rem 1.2rem;border:1px solid #ddd;border-left-width:0px;text-decoration:none;color:#666;background-color:#fafafa;}
@@ -94,9 +99,3 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .pager>a:last-child{border-top-right-radius:3px;border-bottom-right-radius:3px;}
 .pager>a.pager-none{background-color:#fff;opacity:0.65;cursor:not-allowed;}
 .pager>a.pager-active{background-color:#eee;cursor:default;}
-
-/* .fixed-center-box是遮罩层，子节点居中，不能放到 global.css，存在优先级问题 */
-.fixed-center-box {background-color: rgba(255,255,255,.3);position: absolute;left: 0px;top: 0px;z-index:100;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;}
-/* 浮动居中，无遮罩层 */
-.fixed-center {position: fixed;top: 50%;left: 50%;z-index:100;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 10px #aaa;}
-.fixed{position: fixed;left:0px;top:0px;z-index:100;box-shadow:0px 0px 10px #aaa;}
