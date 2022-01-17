@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title></title>
+    <link rel="stylesheet" type="text/css" href="UI.css" /><!--先引用 UI.css 后引用 global.css-->
     <link rel="stylesheet" type="text/css" href="../global.css" />
-    <link rel="stylesheet" type="text/css" href="UI.css" />
 </head>
 <body>
     <div class="padding10">
@@ -70,13 +70,13 @@
         </div>
         <div class="box-danger marginT10">
             <div class="box-head flex">
-                <div class="flex1">表格&nbsp;&nbsp;.box-0 可以无内边距</div>
+                <div class="flex1">表格&nbsp;&nbsp;.padding0 可以无内边距</div>
                 <div class="marginLR5g">
                     <input type="button" class="btn-primary btn-xs h-pre" value="新建" />
                     <input type="button" class="btn-danger btn-xs h-pre" value="批量删除" />
                 </div>
             </div>
-            <div class="box-body box-0">
+            <div class="box-body padding0">
                 <table class="table">
                     <thead>
                         <tr>
