@@ -26,12 +26,13 @@ a{text-decoration: none;}
 .floatLg:after,.floatRg:after,.clear:after{display:table;content:" ";clear:both;}  /* 清除浮动 */
 
 /* 弹性布局 */
-.flex,.flexWrap,.flexCol,.flexBet,.flexAro{display:flex;}
+.flex,.flexWrap,.flexCol,.flexBet,.flexAro,.flexCenter{display:flex;}
 .flex1{flex:1;min-width:0;min-height:0;/*此处加min-width:0，是为了解决子元素超出宽度，父元素宽度也会溢出*/}
 .flexWrap{flex-wrap:wrap;}
 .flexCol{flex-direction:column;}
 .flexBet {justify-content:space-between;}
 .flexAro {justify-content:space-around;}
+.flexCenter{align-items:center;}
 
 /* padding */
 .padding0{padding:0;}/*常用于 UI.css中*/
