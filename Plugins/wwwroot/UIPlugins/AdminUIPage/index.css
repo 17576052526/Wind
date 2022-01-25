@@ -11,6 +11,7 @@
 }
 /*左边*/
 .left{width:220px;background-color:#222D32;overflow:auto;}
+.left a{color:inherit;}
 .search{position:relative;margin:10px 10px;}
 .search>input{width:100%;padding:8px 25px 8px 10px;border:1px solid #374850;border-radius:4px;background-color:#374850;}
 .search>input:focus{background-color:#fff;outline:none;}
