@@ -2,7 +2,7 @@
 html {font-size:62.5%;}/*调整此处可以改变整体布局大小，62.5%==10px，默认是16px*/
 html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0;padding: 0;}
 *,::before,::after {box-sizing: border-box;}/*高度和宽度包括border-width和padding的值*/
-body{font-size: 1.3rem!important;line-height: 1.3!important;color: #333;background-color: #f4f6f9;font-family: "Microsoft YaHei"!important;/*不能用Arial，按钮行高对不齐*/}
+body{font-size: 1.3rem;line-height: 1.3;color: #333;background-color: #f4f6f9;font-family: "Microsoft YaHei";/*不能用Arial，按钮行高对不齐*/}
 html,body{height:100%;}
 ol,ul{list-style: none;}
 a{color:#337ab7;text-decoration: none;}

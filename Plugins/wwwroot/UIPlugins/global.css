@@ -1,8 +1,8 @@
-﻿/*全局设置不要覆盖了 UI.css 的设置*/
+﻿/* 布局css，用于辅助布局 */
 html {font-size:62.5%;}/*调整此处可以改变整体布局大小，62.5%==10px，默认是16px*/
 html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0;padding: 0;}
 *,::before,::after {box-sizing: border-box;}/*高度和宽度包括border-width和padding的值*/
-body{font-size: 1.3rem;line-height: 1.3;font-family: "Microsoft YaHei";/*不能用Arial，按钮行高对不齐*/}
+body{font-size: 1.3rem;line-height: 1.3;color: #333;font-family: "Microsoft YaHei";/*不能用Arial，按钮行高对不齐*/}
 html,body{height:100%;}
 ol,ul{list-style: none;}
 a{text-decoration: none;}
@@ -14,8 +14,8 @@ a{text-decoration: none;}
 /* .fixed-center-box是遮罩层，子节点居中 */
 .fixed-center-box {background-color: rgba(255,255,255,.3);position: absolute;left: 0px;top: 0px;z-index:100;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;}
 /* 浮动居中，无遮罩层 */
-.fixed-center {position: fixed;top: 50%;left: 50%;z-index:100;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 10px #aaa;}
-.fixed{position: fixed;left:0px;top:0px;z-index:100;box-shadow:0px 0px 10px #aaa;}
+.fixed-center {position: fixed;top: 50%;left: 50%;z-index:100;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 10px #aaa!important;}
+.fixed{position: fixed;left:0px;top:0px;z-index:100;box-shadow:0px 0px 10px #aaa!important;}
 
 /*.container{max-width:1200px;margin-left:auto;margin-right:auto;padding-left:10px;padding-right:10px;overflow:hidden;}*/
 .height100{height:100%;}
@@ -35,7 +35,7 @@ a{text-decoration: none;}
 .flexCenter{align-items:center;}
 
 /* padding */
-.padding0{padding:0;}/*常用于 UI.css中*/
+.padding0{padding:0!important;}/*常用于 UI.css中*/
 .padding5{padding:0.5rem;}
 .padding10{padding:1rem;}
 .padding15{padding:1.5rem;}
