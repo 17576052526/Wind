@@ -76,7 +76,7 @@ a{text-decoration: none;}
 .marginLR8g>*{margin-left:0.8rem;margin-right:0.8rem;}
 .marginLR10g>*{margin-left:1rem;margin-right:1rem;}
 .marginLR15g>*{margin-left:1.5rem;margin-right:1.5rem;}
-.padding0 .marginLR3g, .padding0 .marginLR5g, .padding0 .marginLR8g, .padding0 .marginLR10g, .padding0 .marginLR15g{margin-left:0;margin-right:0;}/*常用于 UI.css中*/
+.marginLR0, .padding0 .marginLR3g, .padding0 .marginLR5g, .padding0 .marginLR8g, .padding0 .marginLR10g, .padding0 .marginLR15g{margin-left:0;margin-right:0;}/*解除.marginLRg的副作用*/
 
 /*此处不能用TB，因为flex和普通的height不一致*/
 .marginB5g{margin-bottom:-0.5rem;}
