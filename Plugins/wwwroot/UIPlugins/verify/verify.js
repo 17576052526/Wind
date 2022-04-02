@@ -9,7 +9,7 @@
         //弹出消息框
         function msgBox(str) {
             if (box.length == 0) {
-                var po = $('<span msgBox style="height:100%;position:relative;"><span class="verify-msg" style="position:absolute;white-space:nowrap;"></span></span>').insertAfter(cur);
+                var po = $('<span msgBox style="height:100%;position:relative;"><span class="verify-msg"></span></span>').insertAfter(cur);
                 box = po.children();
             }
             box.html(str);
