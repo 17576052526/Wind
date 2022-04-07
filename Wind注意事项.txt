@@ -2,6 +2,8 @@ Bundler & Minifier  用来压缩合并css、js的 Visual Studio插件
 如果生成不了，右键 bundleconfig.json 选择 Bundler & Minifier 选择 Product Output Files
 Wind 中已经不在使用 Bundler & Minifier 插件，目前是直接引用css，没有合并
 
+类文件命名：模块名+"_"+自定义名称
+
 数据库表命名规则：
 用到下划线的就1.模块名和表标识之间 2.外键字段，其余的不能用下划线，下划线有用作代码生成器生成代码
 1.所有表名字段名均采用 帕斯卡命名法，例如：UserName
