@@ -16,7 +16,7 @@
             box.show();
         }
 
-        if (verify.indexOf('notnull') != -1 && val.length == 0) { msgBox('不能为空'); return false; }
+        if (verify.indexOf('notnull') != -1 && (val == null || val.length == 0)) { msgBox('不能为空'); return false; }
         if (verify.indexOf('number') != -1) {//数字验证
             if (!/^$|^\d+(\.\d+)?$/.test(val)) {//此判断不能放到上面
                 msgBox(msg || '只能输入数字'); return false;
