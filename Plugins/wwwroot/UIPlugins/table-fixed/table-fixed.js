@@ -8,7 +8,7 @@
     2.th（固定的行）背景色必须设置在th上，不能设置在tr上，同理，固定的列背景色也必须设置在td上
  */
 +function ($) {
-    $('.table-fixed').each(function () {
+    $(document).on('mouseenter', '.table-fixed', function () {//悬浮其上在绑定scroll，react 中table可能后出现
         var scrollTop = 0, scrollLeft = 0;
         if ($(this).is('[tableFixed]')) { return; }//绑定过就不在绑定
         $(this).attr('tableFixed', '');//标记该节点已经绑定过此插件
