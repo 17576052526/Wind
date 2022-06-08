@@ -40,6 +40,8 @@ a{color: inherit;text-decoration: inherit;}
 .vertical-middle{vertical-align:middle;}
 .vertical-top{vertical-align:top;}
 
+.font-bold{font-weight:bold;}
+
 .font-12{font-size:1.2rem;}
 .font-13{font-size:1.3rem;}
 .font-14{font-size:1.4rem;}
