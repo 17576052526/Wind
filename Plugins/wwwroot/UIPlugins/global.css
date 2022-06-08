@@ -40,12 +40,20 @@ a{color: inherit;text-decoration: inherit;}
 .vertical-middle{vertical-align:middle;}
 .vertical-top{vertical-align:top;}
 
+.font-12{font-size:1.2rem;}
+.font-13{font-size:1.3rem;}
+.font-14{font-size:1.4rem;}
+.font-15{font-size:1.5rem;}
+.font-16{font-size:1.6rem;}
+.font-18{font-size:1.8rem;}
+.font-20{font-size:2rem;}
+
 .color-white{color:white;}
 
 .bg-none{background:none;}
 .bg-white {background-color:white;}
 
-.border-none{border:none;}
+.border-none{border:none;outline:none;}
 .border-white {border: 1px solid white;}
 
 .br-3 {border-radius:0.3rem;}
@@ -53,6 +61,11 @@ a{color: inherit;text-decoration: inherit;}
 .br-6 {border-radius:0.6rem;}
 .br-8 {border-radius:0.8rem;}
 .br-max {border-radius:9999px;}
+
+.line-h-1\.25{line-height:1.25;}
+.line-h-1\.5{line-height:1.5;}
+.line-h-1\.75{line-height:1.75;}
+.line-h-2{line-height:2;}
 
 .h-100{height:100%;}
 .w-100{width:100%;}
@@ -190,6 +203,20 @@ a{color: inherit;text-decoration: inherit;}
 .mtb-12\.5{margin-top:1.25rem;margin-bottom:1.25rem;}
 .mtb-15{margin-top:1.5rem;margin-bottom:1.5rem;}
 .mtb-20{margin-top:2rem;margin-bottom:2rem;}
+
+/*采用的是pc优先，别的框架都是移动优先*/
+@media(max-width:640px) {
+.sm\:display-none {display: none;}
+}
+@media(max-width:768px) {
+.md\:display-none {display: none;}
+}
+@media(max-width:1024px) {
+.lg\:display-none {display: none;}
+}
+@media(max-width:1280px) {
+.xl\:display-none {display: none;}
+}
 
 /*功能类css*/
 .text-overflow-ellipsis{white-space:nowrap; text-overflow: ellipsis;overflow: hidden;}
