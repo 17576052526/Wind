@@ -40,6 +40,9 @@ a{color: inherit;text-decoration: inherit;}
 .vertical-middle{vertical-align:middle;}
 .vertical-top{vertical-align:top;}
 
+.cursor-pointer{cursor:pointer;}
+.cursor-default{cursor:default;}
+
 .font-bold{font-weight:bold;}
 
 .font-12{font-size:1.2rem;}
@@ -194,6 +197,8 @@ a{color: inherit;text-decoration: inherit;}
 .mlr-12\.5{margin-left:1.25rem;margin-right:1.25rem;}
 .mlr-15{margin-left:1.5rem;margin-right:1.5rem;}
 .mlr-20{margin-left:2rem;margin-right:2rem;}
+
+.-mtb-max{margin-top:-1000rem;margin-bottom:-1000rem;}
 
 .mtb-auto{margin-top:auto;margin-bottom:auto;}
 .mtb-1\.25{margin-top:0.125rem;margin-bottom:0.125rem;}
