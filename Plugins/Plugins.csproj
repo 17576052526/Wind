@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>ecac95f2-8009-4893-bc20-f183fb083b67</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\ServerPlugins\DbOrm\_DMSC\_DbOrm.Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>_DbOrm.Model.txt</LastGenOutput>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

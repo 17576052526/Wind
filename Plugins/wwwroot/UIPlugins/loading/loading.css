@@ -1,0 +1,12 @@
+﻿.loading-box {
+    background-color: rgba(255,255,255,.3);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>高亮显示代码-prism插件</title>
+    <link rel="stylesheet" type="text/css" href="prism.css" />
+</head>
+<body>
+    <!--
+    官网地址：https://prismjs.com/
+        官网中选择要高亮显示的语言，例如：html、js、css、C#、java、pl/sql
+        官网中勾选必要的插件：
+            Unescaped Markup 高亮显示 html
+            File Highlight 引用外部文件高亮显示
+
+        注意：html代码中如果有<script> 必须使用引用外部文件显示的方式，不然<script>后面的代码会显示不全
+    -->
+
+    <!--高亮显示css-->
+    <pre><code class="language-css">p { color: red; }</code></pre>
+    <!--高亮显示js-->
+    <pre><code class="language-js">function getName() { var a = "fds"; if(a == null){ a= "ffff"; } }</code></pre>
+    <!--高亮显示html-->
+    <pre><code><script type="text/plain" class="language-markup"><h1>Title</h1></script></code></pre>
+    <!--高亮显示C#-->
+    <pre><code class="language-csharp">public int a() { string f = "dd"; }</code></pre>
+    <!--高亮显示外部文件，注意：html代码中如果有<script> 必须使用此方式显示，不然<script>后面的代码会显示不全-->
+    <pre data-src="demo.html"></pre>
+
+    <script type="text/javascript" src="prism.js"></script>
+</body>
+</html>
