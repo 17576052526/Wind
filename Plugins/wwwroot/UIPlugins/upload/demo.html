@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <input type="button" value="文件上传" onclick="upload(this)" />
+
+
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="upload.js"></script>
+
+    <script type="text/javascript">
+/*
+上传文件，参数如下：
+    url（必填）：上传的url地址，
+    accept：<input type="file">标签的 accept属性值 表示可以选的文件类型
+    multiple：是否一次可以选多个文件，true 多个，false 单个
+    success：上传成功的回调，
+    progress：当前已上传的百分比（进度）
+    headers：http 请求头
+    data：body参数，格式：aa=11&bb=22
+*/
+        function upload(obj) {
+            $.upload({
+                url: "/common/upload",
+                data: "aa=11&bb=22",
+                accept: ".jpg,.png,.rar",
+                multiple: true,
+                success: function (msg) {
+                    alert('服务器返回的消息：' + msg);
+                    $(obj).val('上传成功');
+                },
+                progress: function (progress) {
+                    $(obj).val(progress);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

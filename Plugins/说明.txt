@@ -1,0 +1,11 @@
+﻿Plugins 是一个网站项目，用来说明 UIPlugins和 UIBlock的
+Plugins不引用 UIPlugins、UIBlock的任何东西
+Plugins和 Wind无任何关联，Wind不引用此类库
+lib是库，用来存放第三方插件的（项目中用到的第三方插件）,lib文件不应该手动修改，如果某个插件不满足需求，应该手动修改好放入手写文件
+
+Devart T4 Editor  是 T4高亮插件
+
+Bundler & Minifier 只在项目引用插件很多的时候使用，其主要作用是
+1.通过 bundleconfig.json文件能够清楚的看到有引用过哪些插件，后期要增加或减少引用插件只需要修改配置文件即可
+2.减少http请求次数
+

@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="pager.css" />
+</head>
+<body>
+    <div id="pager" class="pager"></div>
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="pager.js"></script>
+    <script type="text/javascript">
+        /*
+         参数1：pageSize：每页显示多少条
+         参数2：dataCount：总共多少条数据
+         参数3：fun：点击分页按钮触发的方法
+         参数4（非必填）：pageNum：最多显示多少个分页按钮
+         参数5：curIndex：当前所在页码，默认1
+                类样式：
+                    .pager-none 上一页下一页按钮不能点时的类样式
+                    .pager-active 被激活的页码按钮
+         */
+        $('#pager').pager(10, 101, function (index) {
+            //alert("当前页码：" + index);
+        });
+    </script>
+</body>
+</html>

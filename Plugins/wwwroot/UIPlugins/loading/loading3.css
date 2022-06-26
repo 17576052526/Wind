@@ -1,0 +1,14 @@
+﻿.loading3{width: 100px;height: 100px;position: relative;}
+.loading3>span{width: 20px;height: 20px;border-radius: 50%;background: lightgreen;position: absolute;animation: loading3 1.04s ease infinite;}
+@keyframes loading3{
+    0%{transform: scale(1.2);opacity: 1;}
+    100%{transform: scale(.3);opacity: 0.5;}
+}
+.loading3>span:nth-child(1){left: 0;top: 50%;margin-top:-10px;animation-delay:0.13s;}
+.loading3>span:nth-child(2){left: 14px;top: 14px;animation-delay:0.26s;}
+.loading3>span:nth-child(3){left: 50%;top: 0;margin-left: -10px;animation-delay:0.39s;}
+.loading3>span:nth-child(4){top: 14px;right:14px;animation-delay:0.52s;}
+.loading3>span:nth-child(5){right: 0;top: 50%;margin-top:-10px;animation-delay:0.65s;}
+.loading3>span:nth-child(6){right: 14px;bottom:14px;animation-delay:0.78s;}
+.loading3>span:nth-child(7){bottom: 0;left: 50%;margin-left: -10px;animation-delay:0.91s;}
+.loading3>span:nth-child(8){bottom: 14px;left: 14px;animation-delay:1.04s;}

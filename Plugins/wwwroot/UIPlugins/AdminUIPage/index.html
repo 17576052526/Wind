@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../global.css" />
+    <link rel="stylesheet" type="text/css" href="../font/css/fontello.css" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+</head>
+<body>
+    <div class="flexCol height100">
+        <!--头部-->
+        <div class="head">
+            <div class="logo">WindAdmin | 数据管理中心</div>
+            <div class="navbar">
+                <div class="flex1">
+                    <div class="navbar-btn"><i class="icon-reorder"></i></div>
+                </div>
+                <div class="navbar-btn"><i class="icon-envelope"></i><span class="navbar-label">8</span></div>
+                <div class="navbar-btn"><i class="icon-bell"></i><span class="navbar-label">15</span></div>
+                <div class="navbar-btn"><i class="icon-flag"></i></div>
+                <div class="navbar-btn"><i class="icon-user"></i>管理员</div>
+                <div class="navbar-btn"><i class="icon-off"></i>注销</div>
+            </div>
+        </div>
+        <div class="flex1 flex">
+            <!--左边-->
+            <div class="left">
+                <div class="search"><input type="text" placeholder="搜索..." /><i class="icon-search"></i></div>
+                <ul class="nav">
+                    <li class="nav-active">
+                        <div class="nav-btn icon-folder_open">一级菜单</div>
+                        <ol>
+                            <li><a target="main" href="../AdminUI/demo.html" class="nav-child-btn icon-circle_blank">UI demo</a></li>
+                            <li><a target="main" href="default.html" class="nav-child-btn icon-circle_blank">首页</a></li>
+                            <li><a target="main" href="list.html" class="nav-child-btn icon-circle_blank">列表页</a></li>
+                            <li><a target="main" href="edit.html" class="nav-child-btn icon-circle_blank">编辑页</a></li>
+                        </ol>
+                    </li>
+                    <li class="nav-active">
+                        <div class="nav-btn icon-folder_open">一级菜单</div>
+                        <ol>
+                            <li><a target="main" href="#" class="nav-child-btn icon-circle_blank">二级菜单</a></li>
+                            <li><a target="main" href="#" class="nav-child-btn icon-circle_blank">二级菜单</a></li>
+                            <li><a target="main" href="#" class="nav-child-btn icon-circle_blank">二级菜单</a></li>
+                        </ol>
+                    </li>
+                    <li><a target="main" href="#" class="nav-btn icon-folder_open">测试</a></li>
+                    <li><a target="main" href="#" class="nav-btn icon-folder_open">测试</a></li>
+                </ul>
+            </div>
+            <!--右边-->
+            <div class="flex1">
+                <iframe style="width:100%;height:100%;border:0;display:block;" name="main" src="default.html"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

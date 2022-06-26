@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" type="text/css" href="/lib/global.css" />
+    <link rel="stylesheet" type="text/css" href="/css/layout-merge.min.css" />
+    @RenderSection("head")
+</head>
+<body>
+    <div class="flexCol height100">
+        <!--头部-->
+        <div class="head">
+            <div class="logo">WindAdmin | 数据管理中心</div>
+            <div class="navbar">
+                <div class="flex1">
+                    <div class="navbar-btn" onclick="$('#left').toggle()"><i class="icon-reorder"></i></div>
+                </div>
+                <div class="navbar-btn"><i class="icon-envelope"></i><span class="navbar-label">8</span></div>
+                <div class="navbar-btn"><i class="icon-bell"></i><span class="navbar-label">15</span></div>
+                <div class="navbar-btn"><i class="icon-flag"></i></div>
+                <div class="navbar-btn"><i class="icon-user"></i>管理员</div>
+                <div class="navbar-btn"><i class="icon-off"></i>注销</div>
+            </div>
+        </div>
+        <div class="flex1 flex">
+            <!--左边-->
+            <div class="left" id="left">
+                <div class="search"><input type="text" placeholder="搜索..." class="tree-search" /><i class="icon-search"></i></div>
+                <ul class="nav">
+                    <li class="tree tree-active">
+                        <div class="nav-btn icon-folder_open tree-switch">插件</div>
+                        <ol class="tree-box">
+                            @foreach (var m in Plugins.Pages.Data.List)
+                            {
+                                <li><a href="/see/@m.Key" class="nav-child-btn icon-circle_blank">@m.Value.Name</a></li>
+                            }
+                        </ol>
+                    </li>
+                    @*<li class="tree tree-active">
+                        <div class="nav-btn icon-folder_open tree-switch">一级菜单</div>
+                        <ol class="tree-box">
+                            <li><a target="main" href="../UI/demo.html" class="nav-child-btn icon-circle_blank">UI demo</a></li>
+                            <li><a target="main" href="../admin/default.html" class="nav-child-btn icon-circle_blank">首页</a></li>
+                            <li><a target="main" href="../admin/list.html" class="nav-child-btn icon-circle_blank">列表页</a></li>
+                            <li><a target="main" href="../admin/edit.html" class="nav-child-btn icon-circle_blank">编辑页</a></li>
+                        </ol>
+                    </li>*@
+                </ul>
+            </div>
+            <!--右边-->
+            <div class="flex1">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/lib/jquery.js"></script>
+    <script type="text/javascript" src="/js/layout-merge.min.js"></script>
+    @RenderSection("body")
+</body>
+</html>
