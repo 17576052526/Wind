@@ -1,0 +1,70 @@
+[
+  /******************** index页面 ********************/
+  {
+    "outputFileName": "wwwroot/Admin/Css/index-merge.css",
+    "inputFiles": [
+      "wwwroot/lib/font/css/fontello.css",
+      "wwwroot/lib/tree/tree.css",
+      //手写的放后面
+      "wwwroot/Admin/Css/index.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Admin/Js/index-merge.js",
+    "inputFiles": [
+      "wwwroot/lib/tree/tree.js",
+      "wwwroot/lib/tree/tree-search.js",
+      //手写的放后面
+      "wwwroot/Admin/Js/index.js"
+    ]
+  },
+  /******************** List、Edit共用的库 ********************/
+  {
+    "outputFileName": "wwwroot/Admin/Css/listedit-merge.css",
+    "inputFiles": [
+      "wwwroot/lib/AdminUI/UI.css",
+      "wwwroot/lib/font/css/fontello.css",
+      "wwwroot/lib/loading/loading1.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Admin/js/listedit-merge.js",
+    "inputFiles": [
+      "wwwroot/lib/loading/loading.js",
+      //手写的放后面
+      "wwwroot/Admin/Js/listedit.js"
+    ]
+  },
+  /******************** List页面 ********************/
+  {
+    "outputFileName": "wwwroot/Admin/js/list-merge.js",
+    "inputFiles": [
+      "wwwroot/lib/check/check.js",
+      "wwwroot/lib/table-fixed/table-fixed.js",
+      //手写的放后面
+      "wwwroot/Admin/Js/list.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Admin/css/list-merge.css",
+    "inputFiles": [
+      "wwwroot/lib/table-fixed/table-fixed.css",
+      //手写的放后面
+      "wwwroot/Admin/Css/list.css"
+    ]
+  },
+  /******************** Edit页面 ********************/
+  {
+    "outputFileName": "wwwroot/Admin/js/edit-merge.js",
+    "inputFiles": [
+      "wwwroot/lib/upload/upload.js",
+      "wwwroot/lib/upload/upload-img.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Admin/css/edit-merge.css",
+    "inputFiles": [
+      "wwwroot/lib/upload/upload-img.css"
+    ]
+  }
+]
