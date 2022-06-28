@@ -15,8 +15,7 @@
 	var manager = Manager.Create(Host, GenerationEnvironment);
     string outputDirectory=Regex.Match(File.ReadAllText(projectDir + "_DMSC/appsettings.json"), "(?<=\"outputDirectory\"\\s*:\\s*\")[^\"]+(?=\")").Value;
 	foreach(Table table in list){
-        int index=table.Name.IndexOf('_');
-		string dire=projectDir+outputDirectory+(index==-1?"":table.Name.Substring(0,index)+"\\");//如果表名中有下划线就按模块划分文件夹
+		string dire=projectDir+outputDirectory;//如果表名中有下划线就按模块划分文件夹
         string path=dire+table.Name+".Designer.cs";
 		if (!Directory.Exists(dire)) { Directory.CreateDirectory(dire); }
         if(File.Exists(path)){File.Delete(path);}
