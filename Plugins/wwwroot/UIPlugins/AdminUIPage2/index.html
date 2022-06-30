@@ -9,10 +9,33 @@
     <link rel="stylesheet" type="text/css" href="index.css" />
 </head>
 <body>
-    <div class="flex h-100">
-        <!--左边-->
-        <div class="left">
+    <div class="flex-column h-100">
+        <!--头部-->
+        <div class="flex" style="height:50px;">
             <div class="logo">WindAdmin</div>
+            <div class="flex-1 flex" style="border-bottom:1px solid #DEE2E6;">
+                <div class="flex-1 flex-center">
+                    <span class="head-nav-item mlr-15 font-16"><i class="icon-reorder"></i></span>
+                    <span class="head-nav-item mlr-15">首页</span>
+                    <span class="head-nav-item mlr-15">联系人</span>
+                </div>
+                <div class="flex-center">
+                    <span class="head-nav-item mlr-10">
+                        <i class="icon-envelope"></i>
+                        <span class="head-nav-mark">12</span>
+                    </span>
+                    <span class="head-nav-item mlr-10">
+                        <i class="icon-bell"></i>
+                        <span class="head-nav-mark">8</span>
+                    </span>
+                    <span class="head-nav-item mlr-10"><i class="icon-user"></i>管理员</span>
+                    <span class="head-nav-item mlr-10"><i class="icon-off"></i>注销</span>
+                </div>
+            </div>
+        </div>
+        <!---->
+        <div class="flex-1 flex">
+            <!--左边栏目-->
             <div class="left-body">
                 <div class="flex">
                     <input type="text" class="flex-1 search-text" placeholder="搜索" />
@@ -43,19 +66,9 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <!--右边-->
-        <div class="flex-1 flex-column">
-            <div class="flex right-head">
-                <div class="flex-1 flex-center">
-                    <span class="right-nav mlr-15"><i class="icon-reorder"></i></span>
-                </div>
-                <div class="flex-center">
-                    <span class="right-nav mlr-15"><i class="icon-envelope"></i><span class="mark">12</span></span>
-                    <span class="right-nav mlr-15"><i class="icon-bell"></i><span class="mark">8</span></span>
-                    <span class="right-nav mlr-15"><i class="icon-user"></i>管理员</span>
-                    <span class="right-nav mlr-15"><i class="icon-off"></i>注销</span>
-                </div>
+            <!--右边块-->
+            <div class="flex-1">
+
             </div>
         </div>
     </div>
