@@ -1,6 +1,6 @@
 /.vs
-/Wind.UI/bin
-/Wind.UI/obj
+/UI/bin
+/UI/obj
 /Common/bin
 /Common/obj
 /DbOrm/bin
@@ -9,4 +9,4 @@
 /Plugins/obj
 /Plugins/Properties/PublishProfiles
 /Plugins/wwwroot/upload
-/Wind.UI/wwwroot/upload
+/UI/wwwroot/upload

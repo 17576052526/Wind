@@ -1,6 +1,6 @@
 using DbOrm;
 
-namespace Wind.UI
+namespace UI
 {
     public class Program
     {
