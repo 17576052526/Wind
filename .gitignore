@@ -10,3 +10,6 @@
 /Plugins/Properties/PublishProfiles
 /Plugins/wwwroot/upload
 /UI/wwwroot/upload
+/UI/.config
+/UI/UI.csproj.user
+/UI/Properties/PublishProfiles
