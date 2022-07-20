@@ -1,3 +1,5 @@
+React项目是独立的，不依赖Visual Studio，不依赖.net Core
+
 1.App.js 只设置写路由，内容如下（懒加载方式）：
 import React, { Suspense, lazy } from 'react';
 import { HashRouter as Router, Route, Link, NavLink, Redirect } from "react-router-dom";
