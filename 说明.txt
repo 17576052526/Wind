@@ -1,3 +1,5 @@
+.csproj     <Nullable>disable</Nullable>
+
 Bundler & Minifier  用来压缩合并css、js的 Visual Studio插件
 如果生成不了，右键 bundleconfig.json 选择 Bundler & Minifier 选择 Product Output Files
 Wind 中已经不在使用 Bundler & Minifier 插件，目前是直接引用css，没有合并
