@@ -3,26 +3,25 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:12128",
+      "applicationUrl": "http://localhost:34066",
       "sslPort": 0
     }
   },
   "profiles": {
     "UI": {
       "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5051",
+      "applicationUrl": "http://localhost:5153",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }
