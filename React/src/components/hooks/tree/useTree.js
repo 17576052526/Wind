@@ -1,23 +1,3 @@
-/*
- 用来控制树结构的显示隐藏
- let [isTreeShow, setShowHide, copyShowHide] = useTree('child');
- isTreeShow(model) 用来判断当前这个对象下的子级是显示还是隐藏
- setShowHide(param, isShow, isChild) param数组或对象，isShow 显示还是隐藏，isChild 子级是否也跟着显示隐藏
- copyShowHide(oldArr, newArr)  旧树结构里面的显示隐藏，复制到新对象里面来
- 示例：
- function loadTree(data,isShow) {
-        return data && data.map((m, i) =>
-            <>
-                <tr style={{ display: !isShow && 'none' }}>
-                    <td><div className="table-resize-item"><input type="button" value="显示隐藏" onClick={() => setShowHide(m)} />XXX</div></td>
-                    <td><div className="table-resize-item">{m.title}</div></td>
-                </tr>
-                {loadTree(m.child, isTreeShow(m))}
-            </>
-        )
-    }
-    {data && loadTree(data, true)}
- */
 import React, { useState } from 'react';
 
 export default function (childName) {
