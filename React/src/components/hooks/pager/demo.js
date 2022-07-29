@@ -18,7 +18,7 @@ export default function () {
      setPageIndex 设置当前页码索引
      setDataCount 设置总数据量
      setPageSize 设置每页显示多少条，也可以在 usePager(pageSize) 设置
-     setPageNum 设置最多显示多少个页码按钮，默认是7个
+     setPageBtnNum 设置最多显示多少个页码按钮，默认是7个
      pageCount 获取总页数
 
      pager.css ：分页按钮样式，此样式不是必须要引入的，这只是个示例
@@ -26,7 +26,7 @@ export default function () {
 
 
     let pageSize = 10;
-    let { Pager, pageIndex, setPageIndex, setDataCount, setPageSize, setPageNum, pageCount } = usePager(pageSize);
+    let { Pager, pageIndex, setPageIndex, setDataCount, setPageSize, setPageBtnNum, pageCount } = usePager(pageSize);
 
 
     //获取数据，获取总数据量
