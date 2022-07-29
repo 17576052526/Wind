@@ -9,7 +9,7 @@ export default function () {
 
     return (
         <div>
-            Test
+            测试
         </div>
     );
 }
