@@ -44,7 +44,22 @@ namespace UI
             //配置错误页面，（开发环境下不起效，发布后生效）
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Error/500.html");//500错误页面配置
+                app.UseExceptionHandler(configure =>
+                {
+                    configure.Run(async context =>
+                    {
+                        var exHeader = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>();
+                        var ex = exHeader.Error;
+                        if (ex != default)
+                        {
+                            //写入错误日志
+                            File.AppendAllText(System.AppDomain.CurrentDomain.BaseDirectory + "Error.txt", DateTime.Now.ToString("yyyy-MM-dd HH:mm ") + ex.ToString() + "\r\n\r\n");
+                            //跳转到错误页面
+                            //context.Response.Redirect("/Error/500.html");//此句可以注释
+                            await context.Response.WriteAsJsonAsync(new { code = "500", msg = "服务器内部错误，请查阅错误日志定位错误" });//此句一定要
+                        }
+                    });
+                });
                 app.UseStatusCodePagesWithReExecute("/Error/404.html");//404错误页面配置
             }
 
