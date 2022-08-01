@@ -6,6 +6,11 @@ import $ from 'jquery'
 export default function () {
 
 
+    useEffect(() => {
+
+    }, []);
+
+
 
     return (
         <div>
