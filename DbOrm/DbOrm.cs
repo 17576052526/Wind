@@ -465,7 +465,6 @@ select * from _tab where _RowNum between @_start and @_end
             AddParameter(cmd, param);
             if (cmd.Connection.State == ConnectionState.Closed) { cmd.Connection.Open(); } else if (cmd.Connection.State == ConnectionState.Broken) { cmd.Connection.Close(); cmd.Connection.Open(); }
             int count = cmd.ExecuteNonQuery();
-            cmd.Parameters.Clear();//防止多次使用同一个 Command且添加相同的参数名的
             return count;
         }
         //执行sql查询，返回第一行第一列
@@ -475,7 +474,6 @@ select * from _tab where _RowNum between @_start and @_end
             AddParameter(cmd, param);
             if (cmd.Connection.State == ConnectionState.Closed) { cmd.Connection.Open(); } else if (cmd.Connection.State == ConnectionState.Broken) { cmd.Connection.Close(); cmd.Connection.Open(); }
             object obj = cmd.ExecuteScalar();
-            cmd.Parameters.Clear();//防止多次使用同一个 Command且添加相同的参数名的
             return obj;
         }
         //执行sql查询，返回 DataReader对象
@@ -485,7 +483,6 @@ select * from _tab where _RowNum between @_start and @_end
             AddParameter(cmd, param);
             if (cmd.Connection.State == ConnectionState.Closed) { cmd.Connection.Open(); } else if (cmd.Connection.State == ConnectionState.Broken) { cmd.Connection.Close(); cmd.Connection.Open(); }
             IDataReader reader = cmd.ExecuteReader();
-            cmd.Parameters.Clear();//防止多次使用同一个 Command且添加相同的参数名的
             return reader;
         }
         //添加Sql参数，isIgNull：是否属性值为 null的不参与构造，true 不参与构造，false 参与构造
@@ -505,6 +502,11 @@ select * from _tab where _RowNum between @_start and @_end
                 //设置Parameter属性
                 param.ParameterName = '@' + p.Name;
                 param.Value = val ?? DBNull.Value;//value要在最后设置，不要在设置size之前设置
+                //存在则删除
+                if (cmd.Parameters.Contains(param.ParameterName))
+                {
+                    cmd.Parameters.RemoveAt(param.ParameterName);
+                }
                 cmd.Parameters.Add(param);
             }
         }
