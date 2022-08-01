@@ -73,7 +73,8 @@ namespace UI.Controllers.Api
                     JObject equal = obj.equal;
                     foreach (var m in equal)
                     {
-                        sql.Where(m.Key + "='" + m.Value + "'");
+                        sql.Where(m.Key + "=@" + m.Key);
+                        sql.AddParameter("@" + m.Key, m.Value);
                     }
                 }
                 if (obj.like != null)
@@ -81,7 +82,8 @@ namespace UI.Controllers.Api
                     JObject like = obj.like;
                     foreach (var m in like)
                     {
-                        sql.Where(m.Key + " like '%" + m.Value + "%'");
+                        sql.Where(m.Key + " like @" + m.Key);
+                        sql.AddParameter("@" + m.Key, "%" + m.Value + "%");
                     }
                 }
                 if (obj.gt != null)
@@ -89,7 +91,8 @@ namespace UI.Controllers.Api
                     JObject gt = obj.gt;
                     foreach (var m in gt)
                     {
-                        sql.Where(m.Key + "<='" + m.Value + "'");
+                        sql.Where(m.Key + "<=@" + m.Key);
+                        sql.AddParameter('@' + m.Key, m.Value);
                     }
                 }
                 if (obj.lt != null)
@@ -97,10 +100,13 @@ namespace UI.Controllers.Api
                     JObject lt = obj.lt;
                     foreach (var m in lt)
                     {
-                        sql.Where(m.Key + ">='" + m.Value + "'");
+                        sql.Where(m.Key + ">=@" + m.Key);
+                        sql.AddParameter('@' + m.Key, m.Value);
                     }
                 }
-                int total = sql.QueryScalar<int>();//获取总数据量
+                //获取总数据量
+                int total = sql.QueryScalar<int>();
+                //获取列表数据
                 List<Test_Main> list = null;
                 sql = sql.Select("*");
                 if (obj.orderBy != null)

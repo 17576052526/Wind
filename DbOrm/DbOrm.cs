@@ -122,6 +122,27 @@ namespace DbOrm
             this.TakeCount = 1;
             return Query(param)[0];
         }
+        /// <summary>
+        /// 添加sql Parameter参数
+        /// </summary>
+        public void AddParameter(string name, object value)
+        {
+            var param = Command.CreateParameter();
+            //根据属性的类型设置Parameter 的DbType和size，只设置String类型的其他类型让其自动设置，如果不设置string类型每次size会根据value的长度自动设置，这样不会重用执行计划（网上说的没测试）
+            if (value is String)
+            {
+                param.Size = ((string)value).Length <= 4000 ? 4000 : -1;
+            }
+            //设置Parameter属性
+            param.ParameterName = name;
+            param.Value = value ?? DBNull.Value;//value要在最后设置，不要在设置size之前设置
+            //存在则删除
+            if (Command.Parameters.Contains(name))
+            {
+                Command.Parameters.RemoveAt(name);
+            }
+            Command.Parameters.Add(param);
+        }
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
