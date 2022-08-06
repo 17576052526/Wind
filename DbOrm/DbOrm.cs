@@ -468,8 +468,7 @@ select * from _tab where _RowNum between @_start and @_end
             cmd.CommandText = sql;
             AddParameter(cmd, param);
             if (cmd.Connection.State == ConnectionState.Closed) { cmd.Connection.Open(); } else if (cmd.Connection.State == ConnectionState.Broken) { cmd.Connection.Close(); cmd.Connection.Open(); }
-            int count = cmd.ExecuteNonQuery();
-            return count;
+            return cmd.ExecuteNonQuery();
         }
         //执行sql查询，返回第一行第一列
         internal static object ExecuteScalar(IDbCommand cmd, string sql, object param = null)
@@ -477,8 +476,7 @@ select * from _tab where _RowNum between @_start and @_end
             cmd.CommandText = sql;
             AddParameter(cmd, param);
             if (cmd.Connection.State == ConnectionState.Closed) { cmd.Connection.Open(); } else if (cmd.Connection.State == ConnectionState.Broken) { cmd.Connection.Close(); cmd.Connection.Open(); }
-            object obj = cmd.ExecuteScalar();
-            return obj;
+            return cmd.ExecuteScalar();
         }
         //执行sql查询，返回 DataReader对象
         internal static IDataReader ExecuteReader(IDbCommand cmd, string sql, object param = null)
@@ -486,8 +484,7 @@ select * from _tab where _RowNum between @_start and @_end
             cmd.CommandText = sql;
             AddParameter(cmd, param);
             if (cmd.Connection.State == ConnectionState.Closed) { cmd.Connection.Open(); } else if (cmd.Connection.State == ConnectionState.Broken) { cmd.Connection.Close(); cmd.Connection.Open(); }
-            IDataReader reader = cmd.ExecuteReader();
-            return reader;
+            return cmd.ExecuteReader();
         }
         //添加Sql参数，isIgNull：是否属性值为 null的不参与构造，true 不参与构造，false 参与构造
         internal static void AddParameter(IDbCommand cmd, object model, bool isIgNull = false)
