@@ -337,6 +337,10 @@ select * from _tab where _RowNum between @_start and @_end
         {
             return (T)ExecuteScalar(Command, sql, param);
         }
+        /// <summary>
+        /// 添加 sql传参
+        /// </summary>
+        public void AddParameter(string name, object value) => AddParameter(this.Command, name, value);
         //事务不用委托的方式实现，因为太不灵活了
         public void BeginTransaction()
         {

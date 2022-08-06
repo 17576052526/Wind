@@ -72,3 +72,15 @@ using (DB db = new DB())
     }
     catch { db.Rollback(); }//出错回滚事务
 }
+sql传参的两种方式
+1.静态DB对象 DB.Query(sql, new { ID = 1, MainName = "aa" });
+2.非静态的DB对象
+using (DB db = new DB())
+{
+    db.AddParameter("@ID", "1");//第一种
+    db.Query(sql, new { ID = 1, MainName = "aa" });//第二种
+}
+3.SqlBuilder 查询构造器 传参
+SqlBuilder sql= DB.Select<Test_Main>(),Where("ID=@ID and MainName=@MainName");
+sql.AddParameter("@ID", "1");//第一种
+sql.Query(new {MainName="aa"});//第二种
