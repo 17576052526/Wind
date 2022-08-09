@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Common
+namespace UI.Controllers.Api
 {
     /// <summary>
     /// JWT 的加密解密，这里应该用 RS256 私钥签名，公钥验签，但是目前没找到 RS256相关用法
