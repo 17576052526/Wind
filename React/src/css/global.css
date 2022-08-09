@@ -1,0 +1,236 @@
+﻿/* 原子类css，这里更多的是定义一套命名规范，设计原则：1.不封装原本的css含义  2.可读性：一眼看出有哪些样式 3.可写性：方便记忆，方便编辑器提示*/
+html {font-size:62.5%;}/*调整此处可以改变整体布局大小，62.5%==10px，默认是16px*/
+html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0;padding: 0;}
+*,::before,::after {box-sizing: border-box;}/*高度和宽度包括border-width和padding的值*/
+body{font-size: 1.3rem;line-height: 1.3;color: #333;font-family: "Microsoft YaHei";/*不能用Arial，按钮行高对不齐*/}
+html,body{height:100%;}
+ol,ul{list-style: none;}
+a{color: inherit;text-decoration: inherit;}
+
+.text-center {text-align:center;}
+.text-left{text-align:left;}
+.text-right{text-align:right;}
+
+.flex{display:flex;}
+.block{display:block;}
+.display-none{display:none;}
+.inline{display:inline;}
+.inline-block{display:inline-block;}
+
+.overflow-auto{overflow:auto;}
+.overflow-hidden{overflow:hidden;}
+.overflow-visible{overflow:visible;}
+
+.static {position:static;}
+.fixed {position:fixed;}
+.absolute {position:absolute;}
+.relative {position:relative;}
+
+.flex-1,.flex-2,.flex-3,.flex-4,.flex-5{min-width:0;min-height:0;/*此处加min-width:0，是为了解决子元素超出宽度，父元素宽度也会溢出*/}
+.flex-1{flex:1;}
+.flex-2{flex:2;}
+.flex-3{flex:3;}
+.flex-4{flex:4;}
+.flex-5{flex:5;}
+
+.flex-wrap,.flex-column,.flex-between,.flex-around,.flex-center{display:flex;}
+.flex-wrap{flex-wrap:wrap;}
+.flex-column{flex-direction:column;}
+.flex-between{justify-content:space-between;}
+.flex-around{justify-content:space-around;}
+.flex-center{align-items:center;}
+
+.white-nowrap{white-space:nowrap;}
+.white-normal{white-space:normal;}
+
+.vertical-middle{vertical-align:middle;}
+.vertical-top{vertical-align:top;}
+
+.cursor-pointer{cursor:pointer;}
+.cursor-default{cursor:default;}
+
+.font-bold{font-weight:bold;}
+
+.font-12{font-size:1.2rem;}
+.font-13{font-size:1.3rem;}
+.font-14{font-size:1.4rem;}
+.font-15{font-size:1.5rem;}
+.font-16{font-size:1.6rem;}
+.font-18{font-size:1.8rem;}
+.font-20{font-size:2rem;}
+
+.color-white{color:white;}
+
+.bg-none{background:none;}
+.bg-white {background-color:white;}
+
+.border-none{border:none;outline:none;}
+.border-white {border: 1px solid white;}
+
+.br-3 {border-radius:0.3rem;}
+.br-4 {border-radius:0.4rem;}
+.br-6 {border-radius:0.6rem;}
+.br-8 {border-radius:0.8rem;}
+.br-max {border-radius:9999px;}
+
+.line-h-1\.25{line-height:1.25;}
+.line-h-1\.5{line-height:1.5;}
+.line-h-1\.75{line-height:1.75;}
+.line-h-2{line-height:2;}
+
+.h-100{height:100%;}
+.w-100{width:100%;}
+.max-w-100{max-width:100%;}
+.min-w-100{min-width:100%;}
+
+.p-0{padding:0!important;}/*常用于 UI.css中*/
+.p-2\.5 {padding: 0.25rem;}
+.p-5{padding:0.5rem;}
+.p-7\.5 {padding: 0.75rem;}
+.p-10{padding:1rem;}
+.p-15{padding:1.5rem;}
+.p-20{padding:2rem;}
+.p-25{padding:2.5rem;}
+.p-30{padding:3rem;}
+
+.pt-2\.5 {padding-top: 0.25rem;}
+.pt-5 {padding-top: 0.5rem;}
+.pt-7\.5 {padding-top: 0.75rem;}
+.pt-10 {padding-top: 1rem;}
+.pt-15 {padding-top: 1.5rem;}
+.pt-20 {padding-top: 2rem;}
+.pt-25 {padding-top: 2.5rem;}
+.pt-30 {padding-top: 3rem;}
+
+.pr-2\.5 {padding-right: 0.25rem;}
+.pr-5 {padding-right: 0.5rem;}
+.pr-7\.5 {padding-right: 0.75rem;}
+.pr-10 {padding-right: 1rem;}
+.pr-15 {padding-right: 1.5rem;}
+.pr-20 {padding-right: 2rem;}
+.pr-25 {padding-right: 2.5rem;}
+.pr-30 {padding-right: 3rem;}
+
+.pb-2\.5 {padding-bottom: 0.25rem;}
+.pb-5 {padding-bottom: 0.5rem;}
+.pb-7\.5 {padding-bottom: 0.75rem;}
+.pb-10 {padding-bottom: 1rem;}
+.pb-15 {padding-bottom: 1.5rem;}
+.pb-20 {padding-bottom: 2rem;}
+.pb-25 {padding-bottom: 2.5rem;}
+.pb-30 {padding-bottom: 3rem;}
+
+.pl-2\.5 {padding-left: 0.25rem;}
+.pl-5 {padding-left: 0.5rem;}
+.pl-7\.5 {padding-left: 0.75rem;}
+.pl-10 {padding-left: 1rem;}
+.pl-15 {padding-left: 1.5rem;}
+.pl-20 {padding-left: 2rem;}
+.pl-25 {padding-left: 2.5rem;}
+.pl-30 {padding-left: 3rem;}
+
+.ptb-2\.5 {padding-top: 0.25rem;padding-bottom: 0.25rem;}
+.ptb-5 {padding-top: 0.5rem;padding-bottom: 0.5rem;}
+.ptb-7\.5 {padding-top: 0.75rem;padding-bottom: 0.75rem;}
+.ptb-10 {padding-top: 1rem;padding-bottom: 1rem;}
+.ptb-15 {padding-top: 1.5rem;padding-bottom: 1.5rem;}
+.ptb-20 {padding-top: 2rem;padding-bottom: 2rem;}
+.ptb-25 {padding-top: 2.5rem;padding-bottom: 2.5rem;}
+.ptb-30 {padding-top: 3rem;padding-bottom: 3rem;}
+
+.plr-2\.5 {padding-left: 0.25rem;padding-right: 0.25rem;}
+.plr-5 {padding-left: 0.5rem;padding-right: 0.5rem;}
+.plr-7\.5 {padding-left: 0.75rem;padding-right: 0.75rem;}
+.plr-10 {padding-left: 1rem;padding-right: 1rem;}
+.plr-15 {padding-left: 1.5rem;padding-right: 1.5rem;}
+.plr-20 {padding-left: 2rem;padding-right: 2rem;}
+.plr-25 {padding-left: 2.5rem;padding-right: 2.5rem;}
+.plr-30 {padding-left: 3rem;padding-right: 3rem;}
+
+.mt-2\.5 {margin-top:0.25rem;}
+.mt-5 {margin-top:0.5rem;}
+.mt-7\.5 {margin-top:0.75rem;}
+.mt-10 {margin-top:1rem;}
+.mt-15 {margin-top:1.5rem;}
+.mt-20 {margin-top:2rem;}
+.mt-25 {margin-top:2.5rem;}
+.mt-30 {margin-top:3rem;}
+
+.ml-2\.5 {margin-left:0.25rem;}
+.ml-5 {margin-left:0.5rem;}
+.ml-7\.5 {margin-left:0.75rem;}
+.ml-10 {margin-left:1rem;}
+.ml-15 {margin-left:1.5rem;}
+.ml-20 {margin-left:2rem;}
+.ml-25 {margin-left:2.5rem;}
+.ml-30 {margin-left:3rem;}
+
+.mr-2\.5 {margin-right:0.25rem;}
+.mr-5 {margin-right:0.5rem;}
+.mr-7\.5 {margin-right:0.75rem;}
+.mr-10 {margin-right:1rem;}
+.mr-15 {margin-right:1.5rem;}
+.mr-20 {margin-right:2rem;}
+.mr-25 {margin-right:2.5rem;}
+.mr-30 {margin-right:3rem;}
+
+.mb-2\.5 {margin-bottom:0.25rem;}
+.mb-5 {margin-bottom:0.5rem;}
+.mb-7\.5 {margin-bottom:0.75rem;}
+.mb-10 {margin-bottom:1rem;}
+.mb-15 {margin-bottom:1.5rem;}
+.mb-20 {margin-bottom:2rem;}
+.mb-25 {margin-bottom:2.5rem;}
+.mb-30 {margin-bottom:3rem;}
+
+.-mlr-1\.25{margin-left:-0.125rem;margin-right:-0.125rem;}
+.-mlr-2\.5{margin-left:-0.25rem;margin-right:-0.25rem;}
+.-mlr-3\.75{margin-left:-0.375rem;margin-right:-0.375rem;}
+.-mlr-5{margin-left:-0.5rem;margin-right:-0.5rem;}
+.-mlr-7\.5{margin-left:-0.75rem;margin-right:-0.75rem;}
+.-mlr-10{margin-left:-1rem;margin-right:-1rem;}
+.-mlr-12\.5{margin-left:-1.25rem;margin-right:-1.25rem;}
+.-mlr-15{margin-left:-1.5rem;margin-right:-1.5rem;}
+.-mlr-20{margin-left:-2rem;margin-right:-2rem;}
+
+.mlr-auto{margin-left:auto;margin-right:auto;}
+.mlr-1\.25{margin-left:0.125rem;margin-right:0.125rem;}
+.mlr-2\.5{margin-left:0.25rem;margin-right:0.25rem;}
+.mlr-3\.75{margin-left:0.375rem;margin-right:0.375rem;}
+.mlr-5{margin-left:0.5rem;margin-right:0.5rem;}
+.mlr-7\.5{margin-left:0.75rem;margin-right:0.75rem;}
+.mlr-10{margin-left:1rem;margin-right:1rem;}
+.mlr-12\.5{margin-left:1.25rem;margin-right:1.25rem;}
+.mlr-15{margin-left:1.5rem;margin-right:1.5rem;}
+.mlr-20{margin-left:2rem;margin-right:2rem;}
+
+.-mtb-max{margin-top:-1000rem;margin-bottom:-1000rem;}
+
+.mtb-auto{margin-top:auto;margin-bottom:auto;}
+.mtb-1\.25{margin-top:0.125rem;margin-bottom:0.125rem;}
+.mtb-2\.5{margin-top:0.25rem;margin-bottom:0.25rem;}
+.mtb-3\.75{margin-top:0.375rem;margin-bottom:0.375rem;}
+.mtb-5{margin-top:0.5rem;margin-bottom:0.5rem;}
+.mtb-7\.5{margin-top:0.75rem;margin-bottom:0.75rem;}
+.mtb-10{margin-top:1rem;margin-bottom:1rem;}
+.mtb-12\.5{margin-top:1.25rem;margin-bottom:1.25rem;}
+.mtb-15{margin-top:1.5rem;margin-bottom:1.5rem;}
+.mtb-20{margin-top:2rem;margin-bottom:2rem;}
+
+/*采用的是pc优先，别的框架都是移动优先*/
+@media(max-width:640px) {
+.sm\:display-none {display: none;}
+}
+@media(max-width:768px) {
+.md\:display-none {display: none;}
+}
+@media(max-width:1024px) {
+.lg\:display-none {display: none;}
+}
+@media(max-width:1280px) {
+.xl\:display-none {display: none;}
+}
+
+/*功能类css*/
+.text-overflow-ellipsis{white-space:nowrap; text-overflow: ellipsis;overflow: hidden;}
+.fixed-center {position: fixed;top: 50%;left: 50%;z-index:100;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 10px #aaa!important;}
