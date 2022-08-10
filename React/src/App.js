@@ -7,7 +7,6 @@ let Page1 = lazy(() => import('./components/page1'))
 let Page2 = lazy(() => import('./components/page2'))
 let Login = lazy(() => import('./components/login'))
 
-//App.js 里面只设置路由，其他不在此处写（为了实现页面间的完全分离）
 function App() {
     //设置服务器请求地址，/api 是 src/setupProxy.js 配置的代理服务
     axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? '/api' : '';
