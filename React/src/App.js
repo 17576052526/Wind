@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import axios from 'axios'
+import common from './common'
 
 let Page1 = lazy(() => import('./components/page1'))
 let Page2 = lazy(() => import('./components/page2'))
@@ -12,10 +13,20 @@ function App() {
     axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? '/api' : '';
 
     //设置token
-    //axios.interceptors.request.use(config => {
-    //    config.headers.Authorization = common.getUser() && common.getUser().clientID;//配置登录验证
-    //    return config
-    //})
+    axios.interceptors.request.use(config => {
+        config.headers.Authorization = (common.getSessionStorage("loginMsg") || {}).token;
+        return config
+    });
+
+    //对返回结果做统一处理
+    axios.interceptors.response.use(response => {
+        let data = response.data;
+        if (data.code == -1) { alert(data.msg) }//普通错误（不做特殊处理的，直接弹框提示）
+        return data;
+    }, (error) => {
+        alert("服务器异常");
+        return Promise.reject(error);
+    });
 
     return (
         <Suspense fallback="">
