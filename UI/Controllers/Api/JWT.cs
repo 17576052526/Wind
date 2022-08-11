@@ -166,6 +166,7 @@ namespace UI.Controllers.Api
             {
                 str.AppendFormat("\"{0}\":\"{1}\",", p.Name, p.GetValue(model));
             }
+            str = str.Remove(str.Length - 1, 1);
             str.AppendLine("}");
             string headerBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(header)));
             string payloadBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(str.ToString()));
