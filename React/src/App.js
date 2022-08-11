@@ -24,7 +24,7 @@ function App() {
         else if (data.code == 403) { alert(data.msg); }//访问未认证的接口处理
         return data;
     }, (error) => {
-        alert("服务器异常");
+        alert(error);
         return Promise.reject(error);
     });
 
