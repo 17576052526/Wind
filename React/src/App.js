@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import common from './common'
 
@@ -21,6 +21,7 @@ function App() {
     axios.interceptors.response.use(response => {
         let data = response.data;
         if (data.code == -1) { alert(data.msg) }//普通错误（不做特殊处理的，直接弹框提示）
+        else if (data.code == 403) { alert(data.msg); }//访问未认证的接口处理
         return data;
     }, (error) => {
         alert("服务器异常");
