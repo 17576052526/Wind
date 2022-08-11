@@ -9,7 +9,7 @@ let Login = lazy(() => import('./components/login'))
 
 function App() {
     //设置服务器请求地址，/api 是 src/setupProxy.js 配置的代理服务
-    axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? '/api' : '';
+    axios.defaults.baseURL = common.baseURL;
 
     //设置token
     axios.interceptors.request.use(config => {

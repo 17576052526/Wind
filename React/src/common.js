@@ -1,6 +1,9 @@
 //import $ from 'jquery';
 
 export default {
+    //服务器的请求地址，因为用了代理请求，所以是 /api
+    baseURL: process.env.NODE_ENV == 'development' ? '/api' : '',
+
     //设置 localStorage
     setLocalStorage: (name, value) => {
         if (value instanceof Object) {
