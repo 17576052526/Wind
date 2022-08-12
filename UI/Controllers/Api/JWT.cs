@@ -202,7 +202,7 @@ namespace UI.Controllers.Api
                         result.Header = JsonConvert.DeserializeObject<dynamic>(Encoding.UTF8.GetString(Convert.FromBase64String(header)));
                         result.Payload = model;
                         result.Code = 200;
-                        //重新设置过期时间
+                        //自动续期
                         if (DateTime.Now > exp.AddMinutes(-10))
                         {
                             JWTCache.SetCache(model.tokenid, DateTime.Now.AddMinutes(20), 20);
