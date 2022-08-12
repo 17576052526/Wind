@@ -244,7 +244,7 @@ namespace UI.Controllers.Api
                     {
                         JWTCache.RemoveCache(model.tokenid);
                     }
-                    else//未过期，则设置过期时间
+                    else//未过期，则设置为过期
                     {
                         JWTCache.SetCache(model.tokenid, DateTime.Now.AddMinutes(-1), (exp - DateTime.Now).Minutes + 1);
                     }
