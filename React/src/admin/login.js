@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import $ from 'jquery'
-import '../css/global.css'
-import '../css/font/css/fontello.css'
+import '../_css/global.css'
+import '../_css/font/css/fontello.css'
 import common from '../common'
 
 export default function () {

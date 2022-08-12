@@ -3,9 +3,9 @@ import { HashRouter as Router, Routes, Route, useNavigate } from "react-router-d
 import axios from 'axios'
 import common from './common'
 
-let Page1 = lazy(() => import('./components/page1'))
-let Page2 = lazy(() => import('./components/page2'))
-let Login = lazy(() => import('./components/login'))
+let Page1 = lazy(() => import('./admin/page1'))
+let Page2 = lazy(() => import('./admin/page2'))
+let Login = lazy(() => import('./admin/login'))
 
 function App() {
     //设置服务器请求地址，/api 是 src/setupProxy.js 配置的代理服务
