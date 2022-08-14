@@ -3,7 +3,7 @@ import { HashRouter as Router, Routes, Route, useNavigate } from "react-router-d
 import axios from 'axios'
 import common from './common'
 
-//全局设置，不要写在方法里面，因为重新渲染的时候会再次执行
+/****************************全局设置，不要写在方法里面，因为重新渲染的时候会再次执行****************************/
 //设置服务器请求地址，/api 是 src/setupProxy.js 配置的代理服务
 axios.defaults.baseURL = common.baseURL;
 
@@ -23,6 +23,7 @@ axios.interceptors.response.use(response => {
     alert(error);
     return Promise.reject(error);
 });
+/****************************************************************************************************************/
 
 
 let Page1 = lazy(() => import('./admin/page1'))
