@@ -3,30 +3,33 @@ import { HashRouter as Router, Routes, Route, useNavigate } from "react-router-d
 import axios from 'axios'
 import common from './common'
 
+//全局设置，不要写在方法里面，因为重新渲染的时候会再次执行
+//设置服务器请求地址，/api 是 src/setupProxy.js 配置的代理服务
+axios.defaults.baseURL = common.baseURL;
+
+//设置token
+axios.interceptors.request.use(config => {
+    config.headers.Authorization = (common.getSessionStorage("loginMsg") || {}).token;
+    return config
+});
+
+//对返回结果做统一处理
+axios.interceptors.response.use(response => {
+    let data = response.data;
+    if (data.code == -1) { alert(data.msg) }//普通错误（不做特殊处理的，直接弹框提示）
+    else if (data.code == 403) { alert(data.msg); }//访问未认证的接口处理
+    return data;
+}, (error) => {
+    alert(error);
+    return Promise.reject(error);
+});
+
+
 let Page1 = lazy(() => import('./admin/page1'))
 let Page2 = lazy(() => import('./admin/page2'))
 let Login = lazy(() => import('./admin/login'))
 
 function App() {
-    //设置服务器请求地址，/api 是 src/setupProxy.js 配置的代理服务
-    axios.defaults.baseURL = common.baseURL;
-
-    //设置token
-    axios.interceptors.request.use(config => {
-        config.headers.Authorization = (common.getSessionStorage("loginMsg") || {}).token;
-        return config
-    });
-
-    //对返回结果做统一处理
-    axios.interceptors.response.use(response => {
-        let data = response.data;
-        if (data.code == -1) { alert(data.msg) }//普通错误（不做特殊处理的，直接弹框提示）
-        else if (data.code == 403) { alert(data.msg); }//访问未认证的接口处理
-        return data;
-    }, (error) => {
-        alert(error);
-        return Promise.reject(error);
-    });
 
     return (
         <Suspense fallback="">
