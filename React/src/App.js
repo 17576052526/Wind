@@ -30,6 +30,7 @@ axios.interceptors.response.use(response => {
 let Page1 = lazy(() => import('./admin/page1'))
 let Page2 = lazy(() => import('./admin/page2'))
 let Login = lazy(() => import('./admin/login'))
+let Admin = lazy(() => import('./admin/admin'))
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
                     <Route path="/page1" element={<Page1 />}></Route>
                     <Route path="/page2" element={<Page2 />}></Route>
                     <Route path="/login" element={<Login />}></Route>
+                    <Route path="/admin" element={<Admin />}></Route>
                 </Routes>
             </Router>
         </Suspense>
