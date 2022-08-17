@@ -1,11 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import axios from 'axios'
 import $ from 'jquery'
+import { useStates } from '../common'
+
 
 export default function () {
+    let [state, setState] = useStates({
+
+    })
 
 
     useEffect(() => {
+
 
     }, []);
 
