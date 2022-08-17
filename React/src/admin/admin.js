@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
+import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import $ from 'jquery'
 import './importShare'
 import './css/admin.css'
+
+let Test_Main = lazy(() => import('./shared/Test_Main'))
 
 export default function () {
 
@@ -73,7 +76,11 @@ export default function () {
                 </div>
                 {/*右边块*/}
                 <div className="flex-1">
-
+                    <Suspense fallback="">
+                        <Routes>
+                            <Route path="Test_Main" element={<Test_Main />}></Route>
+                        </Routes>
+                    </Suspense>
                 </div>
             </div>
         </div>

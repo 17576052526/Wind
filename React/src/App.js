@@ -38,12 +38,13 @@ function App() {
         <Suspense fallback="">
             <Router>
                 <Routes>
+                    {/*<Route path="/page1/*" element={<Page1 />}></Route>*/}{/*二级路由写法，父路由要加/*  ，子路由<Route path="Test_Main" element={<Test_Main />}></Route> */}
                     {/*<Route path="/" element={<Navigate to="/page2" />}></Route>*/}{/*重定向*/}
                     {/*<Route path="/" exact component={Page1}></Route>*/}{/*设置主页*/}
                     <Route path="/page1" element={<Page1 />}></Route>
                     <Route path="/page2" element={<Page2 />}></Route>
                     <Route path="/login" element={<Login />}></Route>
-                    <Route path="/admin" element={<Admin />}></Route>
+                    <Route path="/admin/*" element={<Admin />}></Route>
                 </Routes>
             </Router>
         </Suspense>
