@@ -62,8 +62,8 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .input-text{padding: 0.5rem 1rem;line-height:1.3;font-size: 1.3rem;color: #555;border: 1px solid #ced4da;border-radius:3px;vertical-align: middle;outline:none;}
 .input-text:focus {border-color: #3C8DBC;}
 /* 表格 */
-.table {min-width: 100%;border-spacing: 0;border: 1px solid #ddd;}
-.table th,.table td{padding:0.8rem 0.8rem;color:#555;line-height: 1.3;text-align:center;border-bottom: 1px solid #ddd;border-right:1px solid #ddd;}
+.table {min-width: 100%;border-spacing: 0;border: 1px solid #DEE2E6;}
+.table th,.table td{padding:0.8rem 0.8rem;color:#555;line-height: 1.3;text-align:center;border-bottom: 1px solid #DEE2E6;border-right:1px solid #DEE2E6;}
 .table tr:last-child>td{border-bottom:none;}
 .table tr>*:last-child{border-right:none;}
 .table th {background-color:#fafafa;white-space: nowrap;/*th不换行，最小宽度为th内容宽度*/}
