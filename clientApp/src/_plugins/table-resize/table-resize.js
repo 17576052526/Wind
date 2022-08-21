@@ -24,8 +24,8 @@ $(document).on('mousedown', '.table-resize-move', function (e) {
 $(document).on('mouseenter', '.table-resize', function () {
     var cur = $(this);
     if (cur.children('.table-resize-move').length == 0) {
-        cur.css('position', 'relative');
-        cur.append('<span class="table-resize-move" style="cursor:col-resize;width:8px;position:absolute;right:0px;top:0px;bottom:0px;z-index:1;"></span>');
+        cur.not(':last-child').css('position', 'relative');
+        cur.not(':last-child').append('<span class="table-resize-move" style="cursor:col-resize;width:8px;position:absolute;right:0px;top:0px;bottom:0px;z-index:1;"></span>');
     }
 });
 //初始化列宽（不能在悬浮其上的时候初始化列宽）
@@ -35,14 +35,12 @@ $(document).on('mousedown', '.table-resize', function () {
     var table = headTr.closest('table');
     if (!table.is('[table-resize-init]')) {
         table.attr('table-resize-init', '');
-        //设置第一行列宽
-        headTr.children().each(function () {
+        //设置第一行列宽，最后一列不设置宽度
+        headTr.children().not(':last-child').each(function () {
             var obj = $(this);
             var child = obj.children('.table-resize-item');
             obj.css('width', obj.css('width'));
             child.css('width', child.css('width'))
         })
-        //最后一列不设宽度
-        table.find('tr').find('th:last,td:last').css('width', '');
     }
 })
