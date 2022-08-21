@@ -1,4 +1,5 @@
-﻿/*
+﻿/* eslint-disable *///此处不是注释，react当中不校验代码，不加此句react当中会报错
+/*
  鼠标移动div
     .box-move 是要移动的框
     .box-move-switch 鼠标按下的块

@@ -1,4 +1,5 @@
-﻿/*
+﻿/* eslint-disable *///此处不是注释，react当中不校验代码，不加此句react当中会报错
+/*
  树结构搜索插件
  .tree-search 搜索输入框
  .tree 树的项

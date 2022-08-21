@@ -1,4 +1,5 @@
-﻿/*
+﻿/* eslint-disable *///此处不是注释，react当中不校验代码，不加此句react当中会报错
+/*
     树结构显示隐藏
         .tree 每一个项（项的类样式）
         .tree-switch 触发显示隐藏的按钮
