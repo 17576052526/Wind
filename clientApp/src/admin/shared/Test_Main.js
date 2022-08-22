@@ -61,7 +61,7 @@ export default function () {
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th className="table-resize"><div className="table-resize-item"><input type="checkbox" onChange={(e) => setChecks(state.data, e.target.checked ? '+' : '-')} /></div></th>
+                                    <th className="table-resize"><div className="table-resize-item"><input type="checkbox" onChange={(e) => setChecks(state.data, e.target.checked ? '+' : '-')} checked={state.data && state.data.every(s => checks.some(c => s == c))} /></div></th>
                                     <th className="table-resize"><div className="table-resize-item">序号</div></th>
                                     <th className="table-resize"><div className="table-resize-item">编号</div></th>
                                     <th className="table-resize"><div className="table-resize-item">名称</div></th>
