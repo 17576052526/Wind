@@ -8,7 +8,7 @@ namespace UI.Controllers.Api
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class TestController : ControllerBase
+    public class Test_MainController : ControllerBase
     {
         [HttpPost]
         public Result Insert(Test_Main param)
