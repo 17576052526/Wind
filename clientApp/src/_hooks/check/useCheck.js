@@ -34,13 +34,13 @@ export default function () {
         setChecks([...checks]);
     }
 
-    //同步，data：匹配的数据源,  isDel：未匹配到的是否删除，match：匹配的方法，不传就是JSON字符串比较
-    function sync(data, isDel = true, match = (s, m) => JSON.stringify(s) == JSON.stringify(m)) {
+    //同步，data：匹配的数据源,  isKeep：是否保留未匹配到的，match：匹配的方法，不传就是JSON字符串比较
+    function sync(data, isKeep, match = (s, m) => JSON.stringify(s) == JSON.stringify(m)) {
         for (let i = checks.length - 1; i >= 0; i--) {
             let model = data.find(s => match(checks[i], s));
             if (model) {
                 checks[i] = model;
-            } else if (isDel) {
+            } else if (!isKeep) {
                 checks.splice(i, 1);
             }
         }

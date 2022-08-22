@@ -8,7 +8,7 @@
  setChecks(object)选中项中存在则删除，不存在则添加
  setChecks(object,'+')添加选中项
  setChecks(object,'-')删除选中项
- sync(data,(s,m)=>s.ID==m.ID)同步选中项，参数一：匹配的数据源,  参数二：未匹配到的是否删除，参数三：匹配的方法，不传就是JSON字符串比较
+ sync(data,(s,m)=>s.ID==m.ID)同步选中项，参数一：匹配的数据源,  参数二：是否保留未匹配到的，参数三：匹配的方法，不传就是JSON字符串比较
  */
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import axios from 'axios'
@@ -27,7 +27,7 @@ export default function () {
         ];
         setData(msg);
         //同步 checks数据
-        sync(msg, true, (s, m) => s.ID == m.ID);
+        sync(msg, false, (s, m) => s.ID == m.ID);
     }, [])
 
     return (

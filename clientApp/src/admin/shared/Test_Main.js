@@ -21,7 +21,7 @@ export default function () {
 
     let MainName = useRef();
 
-    async function load(isMatchDel = true) {
+    async function load(isMatchDel) {
         let param = {
             pageIndex: pageIndex,
             pageSize: pageSize,
@@ -37,7 +37,7 @@ export default function () {
         }
     }
 
-    useEffect(() => load(false), [pageIndex]);
+    useEffect(() => load(true), [pageIndex]);
 
 
 
