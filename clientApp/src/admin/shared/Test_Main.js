@@ -21,7 +21,7 @@ export default function () {
 
     let MainName = useRef();
 
-    async function load(isMatchDel) {
+    async function load(isMatchDel = true) {
         let param = {
             pageIndex: pageIndex,
             pageSize: pageSize,
@@ -31,7 +31,7 @@ export default function () {
         }
         let msg = await axios.post("/api/test_main/select", param);
         if (msg.code == 1) {
-            sync(msg.data.list, isMatchDel == null ? true : isMatchDel);
+            sync(msg.data.list, isMatchDel);
             setDataCount(msg.data.total);
             setState({ data: msg.data.list });
         }
