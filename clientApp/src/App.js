@@ -17,11 +17,11 @@ axios.interceptors.request.use(config => {
 //对返回结果做统一处理
 axios.interceptors.response.use(response => {
     let data = response.data;
-    if (data.code == -1) { alert(data.msg) }//普通错误（不做特殊处理的，直接弹框提示）
-    else if (data.code == 403) { alert(data.msg); }//访问未认证的接口处理
+    if (data.code == -1) { $.alert ? $.alert(data.msg) : alert(data.msg) }//普通错误（不做特殊处理的，直接弹框提示）
+    else if (data.code == 403) { $.alert ? $.alert(data.msg) : alert(data.msg); }//访问未认证的接口处理
     return data;
 }, (error) => {
-    alert(error);
+    $.alert ? $.alert(error) : alert(error);
     return Promise.reject(error);
 });
 /****************************************************************************************************************/
