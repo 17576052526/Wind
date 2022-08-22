@@ -1,7 +1,10 @@
 /*
  说明： 选中项组件
  checks 选中项列表（数组）
- setChecks(Array)设置选中的项有哪些，setChecks([])清空选中项
+ setChecks([])清空所有选中项
+ setChecks(Array)选中项替换为当前传入的Array
+ setChecks(Array,'+')选中项后面追加Array
+  setChecks(Array,'-')选中项里面删除Array包含的项
  setChecks(object)选中项中存在则删除，不存在则添加
  setChecks(object,'+')添加选中项
  setChecks(object,'-')删除选中项

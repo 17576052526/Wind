@@ -4,23 +4,32 @@ export default function () {
     let [checks, setChecks] = useState([]);
 
     function set(param, type) {
-        if (Array.isArray(param)) {
-            checks = param;
-        } else {
-            let index = checks.indexOf(param);
+        function addOrDel(model) {
+            let index = checks.indexOf(model);
             if (type == null) {
                 if (index == -1) {
-                    checks.push(param);
+                    checks.push(model);
                 } else {
                     checks.splice(index, 1);
                 }
             } else {
                 if (type == '+') {
-                    index == -1 && checks.push(param);
+                    index == -1 && checks.push(model);
                 } else if (type == '-') {
                     index != -1 && checks.splice(index, 1);
                 }
             }
+        }
+        if (Array.isArray(param)) {
+            if (type) {
+                for (let i = param.length - 1; i >= 0; i--) {
+                    addOrDel(param[i]);
+                }
+            } else {
+                checks = param;
+            }
+        } else {
+            addOrDel(param)
         }
         setChecks([...checks]);
     }
