@@ -1,2 +1,2 @@
 ﻿.table-resize-item{overflow:hidden;}
-tbody .table-resize-item{white-space:nowrap; text-overflow: ellipsis;}/*溢出部分...*/
+td .table-resize-item{white-space:nowrap; text-overflow: ellipsis;}/*溢出部分...*/
