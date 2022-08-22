@@ -27,7 +27,7 @@ export default function () {
 
     //同步，data：匹配的数据源,  isDel：未匹配到的是否删除，match：匹配的方法，不传就是JSON字符串比较
     function sync(data, isDel, match) {
-        for (let i = 0; i < checks.length; i++) {
+        for (let i = checks.length - 1; i >= 0; i--) {
             let model = data.find(s => match ? match(checks[i], s) : JSON.stringify(checks[i]) == JSON.stringify(s));
             if (model) {
                 checks[i] = model;
