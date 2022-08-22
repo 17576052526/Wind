@@ -138,7 +138,9 @@ namespace DbOrm
             //分页必须在最后构造
             if (TakeCount > 0)
             {
-                DB.AddParameter(Command, new { _start = SkipCount + 1, _end = SkipCount + TakeCount });//添加分页参数
+                //添加分页参数
+                DB.AddParameter(Command, "@_start", SkipCount + 1);
+                DB.AddParameter(Command, "@_end", SkipCount + TakeCount);
                 return $@"
 with _tab as(
 {str}
