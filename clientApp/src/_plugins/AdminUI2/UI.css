@@ -94,7 +94,7 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .tab-item:first-child{border-left:none;}*/
 /*分页按钮*/
 .pager{display:flex;}
-.pager>a{padding:0.6rem 1.2rem;border:1px solid #ddd;border-left-width:0px;text-decoration:none;color:#666;background-color:#fafafa;}
+.pager>a{padding:0.6rem 1.2rem;border:1px solid #ddd;border-left-width:0px;text-decoration:none;color:#666;background-color:#fafafa;cursor:pointer;user-select:none;}
 .pager>a:hover{background-color:#eee;}
 .pager>a:first-child{border-left-width:1px;border-top-left-radius:3px;border-bottom-left-radius:3px;}
 .pager>a:last-child{border-top-right-radius:3px;border-bottom-right-radius:3px;}
