@@ -108,7 +108,8 @@ namespace UI.Controllers.Api
                 int total = sql.QueryScalar<int>();
                 //获取列表数据
                 List<Test_Main> list = null;
-                sql = sql.Select("*");
+                sql = sql.Select("Test_Main.*,Test_Type.TypeName");
+                sql.LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID");
                 if (obj.orderBy != null)
                 {
                     sql = sql.OrderBy(obj.orderBy.ToString());
