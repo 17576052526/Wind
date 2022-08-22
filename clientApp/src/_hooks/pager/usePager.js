@@ -17,7 +17,9 @@ export default function (_size) {
         if (pageSize.current == null) { alert('分页控件 setDataCount调用前，请先设置 pageSize'); return; }
         let count = dataCount % pageSize.current == 0 ? dataCount / pageSize.current : parseInt(dataCount / pageSize.current) + 1;//总的页码数量
         setPageCount(count);//重新渲染
-        setPageIndex(count == 0 ? 1 : pageIndex > count ? count : pageIndex);//当前页码重新计算
+        //当前页码重新计算，不要这样写setPageIndex(count == 0 ? 1 : pageIndex > count ? count : pageIndex);
+        if (count == 0) { setPageIndex(1) }
+        else if (pageIndex > count) { setPageIndex(count) }
     }
 
 
