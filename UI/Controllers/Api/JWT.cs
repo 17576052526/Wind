@@ -218,7 +218,7 @@ namespace UI.Controllers.Api
             catch
             {
                 result.Code = 403;
-                result.Message = "ToKen 解析时发生异常";
+                result.Message = "ToKen 认证失败";
             }
             return result;
         }
