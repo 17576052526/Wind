@@ -10,7 +10,7 @@ axios.defaults.baseURL = common.apiUrl;
 
 //设置token
 axios.interceptors.request.use(config => {
-    config.headers.Authorization = (common.getSessionStorage("loginMsg") || {}).token;
+    config.headers.Authorization = common.userData && common.userData.token;
     return config
 });
 

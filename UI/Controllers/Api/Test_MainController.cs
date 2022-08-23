@@ -8,6 +8,7 @@ namespace UI.Controllers.Api
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [JWTAuthorize]
     public class Test_MainController : ControllerBase
     {
         [HttpPost]

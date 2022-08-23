@@ -21,6 +21,9 @@ export default {
     //服务器的请求地址，因为用了代理请求，所以是 /api
     apiUrl: process.env.NODE_ENV == 'development' ? '/api' : '',
 
+    //获取用户信息
+    userData: JSON.parse(window.sessionStorage.getItem("_userData")),
+
     //设置 localStorage
     setLocalStorage: (name, value) => {
         if (value instanceof Object) {
