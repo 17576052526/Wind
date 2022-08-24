@@ -19,7 +19,7 @@ namespace UI.Controllers.Api
         }
 
         [HttpPost]
-        public Result Delete(List<string> param)
+        public Result Delete(List<int> param)
         {
             using (DB db = new DB())
             {

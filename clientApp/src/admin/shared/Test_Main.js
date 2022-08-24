@@ -39,7 +39,17 @@ export default function () {
 
     useEffect(() => load(true), [pageIndex]);
 
-
+    //删除
+    function remove() {
+        if (checks.length == 0) { $.alert('请先勾选'); return; }
+        $.confirm('确定删除？', async () => {
+            let param = checks.map(s => s.ID);
+            let msg = await axios.post("/api/test_main/delete", param);
+            if (msg.code == 1) {
+                load();
+            }
+        })
+    }
 
     return (
         <>
@@ -48,7 +58,7 @@ export default function () {
                     <div className="flex-1">流程列表（测试）</div>
                     <div className="-mlr-5">
                         <input type="button" className="btn-primary h-pre mlr-5" value="新建" onClick={() => setState({ isTest_Main_insert: true })} />
-                        <input type="button" className="btn-danger h-pre mlr-5" value="删除" />
+                        <input type="button" className="btn-danger h-pre mlr-5" value="删除" onClick={() => remove()} />
                         <input type="button" className="btn-primary h-pre mlr-5" value="修改" onClick={() => setState({ isTest_Main_update: true })} />
                     </div>
                 </div>
