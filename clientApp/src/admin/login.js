@@ -46,9 +46,9 @@ export default function () {
             }
             //登录成功之后，解析 返回的 token成json，保存在本地
             let tokenArr = msg.data.split('.');
-            common.userData = JSON.parse(window.atob(tokenArr[1]));
-            common.userData.token = msg.data;
-            common.setSessionStorage("_userData", common.userData);
+            let user = JSON.parse(window.atob(tokenArr[1]));
+            user.token = msg.data;
+            common.setUser(user);
             navigate('/admin');
         } else if (msg.code == -2) {
             alert(msg.msg);

@@ -21,8 +21,14 @@ export default {
     //服务器的请求地址，因为用了代理请求，所以是 /api
     apiUrl: process.env.NODE_ENV == 'development' ? '/api' : '',
 
-    //获取用户信息
-    userData: JSON.parse(window.sessionStorage.getItem("_userData")),
+    //用户信息的设置与获取，此处可作为一个示例
+    setUser: function (value) { this._user = value; this.setSessionStorage('common._user', value); },
+    getUser: function () {
+        if (this._user === undefined) {//无论有没有取到值，第二次都不会去取值
+            this._user = this.getSessionStorage('common._user');
+        }
+        return this._user;
+    },
 
     //设置 localStorage
     setLocalStorage: (name, value) => {
