@@ -2,6 +2,7 @@ import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios'
 import $ from 'jquery'
+import common from '../common'
 import './importShare'
 import './css/admin.css'
 
@@ -46,7 +47,7 @@ export default function () {
                             <i className="icon-bell"></i>
                             <span className="head-nav-mark">8</span>
                         </span>
-                        <span className="head-nav-item mlr-10"><i className="icon-user"></i>管理员</span>
+                        <span className="head-nav-item mlr-10"><i className="icon-user"></i>{common.getUser() && common.getUser().UserName}</span>
                         <span className="head-nav-item mlr-10" onClick={() => cancel()}><i className="icon-off"></i>注销</span>
                     </div>
                 </div>
