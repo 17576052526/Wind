@@ -6,6 +6,7 @@ import './importShare'
 import './css/admin.css'
 
 let Test_Main = lazy(() => import('./shared/Test_Main'))
+let Index = lazy(() => import('./index'))
 
 export default function () {
     let navigate = useNavigate();
@@ -62,7 +63,7 @@ export default function () {
                         <li className="tree-active">
                             <div className="nav-switch icon-folder_open">一级菜单</div>
                             <ol>
-                                <li><a className="nav-btn icon-circle_blank" href="#">首页</a></li>
+                                <li><a className={"nav-btn icon-circle_blank cursor-pointer " + (location.pathname == '/admin' && 'nav-btn-active')} onClick={() => navigate("")}>首页</a></li>
                                 <li><a className={"nav-btn icon-circle_blank cursor-pointer " + (location.pathname == '/admin/test_main' && 'nav-btn-active')} onClick={() => navigate("test_main")}>测试页</a></li>
                                 <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
                             </ol>
@@ -87,6 +88,7 @@ export default function () {
                 <div className="flex-1 p-7.5">
                     <Suspense fallback="">
                         <Routes>
+                            <Route path="" exact element={<Index />}></Route>{/*设置主页*/}
                             <Route path="Test_Main" element={<Test_Main />}></Route>
                         </Routes>
                     </Suspense>
