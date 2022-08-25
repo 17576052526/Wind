@@ -153,7 +153,7 @@ namespace UI.Controllers.Api
                 iss = "WindAdmin",
                 exp = DateTime.Now.AddMinutes(20),//过期时间
                 iat = DateTime.Now,//发布时间
-                tokenid = model.GetHashCode(),//token的 id
+                tokenid = model.GetHashCode()+ new Random().Next(1, 9999),//token的 id，必须要加随机数
             };
             //payload，model 通过反射合并到同一个json字符串里面
             StringBuilder str = new StringBuilder();

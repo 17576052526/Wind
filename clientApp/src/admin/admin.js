@@ -2,20 +2,27 @@ import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import $ from 'jquery'
-import '../_plugins/globalCss/global.css'
-import '../_plugins/font/css/fontello.css'
+import './importShare'
 import './css/admin.css'
 
 let Test_Main = lazy(() => import('./shared/Test_Main'))
 
 export default function () {
-
+    let navigate = useNavigate();
 
     useEffect(() => {
 
     }, []);
 
-
+    //注销
+    function cancel() {
+        $.confirm('确定注销？', async () => {
+            let msg = await axios.get('/api/common/cancel');
+            if (msg.code == 1) {
+                navigate('/login')
+            }
+        })
+    }
 
     return (
         <div className="flex-column h-100">
@@ -38,7 +45,7 @@ export default function () {
                             <span className="head-nav-mark">8</span>
                         </span>
                         <span className="head-nav-item mlr-10"><i className="icon-user"></i>管理员</span>
-                        <span className="head-nav-item mlr-10"><i className="icon-off"></i>注销</span>
+                        <span className="head-nav-item mlr-10" onClick={() => cancel()}><i className="icon-off"></i>注销</span>
                     </div>
                 </div>
             </div>

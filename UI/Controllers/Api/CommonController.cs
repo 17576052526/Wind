@@ -56,5 +56,12 @@ namespace UI.Controllers.Api
             Base.SetCache("VerifyCode" + HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString(), code, 5, false);//验证码存储起来
             return File(Common.VerifyCode.CreateImage(code), "image/Jpeg");//生成图片并输出到客户端
         }
+
+        //注销
+        public Result Cancel()
+        {
+            JWT.Cancel(Request.Headers["Authorization"]);
+            return Result.OK();
+        }
     }
 }
