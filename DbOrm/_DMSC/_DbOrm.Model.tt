@@ -59,7 +59,7 @@ namespace DbOrm.Model
         internal override string Update()
         {
             StringBuilder str = new StringBuilder();
-<#        foreach(Column c in table.Column){ #>
+<#        foreach(Column c in table.Column.Where(s=>!s.IsIdentity)){ #>
             if (<#=c.Name#> != null) { str.AppendLine(",<#=c.Name#>=@<#=c.Name#>"); }
 <#        }#>
 

@@ -42,7 +42,6 @@ namespace DbOrm.Model
         internal override string Update()
         {
             StringBuilder str = new StringBuilder();
-            if (ID != null) { str.AppendLine(",ID=@ID"); }
             if (UserName != null) { str.AppendLine(",UserName=@UserName"); }
             if (UserPwd != null) { str.AppendLine(",UserPwd=@UserPwd"); }
 
