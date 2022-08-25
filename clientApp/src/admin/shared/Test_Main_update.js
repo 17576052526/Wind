@@ -4,7 +4,7 @@ import $ from 'jquery'
 import { useStates } from '../../common'
 
 
-export default function ({ close }) {
+export default function ({ close, checks }) {
     let [state, setState] = useStates({
 
     })
@@ -12,7 +12,10 @@ export default function ({ close }) {
     let form = useRef();
 
     useEffect(() => {
+        if (checks.length == 0) { $.alert('请先勾选'); close(); return; }
+        if (checks.length > 1) { $.alert('一次只能修改一条'); close(); return; }
 
+        setState({ data: checks[0] });
 
     }, []);
 
@@ -22,7 +25,8 @@ export default function ({ close }) {
         for (var m of $(form.current).serializeArray()) {
             param[m.name] = m.value;
         }
-        let msg = await axios.post("/api/test_main/insert", param);
+        param.ID = state.data.ID;
+        let msg = await axios.post("/api/test_main/update", param);
         if (msg.code == 1) {
             $.alert('操作成功');
             close();
@@ -32,7 +36,7 @@ export default function ({ close }) {
     return (
         <div className="box box-move fixed-center" style={{ width: '800px', height: '500px' }}>
             <div className="box-head box-move-switch flex">
-                <div className="flex-1">新建</div>
+                <div className="flex-1">修改</div>
                 <i className="icon-remove" onClick={() => close()}></i>
             </div>
             <div className="box-body">
@@ -40,27 +44,27 @@ export default function ({ close }) {
                     <div className="form-row">
                         <label className="form-item">
                             <span>编号</span>
-                            <input type="text" className="input-text" name="MainID" />
+                            <input type="text" className="input-text" name="MainID" defaultValue={state.data && state.data.MainID} />
                         </label>
                         <label className="form-item">
                             <span>名称</span>
-                            <input type="text" className="input-text" name="MainName" />
+                            <input type="text" className="input-text" name="MainName" defaultValue={state.data && state.data.MainName} />
                         </label>
                         <label className="form-item">
                             <span>数量</span>
-                            <input type="text" className="input-text" name="Quantity" />
+                            <input type="text" className="input-text" name="Quantity" defaultValue={state.data && state.data.Quantity} />
                         </label>
                         <label className="form-item">
                             <span>价格</span>
-                            <input type="text" className="input-text" name="Amount" />
+                            <input type="text" className="input-text" name="Amount" defaultValue={state.data && state.data.Amount} />
                         </label>
                         <label className="form-item">
                             <span>是否</span>
-                            <input type="checkbox" name="IsShow" value="true" />
+                            <input type="checkbox" name="IsShow" value="true" defaultChecked={state.data && state.data.IsShow} />
                         </label>
                         <label className="form-item">
                             <span>备注</span>
-                            <input type="text" className="input-text" name="Remark" />
+                            <input type="text" className="input-text" name="Remark" defaultValue={state.data && state.data.Remark} />
                         </label>
                     </div>
                 </form>

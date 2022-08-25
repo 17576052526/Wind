@@ -90,7 +90,7 @@ export default function () {
                                     <tr>
                                         <td><div className="table-resize-item"><input type="checkbox" checked={checks.some(s => s == m)} onChange={() => setChecks(m)} /></div></td>
                                         <td><div className="table-resize-item">{pageSize * (pageIndex - 1) + i + 1}</div></td>
-                                        <td><div className="table-resize-item"><a className="cursor-pointer">{m.MainID}</a></div></td>
+                                        <td><div className="table-resize-item"><a className="cursor-pointer" onClick={() => { setState({ isTest_Main_update: true }); setChecks([m]) }}>{m.MainID}</a></div></td>
                                         <td><div className="table-resize-item">{m.MainName}</div></td>
                                         <td><div className="table-resize-item">{m.Type.TypeName}</div></td>
                                         <td><div className="table-resize-item">{m.Quantity}</div></td>
@@ -111,7 +111,7 @@ export default function () {
             {/*新建*/}
             {state.isTest_Main_insert && <Test_Main_insert close={() => { setState({ isTest_Main_insert: null }); load() }}></Test_Main_insert>}
             {/*修改*/}
-            {state.isTest_Main_update && <Test_Main_update close={() => { setState({ isTest_Main_update: null }); load() }}></Test_Main_update>}
+            {state.isTest_Main_update && <Test_Main_update close={() => { setState({ isTest_Main_update: null }); load() }} checks={checks}></Test_Main_update>}
         </>
     );
 }

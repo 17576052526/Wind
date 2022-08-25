@@ -39,9 +39,10 @@ namespace UI.Controllers.Api
         }
 
         [HttpPost]
-        public Result Update(Test_Main param)
+        public Result Update(object param)
         {
-            DB.Update(param, "ID=@ID", new { ID = param.ID });
+            Test_Main obj = JsonConvert.DeserializeObject<Test_Main>(param.ToString());
+            DB.Update(obj, "ID=@ID", new { ID = obj.ID });
             return Result.OK();
         }
         /*
