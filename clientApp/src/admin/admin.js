@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios'
 import $ from 'jquery'
 import './importShare'
@@ -9,6 +9,7 @@ let Test_Main = lazy(() => import('./shared/Test_Main'))
 
 export default function () {
     let navigate = useNavigate();
+    let location = useLocation();
 
     useEffect(() => {
 
@@ -61,9 +62,9 @@ export default function () {
                         <li className="tree-active">
                             <div className="nav-switch icon-folder_open">一级菜单</div>
                             <ol>
+                                <li><a className="nav-btn icon-circle_blank" href="#">首页</a></li>
+                                <li><a className={"nav-btn icon-circle_blank cursor-pointer " + (location.pathname == '/admin/test_main' && 'nav-btn-active')} onClick={() => navigate("test_main")}>测试页</a></li>
                                 <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
-                                <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
-                                <li><a className="nav-btn-active nav-btn icon-circle_blank" href="#">编辑页</a></li>
                             </ol>
                         </li>
                         <li className="tree-active">
@@ -78,7 +79,7 @@ export default function () {
                             <div className="nav-switch icon-folder_open">一级菜单</div>
                         </li>
                         <li>
-                            <div className="nav-btn-active nav-btn icon-folder_open">一级菜单</div>
+                            <div className="nav-btn icon-folder_open">一级菜单</div>
                         </li>
                     </ul>
                 </div>
