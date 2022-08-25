@@ -12,9 +12,10 @@ namespace UI.Controllers.Api
     public class Test_MainController : ControllerBase
     {
         [HttpPost]
-        public Result Insert(Test_Main param)
+        public Result Insert(object param)
         {
-            DB.Insert(param);
+            Test_Main obj = JsonConvert.DeserializeObject<Test_Main>(param.ToString());
+            DB.Insert(obj);
             return Result.OK();
         }
 

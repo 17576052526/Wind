@@ -109,9 +109,9 @@ export default function () {
                 </div>
             </div>
             {/*新建*/}
-            {state.isTest_Main_insert && <Test_Main_insert close={() => setState({ isTest_Main_insert: null })}></Test_Main_insert>}
+            {state.isTest_Main_insert && <Test_Main_insert close={() => { setState({ isTest_Main_insert: null }); load() }}></Test_Main_insert>}
             {/*修改*/}
-            {state.isTest_Main_update && <Test_Main_update close={() => setState({ isTest_Main_update: null })}></Test_Main_update>}
+            {state.isTest_Main_update && <Test_Main_update close={() => { setState({ isTest_Main_update: null }); load() }}></Test_Main_update>}
         </>
     );
 }
