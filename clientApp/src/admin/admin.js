@@ -61,24 +61,29 @@ export default function () {
                         <div className="search-btn"><i className="icon-search"></i></div>
                     </div>
                     <ul className="nav">
-                        <li className="tree-active">
-                            <div className="nav-switch icon-folder_open">一级菜单</div>
-                            <ol>
-                                <li><a className={"nav-btn icon-circle_blank cursor-pointer " + (location.pathname == '/admin' && 'nav-btn-active')} onClick={() => navigate("")}>首页</a></li>
-                                <li><a className={"nav-btn icon-circle_blank cursor-pointer " + (location.pathname == '/admin/test_main' && 'nav-btn-active')} onClick={() => navigate("test_main")}>测试页</a></li>
+                        <li className="tree tree-active">
+                            <div className="nav-switch icon-folder_open tree-switch">系统管理</div>
+                            <ol className="tree-box">
+                                <li><a className={"nav-btn icon-circle_blank " + (location.pathname == '/admin' && 'nav-btn-active')} onClick={() => navigate("")}>首页</a></li>
+                                <li><a className={"nav-btn icon-circle_blank " + (location.pathname == '/admin/test_main' && 'nav-btn-active')} onClick={() => navigate("test_main")}>测试页</a></li>
                                 <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
                             </ol>
                         </li>
-                        <li className="tree-active">
-                            <div className="nav-switch icon-folder_open">一级菜单</div>
-                            <ol>
+                        <li className="tree">
+                            <div className="nav-switch icon-folder_open tree-switch">个人中心</div>
+                            <ol className="tree-box">
                                 <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
                                 <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
                                 <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
                             </ol>
                         </li>
-                        <li>
-                            <div className="nav-switch icon-folder_open">一级菜单</div>
+                        <li className="tree">
+                            <div className="nav-switch icon-folder_open tree-switch">消息中心</div>
+                            <ol className="tree-box">
+                                <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
+                                <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
+                                <li><a className="nav-btn icon-circle_blank" href="#">编辑页</a></li>
+                            </ol>
                         </li>
                         <li>
                             <div className="nav-btn icon-folder_open">一级菜单</div>

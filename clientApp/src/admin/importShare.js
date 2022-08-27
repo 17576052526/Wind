@@ -26,3 +26,6 @@ import '../_plugins/upload/upload.js'
 
 import '../_plugins/verify/verify.css'
 import '../_plugins/verify/verify.js'
+
+import '../_plugins/tree/tree.css'
+import '../_plugins/tree/tree.js'
