@@ -29,3 +29,5 @@ import '../_plugins/verify/verify.js'
 
 import '../_plugins/tree/tree.css'
 import '../_plugins/tree/tree.js'
+
+import '../_plugins/loading/axiosLoading.js'
