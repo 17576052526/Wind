@@ -53,7 +53,7 @@
 }
 .nav {padding-top:5px;font-size:14px;font-weight:500;}
 .nav a{color:inherit;}
-.nav-switch,.nav-btn{margin-top:5px;padding:8px 10px;border-radius:4px;position:relative;display:block;cursor:pointer;}
+.nav-switch,.nav-btn{margin-top:5px;padding:8px 10px;border-radius:4px;position:relative;display:block;cursor:pointer;user-select:none;}
 .nav-switch::before,.nav-btn::before{margin-right:10px;}
 .nav-switch::after{font-size:12px;content:'\f053';font-family: "fontello";position: absolute;right: 12px;top: 50%;margin-top: -6px;}
 .tree-active .nav-switch,.nav-switch:hover,.nav-btn:hover{background-color:#494E53;}
