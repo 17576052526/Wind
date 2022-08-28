@@ -99,7 +99,7 @@ namespace UI
             //    await context.Response.WriteAsync(String.Empty);
             //});
 
-            //app.MapFallbackToFile("index.html");//当是.net core react项目时，设置起始页为 react里面的 index.html
+            app.MapFallbackToFile("index.html");//设置起始页为 wwwroot里面的 index.html
 
             app.Run();
         }
