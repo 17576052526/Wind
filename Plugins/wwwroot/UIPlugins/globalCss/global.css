@@ -220,19 +220,19 @@ a{color: inherit;text-decoration: inherit;}
 /*采用的是pc优先，别的框架都是移动优先*/
 @media(max-width:640px) {
 .sm\:display-none {display: none;}
-.sm\:.block{display:block;}
+.sm\:block{display:block;}
 }
 @media(max-width:768px) {
 .md\:display-none {display: none;}
-.md\:.block{display:block;}
+.md\:block{display:block;}
 }
 @media(max-width:1024px) {
 .lg\:display-none {display: none;}
-.lg\:.block{display:block;}
+.lg\:block{display:block;}
 }
 @media(max-width:1280px) {
 .xl\:display-none {display: none;}
-.xl\:.block{display:block;}
+.xl\:block{display:block;}
 }
 
 /*功能类css*/
