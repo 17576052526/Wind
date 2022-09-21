@@ -221,18 +221,22 @@ a{color: inherit;text-decoration: inherit;}
 @media(max-width:640px) {
 .sm\:display-none {display: none;}
 .sm\:block{display:block;}
+.sm\:flex{display:flex;}
 }
 @media(max-width:768px) {
 .md\:display-none {display: none;}
 .md\:block{display:block;}
+.md\:flex{display:flex;}
 }
 @media(max-width:1024px) {
 .lg\:display-none {display: none;}
 .lg\:block{display:block;}
+.lg\:flex{display:flex;}
 }
 @media(max-width:1280px) {
 .xl\:display-none {display: none;}
 .xl\:block{display:block;}
+.xl\:flex{display:flex;}
 }
 
 /*功能类css*/
