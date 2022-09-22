@@ -217,26 +217,26 @@ a{color: inherit;text-decoration: inherit;}
 .mtb-15{margin-top:1.5rem;margin-bottom:1.5rem;}
 .mtb-20{margin-top:2rem;margin-bottom:2rem;}
 
-/*采用的是pc优先，别的框架都是移动优先*/
+/*采用的是pc优先，别的框架都是移动优先，:(冒号)jquery查找的时候不支持*/
 @media(max-width:640px) {
-.sm\:display-none {display: none;}
-.sm\:block{display:block;}
-.sm\:flex{display:flex;}
+.sm-display-none {display: none;}
+.sm-block{display:block;}
+.sm-flex{display:flex;}
 }
 @media(max-width:768px) {
-.md\:display-none {display: none;}
-.md\:block{display:block;}
-.md\:flex{display:flex;}
+.md-display-none {display: none;}
+.md-block{display:block;}
+.md-flex{display:flex;}
 }
 @media(max-width:1024px) {
-.lg\:display-none {display: none;}
-.lg\:block{display:block;}
-.lg\:flex{display:flex;}
+.lg-display-none {display: none;}
+.lg-block{display:block;}
+.lg-flex{display:flex;}
 }
 @media(max-width:1280px) {
-.xl\:display-none {display: none;}
-.xl\:block{display:block;}
-.xl\:flex{display:flex;}
+.xl-display-none {display: none;}
+.xl-block{display:block;}
+.xl-flex{display:flex;}
 }
 
 /*功能类css*/
