@@ -22,6 +22,7 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
     user-select: none;
     outline:none;
 }
+.btn-default[disabled],.btn-primary[disabled],.btn-success[disabled],.btn-info[disabled],.btn-danger[disabled],.btn-warning[disabled]{opacity:0.65;}
 .btn-lg{padding: 0.7rem 1.2rem;font-size: 1.7rem;}
 .btn-xs{padding: 0.3rem 0.6rem;font-size: 1.2rem;}
 
