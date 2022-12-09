@@ -3,7 +3,7 @@ html,body,form,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,input{margin: 0px;padding: 0px;}
 *,*::before,*::after {box-sizing: border-box;}  /* 高度和宽度包括border-width和padding的值 */
 body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.42857143;color: #333;background-color: #ECF0F5;}
 html,body{height:100%;}
-select[disabled], button[disabled], input[type="button"][disabled], input[type="checkbox"][disabled], input[type="radio"][disabled] {opacity: 0.65;cursor: not-allowed;}
+select[disabled], button[disabled], input[type="button"][disabled], input[type="checkbox"][disabled], input[type="radio"][disabled] {cursor: not-allowed;}
 /*预防高度撑开*/
 .h-pre{margin-top:-12px;margin-bottom:-10px;}
 /* 按钮 */
