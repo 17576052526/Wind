@@ -21,7 +21,7 @@ export default function () {
 
     let MainName = useRef();
 
-    async function load(isMatchDel) {
+    function load(isMatchDel) {
         let param = {
             pageIndex: pageIndex,
             pageSize: pageSize,
@@ -29,12 +29,11 @@ export default function () {
                 MainName: MainName.current.value,
             }
         }
-        let msg = await axios.post("/api/test_main/select", param);
-        if (msg.code == 1) {
+        axios.post("/api/test_main/select", param).then(msg => {
             sync(msg.data.list, isMatchDel);
             setDataCount(msg.data.total);
             setState({ data: msg.data.list });
-        }
+        });
     }
 
     useEffect(() => load(true), [pageIndex]);
@@ -42,12 +41,11 @@ export default function () {
     //删除
     function remove() {
         if (checks.length == 0) { $.alert('请先勾选'); return; }
-        $.confirm('确定删除？', async () => {
+        $.confirm('确定删除？', () => {
             let param = checks.map(s => s.ID);
-            let msg = await axios.post("/api/test_main/delete", param);
-            if (msg.code == 1) {
+            axios.post("/api/test_main/delete", param).then(msg => {
                 load();
-            }
+            });
         })
     }
 

@@ -17,8 +17,15 @@ axios.interceptors.request.use(config => {
 //对返回结果做统一处理
 axios.interceptors.response.use(response => {
     let data = response.data;
-    if (data.code == -1) { $.alert ? $.alert(data.msg) : alert(data.msg) }//普通错误（不做特殊处理的，直接弹框提示）
-    else if (data.code == 403) { $.alert ? $.alert(data.msg) : alert(data.msg); }//访问未认证的接口处理
+    if (data.code == -1) {//普通错误（不做特殊处理的，直接弹框提示）
+        $.alert ? $.alert(data.msg) : alert(data.msg)
+        return Promise.reject(response);//标识为失败状态，并且不会进入到axios的回调函数里面
+    }
+    else if (data.code == 403) {//访问未认证的接口处理
+        $.alert ? $.alert(data.msg) : alert(data.msg);
+        window.location.href = '#/login';
+        return Promise.reject(response);
+    }
     return data;
 }, (error) => {
     $.alert ? $.alert(error) : alert(error);

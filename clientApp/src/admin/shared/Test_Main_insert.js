@@ -17,16 +17,15 @@ export default function ({ close }) {
     }, []);
 
     //提交
-    async function submit() {
+    function submit() {
         var param = {};
         for (var m of $(form.current).serializeArray()) {
             param[m.name] = m.value;
         }
-        let msg = await axios.post("/api/test_main/insert", param);
-        if (msg.code == 1) {
+        axios.post("/api/test_main/insert", param).then(msg => {
             $.alert('操作成功');
             close();
-        }
+        });
     }
 
     return (

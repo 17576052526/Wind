@@ -19,11 +19,10 @@ export default function () {
 
     //注销
     function cancel() {
-        $.confirm('确定注销？', async () => {
-            let msg = await axios.get('/api/common/cancel');
-            if (msg.code == 1) {
+        $.confirm('确定注销？', () => {
+            axios.get('/api/common/cancel').then(msg => {
                 navigate('/login')
-            }
+            });
         })
     }
 

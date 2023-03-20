@@ -26,7 +26,7 @@ export default function () {
     }, [])
 
     //登录
-    async function login() {
+    function login() {
         if (userName.current.value.length == 0) { alert('请输入登录名'); return; }
         else if (verifyCode.current && verifyCode.current.value.length == 0) { alert('请输入验证码'); return; }
         let obj = {
@@ -34,27 +34,28 @@ export default function () {
             userPwd: userPwd.current.value,
             verifyCode: verifyCode.current ? verifyCode.current.value : '',
         }
-        let msg = await axios.post("/api/common/login", obj);
-        if (msg.code == 1) {
-            //记住密码
-            if (remember.current && remember.current.checked) {
-                common.setLocalStorage("rememberUserName", userName.current.value);
-                common.setLocalStorage("rememberUserPwd", userPwd.current.value);
-            } else {
-                common.setLocalStorage("rememberUserName", '');
-                common.setLocalStorage("rememberUserPwd", '');
+        axios.post("/api/common/login", obj).then(msg => {
+            if (msg.code == 1) {
+                //记住密码
+                if (remember.current && remember.current.checked) {
+                    common.setLocalStorage("rememberUserName", userName.current.value);
+                    common.setLocalStorage("rememberUserPwd", userPwd.current.value);
+                } else {
+                    common.setLocalStorage("rememberUserName", '');
+                    common.setLocalStorage("rememberUserPwd", '');
+                }
+                //登录成功之后，解析 返回的 token成json，保存在本地
+                let tokenArr = msg.data.split('.');
+                let user = JSON.parse(window.atob(tokenArr[1]));
+                user.token = msg.data;
+                common.setUser(user);
+                navigate('/admin');
+            } else if (msg.code == -2) {
+                alert(msg.msg);
+                verifyImg.current && verifyImg.current.click();//刷新验证码
+                setIsVerifyCode(true);
             }
-            //登录成功之后，解析 返回的 token成json，保存在本地
-            let tokenArr = msg.data.split('.');
-            let user = JSON.parse(window.atob(tokenArr[1]));
-            user.token = msg.data;
-            common.setUser(user);
-            navigate('/admin');
-        } else if (msg.code == -2) {
-            alert(msg.msg);
-            verifyImg.current && verifyImg.current.click();//刷新验证码
-            setIsVerifyCode(true);
-        }
+        });
     }
 
 
