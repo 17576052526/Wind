@@ -18,8 +18,8 @@ export function useStates(obj) {
 }
 
 export default {
-    //服务器的请求地址（会有多处调用），因为用了代理请求，所以是 /api
-    apiUrl: process.env.NODE_ENV == 'development' ? '/api' : '',
+    //设置服务器请求地址，值是 src/setupProxy.js 配置的代理服务
+    apiUrl: process.env.NODE_ENV == 'development' ? '/server' : '',
 
     //用户信息的设置与获取，此处可作为一个示例
     setUser: function (value) { this._user = value; this.setSessionStorage('common._user', value); },

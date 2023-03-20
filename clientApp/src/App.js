@@ -5,7 +5,7 @@ import $ from 'jquery'
 import common from './common'
 
 /****************************全局设置，不要写在方法里面，因为重新渲染的时候会再次执行****************************/
-//设置服务器请求地址，/api 是 src/setupProxy.js 配置的代理服务
+//设置服务器请求地址，common.apiUrl值 是 src/setupProxy.js 配置的代理服务
 axios.defaults.baseURL = common.apiUrl;
 
 //设置token
