@@ -1,2 +1,0 @@
-D:\GitRepositories\Wind\clientapp\obj\Debug\clientapp.esproj.SuggestedBindingRedirects.cache
-D:\GitRepositories\Wind\clientapp\obj\Debug\clientapp.esproj.CoreCompileInputs.cache
