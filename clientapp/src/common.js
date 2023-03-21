@@ -24,13 +24,16 @@ export default {
     //设置服务器请求地址，值是 src/setupProxy.js 配置的代理服务
     apiUrl: process.env.NODE_ENV == 'development' ? '/server' : '',
 
-    //用户信息的设置与获取，此处可作为一个示例
-    setUser: function (value) { this._user = value; this.setSessionStorage('common._user', value); },
-    getUser: function () {
-        if (this._user === undefined) {//无论有没有取到值，第二次都不会去取值
-            this._user = this.getSessionStorage('common._user');
+    //全局变量，name 变量名，value 值，存入SessionStorage能防止刷新页面之后值就不存在的问题
+    set: function (name, value) {
+        this['__' + name] = value;
+        this.setSessionStorage('common.__' + name, value);
+    },
+    get: function (name) {
+        if (this['__' + name] === undefined) {//无论有没有取到值，第二次都不会去取值
+            this['__' + name] = this.getSessionStorage('common.__' + name);
         }
-        return this._user;
+        return this['__' + name];
     },
 
     //设置 localStorage

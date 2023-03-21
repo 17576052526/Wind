@@ -46,7 +46,7 @@ export default function () {
                             <i className="icon-bell"></i>
                             <span className="head-nav-mark">8</span>
                         </span>
-                        <span className="head-nav-item mlr-10"><i className="icon-user"></i>{common.getUser() && common.getUser().UserName}</span>
+                        <span className="head-nav-item mlr-10"><i className="icon-user"></i>{common.get('user') && common.get('user').UserName}</span>
                         <span className="head-nav-item mlr-10" onClick={() => cancel()}><i className="icon-off"></i>注销</span>
                     </div>
                 </div>

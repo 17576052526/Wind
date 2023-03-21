@@ -10,7 +10,7 @@ axios.defaults.baseURL = common.apiUrl;
 
 //设置token
 axios.interceptors.request.use(config => {
-    config.headers.Authorization = common.getUser() && common.getUser().token;
+    config.headers.Authorization = common.get('user') && common.get('user').token;
     return config
 });
 

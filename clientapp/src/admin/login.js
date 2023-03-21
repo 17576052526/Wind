@@ -48,7 +48,7 @@ export default function () {
                 let tokenArr = msg.data.split('.');
                 let user = JSON.parse(window.atob(tokenArr[1]));
                 user.token = msg.data;
-                common.setUser(user);
+                common.set('user', user);
                 navigate('/admin');
             } else if (msg.code == -2) {
                 alert(msg.msg);
