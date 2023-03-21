@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, createContext } from 'react';
 
 /*
  说明：状态钩子，用于代替 useState()
@@ -16,6 +16,9 @@ export function useStates(obj) {
     if (obj && obj.constructor != Object) { throw new window.Error('useStates 的初始值只能是对象') }
     return useReducer((oldState, newState) => ({ ...oldState, ...newState }), obj || {});
 }
+
+//useContext父子组件传值，可以跨组件传值
+export const context = createContext(null);
 
 export default {
     //设置服务器请求地址，值是 src/setupProxy.js 配置的代理服务
