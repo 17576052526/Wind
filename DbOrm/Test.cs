@@ -6,7 +6,7 @@ namespace DbOrm.Model
     /// <summary>
     /// 测试表
     /// </summary>
-    public class Test : IDAL
+    public class Test : IModel
     {
         /// <summary>
         /// 内码
@@ -55,7 +55,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 新增
         /// </summary>
-        internal override string Insert()
+        internal override string InsertSql()
         {
             return "insert into Test(TypesID,Title,Dates,Img,Num,Price,Che,Desc,Files) values(@TypesID,@Title,@Dates,@Img,@Num,@Price,@Che,@Desc,@Files)";
         }
@@ -63,7 +63,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 修改
         /// </summary>
-        internal override string Update()
+        internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
             if (ID != null) { str.AppendLine(",ID=@ID"); }
