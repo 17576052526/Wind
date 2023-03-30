@@ -37,7 +37,7 @@ namespace DbOrm.Model
     /// <summary>
     /// <#=table.Description#>
     /// </summary>
-    public partial class <#=table.Name#> : IDAL
+    public partial class <#=table.Name#> : IModel
     {
 <#        foreach(Column column in table.Column){ #>
         /// <summary>
@@ -48,7 +48,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 新增
         /// </summary>
-        internal override string Insert()
+        internal override string InsertSql()
         {
             return "insert into <#=table.Name#>(<#bool b=true;foreach(Column c in table.Column.Where(s=>!s.IsIdentity)){if(b){Write(c.Name);b=false;}else{Write(','+c.Name);}} #>) values(<#b=true;foreach(Column c in table.Column.Where(s=>!s.IsIdentity)){if(b){Write('@'+c.Name);b=false;}else{Write(",@"+c.Name);}} #>)";
         }
@@ -56,7 +56,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 修改
         /// </summary>
-        internal override string Update()
+        internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
 <#        foreach(Column c in table.Column.Where(s=>!s.IsIdentity)){ #>

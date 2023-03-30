@@ -14,7 +14,7 @@ namespace DbOrm.Model
     /// <summary>
     /// 管理员（后台登录）
     /// </summary>
-    public partial class Sys_Admin : IDAL
+    public partial class Sys_Admin : IModel
     {
         /// <summary>
         /// 
@@ -31,7 +31,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 新增
         /// </summary>
-        internal override string Insert()
+        internal override string InsertSql()
         {
             return "insert into Sys_Admin(UserName,UserPwd) values(@UserName,@UserPwd)";
         }
@@ -39,7 +39,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 修改
         /// </summary>
-        internal override string Update()
+        internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
             if (UserName != null) { str.AppendLine(",UserName=@UserName"); }

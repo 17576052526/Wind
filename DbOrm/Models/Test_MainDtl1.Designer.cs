@@ -14,7 +14,7 @@ namespace DbOrm.Model
     /// <summary>
     /// Test_Main的明细表
     /// </summary>
-    public partial class Test_MainDtl1 : IDAL
+    public partial class Test_MainDtl1 : IModel
     {
         /// <summary>
         /// 主键
@@ -35,7 +35,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 新增
         /// </summary>
-        internal override string Insert()
+        internal override string InsertSql()
         {
             return "insert into Test_MainDtl1(Test_Main_ID,MainDtl1Name,Remark) values(@Test_Main_ID,@MainDtl1Name,@Remark)";
         }
@@ -43,7 +43,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 修改
         /// </summary>
-        internal override string Update()
+        internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
             if (Test_Main_ID != null) { str.AppendLine(",Test_Main_ID=@Test_Main_ID"); }

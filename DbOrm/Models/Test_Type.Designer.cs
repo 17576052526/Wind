@@ -14,7 +14,7 @@ namespace DbOrm.Model
     /// <summary>
     /// Test模块类型表，与基础数据不同的是他只给Test模块用，也是为了后期的模块移植
     /// </summary>
-    public partial class Test_Type : IDAL
+    public partial class Test_Type : IModel
     {
         /// <summary>
         /// 主键
@@ -29,26 +29,21 @@ namespace DbOrm.Model
         /// </summary>
         public string TypeName { set; get; }
         /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? CreateTime { set; get; }
-        /// <summary>
         /// 新增
         /// </summary>
-        internal override string Insert()
+        internal override string InsertSql()
         {
-            return "insert into Test_Type(TypeID,TypeName,CreateTime) values(@TypeID,@TypeName,@CreateTime)";
+            return "insert into Test_Type(TypeID,TypeName) values(@TypeID,@TypeName)";
         }
 
         /// <summary>
         /// 修改
         /// </summary>
-        internal override string Update()
+        internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
             if (TypeID != null) { str.AppendLine(",TypeID=@TypeID"); }
             if (TypeName != null) { str.AppendLine(",TypeName=@TypeName"); }
-            if (CreateTime != null) { str.AppendLine(",CreateTime=@CreateTime"); }
 
             return "update Test_Type set " + str.Remove(0, 1);
         }

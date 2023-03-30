@@ -14,7 +14,7 @@ namespace DbOrm.Model
     /// <summary>
     /// 测试模块主表
     /// </summary>
-    public partial class Test_Main : IDAL
+    public partial class Test_Main : IModel
     {
         /// <summary>
         /// 主键
@@ -63,7 +63,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 新增
         /// </summary>
-        internal override string Insert()
+        internal override string InsertSql()
         {
             return "insert into Test_Main(MainID,MainName,Test_Type_ID,Quantity,Amount,IsShow,Img,Files,Remark,CreateTime) values(@MainID,@MainName,@Test_Type_ID,@Quantity,@Amount,@IsShow,@Img,@Files,@Remark,@CreateTime)";
         }
@@ -71,7 +71,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 修改
         /// </summary>
-        internal override string Update()
+        internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
             if (MainID != null) { str.AppendLine(",MainID=@MainID"); }
