@@ -61,34 +61,24 @@ namespace DbOrm
         /// <summary>
         /// 添加Sql参数
         /// </summary>
-        /// <param name="param">实体类或 实体类集合</param>
+        /// <param name="param">实体类、匿名类、Dictionary<string, object> 类型</param>
         public static void AddParameter(this IDbCommand cmd, object param)
         {
-            var list = param as IEnumerable<object>;
-            if (list == null)
+            var list = param as Dictionary<string, object>;
+            if (list != null)
             {
-                //实体类
-                foreach (var p in param.GetType().GetProperties())
+                //Dictionary<string, object> 类型
+                foreach (var m in list)
                 {
-                    cmd.AddParameter('@' + p.Name, p.GetValue(param));
+                    cmd.AddParameter(m.Key, m.Value);
                 }
             }
             else
             {
-                var cmdParam = cmd.Parameters;
-                //实体类数组
-                foreach (var m in list)
+                //实体类、匿名类类型
+                foreach (var p in param.GetType().GetProperties())
                 {
-                    foreach (var p in m.GetType().GetProperties())
-                    {
-                        string name = '@' + p.Name;
-                        //实体类数组可能会有重复的参数，存在重复的则以后面的为准
-                        if (cmdParam.Contains(name))
-                        {
-                            cmdParam.RemoveAt(name);
-                        }
-                        cmd.AddParameter(name, p.GetValue(m));
-                    }
+                    cmd.AddParameter('@' + p.Name, p.GetValue(param));
                 }
             }
         }

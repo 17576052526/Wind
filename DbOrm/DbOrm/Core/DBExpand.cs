@@ -44,7 +44,16 @@ namespace DbOrm
         }
         public int Update(IModel model, string where, object param = null)
         {
-            return this.ExecuteNonQuery(model.UpdateSql() + " where " + where, new object[] { model, param });
+            Dictionary<string, object> paramList = new Dictionary<string, object>();
+            foreach (var p in model.GetType().GetProperties())
+            {
+                paramList.Add('@' + p.Name, p.GetValue(model));
+            }
+            foreach (var p in param.GetType().GetProperties())
+            {
+                paramList.Add('@' + p.Name, p.GetValue(param));
+            }
+            return this.ExecuteNonQuery(model.UpdateSql() + " where " + where, paramList);
         }
         public int Delete<T>(string where, object param = null) where T : IModel
         {

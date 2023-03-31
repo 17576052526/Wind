@@ -24,7 +24,7 @@ namespace DbOrm
         private string _OrderBy;
         private int SkipCount;//跳过多少条（分页用到）   ，此处不用 startIndex 起始索引，因为不同数据库的起始索引是不一样的
         private int TakeCount;//返回之后的多少条（分页用到）
-        private List<object> Params = new List<object>();//sql参数
+        private Dictionary<string, object> Params = new Dictionary<string, object>();//sql参数
         private List<Type> Types;
         public SqlBuilder(IDbConnection conn, IDbTransaction transaction = null)
         {
@@ -44,7 +44,10 @@ namespace DbOrm
         }
         public SqlBuilder<T> Where(string where, object param = null)
         {
-            this.Params.Add(param);
+            foreach (var p in param.GetType().GetProperties())
+            {
+                this.Params.Add('@' + p.Name, p.GetValue(param));
+            }
             this._Where = where;
             return this;
         }
@@ -110,11 +113,8 @@ select * from _tab where _RowNum between @_start and @_end
         {
             this.SkipCount = skipCount;
             this.TakeCount = takeCount;
-            Params.Add(new
-            {
-                _start = SkipCount + 1,
-                _end = SkipCount + TakeCount
-            });
+            Params.Add("@_start", SkipCount + 1);
+            Params.Add("@_end", SkipCount + TakeCount);
             return Connection.Query<T>(this.ToString(), Params, Types.ToArray(), Transaction);
         }
         /// <summary>
@@ -123,11 +123,8 @@ select * from _tab where _RowNum between @_start and @_end
         public T QueryFirstRow()
         {
             this.TakeCount = 1;
-            Params.Add(new
-            {
-                _start = SkipCount + 1,
-                _end = SkipCount + TakeCount
-            });
+            Params.Add("@_start", SkipCount + 1);
+            Params.Add("@_end", SkipCount + TakeCount);
             List<T> list = Connection.Query<T>(this.ToString(), Params, Types.ToArray(), Transaction);
             return list.Count > 0 ? list[0] : default(T);
         }
