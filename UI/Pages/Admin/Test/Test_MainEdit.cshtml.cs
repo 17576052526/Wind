@@ -17,16 +17,16 @@ namespace Wind.UI.Pages.Admin.Test
         {
             if (id != null)
             {
-                Model = DB.Select<Test_Main>().Where("ID=@ID").QueryFirstRow(new { ID = id });
+                Model = DB.Selects<Test_Main>().Where("ID=@ID", new { ID = id }).QueryFirstRow();
             }
         }
 
         //新增或修改
-        public IActionResult OnPost(Test_Main model,string id)
+        public IActionResult OnPost(Test_Main model, string id)
         {
             if (id == null)
             {
-                DB.Insert(model);
+                DB.Inserts(model);
             }
             else
             {
@@ -42,7 +42,7 @@ namespace Wind.UI.Pages.Admin.Test
                 if (model.Remark == null) { model.Remark = ""; }
                 if (model.CreateTime == null) { model.CreateTime = Convert.ToDateTime("1/1/1753 12:00:00"); }
 
-                DB.Update(model, "ID=@ID", new { ID = id });
+                DB.Updates(model, "ID=@ID", new { ID = id });
             }
             return Redirect(Request.Query["url"]);
         }

@@ -75,7 +75,7 @@ namespace Wind.UI.Controllers
                 }
             }
             //判断用户名密码
-            List<dynamic> list = DB.Query("select * from Sys_Admin where UserName=@UserName and UserPwd=@UserPwd", new { UserName = userName, UserPwd = Base.Encry(userPwd) });
+            List<dynamic> list = DB.Querys("select * from Sys_Admin where UserName=@UserName and UserPwd=@UserPwd", new { UserName = userName, UserPwd = Base.Encry(userPwd) });
             if (list.Count > 0)
             {
                 dynamic model = list[0];

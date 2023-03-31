@@ -58,7 +58,7 @@ namespace UI.Controllers.Api
                 }
             }
             //验证用户名密码
-            List<Sys_Admin> list = DB.Query<Sys_Admin>("select * from Sys_Admin where UserName=@UserName and UserPwd=@UserPwd", new { UserName = userName, UserPwd = userPwd == null ? "" : Base.Encry(userPwd) });
+            List<Sys_Admin> list = DB.Querys<Sys_Admin>("select * from Sys_Admin where UserName=@UserName and UserPwd=@UserPwd", new { UserName = userName, UserPwd = userPwd == null ? "" : Base.Encry(userPwd) });
             if (list.Count > 0)
             {
                 Sys_Admin admin = list[0];

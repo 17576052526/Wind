@@ -36,7 +36,7 @@
                         </label>
                         <label class="form-item">
                             <span>类型</span>
-                            @Html.DropDownListFor(s => s.Model.Test_Type_ID, DB.Select<Test_Type>("ID,TypeName").Query().Select<Test_Type, SelectListItem>(s => new SelectListItem(s.TypeName, s.ID.ToString(), s.ID.ToString() == Request.Query["Test_Type_ID"])), "请选择", new { @class = "input-text" })
+                            @Html.DropDownListFor(s => s.Model.Test_Type_ID, DB.Selects<Test_Type>("ID,TypeName").Query().Select<Test_Type, SelectListItem>(s => new SelectListItem(s.TypeName, s.ID.ToString(), s.ID.ToString() == Request.Query["Test_Type_ID"])), "请选择", new { @class = "input-text" })
                         </label>
                         <label class="form-item">
                             <span>数量</span>

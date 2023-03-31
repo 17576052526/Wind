@@ -55,17 +55,17 @@ namespace Wind.UI.Pages.Admin.Test
             //È¡Êý
             using (DB db = new DB())
             {
-                var sql = db.Selects<Test_Main>("count(*)")
+                var sql = db.Select<Test_Main>("count(*)")
                     .LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID")
-                    .Where(Where);
-                this.DataCount = sql.QueryScalar<int>(Param);
+                    .Where(Where, Param);
+                this.DataCount = (int)sql.QueryScalar();
 
                 if (Request.Query["orderby"].Count > 0)
                 {
                     sql = sql.OrderBy(Request.Query["orderby"]);
                 }
                 this.List = sql.Select("Test_Main.*,Test_Type.TypeName")
-                    .Query((PageIndex - 1) * PageSize, PageSize, Param);
+                    .Query((PageIndex - 1) * PageSize, PageSize);
             }
         }
 
@@ -79,11 +79,11 @@ namespace Wind.UI.Pages.Admin.Test
                 {
                     foreach (var m in Request.Form["checkID"])
                     {
-                        db.Deletes<Test_Main>("ID=@ID", new { ID = m });
+                        db.Delete<Test_Main>("ID=@ID", new { ID = m });
                     }
-                    db.Commit();
+                    db.CommitTransaction();
                 }
-                catch { db.Rollback();throw; }
+                catch { db.RollbackTransaction();throw; }
             }
             return Redirect(Request.Path.Value.Remove(Request.Path.Value.LastIndexOf('/')) + Request.QueryString);
         }

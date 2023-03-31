@@ -15,7 +15,7 @@ namespace UI.Controllers.Api
         public Result Insert(object param)
         {
             Test_Main obj = JsonConvert.DeserializeObject<Test_Main>(param.ToString());
-            DB.Insert(obj);
+            DB.Inserts(obj);
             return Result.OK();
         }
 
@@ -29,11 +29,11 @@ namespace UI.Controllers.Api
                 {
                     foreach (var m in param)
                     {
-                        db.Deletes<Test_Main>("ID=@ID", new { ID = m });
+                        db.Delete<Test_Main>("ID=@ID", new { ID = m });
                     }
-                    db.Commit();
+                    db.CommitTransaction();
                 }
-                catch { db.Rollback(); throw; }
+                catch { db.RollbackTransaction(); throw; }
             }
             return Result.OK();
         }
@@ -42,7 +42,7 @@ namespace UI.Controllers.Api
         public Result Update(object param)
         {
             Test_Main obj = JsonConvert.DeserializeObject<Test_Main>(param.ToString());
-            DB.Update(obj, "ID=@ID", new { ID = obj.ID });
+            DB.Updates(obj, "ID=@ID", new { ID = obj.ID });
             return Result.OK();
         }
         /*
@@ -70,7 +70,7 @@ namespace UI.Controllers.Api
             dynamic obj = JsonConvert.DeserializeObject<dynamic>(param.ToString());
             using (DB db = new DB())
             {
-                var sql = db.Selects<Test_Main>("count(*)");
+                var sql = db.Select<Test_Main>("count(*)");
                 if (obj.equal != null)
                 {
                     JObject equal = obj.equal;
@@ -108,7 +108,7 @@ namespace UI.Controllers.Api
                     }
                 }
                 //获取总数据量
-                int total = sql.QueryScalar<int>();
+                int total = (int)sql.QueryScalar();
                 //获取列表数据
                 List<Test_Main> list = null;
                 sql = sql.Select("Test_Main.*,Test_Type.TypeName");
