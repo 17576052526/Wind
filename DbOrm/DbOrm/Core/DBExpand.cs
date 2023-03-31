@@ -47,11 +47,11 @@ namespace DbOrm
             Dictionary<string, object> paramList = new Dictionary<string, object>();
             foreach (var p in model.GetType().GetProperties())
             {
-                paramList.Add('@' + p.Name, p.GetValue(model));
+                paramList['@' + p.Name] = p.GetValue(model);
             }
             foreach (var p in param.GetType().GetProperties())
             {
-                paramList.Add('@' + p.Name, p.GetValue(param));
+                paramList['@' + p.Name] = p.GetValue(param);
             }
             return this.ExecuteNonQuery(model.UpdateSql() + " where " + where, paramList);
         }
