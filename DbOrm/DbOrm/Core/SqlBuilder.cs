@@ -26,11 +26,13 @@ namespace DbOrm
         private int TakeCount;//返回之后的多少条（分页用到）
         private Dictionary<string, object> Params = new Dictionary<string, object>();//sql参数
         private List<Type> Types;
-        public SqlBuilder(IDbConnection conn, IDbTransaction transaction = null)
+        private bool IsClose;//调用完后是否关闭数据库连接
+        public SqlBuilder(IDbConnection conn, IDbTransaction transaction = null, bool isClose = false)
         {
             Connection = conn;
             Transaction = transaction;
             Types = new List<Type>() { typeof(T) };
+            IsClose = isClose;
         }
         public void AddParameter(string name, object value)
         {
@@ -99,6 +101,11 @@ select * from _tab where _RowNum between @_start and @_end
         /// </summary>
         public object QueryScalar()
         {
+            if (IsClose)
+            {
+                try { return Connection.ExecuteScalar(this.ToString(), Params, Transaction); }
+                finally { Connection.Close(); }
+            }
             return Connection.ExecuteScalar(this.ToString(), Params, Transaction);
         }
         /// <summary>
@@ -106,6 +113,11 @@ select * from _tab where _RowNum between @_start and @_end
         /// </summary>
         public List<T> Query()
         {
+            if (IsClose)
+            {
+                try { return Connection.Query<T>(this.ToString(), Params, Types.ToArray(), Transaction); }
+                finally { Connection.Close(); }
+            }
             return Connection.Query<T>(this.ToString(), Params, Types.ToArray(), Transaction);
         }
         /// <summary>
@@ -119,7 +131,7 @@ select * from _tab where _RowNum between @_start and @_end
             this.TakeCount = takeCount;
             Params.Add("@_start", SkipCount + 1);
             Params.Add("@_end", SkipCount + TakeCount);
-            return Connection.Query<T>(this.ToString(), Params, Types.ToArray(), Transaction);
+            return Query();
         }
         /// <summary>
         /// 查询第一行
@@ -129,7 +141,7 @@ select * from _tab where _RowNum between @_start and @_end
             this.TakeCount = 1;
             Params.Add("@_start", SkipCount + 1);
             Params.Add("@_end", SkipCount + TakeCount);
-            List<T> list = Connection.Query<T>(this.ToString(), Params, Types.ToArray(), Transaction);
+            List<T> list = Query();
             return list.Count > 0 ? list[0] : default(T);
         }
 

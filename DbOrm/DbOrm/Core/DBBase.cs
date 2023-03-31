@@ -15,8 +15,8 @@ namespace DbOrm
     public abstract class DBBase : IDisposable
     {
         //连接对象
-        protected IDbConnection Connection;
-        protected IDbTransaction Transaction;
+        internal IDbConnection Connection;
+        internal IDbTransaction Transaction;
         //初始化
         public DBBase()
         {

@@ -64,10 +64,9 @@ namespace DbOrm
         }
         public static SqlBuilder<T> Selects<T>(string column = "*") where T : IModel
         {
-            using (var db = NewThis())
-            {
-                return db.Select<T>(column);
-            }
+            //此处不用using，此方法返回的是SqlBuilder，外面要调用数据库查询，所以此方法不能关闭数据库连接
+            DBBase db = NewThis();
+            return new SqlBuilder<T>(db.Connection, null, true).Select(column).From(typeof(T).Name);
         }
         #endregion
 
