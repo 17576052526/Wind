@@ -21,7 +21,6 @@ namespace DbOrm
         public DBBase()
         {
             Connection = CreateConnection();
-            Connection.Open();
         }
         //释放对象
         public void Dispose()
@@ -51,6 +50,7 @@ namespace DbOrm
         /// </summary>
         public void BeginTransaction()
         {
+            Connection.Open();//开启事务，必须先打开数据库连接
             Transaction = Connection.BeginTransaction();
         }
         /// <summary>

@@ -14,7 +14,6 @@ namespace DbOrm
      * 最底层代码，Connection的扩展
      * 1.Connection 实例上扩展方法，扩展的方法跟着 Connection的实例走，这样能实现支持多种不同类型的数据库，和同时支持多数据库（一个项目同时用到A、B两个数据库）
      * 2.查询也可能会有事务
-     * 3.conn.Open() 没写在里面，在外面控制，因为事务是在外面创建的，而创建事务前要先打开数据库连接
      * 4.存储过程用 exec
      */
     public static partial class ConnectionExpand
@@ -27,6 +26,7 @@ namespace DbOrm
         /// <returns></returns>
         public static int ExecuteNonQuery(this IDbConnection conn, string sql, object param = null, IDbTransaction transaction = null)
         {
+            if (conn.State == ConnectionState.Closed) { conn.Open(); } else if (conn.State == ConnectionState.Broken) { conn.Close(); conn.Open(); }
             return conn.CreateCommand(sql, param, transaction).ExecuteNonQuery();
         }
 
@@ -38,6 +38,7 @@ namespace DbOrm
         /// <returns></returns>
         public static object ExecuteScalar(this IDbConnection conn, string sql, object param = null, IDbTransaction transaction = null)
         {
+            if (conn.State == ConnectionState.Closed) { conn.Open(); } else if (conn.State == ConnectionState.Broken) { conn.Close(); conn.Open(); }
             return conn.CreateCommand(sql, param, transaction).ExecuteScalar();
         }
         /// <summary>
@@ -45,6 +46,7 @@ namespace DbOrm
         /// </summary>
         public static IDataReader ExecuteReader(this IDbConnection conn, string sql, object param = null, IDbTransaction transaction = null)
         {
+            if (conn.State == ConnectionState.Closed) { conn.Open(); } else if (conn.State == ConnectionState.Broken) { conn.Close(); conn.Open(); }
             return conn.CreateCommand(sql, param, transaction).ExecuteReader();
         }
         /// <summary>
