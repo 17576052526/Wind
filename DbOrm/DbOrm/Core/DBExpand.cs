@@ -49,9 +49,12 @@ namespace DbOrm
             {
                 paramList['@' + p.Name] = p.GetValue(model);
             }
-            foreach (var p in param.GetType().GetProperties())
+            if (param != null)
             {
-                paramList['@' + p.Name] = p.GetValue(param);
+                foreach (var p in param.GetType().GetProperties())
+                {
+                    paramList['@' + p.Name] = p.GetValue(param);
+                }
             }
             return this.ExecuteNonQuery(model.UpdateSql() + " where " + where, paramList);
         }
