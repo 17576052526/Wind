@@ -32,6 +32,10 @@ namespace DbOrm
             Transaction = transaction;
             Types = new List<Type>() { typeof(T) };
         }
+        public void AddParameter(string name, object value)
+        {
+            this.Params.Add(name, value);
+        }
         public SqlBuilder<T> Select(string column)
         {
             this.Column = column;
