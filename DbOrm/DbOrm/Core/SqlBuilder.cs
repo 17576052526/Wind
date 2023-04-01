@@ -50,9 +50,12 @@ namespace DbOrm
         }
         public SqlBuilder<T> Where(string where, object param = null)
         {
-            foreach (var p in param.GetType().GetProperties())
+            if (param != null)
             {
-                this.Params.Add('@' + p.Name, p.GetValue(param));
+                foreach (var p in param.GetType().GetProperties())
+                {
+                    this.Params.Add('@' + p.Name, p.GetValue(param));
+                }
             }
             this._Where = where;
             return this;
