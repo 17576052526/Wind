@@ -26,7 +26,7 @@ namespace DbOrm
         /// <returns></returns>
         public static int ExecuteNonQuery(this IDbConnection conn, string sql, object param = null, IDbTransaction transaction = null)
         {
-            if (conn.State == ConnectionState.Closed) { conn.Open(); } else if (conn.State == ConnectionState.Broken) { conn.Close(); conn.Open(); }
+            if (conn.State == ConnectionState.Closed) { conn.Open(); }//不判断 ConnectionState.Broken，因为conn.Close(); conn.Open(); 对事务会有影响
             return conn.CreateCommand(sql, param, transaction).ExecuteNonQuery();
         }
 
@@ -38,7 +38,7 @@ namespace DbOrm
         /// <returns></returns>
         public static object ExecuteScalar(this IDbConnection conn, string sql, object param = null, IDbTransaction transaction = null)
         {
-            if (conn.State == ConnectionState.Closed) { conn.Open(); } else if (conn.State == ConnectionState.Broken) { conn.Close(); conn.Open(); }
+            if (conn.State == ConnectionState.Closed) { conn.Open(); }//不判断 ConnectionState.Broken，因为conn.Close(); conn.Open(); 对事务会有影响
             return conn.CreateCommand(sql, param, transaction).ExecuteScalar();
         }
         /// <summary>
@@ -46,7 +46,7 @@ namespace DbOrm
         /// </summary>
         public static IDataReader ExecuteReader(this IDbConnection conn, string sql, object param = null, IDbTransaction transaction = null)
         {
-            if (conn.State == ConnectionState.Closed) { conn.Open(); } else if (conn.State == ConnectionState.Broken) { conn.Close(); conn.Open(); }
+            if (conn.State == ConnectionState.Closed) { conn.Open(); }//不判断 ConnectionState.Broken，因为conn.Close(); conn.Open(); 对事务会有影响
             return conn.CreateCommand(sql, param, transaction).ExecuteReader();
         }
         /// <summary>
