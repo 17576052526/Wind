@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { HashRouter as Router, Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useNavigate, Navigate } from "react-router-dom";//改用 BrowserRouter 路由，只需此行的 HashRouter 改成BrowserRouter，其他都不用改
 import axios from 'axios'
 import $ from 'jquery'
 import common from './common'
