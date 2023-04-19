@@ -52,6 +52,7 @@ function App() {
                     <Route path="/page2" element={<Page2 />}></Route>
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/admin/*" element={<Admin />}></Route>
+                    <Route path="*" element={<div>404--页面不存在</div>}></Route>
                 </Routes>
             </Router>
         </Suspense>

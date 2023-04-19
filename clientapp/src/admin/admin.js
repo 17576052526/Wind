@@ -95,6 +95,7 @@ export default function () {
                         <Routes>
                             <Route path="" exact element={<Index />}></Route>{/*设置主页*/}
                             <Route path="Test_Main" element={<Test_Main />}></Route>
+                            <Route path="*" element={<div>404--页面不存在</div>}></Route>
                         </Routes>
                     </Suspense>
                 </div>
