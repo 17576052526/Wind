@@ -12,6 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="_DMSC\DataBaseDemo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataBaseDemo.txt</LastGenOutput>
+    </None>
+    <None Update="_DMSC\DataBaseDemo.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataBaseDemo.tt</DependentUpon>
+    </None>
     <None Update="_DMSC\_DbOrm.Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>_DbOrm.Model.txt</LastGenOutput>
