@@ -1,0 +1,72 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ output extension=".txt" #>
+<#@ include file="$(ProjectDir)_DMSC\MultipleOutputHelper.ttinclude"#>
+<#@ include file="$(ProjectDir)_DMSC\GetDBMsg.ttinclude"#>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+
+<#
+    string solutionDir = Host.ResolveAssemblyReference("$(SolutionDir)"); //获取当前解决方案路径
+    string projectDir = Host.ResolveAssemblyReference("$(ProjectDir)"); //获取当前项目路径
+
+	//连接字符串 _DMSC/appsettings.json配置连接字符串
+    DbHelper.ConnString=Regex.Match(File.ReadAllText(projectDir + "_DMSC/appsettings.json"), "(?<=\"ConnString\"\\s*:\\s*\")[^\"]+(?=\")").Value;
+    List<Table> list=DMSC.Main();  //获取表集合
+	var manager = Manager.Create(Host, GenerationEnvironment);
+    manager.StartNewFile("DataBaseDemo.html");  //必须放在输出的字符串之前
+#>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>数据库说明 <#=DateTime.Now.ToString("yyyy-MM-dd HH:mm")#>更新</title>
+    <style type="text/css">
+        html,body,div,ul,li{margin: 0px;padding: 0px;}
+        body{line-height:1.7;color: #666;font-size:14px;font-family:"宋体",Arial;word-break:break-all;}
+        .postLeft{background-color:#f5f5f5;position:fixed;left:0px;top:0px;width:200px;height:100%;overflow:auto;}
+        .postLeft a{line-height:34px;padding-left:20px;display:block;color:#555;text-decoration:none;background-color:#eee;margin-bottom:10px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;}
+        .tabDiv{width:800px;margin-left:240px;}
+        .tabDiv .tabName {line-height:18px;font-size:16px;font-weight:bold;}
+        .tabDiv table {width:100%;border:1px solid #ccc;border-collapse:collapse;table-layout:fixed;margin-bottom:20px;}
+        .tabDiv table tr{}
+        .tabDiv table tr:hover{background-color:#E2EFF8;}
+        .tabDiv table tr th{height:32px;padding-left:10px;padding-right:10px;text-align:left;border:1px solid #C0C0C0;border-left-style:none;background-color:#EEF6FB;}
+        .tabDiv table tr td{height:30px;padding-left:10px;padding-right:10px;border-bottom:1px solid #EAEAEA;}
+		.tabDiv table tr td .key{width:0px;height:0px;line-height:0px;border:5px solid transparent;border-left:5px solid #000;display:inline-block;}
+    </style>
+</head>
+<body>
+    <div class="postLeft">
+<# foreach(Table table in list){ #>
+        <a href="#<#=table.Name#>"><#=table.Name#>（<#=table.Description#>）</a>
+<# }#>
+    </div>
+    <div class="tabDiv">
+<# foreach(Table table in list){ #>
+        <p id="<#=table.Name#>" class="tabName"><#=table.Name#>（<#=table.Description#>）</p>
+        <table>
+            <tr>
+				<th>列名</th>
+                <th>对应C#类型</th>
+                <th>长度</th>
+                <th>说明</th>
+                <th>是否允许null</th>
+            </tr>
+<# foreach(Column col in table.Column){ #>
+			<tr>
+                <td><#=col.Name==table.PrimaryKey?"<div class='key'></div>":""#><#=col.Name#></td>
+                <td><#=col.Type#></td>
+                <td><#=col.Length#></td>
+                <td><#=col.Description#></td>
+                <td><input type="checkbox" disabled="disabled" <#=col.IsNull?"checked='checked'":""#> /></td>
+            </tr>
+<# }#>
+        </table>
+<# }#>
+    </div>
+</body>
+</html>
+<#
+	manager.EndBlock();  //结束输出文件
+	manager.Process(true,false);   //执行编译
+#>

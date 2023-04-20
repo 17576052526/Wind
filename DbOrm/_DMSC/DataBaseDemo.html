@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>数据库说明 2023-04-20 12:47更新</title>
+    <style type="text/css">
+        html,body,div,ul,li{margin: 0px;padding: 0px;}
+        body{line-height:1.7;color: #666;font-size:14px;font-family:"宋体",Arial;word-break:break-all;}
+        .postLeft{background-color:#f5f5f5;position:fixed;left:0px;top:0px;width:200px;height:100%;overflow:auto;}
+        .postLeft a{line-height:34px;padding-left:20px;display:block;color:#555;text-decoration:none;background-color:#eee;margin-bottom:10px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;}
+        .tabDiv{width:800px;margin-left:240px;}
+        .tabDiv .tabName {line-height:18px;font-size:16px;font-weight:bold;}
+        .tabDiv table {width:100%;border:1px solid #ccc;border-collapse:collapse;table-layout:fixed;margin-bottom:20px;}
+        .tabDiv table tr{}
+        .tabDiv table tr:hover{background-color:#E2EFF8;}
+        .tabDiv table tr th{height:32px;padding-left:10px;padding-right:10px;text-align:left;border:1px solid #C0C0C0;border-left-style:none;background-color:#EEF6FB;}
+        .tabDiv table tr td{height:30px;padding-left:10px;padding-right:10px;border-bottom:1px solid #EAEAEA;}
+		.tabDiv table tr td .key{width:0px;height:0px;line-height:0px;border:5px solid transparent;border-left:5px solid #000;display:inline-block;}
+    </style>
+</head>
+<body>
+    <div class="postLeft">
+        <a href="#Test_MainDtl">Test_MainDtl（Test_Main的明细表）</a>
+        <a href="#Test_Main">Test_Main（测试模块主表）</a>
+        <a href="#Sys_Admin">Sys_Admin（管理员（后台登录））</a>
+        <a href="#Test_Type">Test_Type（Test模块类型表，与基础数据不同的是他只给Test模块用，也是为了后期的模块移植）</a>
+        <a href="#Test_MainDtl1">Test_MainDtl1（Test_Main的明细表）</a>
+    </div>
+    <div class="tabDiv">
+        <p id="Test_MainDtl" class="tabName">Test_MainDtl（Test_Main的明细表）</p>
+        <table>
+            <tr>
+				<th>列名</th>
+                <th>对应C#类型</th>
+                <th>长度</th>
+                <th>说明</th>
+                <th>是否允许null</th>
+            </tr>
+			<tr>
+                <td><div class='key'></div>ID</td>
+                <td>int</td>
+                <td>4</td>
+                <td>主键</td>
+                <td><input type="checkbox" disabled="disabled"  /></td>
+            </tr>
+			<tr>
+                <td>Test_Main_ID</td>
+                <td>int</td>
+                <td>4</td>
+                <td>Test_Main表外键</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>MainDtlName</td>
+                <td>nvarchar</td>
+                <td>100</td>
+                <td>名称</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>Remark</td>
+                <td>nvarchar</td>
+                <td>1000</td>
+                <td>备注</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+        </table>
+        <p id="Test_Main" class="tabName">Test_Main（测试模块主表）</p>
+        <table>
+            <tr>
+				<th>列名</th>
+                <th>对应C#类型</th>
+                <th>长度</th>
+                <th>说明</th>
+                <th>是否允许null</th>
+            </tr>
+			<tr>
+                <td><div class='key'></div>ID</td>
+                <td>int</td>
+                <td>4</td>
+                <td>主键</td>
+                <td><input type="checkbox" disabled="disabled"  /></td>
+            </tr>
+			<tr>
+                <td>MainID</td>
+                <td>varchar</td>
+                <td>50</td>
+                <td>编号</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>MainName</td>
+                <td>nvarchar</td>
+                <td>100</td>
+                <td>名称</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>Test_Type_ID</td>
+                <td>int</td>
+                <td>4</td>
+                <td>所属类型（外键）</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>Quantity</td>
+                <td>int</td>
+                <td>4</td>
+                <td>数量</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>Amount</td>
+                <td>decimal</td>
+                <td>9</td>
+                <td>金额</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>IsShow</td>
+                <td>bit</td>
+                <td>1</td>
+                <td>是否显示</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>Img</td>
+                <td>varchar</td>
+                <td>200</td>
+                <td>图片</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>Files</td>
+                <td>varchar</td>
+                <td>200</td>
+                <td>文件</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>Remark</td>
+                <td>nvarchar</td>
+                <td>1000</td>
+                <td>备注</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>CreateTime</td>
+                <td>datetime</td>
+                <td>8</td>
+                <td>创建时间</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+        </table>
+        <p id="Sys_Admin" class="tabName">Sys_Admin（管理员（后台登录））</p>
+        <table>
+            <tr>
+				<th>列名</th>
+                <th>对应C#类型</th>
+                <th>长度</th>
+                <th>说明</th>
+                <th>是否允许null</th>
+            </tr>
+			<tr>
+                <td><div class='key'></div>ID</td>
+                <td>int</td>
+                <td>4</td>
+                <td></td>
+                <td><input type="checkbox" disabled="disabled"  /></td>
+            </tr>
+			<tr>
+                <td>UserName</td>
+                <td>nvarchar</td>
+                <td>100</td>
+                <td>用户名</td>
+                <td><input type="checkbox" disabled="disabled"  /></td>
+            </tr>
+			<tr>
+                <td>UserPwd</td>
+                <td>varchar</td>
+                <td>500</td>
+                <td>密码（加密后的字符串）</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+        </table>
+        <p id="Test_Type" class="tabName">Test_Type（Test模块类型表，与基础数据不同的是他只给Test模块用，也是为了后期的模块移植）</p>
+        <table>
+            <tr>
+				<th>列名</th>
+                <th>对应C#类型</th>
+                <th>长度</th>
+                <th>说明</th>
+                <th>是否允许null</th>
+            </tr>
+			<tr>
+                <td><div class='key'></div>ID</td>
+                <td>int</td>
+                <td>4</td>
+                <td>主键</td>
+                <td><input type="checkbox" disabled="disabled"  /></td>
+            </tr>
+			<tr>
+                <td>TypeID</td>
+                <td>varchar</td>
+                <td>50</td>
+                <td>编号</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>TypeName</td>
+                <td>nvarchar</td>
+                <td>100</td>
+                <td>名称</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+        </table>
+        <p id="Test_MainDtl1" class="tabName">Test_MainDtl1（Test_Main的明细表）</p>
+        <table>
+            <tr>
+				<th>列名</th>
+                <th>对应C#类型</th>
+                <th>长度</th>
+                <th>说明</th>
+                <th>是否允许null</th>
+            </tr>
+			<tr>
+                <td><div class='key'></div>ID</td>
+                <td>int</td>
+                <td>4</td>
+                <td>主键</td>
+                <td><input type="checkbox" disabled="disabled"  /></td>
+            </tr>
+			<tr>
+                <td>Test_Main_ID</td>
+                <td>int</td>
+                <td>4</td>
+                <td>外键</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>MainDtl1Name</td>
+                <td>varchar</td>
+                <td>50</td>
+                <td>名称</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+			<tr>
+                <td>Remark</td>
+                <td>nvarchar</td>
+                <td>1000</td>
+                <td>备注</td>
+                <td><input type="checkbox" disabled="disabled" checked='checked' /></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
