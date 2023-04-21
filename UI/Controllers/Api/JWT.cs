@@ -114,9 +114,18 @@ namespace UI.Controllers.Api
     /// </summary>
     public class JWTAuthorize : Attribute, IAuthorizationFilter
     {
+        private string Name;
+        /// <summary>
+        /// 权限认证
+        /// </summary>
+        /// <param name="name">权限名称，授权和认证两者名称要一致，用于判断某些用户是否有某些权限</param>
+        public JWTAuthorize(string name = "")
+        {
+            this.Name = name;
+        }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            JWTResult result = JWT.Validation(context.HttpContext.Request.Headers["Authorization"]);
+            JWTResult result = JWT.Validation(context.HttpContext.Request.Headers["Authorization"], Name);
             if (result.Code == 403)
             {
                 context.Result = new JsonResult(new { code = result.Code, msg = result.Message });
@@ -141,7 +150,8 @@ namespace UI.Controllers.Api
         /// <summary>
         /// 签名
         /// </summary>
-        public static string Signature(object model)
+        /// <param name="name">权限名称，授权和认证两者名称要一致，用于判断某些用户是否有某些权限</param>
+        public static string Signature(object model, string name = "")
         {
             var header = new
             {
@@ -154,6 +164,7 @@ namespace UI.Controllers.Api
                 exp = DateTime.Now.AddMinutes(20),//过期时间
                 iat = DateTime.Now,//发布时间
                 tokenid = model.GetHashCode()+ new Random().Next(1, 9999),//token的 id，必须要加随机数
+                __name = name,//权限名称，授权和认证两者名称要一致，用于判断某些用户是否有某些权限
             };
             //payload，model 通过反射合并到同一个json字符串里面
             StringBuilder str = new StringBuilder();
@@ -177,7 +188,7 @@ namespace UI.Controllers.Api
         /// <summary>
         /// 验签
         /// </summary>
-        public static JWTResult Validation(string token)
+        public static JWTResult Validation(string token, string name)
         {
             JWTResult result = new JWTResult();
             try
@@ -192,7 +203,12 @@ namespace UI.Controllers.Api
                 {
                     dynamic model = JsonConvert.DeserializeObject<dynamic>(Encoding.UTF8.GetString(Convert.FromBase64String(payload)));
                     DateTime exp = JWTCache.GetCache(model.tokenid) ?? model.exp;
-                    if (exp < DateTime.Now)
+                    if (model.__name != name)//验证权限名称是否正确
+                    {
+                        result.Code = 403;
+                        result.Message = "您无此权限";
+                    }
+                    else if (exp < DateTime.Now)
                     {
                         result.Code = 403;
                         result.Message = "Token 已过期";
