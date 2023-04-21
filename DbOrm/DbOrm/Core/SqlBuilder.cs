@@ -60,6 +60,14 @@ namespace DbOrm
             this._Where = where;
             return this;
         }
+        public SqlBuilder<T> WhereAnd(string where, object param = null)
+        {
+            return Where(this._Where.Length > 0 ? this._Where + " and " + where : where, param);
+        }
+        public SqlBuilder<T> WhereOr(string where, object param = null)
+        {
+            return Where(this._Where.Length > 0 ? this._Where + " or " + where : where, param);
+        }
         public SqlBuilder<T> LeftJoin<TJoin>(string joinWhere)
         {
             this.Types.Add(typeof(TJoin));

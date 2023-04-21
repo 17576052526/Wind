@@ -18,7 +18,11 @@ namespace UI
             //AddMvc();//既有MVC又有Page页面用这个，包含 AddControllersWithViews() 及 AddRazorPages() 功能。功能最全
             builder.Services.AddControllersWithViews();//+ Mvc 服务注册
             builder.Services.AddControllers()//+ WebApi 服务注册
-                .AddJsonOptions(p => { p.JsonSerializerOptions.PropertyNamingPolicy = null; });//webApi 返回json原样字段返回，默认是首字母小写
+                .AddNewtonsoftJson(s =>//需要安装 Microsoft.AspNetCore.Mvc.NewtonsoftJson  6+版本
+                {
+                    s.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();//webApi 返回json原样字段返回，默认是首字母小写
+                    s.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置 DateTime输出格式 
+                });
             builder.Services.AddRazorPages()//+ Razor页面 服务注册
                 .AddRazorPagesOptions(s =>
                 {
