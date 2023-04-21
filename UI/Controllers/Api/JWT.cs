@@ -118,7 +118,7 @@ namespace UI.Controllers.Api
         /// <summary>
         /// 权限认证
         /// </summary>
-        /// <param name="name">权限名称，授权和认证两者名称要一致，用于判断某些用户是否有某些权限</param>
+        /// <param name="name">权限标识，用于判断某个接口是否有权限</param>
         public JWTAuthorize(string name = "")
         {
             this.Name = name;
@@ -150,7 +150,7 @@ namespace UI.Controllers.Api
         /// <summary>
         /// 签名
         /// </summary>
-        /// <param name="name">权限名称，授权和认证两者名称要一致，用于判断某些用户是否有某些权限</param>
+        /// <param name="name">用于判断某个接口是否有权限，验签的时候有用到此参数</param>
         public static string Signature(object model, string name = "")
         {
             var header = new
@@ -164,7 +164,7 @@ namespace UI.Controllers.Api
                 exp = DateTime.Now.AddMinutes(20),//过期时间
                 iat = DateTime.Now,//发布时间
                 tokenid = model.GetHashCode()+ new Random().Next(1, 9999),//token的 id，必须要加随机数
-                __name = name,//权限名称，授权和认证两者名称要一致，用于判断某些用户是否有某些权限
+                __name = name,
             };
             //payload，model 通过反射合并到同一个json字符串里面
             StringBuilder str = new StringBuilder();
@@ -203,7 +203,7 @@ namespace UI.Controllers.Api
                 {
                     dynamic model = JsonConvert.DeserializeObject<dynamic>(Encoding.UTF8.GetString(Convert.FromBase64String(payload)));
                     DateTime exp = JWTCache.GetCache(model.tokenid) ?? model.exp;
-                    if (model.__name != name)//验证权限名称是否正确
+                    if (model.__name != name)//由签名和验签的两个参数，判断某个接口是否有权限，此处代码可以根据实际业务修改
                     {
                         result.Code = 403;
                         result.Message = "您无此权限";
