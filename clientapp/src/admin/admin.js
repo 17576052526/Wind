@@ -6,7 +6,7 @@ import common, { useStates } from '../common'
 import './importShare'
 import './css/admin.css'
 
-let Test_Main = lazy(() => import('./shared/Test_Main'))
+let Test_Main = lazy(() => import('./pages/Test_Main'))
 let Index = lazy(() => import('./index'))
 
 export default function () {
