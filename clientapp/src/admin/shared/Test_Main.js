@@ -3,6 +3,7 @@ import axios from 'axios'
 import $ from 'jquery'
 import { useStates } from '../../common'
 import '../importShare'
+import { pageSize } from '../config'
 import usePager from '../../_hooks/pager/usePager'
 import useCheck from '../../_hooks/check/useCheck'
 import Test_Main_insert from './Test_Main_insert'
@@ -11,23 +12,22 @@ import Test_Main_update from './Test_Main_update'
 
 export default function () {
     let [state, setState] = useStates({
+        //定义状态
 
     })
-
-    let pageSize = 10;
+    //分页hooks
     let { Pager, pageIndex, setPageIndex, setDataCount, setPageSize, setPageBtnNum, pageCount } = usePager(pageSize);
-
+    //选中，全选
     let [checks, setChecks, sync] = useCheck();
-
+    //搜索，变量定义
     let MainName = useRef();
 
+    //加载数据
     function load(isMatchDel) {
         let param = {
             pageIndex: pageIndex,
             pageSize: pageSize,
-            like: {
-                MainName: MainName.current.value,
-            }
+            MainName: MainName.current.value,
         }
         axios.post("/api/test_main/select", param).then(msg => {
             sync(msg.data.list, isMatchDel);
@@ -97,9 +97,10 @@ export default function () {
                                         <td><div className="table-resize-item"><a target="_blank" href={m.Img && m.Img.split('|')[0]}><img src={m.Img && m.Img.split('|')[0]} /></a></div></td>
                                         <td><div className="table-resize-item"><a href={m.Files} download>下载文件</a></div></td>
                                         <td><div className="table-resize-item">{m.Remark}</div></td>
-                                        <td><div className="table-resize-item">{m.CreateTime && m.CreateTime.replace('T', ' ')}</div></td>
+                                        <td><div className="table-resize-item">{m.CreateTime}</div></td>
                                     </tr>
                                 )}
+                                {(state.data == null || state.data.length == 0) && <tr><td colSpan="100" className="text-center font-bold">暂无数据</td></tr>}
                             </tbody>
                         </table>
                     </div>

@@ -6,11 +6,13 @@ import { useStates } from '../../common'
 
 export default function ({ close }) {
     let [state, setState] = useStates({
-
+        //定义状态
+        
     })
 
     let form = useRef();
 
+    //页面加载
     useEffect(() => {
 
 
