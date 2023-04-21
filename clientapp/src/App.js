@@ -23,7 +23,7 @@ axios.interceptors.response.use(response => {
     }
     else if (data.code == 403) {//访问未认证的接口处理
         $.alert ? $.alert(data.msg) : alert(data.msg);
-        window.location.href = '#/login';
+        window.location.href = '#/login';//此处用不了 useNavigate()跳转
         return Promise.reject(response);
     }
     return data;
