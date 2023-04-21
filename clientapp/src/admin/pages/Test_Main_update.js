@@ -60,9 +60,11 @@ export default function ({ close, checks }) {
                             <input type="text" className="input-text" name="Amount" defaultValue={state.data && state.data.Amount} />
                         </label>
                         <label className="form-item">
-                            <span>是否</span>
-                            <input type="hidden" name="IsShow" value="false" />
-                            <input type="checkbox" name="IsShow" value="true" defaultChecked={state.data && state.data.IsShow} />
+                            <span>是否显示</span>
+                            <div>
+                                <input type="hidden" name="IsShow" value="false" />
+                                <input type="checkbox" name="IsShow" value="true" defaultChecked={state.data && state.data.IsShow} />
+                            </div>
                         </label>
                         <label className="form-item">
                             <span>备注</span>
