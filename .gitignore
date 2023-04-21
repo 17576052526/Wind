@@ -5,6 +5,7 @@
 /Common/obj
 /DbOrm/bin
 /DbOrm/obj
+/DbOrm/_CacheFile
 /Plugins/bin
 /Plugins/obj
 /Plugins/Properties/PublishProfiles

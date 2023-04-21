@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="_CacheFile\**" />
+    <EmbeddedResource Remove="_CacheFile\**" />
+    <None Remove="_CacheFile\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
   </ItemGroup>
@@ -20,6 +26,15 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataBaseDemo.tt</DependentUpon>
+    </None>
+    <None Update="_DMSC\_Api.tt">
+      <LastGenOutput>_Api.txt</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="_DMSC\_Api.txt">
+      <DependentUpon>_Api.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </None>
     <None Update="_DMSC\_DbOrm.Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
