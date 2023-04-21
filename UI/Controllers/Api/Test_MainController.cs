@@ -60,16 +60,9 @@ namespace UI.Controllers.Api
                 //表连接查询
                 sql.LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID");
                 //排序
-                if (obj.orderBy != null) { sql.OrderBy(obj.orderBy.ToString()); }
+                //if (obj.orderBy != null) { sql.OrderBy(obj.orderBy.ToString()); }
                 //分页
-                if (obj.pageSize != null && obj.pageIndex != null)
-                {
-                    return Result.OK(new { total = total, list = sql.Query(((int)obj.pageIndex - 1) * (int)obj.pageSize, (int)obj.pageSize) });
-                }
-                else
-                {
-                    return Result.OK(new { total = total, list = sql.Query() });
-                }
+                return Result.OK(new { total = total, list = sql.Query(((int)obj.pageIndex - 1) * (int)obj.pageSize, (int)obj.pageSize) });
             }
         }
     }
