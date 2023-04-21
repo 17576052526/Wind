@@ -56,11 +56,11 @@ namespace UI.Controllers.Api
                 //查询总数据量
                 int total = (int)sql.QueryScalar();
                 //设置查询列
-                sql = sql.Select("Test_Main.*,Test_Type.TypeName");
+                sql.Select("Test_Main.*,Test_Type.TypeName");
                 //表连接查询
                 sql.LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID");
                 //排序
-                //if (obj.orderBy != null) { sql.OrderBy(obj.orderBy.ToString()); }
+                sql.OrderBy("ID desc");
                 //分页
                 return Result.OK(new { total = total, list = sql.Query(((int)obj.pageIndex - 1) * (int)obj.pageSize, (int)obj.pageSize) });
             }
