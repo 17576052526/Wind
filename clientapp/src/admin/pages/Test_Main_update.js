@@ -61,6 +61,7 @@ export default function ({ close, checks }) {
                         </label>
                         <label className="form-item">
                             <span>是否</span>
+                            <input type="hidden" name="IsShow" value="false" />
                             <input type="checkbox" name="IsShow" value="true" defaultChecked={state.data && state.data.IsShow} />
                         </label>
                         <label className="form-item">
