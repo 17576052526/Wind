@@ -13,6 +13,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="_DMSC\_List.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_List.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="_DMSC\_List.cs">
+      <DependentUpon>_List.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
   </ItemGroup>
@@ -26,6 +42,28 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataBaseDemo.tt</DependentUpon>
+    </None>
+    <None Update="_DMSC\_Update.tt">
+      <LastGenOutput>_Update.txt</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="_DMSC\_Update.txt">
+      <DependentUpon>_Update.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </None>
+    <None Update="_DMSC\_Insert.tt">
+      <LastGenOutput>_Insert.txt</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="_DMSC\_Insert.txt">
+      <DependentUpon>_Insert.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </None>
+    <None Update="_DMSC\_List.tt">
+      <LastGenOutput>_List.txt</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
     </None>
     <None Update="_DMSC\_Api.tt">
       <LastGenOutput>_Api.txt</LastGenOutput>
@@ -44,6 +82,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>_DbOrm.Model.tt</DependentUpon>
+    </None>
+    <None Update="_DMSC\_List.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_List.tt</DependentUpon>
     </None>
   </ItemGroup>
 

@@ -1,0 +1,137 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ output extension=".txt" #>
+<#@ include file="$(ProjectDir)_DMSC\MultipleOutputHelper.ttinclude"#>
+<#@ include file="$(ProjectDir)_DMSC\GetDBMsg.ttinclude"#>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+
+<#
+    string solutionDir = Host.ResolveAssemblyReference("$(SolutionDir)"); //获取当前解决方案路径
+    string projectDir = Host.ResolveAssemblyReference("$(ProjectDir)"); //获取当前项目路径
+
+	//连接字符串 _DMSC/appsettings.json配置连接字符串
+    DbHelper.ConnString=Regex.Match(File.ReadAllText(projectDir + "_DMSC/appsettings.json"), "(?<=\"ConnString\"\\s*:\\s*\")[^\"]+(?=\")").Value;
+    List<Table> list=DMSC.Main();  //获取表集合
+	var manager = Manager.Create(Host, GenerationEnvironment);
+	foreach(Table table in list){
+		string dire=projectDir+"_CacheFile/";
+        string path=dire+table.Name+".js";
+		if (!Directory.Exists(dire)) { Directory.CreateDirectory(dire); }
+        if(File.Exists(path)){File.Delete(path);}
+		manager.StartNewFile(path);  //必须放在输出的字符串之前
+#>
+import React, { useEffect, useRef } from 'react';
+import axios from 'axios'
+import $ from 'jquery'
+import { useStates } from '../../common'
+import '../importShare'
+import { pageSize } from '../config'
+import usePager from '../../_hooks/pager/usePager'
+import useCheck from '../../_hooks/check/useCheck'
+import <#=table.Name#>_insert from './<#=table.Name#>_insert'
+import <#=table.Name#>_update from './<#=table.Name#>_update'
+
+
+export default function () {
+    let [state, setState] = useStates({
+        //定义状态
+
+    })
+    //分页hooks
+    let { Pager, pageIndex, setPageIndex, setDataCount, setPageSize, setPageBtnNum, pageCount } = usePager(pageSize);
+    //选中，全选
+    let [checks, setChecks, sync] = useCheck();
+    //搜索，变量定义
+    //let MainName = useRef();
+
+    //加载数据
+    function load(isMatchDel) {
+        let param = {
+            pageIndex: pageIndex,
+            pageSize: pageSize,
+            //搜索参数
+            //MainName: MainName.current.value,
+        }
+        axios.post("/api/<#=table.Name#>/select", param).then(msg => {
+            sync(msg.data.list, isMatchDel);
+            setDataCount(msg.data.total);
+            setState({ data: msg.data.list });
+        });
+    }
+
+    useEffect(() => load(true), [pageIndex]);
+
+    //删除
+    function remove() {
+        if (checks.length == 0) { $.alert('请先勾选'); return; }
+        $.confirm('确定删除？', () => {
+            let param = checks.map(s => s.ID);
+            axios.post("/api/<#=table.Name#>/delete", param).then(msg => {
+                load();
+            });
+        })
+    }
+
+    return (
+        <>
+            <div className="box h-100">
+                <div className="box-head flex">
+                    <div className="flex-1"><#=table.Description#></div>
+                    <div className="-mlr-5">
+                        <input type="button" className="btn-primary h-pre mlr-5" value="新建" onClick={() => setState({ is<#=table.Name#>_insert: true })} />
+                        <input type="button" className="btn-danger h-pre mlr-5" value="删除" onClick={() => remove()} />
+                        <input type="button" className="btn-primary h-pre mlr-5" value="修改" onClick={() => setState({ is<#=table.Name#>_update: true })} />
+                    </div>
+                </div>
+                <div className="box-body flex-column">
+                    {/*<div className="mb-10">
+                        <label className="mlr-5">名称：<input type="text" className="input-text" ref={MainName} /></label>
+                        <button className="btn-primary mlr-5" onClick={() => load()}><i className="icon-search"></i>搜索</button>
+                    </div>*/}
+                    <div className="table-fixed flex-1">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th className="table-resize"><div className="table-resize-item"><input type="checkbox" onChange={(e) => setChecks(state.data, e.target.checked ? '+' : '-')} checked={state.data && state.data.every(s => checks.some(c => s == c))} /></div></th>
+                                    <th className="table-resize"><div className="table-resize-item">序号</div></th>
+<#        foreach(Column column in table.Column){ #>
+                                    <th className="table-resize"><div className="table-resize-item"><#=column.Description#></div></th>
+<#        }#>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {state.data && state.data.map((m, i) =>
+                                    <tr>
+                                        <td><div className="table-resize-item"><input type="checkbox" checked={checks.some(s => s == m)} onChange={() => setChecks(m)} /></div></td>
+                                        <td><div className="table-resize-item">{pageSize * (pageIndex - 1) + i + 1}</div></td>
+<#        foreach(Column column in table.Column){ #>
+<#        if(column.CType=="bool?"){#>
+                                        <td><div className="table-resize-item"><input type="checkbox" checked={m.<#=column.Name#>} /></div></td>
+<#        }else{#>
+                                        <td><div className="table-resize-item">{m.<#=column.Name#>}</div></td>
+<#        }}#>
+                                        
+                                    </tr>
+                                )}
+                                {(state.data == null || state.data.length == 0) && <tr><td colSpan="100" className="text-center font-bold">暂无数据</td></tr>}
+                            </tbody>
+                        </table>
+                    </div>
+                    <Pager className="pager mt-5" previousPage={<i className="icon-chevron_left"></i>} nextPage={<i className="icon-chevron_right"></i>} noneClass="pager-none" activeClass="pager-active"></Pager>
+                </div>
+            </div>
+            {/*新建*/}
+            {state.is<#=table.Name#>_insert && <<#=table.Name#>_insert close={() => { setState({ is<#=table.Name#>_insert: null }); load() }}></<#=table.Name#>_insert>}
+            {/*修改*/}
+            {state.is<#=table.Name#>_update && <<#=table.Name#>_update close={() => { setState({ is<#=table.Name#>_update: null }); load() }} checks={checks}></<#=table.Name#>_update>}
+        </>
+    );
+}
+
+<#
+manager.EndBlock();  //结束输出文件
+//--------------------------生成开发文件--结束--------------------------
+	}
+	manager.Process(true,false);   //执行编译
+#>
