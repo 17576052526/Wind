@@ -60,7 +60,7 @@ namespace UI.Controllers.Api
                 //表连接查询
                 sql.LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID");
                 //排序
-                sql.OrderBy("ID desc");
+                sql.OrderBy("Test_Main.ID desc");
                 //分页
                 return Result.OK(new { total = total, list = sql.Query(((int)obj.pageIndex - 1) * (int)obj.pageSize, (int)obj.pageSize) });
             }
