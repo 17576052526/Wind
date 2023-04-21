@@ -27,6 +27,7 @@ export default function () {
         let param = {
             pageIndex: pageIndex,
             pageSize: pageSize,
+            //搜索参数
             MainName: MainName.current.value,
         }
         axios.post("/api/test_main/select", param).then(msg => {
