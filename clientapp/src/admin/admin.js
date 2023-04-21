@@ -2,7 +2,7 @@ import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios'
 import $ from 'jquery'
-import common from '../common'
+import common, { useStates } from '../common'
 import './importShare'
 import './css/admin.css'
 
@@ -10,6 +10,11 @@ let Test_Main = lazy(() => import('./shared/Test_Main'))
 let Index = lazy(() => import('./index'))
 
 export default function () {
+    let [state, setState] = useStates({
+        //定义状态
+        isLeftShow: 1,//左边块是否显示 ，存在值则显示
+    });
+
     let navigate = useNavigate();
     let location = useLocation();
 
@@ -30,10 +35,10 @@ export default function () {
         <div className="flex-column h-100">
             {/*头部*/}
             <div className="flex" style={{ height: '50px', backgroundColor: '#fff' }} >
-                <div className="logo">WindAdmin</div>
+                {state.isLeftShow && <div className="logo">WindAdmin</div>}
                 <div className="flex-1 flex" style={{ borderBottom: '1px solid #DEE2E6' }} >
                     <div className="flex-1 flex-center">
-                        <span className="head-nav-item mlr-15 font-16"><i className="icon-reorder"></i></span>
+                        <span className="head-nav-item mlr-15 font-16" onClick={() => setState({ isLeftShow: !state.isLeftShow })}><i className="icon-reorder"></i></span>
                         <span className="head-nav-item mlr-15">首页</span>
                         <span className="head-nav-item mlr-15">联系人</span>
                     </div>
@@ -54,7 +59,7 @@ export default function () {
             {/*******/}
             <div className="flex-1 flex">
                 {/*左边栏目*/}
-                <div className="left-body">
+                {state.isLeftShow && <div className="left-body">
                     <div className="flex">
                         <input type="text" className="flex-1 search-text" placeholder="搜索" />
                         <div className="search-btn"><i className="icon-search"></i></div>
@@ -88,7 +93,7 @@ export default function () {
                             <div className="nav-btn icon-folder_open">一级菜单</div>
                         </li>
                     </ul>
-                </div>
+                </div>}
                 {/*右边块*/}
                 <div className="flex-1 p-7.5">
                     <Suspense fallback="">
