@@ -4,7 +4,7 @@ import axios from 'axios'
 import $ from 'jquery'
 import common, { useStates } from '../common'
 import './importShare'
-import './css/admin.css'
+import './_css/admin.css'
 
 let Test_Main = lazy(() => import('./pages/Test_Main'))
 let Index = lazy(() => import('./index'))
