@@ -74,7 +74,7 @@ export default function ({ close, checks }) {
                                 <input type="checkbox" name="<#=column.Name#>" value="true" defaultChecked={state.data && state.data.<#=column.Name#>} />
                             </div>
                         </label>
-<#        }else{#>
+<#        }else if(column.Name!=table.PrimaryKey&&column.IsIdentity==false){#>
                         <label className="form-item">
                             <span><#=column.Description#></span>
                             <input type="text" className="input-text" name="<#=column.Name#>" defaultValue={state.data && state.data.<#=column.Name#>} />

@@ -94,9 +94,11 @@ export default function () {
                                 <tr>
                                     <th className="table-resize"><div className="table-resize-item"><input type="checkbox" onChange={(e) => setChecks(state.data, e.target.checked ? '+' : '-')} checked={state.data && state.data.every(s => checks.some(c => s == c))} /></div></th>
                                     <th className="table-resize"><div className="table-resize-item">序号</div></th>
-<#        foreach(Column column in table.Column){ #>
+<#        foreach(Column column in table.Column){ 
+                 if(column.Name!=table.PrimaryKey&&column.IsIdentity==false){
+#>
                                     <th className="table-resize"><div className="table-resize-item"><#=column.Description#></div></th>
-<#        }#>
+<#     }   }#>
                                     
                                 </tr>
                             </thead>
@@ -108,7 +110,7 @@ export default function () {
 <#        foreach(Column column in table.Column){ #>
 <#        if(column.CType=="bool?"){#>
                                         <td><div className="table-resize-item"><input type="checkbox" checked={m.<#=column.Name#>} /></div></td>
-<#        }else{#>
+<#        }else if(column.Name!=table.PrimaryKey&&column.IsIdentity==false){#>
                                         <td><div className="table-resize-item">{m.<#=column.Name#>}</div></td>
 <#        }}#>
                                         

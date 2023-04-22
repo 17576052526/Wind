@@ -67,7 +67,7 @@ export default function ({ close }) {
                             <span><#=column.Description#></span>
                             <input type="checkbox" name="<#=column.Name#>" value="true" />
                         </label>
-<#        }else{#>
+<#        }else if(column.Name!=table.PrimaryKey&&column.IsIdentity==false){#>
                         <label className="form-item">
                             <span><#=column.Description#></span>
                             <input type="text" className="input-text" name="<#=column.Name#>" />
