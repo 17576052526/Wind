@@ -98,7 +98,7 @@ namespace UI.Controllers.Api
     public class JWTResult
     {
         /// <summary>
-        /// JWT 状态码，200：认证成功， 403：认证失败
+        /// JWT 状态码，200：认证成功， 403：认证失败，401：权限不够
         /// </summary>
         public int Code { set; get; }
         /// <summary>
@@ -126,7 +126,7 @@ namespace UI.Controllers.Api
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             JWTResult result = JWT.Validation(context.HttpContext.Request.Headers["Authorization"], Name);
-            if (result.Code == 403)
+            if (result.Code == 403 || result.Code == 401)
             {
                 context.Result = new JsonResult(new { code = result.Code, msg = result.Message });
             }
@@ -205,7 +205,7 @@ namespace UI.Controllers.Api
                     DateTime exp = JWTCache.GetCache(model.tokenid) ?? model.exp;
                     if (model.__name != name)//由签名和验签的两个参数，判断某个接口是否有权限，此处代码可以根据实际业务修改
                     {
-                        result.Code = 403;
+                        result.Code = 401;
                         result.Message = "您无此权限";
                     }
                     else if (exp < DateTime.Now)
