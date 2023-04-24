@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import axios from 'axios'
 import $ from 'jquery'
 import { useStates } from '../../common'
@@ -12,8 +12,8 @@ export default function ({ close }) {
 
     let form = useRef();
 
-    //页面加载
-    useEffect(() => {
+    //页面加载，useLayoutEffect有防抖动效果，例如页面加载事件中关闭当前组件
+    useLayoutEffect(() => {
 
 
     }, []);
