@@ -80,6 +80,12 @@ namespace DbOrm
             this.Join += $"\ninner join {typeof(TJoin).Name} on {joinWhere}";
             return this;
         }
+        public SqlBuilder<T> RightJoin<TJoin>(string joinWhere)
+        {
+            this.Types.Add(typeof(TJoin));
+            this.Join += $"\nright join {typeof(TJoin).Name} on {joinWhere}";
+            return this;
+        }
         public SqlBuilder<T> OrderBy(string orderByColumn)
         {
             if (!Regex.IsMatch(orderByColumn, @"^(\w+|\[\w+\]|\w+\.(\w+|\[\w+\]))(\s+(asc|desc))?$", RegexOptions.IgnoreCase)) { throw new Exception($"字符串”{orderByColumn}“存在sql注入风险"); }
