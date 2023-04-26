@@ -1,4 +1,5 @@
 using DbOrm;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace UI
 {
@@ -65,6 +66,7 @@ namespace UI
                     });
                 });
                 app.UseStatusCodePagesWithReExecute("/Error/404.html");//404错误页面配置
+                //app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());//http重定向到https
             }
 
             app.UseRouting();//+ 此句代码作用未知，但其他示例中都有
