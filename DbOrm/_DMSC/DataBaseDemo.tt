@@ -23,9 +23,9 @@
     <style type="text/css">
         html,body,div,ul,li{margin: 0px;padding: 0px;}
         body{line-height:1.7;color: #666;font-size:14px;font-family:"宋体",Arial;word-break:break-all;}
-        .postLeft{background-color:#f5f5f5;position:fixed;left:0px;top:0px;width:200px;height:100%;overflow:auto;}
+        .postLeft{background-color:#f5f5f5;position:fixed;left:0px;top:0px;width:300px;height:100%;overflow:auto;}
         .postLeft a{line-height:34px;padding-left:20px;display:block;color:#555;text-decoration:none;background-color:#eee;margin-bottom:10px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;}
-        .tabDiv{width:800px;margin-left:240px;}
+        .tabDiv{width:800px;margin-left:340px;}
         .tabDiv .tabName {line-height:18px;font-size:16px;font-weight:bold;}
         .tabDiv table {width:100%;border:1px solid #ccc;border-collapse:collapse;table-layout:fixed;margin-bottom:20px;}
         .tabDiv table tr{}
