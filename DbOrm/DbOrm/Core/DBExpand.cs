@@ -23,25 +23,6 @@ namespace DbOrm
         {
             return this.ExecuteNonQuery(model.InsertSql(), model);
         }
-        public int Insert(IEnumerable<IModel> list)
-        {
-            this.BeginTransaction();
-            try
-            {
-                int count = 0;
-                foreach (IModel m in list)
-                {
-                    count += this.ExecuteNonQuery(m.InsertSql(), m);
-                }
-                this.CommitTransaction();
-                return count;
-            }
-            catch
-            {
-                this.RollbackTransaction();
-                throw;
-            }
-        }
         public int Update(IModel model, string where, object param = null)
         {
             Dictionary<string, object> paramList = new Dictionary<string, object>();

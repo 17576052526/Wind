@@ -41,11 +41,27 @@ namespace DbOrm
                 return db.Insert(model);
             }
         }
+        //批量插入，不能写到DBExpand中，因为有 db.BeginTransaction();
         public static int Inserts(IEnumerable<IModel> list)
         {
             using (var db = NewThis())
             {
-                return db.Insert(list);
+                try
+                {
+                    db.BeginTransaction();
+                    int count = 0;
+                    foreach (IModel m in list)
+                    {
+                        count += db.ExecuteNonQuery(m.InsertSql(), m);
+                    }
+                    db.CommitTransaction();
+                    return count;
+                }
+                catch
+                {
+                    db.RollbackTransaction();
+                    throw;
+                }
             }
         }
         public static int Updates(IModel model, string where, object param = null)
