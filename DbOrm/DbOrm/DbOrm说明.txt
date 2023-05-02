@@ -30,21 +30,23 @@ public class DB : DBExpand
             //事务用法
             using (DB db = new DB())
             {
-                //开启事务
-                db.BeginTransaction();
                 try
                 {
-                    //第一条执行成功
+                    db.BeginTransaction();
+
+
+                    //执行第一条语句
                     db.ExecuteNonQuery("update Test_Main set MainName=@MainName where ID=@ID", new { MainName = "888", ID = 12 });
-                    //第二条执行失败
+                    //执行第二条语句
                     db.ExecuteNonQuery("update Test_Main set MainName=@MainName where ID=@ID", new { MainName = "777", ID = "a1" });
-                    //提交事务
+                    
+
                     db.CommitTransaction();
                 }
                 catch
                 {
-                    //回滚事务
                     db.RollbackTransaction();
+                    throw;
                 }
             }
 
