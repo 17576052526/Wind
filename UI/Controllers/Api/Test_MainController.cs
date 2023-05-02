@@ -11,9 +11,9 @@ namespace UI.Controllers.Api
     public class Test_MainController : ControllerBase
     {
         [HttpPost]
-        public Result Insert(Test_Main model)
+        public Result Insert(Test_Main param)
         {
-            DB.Inserts(model);
+            DB.Inserts(param);
             return Result.OK();
         }
 
@@ -37,32 +37,31 @@ namespace UI.Controllers.Api
         }
 
         [HttpPost]
-        public Result Update(Test_Main model)
+        public Result Update(Test_Main param)
         {
-            DB.Updates(model, "ID=@ID", new { ID = model.ID });
+            DB.Updates(param, "ID=@ID", new { ID = param.ID });
             return Result.OK();
         }
 
         [HttpPost]
-        public Result Select(dynamic obj)
+        public Result Select(dynamic param)
         {
             using (DB db = new DB())
             {
                 var sql = db.Select<Test_Main>("count(*)");
                 //构造条件，注意参数赋值要转类型
-                if (obj.MainName != "" && obj.MainName != null) { sql.WhereAnd("MainName like @MainName", new { MainName = '%' + obj.MainName.ToString() + '%' }); }
+                if (param.MainName != "" && param.MainName != null) { sql.WhereAnd("MainName like @MainName", new { MainName = '%' + param.MainName.ToString() + '%' }); }
 
-
+                //表连接查询
+                sql.LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID");
                 //查询总数据量
                 int total = (int)sql.QueryScalar();
                 //设置查询列
                 sql.Select("Test_Main.*,Test_Type.TypeName");
-                //表连接查询
-                sql.LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID");
                 //排序
                 sql.OrderBy("Test_Main.ID desc");
                 //分页
-                return Result.OK(new { total = total, list = sql.Query(((int)obj.pageIndex - 1) * (int)obj.pageSize, (int)obj.pageSize) });
+                return Result.OK(new { total = total, list = sql.Query(((int)param.pageIndex - 1) * (int)param.pageSize, (int)param.pageSize) });
             }
         }
     }

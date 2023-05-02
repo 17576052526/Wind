@@ -33,9 +33,9 @@ namespace UI.Controllers.Api
     public class <#=table.Name#>Controller : ControllerBase
     {
         [HttpPost]
-        public Result Insert(<#=table.Name#> model)
+        public Result Insert(<#=table.Name#> param)
         {
-            DB.Inserts(model);
+            DB.Inserts(param);
             return Result.OK();
         }
 
@@ -59,32 +59,31 @@ namespace UI.Controllers.Api
         }
 
         [HttpPost]
-        public Result Update(<#=table.Name#> model)
+        public Result Update(<#=table.Name#> param)
         {
-            DB.Updates(model, "ID=@ID", new { ID = model.ID });
+            DB.Updates(param, "ID=@ID", new { ID = param.ID });
             return Result.OK();
         }
 
         [HttpPost]
-        public Result Select(dynamic obj)
+        public Result Select(dynamic param)
         {
             using (DB db = new DB())
             {
                 var sql = db.Select<<#=table.Name#>>("count(*)");
                 //构造条件，注意参数赋值要转类型
-                //if (obj.MainName != "" && obj.MainName != null) { sql.WhereAnd("MainName like @MainName", new { MainName = '%' + obj.MainName.ToString() + '%' }); }
+                //if (param.MainName != "" && param.MainName != null) { sql.WhereAnd("MainName like @MainName", new { MainName = '%' + param.MainName.ToString() + '%' }); }
 
-
+                //表连接查询
+                //sql.LeftJoin<Test_Type>("<#=table.Name#>.Test_Type_ID=Test_Type.ID");
                 //查询总数据量
                 int total = (int)sql.QueryScalar();
                 //设置查询列
                 sql.Select("<#=table.Name#>.*");
-                //表连接查询
-                //sql.LeftJoin<Test_Type>("<#=table.Name#>.Test_Type_ID=Test_Type.ID");
                 //排序
                 sql.OrderBy("<#=table.Name#>.ID desc");
                 //分页
-                return Result.OK(new { total = total, list = sql.Query(((int)obj.pageIndex - 1) * (int)obj.pageSize, (int)obj.pageSize) });
+                return Result.OK(new { total = total, list = sql.Query(((int)param.pageIndex - 1) * (int)param.pageSize, (int)param.pageSize) });
             }
         }
     }
