@@ -9,12 +9,11 @@
 
     var box = this.children().eq(0);
     var li = box.children();
-    var width = this.width();
     //左右各加一个
     box.prepend(li.eq(li.length - 1).clone());
     box.append(li.eq(0).clone());
     //设置第一个显示
-    box.css('transform', 'translateX(-' + width + 'px)');
+    box.css('transform', 'translateX(-100%)');
     var index = 1;
     //设置过渡效果
     setTimeout(function () { box.css('transition', 'all ' + (param.speed / 1000) + 's'); }, 100);
@@ -31,18 +30,18 @@
     });
     //执行
     function exec() {
-        box.css('transform', 'translateX(-' + (width * index) + 'px)');
+        box.css('transform', 'translateX(-' + index + '00%)');
         //动画完成后在执行判断
         setTimeout(function () {
             if (index >= li.length + 1) {
                 index = 1;
                 box.css('transition-duration', '0s');
-                box.css('transform', 'translateX(-' + (width * index) + 'px)');
+                box.css('transform', 'translateX(-' + index + '00%)');
                 setTimeout(function () { box.css('transition-duration', (param.speed / 1000) + 's'); }, 100);
             } else if (index <= 0) {
                 index = li.length;
                 box.css('transition-duration', '0s');
-                box.css('transform', 'translateX(-' + (width * index) + 'px)');
+                box.css('transform', 'translateX(-' + index + '00%)');
                 setTimeout(function () { box.css('transition-duration', (param.speed / 1000) + 's'); }, 100);
             }
             //按钮选中
@@ -82,7 +81,7 @@
         if (param.isSwitchStop) { clearInterval(time) }
     }
     //移动端左右滑动事件
-    var startX, moveX
+    var startX, moveX, width = this.width()
     document.addEventListener('touchstart', function (event) {
         startX = event.touches[0].pageX
         clearInterval(time);//停止计时器
@@ -106,7 +105,7 @@
         } else if (moveX > 80) {
             previous();
         } else {
-            box.css('transform', 'translateX(-' + (width * index) + 'px)');//还原
+            box.css('transform', 'translateX(-' + index + '00%)');//还原
         }
     })
 
