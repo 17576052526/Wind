@@ -8,13 +8,18 @@
 
     var box = this.children().eq(0);
     var li = box.children();
-    //第一个添加类样式（动画）
-    li.eq(0).find('[animate]').each(function () {
-        $(this).addClass($(this).attr('animate'));
-    });
     //左右各加一个
     box.prepend(li.eq(li.length - 1).clone());
     box.append(li.eq(0).clone());
+    //第一个添加类样式（动画）
+    li.eq(0).find('[animate]').each(function () {
+        var delay = $(this).attr('delay');
+        if (delay) {
+            setTimeout(() => $(this).addClass($(this).attr('animate')), parseFloat(delay) * 1000);
+        } else {
+            $(this).addClass($(this).attr('animate'));
+        }
+    });
     //设置第一个显示
     box.css('transform', 'translateX(-100%)');
     var index = 1;
@@ -56,7 +61,12 @@
             });
             //切换完后子节点可以添加类样式（动画）
             li.eq(index - 1).find('[animate]').each(function () {
-                $(this).addClass($(this).attr('animate'));
+                var delay = $(this).attr('delay');
+                if (delay) {
+                    setTimeout(() => $(this).addClass($(this).attr('animate')), parseFloat(delay) * 1000);
+                } else {
+                    $(this).addClass($(this).attr('animate'));
+                }
             });
         }, param.speed);
     }
