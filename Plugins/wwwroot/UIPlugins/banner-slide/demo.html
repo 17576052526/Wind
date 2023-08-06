@@ -7,6 +7,16 @@
         /*非必要样式*/
         * {margin: 0;padding: 0;}
         ul {list-style: none;}
+        .hidden{visibility:hidden;}
+        @keyframes fadeInDown{
+            0%{opacity:0;transform:translateY(-30%);}
+            100%{opacity:1;transform:translateY(0px);}
+        }
+        .fadeInDown {
+            animation: fadeInDown 0.6s;
+            visibility: visible;
+        }
+
     </style>
     <script type="text/javascript" src="../jquery.js"></script>
 
@@ -14,10 +24,26 @@
     <script type="text/javascript" src="banner-slide.js"></script>
 </head>
 <body>
+    <!--
+        说明：
+        interval: 5000,   //间隔5秒切换一次
+        speed: 500,    //0.5秒切换完成
+        isHoverStop: false,    //鼠标悬浮其上停止计时器
+        isSwitchStop: true,    //手动切换后是否停止计时器
+        子节点设置动画：
+        animate="动画类样式"
+
+        -->
     <div class="banner-slide" style="width:500px;height:300px;">
         <ul class="banner-slide-box">
-            <li class="banner-slide-item" style="background-color:#000;"></li>
-            <li class="banner-slide-item" style="background-color:#4cff00;"></li>
+            <li class="banner-slide-item" style="background-color:#eee;">
+                <div class="hidden" animate="fadeInDown">动画1</div>
+                <div class="hidden" animate="fadeInDown">动画2</div>
+            </li>
+            <li class="banner-slide-item" style="background-color:#4cff00;">
+                <div class="hidden" animate="fadeInDown">动画3</div>
+                <div class="hidden" animate="fadeInDown">动画4</div>
+            </li>
             <li class="banner-slide-item" style="background-color:blue;"></li>
         </ul>
     </div>

@@ -4,11 +4,14 @@
         speed: 500,    //0.5秒切换完成
         isHoverStop: false,    //鼠标悬浮其上停止计时器
         isSwitchStop: true,    //手动切换后是否停止计时器
-        callback: null   //动画完成后的回调，参数一：当前banner对象
     }, settings || {});
 
     var box = this.children().eq(0);
     var li = box.children();
+    //第一个添加类样式（动画）
+    li.eq(0).find('[animate]').each(function () {
+        $(this).addClass($(this).attr('animate'));
+    });
     //左右各加一个
     box.prepend(li.eq(li.length - 1).clone());
     box.append(li.eq(0).clone());
@@ -47,10 +50,14 @@
             //按钮选中
             btnBox.children().removeClass('banner-slide-btnActive');
             btnBox.children().eq(index - 1).addClass('banner-slide-btnActive');
-            //动画完成后执行的事件
-            if (param.callback) {
-                param.callback(li.eq(index));
-            }
+            //其他的去掉类样式
+            li.find('[animate]').each(function () {
+                $(this).removeClass($(this).attr('animate'));
+            });
+            //切换完后子节点可以添加类样式（动画）
+            li.eq(index - 1).find('[animate]').each(function () {
+                $(this).addClass($(this).attr('animate'));
+            });
         }, param.speed);
     }
     //开始计时器
