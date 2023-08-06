@@ -13,13 +13,13 @@
 <body>
     <!--
     说明：滚动条滚动到某块位置处，对该块添加类样式（动画效果）
-        .scroll-show 标识当前块
-        addClass="类样式名" 要添加的类样式
+        scroll-animate="类样式名" 要添加的类样式（动画）
+        delay="延迟时间"
 
         hidden 是 global.css 中的 visibility: hidden;
         -->
 
-    <div class="scroll-show hidden" addClass="fadeInDown">动画效果</div>
-
+    <div class="hidden" scroll-animate="fadeInDown">动画效果</div>
+    <div class="hidden" scroll-animate="fadeInDown" delay="1">动画效果</div>
 </body>
 </html>
