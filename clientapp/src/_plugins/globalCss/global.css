@@ -21,6 +21,9 @@ a{color: inherit;text-decoration: inherit;}
 .overflow-hidden{overflow:hidden;}
 .overflow-visible{overflow:visible;}
 
+.hidden {visibility: hidden;}
+.visible {visibility: visible;}
+
 .static {position:static;}
 .fixed {position:fixed;}
 .absolute {position:absolute;}
