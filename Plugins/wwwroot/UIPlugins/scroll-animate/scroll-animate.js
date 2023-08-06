@@ -1,4 +1,4 @@
-﻿function scrollShow() {
+﻿function scrollAnimate() {
     var scrollTop = document.documentElement.scrollTop;
     var height = $(window).height();
     $('[scroll-animate]').each(function () {
@@ -13,5 +13,5 @@
         }
     })
 }
-$(scrollShow);
-$(window).on('scroll', scrollShow);
+$(scrollAnimate);
+$(window).on('scroll', scrollAnimate);
