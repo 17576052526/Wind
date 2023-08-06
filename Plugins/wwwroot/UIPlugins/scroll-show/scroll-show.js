@@ -6,7 +6,7 @@
         if (scrollTop + height > th.offset().top) {
             var delay = th.attr('delay');
             if (delay) {
-                setTimeout(() => th.addClass(th.attr('scroll-animate')).removeAttr('scroll-animate');, parseFloat(delay) * 1000)
+                setTimeout(() => th.addClass(th.attr('scroll-animate')).removeAttr('scroll-animate'), parseFloat(delay) * 1000)
             } else {
                 th.addClass(th.attr('scroll-animate')).removeAttr('scroll-animate');
             }
