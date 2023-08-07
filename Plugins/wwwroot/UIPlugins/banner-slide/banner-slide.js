@@ -99,16 +99,16 @@
     }
     //移动端左右滑动事件
     var startX, moveX, width = this.width()
-    document.addEventListener('touchstart', function (event) {
+    this.get(0).addEventListener('touchstart', function (event) {
         startX = event.touches[0].pageX
         clearInterval(time);//停止计时器
         box.css('transition-duration', '0s');//停止过渡效果
     })
-    document.addEventListener('touchmove', function (event) {
+    this.get(0).addEventListener('touchmove', function (event) {
         moveX = event.touches[0].pageX - startX
         box.css('transform', 'translateX(-' + (width * index - moveX) + 'px)');//移动
     })
-    document.addEventListener('touchend', function (event) {
+    this.get(0).addEventListener('touchend', function (event) {
         //重新启动计时器
         time = setInterval(function () {
             index++;
