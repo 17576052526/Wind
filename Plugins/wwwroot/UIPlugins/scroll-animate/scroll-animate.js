@@ -1,5 +1,5 @@
 ﻿function scrollAnimate() {
-    var scrollTop = document.documentElement.scrollTop;
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     var height = $(window).height();
     $('[scroll-animate]').each(function () {
         var th = $(this);
