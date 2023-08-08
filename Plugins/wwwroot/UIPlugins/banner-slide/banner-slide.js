@@ -3,7 +3,7 @@
         interval: 5000,   //间隔5秒切换一次
         speed: 500,    //0.5秒切换完成
         isHoverStop: false,    //鼠标悬浮其上停止计时器
-        isSwitchStop: true,    //手动切换后是否停止计时器
+        switchStop: 30000,    //手动切换后暂停多久重新启动计时器
     }, settings || {});
 
     var box = this.children().eq(0);
@@ -34,8 +34,18 @@
     btnBox.on('click', '.banner-slide-btn', function () {
         index = $(this).index() + 1;
         exec();
-        if (param.isSwitchStop) { clearInterval(time) }
+        ztTime();//手动切换后暂停一段时间重新启动计时器
     });
+    //暂停一段时间后重新启动计时器
+    function ztTime() {
+        clearInterval(time);
+        setTimeout(() => {
+            time = setInterval(function () {
+                index++;
+                exec();
+            }, param.interval)
+        }, param.switchStop);
+    }
     //执行
     function exec() {
         box.css('transform', 'translateX(-' + index + '00%)');
@@ -89,13 +99,13 @@
     function previous() {
         index--;
         exec();
-        if (param.isSwitchStop) { clearInterval(time) }
+        ztTime();//手动切换后暂停一段时间重新启动计时器
     }
     //下一个
     function next() {
         index++;
         exec();
-        if (param.isSwitchStop) { clearInterval(time) }
+        ztTime();//手动切换后暂停一段时间重新启动计时器
     }
     //移动端左右滑动事件
     var startX, moveX, width = this.width()
