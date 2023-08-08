@@ -39,12 +39,7 @@
     //暂停一段时间后重新启动计时器
     function ztTime() {
         clearInterval(time);
-        setTimeout(() => {
-            time = setInterval(function () {
-                index++;
-                exec();
-            }, param.interval)
-        }, param.switchStop);
+        setTimeout(() => setTime(), param.switchStop);
     }
     //执行
     function exec() {
@@ -80,20 +75,20 @@
             });
         }, param.speed);
     }
-    //开始计时器
-    var time = setInterval(function () {
-        index++;
-        exec();
-    }, param.interval)
+    //计时器
+    var time;
+    function setTime() {
+        clearInterval(time);
+        time = setInterval(function () {
+            index++;
+            exec();
+        }, param.interval)
+    }
+    setTime();
     //悬浮其上停止计时器
     if (param.isHoverStop) {
         box.on('mouseenter', function () { clearInterval(time) });
-        box.on('mouseleave', function () {
-            time = setInterval(function () {
-                index++;
-                exec();
-            }, param.interval);
-        });
+        box.on('mouseleave', function () { setTime(); });
     }
     //上一个
     function previous() {
@@ -120,10 +115,7 @@
     })
     this.get(0).addEventListener('touchend', function (event) {
         //重新启动计时器
-        time = setInterval(function () {
-            index++;
-            exec();
-        }, param.interval)
+        setTime();
         //启动过渡效果
         box.css('transition-duration', (param.speed / 1000) + 's');
 
