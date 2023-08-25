@@ -6,10 +6,10 @@ using System;
 namespace DbOrm.Model
 {
     /// <summary>
-    /// 测试模块主表
+    /// 杂项表
     /// </summary>
-    public partial class Test_Main
+    public partial class Sys_Sundry
     {
-        public Test_Type Type { set; get; }
+
     }
 }

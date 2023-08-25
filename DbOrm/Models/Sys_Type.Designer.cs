@@ -12,32 +12,40 @@ using System.Text;
 namespace DbOrm.Model
 {
     /// <summary>
-    /// Test_Main的明细表
+    /// 类型表、分类表
     /// </summary>
-    public partial class Test_MainDtl : IModel
+    public partial class Sys_Type : IModel
     {
         /// <summary>
-        /// 主键
+        /// 
         /// </summary>
         public int? ID { set; get; }
         /// <summary>
-        /// Test_Main表外键
+        /// 
         /// </summary>
-        public int? Test_Main_ID { set; get; }
+        public int? ParentID { set; get; }
         /// <summary>
-        /// 名称
+        /// 
         /// </summary>
-        public string MainDtlName { set; get; }
+        public string Name { set; get; }
         /// <summary>
-        /// 备注
+        /// 
         /// </summary>
-        public string Remark { set; get; }
+        public string Temp1 { set; get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Temp2 { set; get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Temp3 { set; get; }
         /// <summary>
         /// 新增
         /// </summary>
         internal override string InsertSql()
         {
-            return "insert into Test_MainDtl(Test_Main_ID,MainDtlName,Remark) values(@Test_Main_ID,@MainDtlName,@Remark)";
+            return "insert into Sys_Type(ParentID,Name,Temp1,Temp2,Temp3) values(@ParentID,@Name,@Temp1,@Temp2,@Temp3)";
         }
 
         /// <summary>
@@ -46,11 +54,13 @@ namespace DbOrm.Model
         internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
-            if (Test_Main_ID != null) { str.AppendLine(",Test_Main_ID=@Test_Main_ID"); }
-            if (MainDtlName != null) { str.AppendLine(",MainDtlName=@MainDtlName"); }
-            if (Remark != null) { str.AppendLine(",Remark=@Remark"); }
+            if (ParentID != null) { str.AppendLine(",ParentID=@ParentID"); }
+            if (Name != null) { str.AppendLine(",Name=@Name"); }
+            if (Temp1 != null) { str.AppendLine(",Temp1=@Temp1"); }
+            if (Temp2 != null) { str.AppendLine(",Temp2=@Temp2"); }
+            if (Temp3 != null) { str.AppendLine(",Temp3=@Temp3"); }
 
-            return "update Test_MainDtl set " + str.Remove(0, 1);
+            return "update Sys_Type set " + str.Remove(0, 1);
         }
     }
 }
