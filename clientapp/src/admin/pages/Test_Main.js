@@ -91,7 +91,7 @@ export default function () {
                                         <td><div className="table-resize-item">{pageSize * (pageIndex - 1) + i + 1}</div></td>
                                         <td><div className="table-resize-item"><a className="cursor-pointer" onClick={() => { setState({ isTest_Main_update: true }); setChecks([m]) }}>{m.MainID}</a></div></td>
                                         <td><div className="table-resize-item">{m.MainName}</div></td>
-                                        <td><div className="table-resize-item">{m.Type.TypeName}</div></td>
+                                        <td><div className="table-resize-item">{m.Type.Name}</div></td>
                                         <td><div className="table-resize-item">{m.Quantity}</div></td>
                                         <td><div className="table-resize-item">{m.Amount}</div></td>
                                         <td><div className="table-resize-item"><input type="checkbox" checked={m.IsShow} /></div></td>
