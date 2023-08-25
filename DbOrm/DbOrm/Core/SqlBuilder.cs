@@ -95,21 +95,37 @@ namespace DbOrm
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.Append("select ").Append(Column);
-            if (TakeCount > 0) { str.Append($",row_number() over(order by {(_OrderBy == null ? "(select 0)" : _OrderBy.TrimEnd(','))}) as _RowNum"); }//分页的序号列
-            str.Append(" from ").Append(Table);
-            str.AppendLine(this.Join);
-            if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
-            if (TakeCount == 0 && _OrderBy != null) { str.Append(" order by ").Append(_OrderBy.TrimEnd(',')); }//如果有分页排序则在上面构建好了
-            //分页必须在最后构造
-            if (TakeCount > 0)
+            if (Connection is Microsoft.Data.SqlClient.SqlConnection)
             {
-                return $@"
+                str.Append("select ").Append(Column);
+                if (TakeCount > 0) { str.Append($",row_number() over(order by {(_OrderBy == null ? "(select 0)" : _OrderBy.TrimEnd(','))}) as _RowNum"); }//分页的序号列
+                str.Append(" from ").Append(Table);
+                str.AppendLine(this.Join);
+                if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
+                if (TakeCount == 0 && _OrderBy != null) { str.Append(" order by ").Append(_OrderBy.TrimEnd(',')); }//如果有分页排序则在上面构建好了
+                                                                                                                   //分页必须在最后构造
+                if (TakeCount > 0)
+                {
+                    return $@"
 with _tab as(
 {str}
 )
 select * from _tab where _RowNum between @_start and @_end
 ";
+                }
+            }
+            else if (Connection is Microsoft.Data.Sqlite.SqliteConnection)
+            {
+                str.Append("select ").Append(Column);
+                str.Append(" from ").Append(Table);
+                str.AppendLine(this.Join);
+                if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
+                if (_OrderBy != null) { str.Append(" order by ").Append(_OrderBy.TrimEnd(',')); }
+                if (TakeCount > 0) { str.Append($" LIMIT {SkipCount},{TakeCount}"); }
+            }
+            else
+            {
+                throw new Exception("请在此处加判断");
             }
             return str.ToString();
         }
