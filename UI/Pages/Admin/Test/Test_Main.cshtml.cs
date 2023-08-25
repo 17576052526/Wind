@@ -58,7 +58,7 @@ namespace Wind.UI.Pages.Admin.Test
                 var sql = db.Select<Test_Main>("count(*)")
                     .LeftJoin<Sys_Type>("Test_Main.Sys_Type_ID=Sys_Type.ID")
                     .Where(Where, Param);
-                this.DataCount = (int)sql.QueryScalar();
+                this.DataCount = Convert.ToInt32(sql.QueryScalar());
 
                 if (Request.Query["orderby"].Count > 0)
                 {
