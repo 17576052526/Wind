@@ -27,7 +27,7 @@
                 <form method="get" id="searchForm">
                     <div class="marginLR3g">
                         <input type="text" class="input-text" name="MainID" placeholder="编号" value="@Request.Query["MainID"]" />
-                        @Html.DropDownList("Test_Type_ID", DB.Selects<Test_Type>("ID,TypeName").Query().Select<Test_Type, SelectListItem>(s => new SelectListItem(s.TypeName, s.ID.ToString(), s.ID.ToString() == Request.Query["Test_Type_ID"])), "请选择类型", new { @class = "input-text" })
+                        @Html.DropDownList("Sys_Type_ID", DB.Selects<Sys_Type>("ID,Name").Query().Select<Sys_Type, SelectListItem>(s => new SelectListItem(s.Name, s.ID.ToString(), s.ID.ToString() == Request.Query["Sys_Type_ID"])), "请选择类型", new { @class = "input-text" })
                         <input type="date" class="input-text" name="CreateTime1" placeholder="起始创建时间" value="@Request.Query["CreateTime1"]" />-
                         <input type="date" class="input-text" name="CreateTime2" placeholder="结束创建时间" value="@Request.Query["CreateTime2"]" />
                         <button type="submit" class="btn-primary"><i class="icon-search"></i>搜索</button>
@@ -58,7 +58,7 @@
                                         <td class="table-fixed-col"><input type="checkbox" class="check-item" name="checkID" value="@m.ID" /></td>
                                         <td><a href="Test_MainEdit?id=@m.ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">@m.MainID</a></td>
                                         <td>@m.MainName</td>
-                                        <td>@m.Type.TypeName</td>
+                                        <td>@m.Type.Name</td>
                                         <td>@m.Quantity</td>
                                         <td>@m.Amount</td>
                                         <td><input type="checkbox" onclick="this.checked=!this.checked" checked="@m.IsShow" /></td>

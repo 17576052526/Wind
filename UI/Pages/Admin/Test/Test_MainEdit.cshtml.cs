@@ -33,7 +33,7 @@ namespace Wind.UI.Pages.Admin.Test
                 //为 null 不参与修改，所以一定要有值才会参与修改
                 if (model.MainID == null) { model.MainID = ""; }
                 if (model.MainName == null) { model.MainName = ""; }
-                if (model.Test_Type_ID == null) { model.Test_Type_ID = 0; }
+                if (model.Sys_Type_ID == null) { model.Sys_Type_ID = 0; }
                 if (model.Quantity == null) { model.Quantity = 0; }
                 if (model.Amount == null) { model.Amount = 0; }
                 if (model.IsShow == null) { model.IsShow = false; }

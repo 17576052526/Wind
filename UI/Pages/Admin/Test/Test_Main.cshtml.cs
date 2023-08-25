@@ -21,7 +21,7 @@ namespace Wind.UI.Pages.Admin.Test
                 if (_where == null)
                 {
                     _where += !String.IsNullOrEmpty(Request.Query["MainID"]) ? " and Test_Main.MainID like @MainID" : null;
-                    _where += !String.IsNullOrEmpty(Request.Query["Test_Type_ID"]) ? " and Test_Main.Test_Type_ID = @Test_Type_ID" : null;
+                    _where += !String.IsNullOrEmpty(Request.Query["Sys_Type_ID"]) ? " and Test_Main.Sys_Type_ID = @Sys_Type_ID" : null;
                     _where += !String.IsNullOrEmpty(Request.Query["CreateTime1"]) ? " and Test_Main.CreateTime >= @CreateTime1" : null;
                     _where += !String.IsNullOrEmpty(Request.Query["CreateTime2"]) ? " and Test_Main.CreateTime <= @CreateTime2" : null;
 
@@ -41,7 +41,7 @@ namespace Wind.UI.Pages.Admin.Test
                     _param = new
                     {
                         MainID = "%" + Request.Query["MainID"].ToString() + "%",
-                        Test_Type_ID = Request.Query["Test_Type_ID"].ToString(),
+                        Sys_Type_ID = Request.Query["Sys_Type_ID"].ToString(),
                         CreateTime1 = Request.Query["CreateTime1"].ToString(),
                         CreateTime2 = Request.Query["CreateTime2"].ToString(),
                     };
@@ -56,7 +56,7 @@ namespace Wind.UI.Pages.Admin.Test
             using (DB db = new DB())
             {
                 var sql = db.Select<Test_Main>("count(*)")
-                    .LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID")
+                    .LeftJoin<Sys_Type>("Test_Main.Sys_Type_ID=Sys_Type.ID")
                     .Where(Where, Param);
                 this.DataCount = (int)sql.QueryScalar();
 
@@ -64,7 +64,7 @@ namespace Wind.UI.Pages.Admin.Test
                 {
                     sql = sql.OrderBy(Request.Query["orderby"]);
                 }
-                this.List = sql.Select("Test_Main.*,Test_Type.TypeName")
+                this.List = sql.Select("Test_Main.*,Sys_Type.Name")
                     .Query((PageIndex - 1) * PageSize, PageSize);
             }
         }

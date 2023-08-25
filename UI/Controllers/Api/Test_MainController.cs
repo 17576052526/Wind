@@ -53,11 +53,11 @@ namespace UI.Controllers.Api
                 if (param.MainName != "" && param.MainName != null) { sql.WhereAnd("MainName like @MainName", new { MainName = '%' + param.MainName.ToString() + '%' }); }
 
                 //表连接查询
-                sql.LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID");
+                sql.LeftJoin<Sys_Type>("Test_Main.Sys_Type_ID=Sys_Type.ID");
                 //查询总数据量
                 int total = (int)sql.QueryScalar();
                 //设置查询列
-                sql.Select("Test_Main.*,Test_Type.TypeName");
+                sql.Select("Test_Main.*,Sys_Type.Name");
                 //排序
                 sql.OrderBy("Test_Main.ID desc");
                 //分页
