@@ -12,22 +12,26 @@ using System.Text;
 namespace DbOrm.Model
 {
     /// <summary>
-    /// 测试表
+    /// 测试模块主表
     /// </summary>
-    public partial class Sys_Test : IModel
+    public partial class Test_Main : IModel
     {
         /// <summary>
         /// 主键
         /// </summary>
         public int? ID { set; get; }
         /// <summary>
-        /// 所属类型（外键）
+        /// 编号
         /// </summary>
-        public int? TypeID { set; get; }
+        public string MainID { set; get; }
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name { set; get; }
+        public string MainName { set; get; }
+        /// <summary>
+        /// 所属类型（外键）
+        /// </summary>
+        public int? Sys_Type_ID { set; get; }
         /// <summary>
         /// 数量
         /// </summary>
@@ -61,7 +65,7 @@ namespace DbOrm.Model
         /// </summary>
         internal override string InsertSql()
         {
-            return "insert into Sys_Test(TypeID,Name,Quantity,Amount,IsShow,Img,Files,Remark,CreateTime) values(@TypeID,@Name,@Quantity,@Amount,@IsShow,@Img,@Files,@Remark,@CreateTime)";
+            return "insert into Test_Main(MainID,MainName,Sys_Type_ID,Quantity,Amount,IsShow,Img,Files,Remark,CreateTime) values(@MainID,@MainName,@Sys_Type_ID,@Quantity,@Amount,@IsShow,@Img,@Files,@Remark,@CreateTime)";
         }
 
         /// <summary>
@@ -70,8 +74,9 @@ namespace DbOrm.Model
         internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
-            if (TypeID != null) { str.AppendLine(",TypeID=@TypeID"); }
-            if (Name != null) { str.AppendLine(",Name=@Name"); }
+            if (MainID != null) { str.AppendLine(",MainID=@MainID"); }
+            if (MainName != null) { str.AppendLine(",MainName=@MainName"); }
+            if (Sys_Type_ID != null) { str.AppendLine(",Sys_Type_ID=@Sys_Type_ID"); }
             if (Quantity != null) { str.AppendLine(",Quantity=@Quantity"); }
             if (Amount != null) { str.AppendLine(",Amount=@Amount"); }
             if (IsShow != null) { str.AppendLine(",IsShow=@IsShow"); }
@@ -80,7 +85,7 @@ namespace DbOrm.Model
             if (Remark != null) { str.AppendLine(",Remark=@Remark"); }
             if (CreateTime != null) { str.AppendLine(",CreateTime=@CreateTime"); }
 
-            return "update Sys_Test set " + str.Remove(0, 1);
+            return "update Test_Main set " + str.Remove(0, 1);
         }
     }
 }
