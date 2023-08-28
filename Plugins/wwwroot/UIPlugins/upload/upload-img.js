@@ -12,21 +12,23 @@
         $(按钮对象).attr('data') 获取图片地址
 */
 //加载
-$('.upload-img').each(function () {
-    var cur = $(this);
-    var data = cur.attr('data');
-    //生成box
-    var boxId = 'imgBox' + Math.floor(Math.random() * 1000000);
-    cur.attr('boxId', boxId);
-    var box = $('<div class="upload-img-box" id="' + boxId + '"></div>').insertBefore(cur);
-    //生成隐藏域
-    var hidName = cur.attr('hidden-name');
-    if (hidName) {
-        var hiddenId = 'hidden' + Math.floor(Math.random() * 1000000);
-        cur.attr('hiddenId', hiddenId);
-        $('<input type="hidden" name="' + hidName + '" id="' + hiddenId + '" value="' + data + '"  />').insertBefore(cur)
-    }
-    addImg(box, data);
+$(function () {
+    $('.upload-img').each(function () {
+        var cur = $(this);
+        var data = cur.attr('data');
+        //生成box
+        var boxId = 'imgBox' + Math.floor(Math.random() * 1000000);
+        cur.attr('boxId', boxId);
+        var box = $('<div class="upload-img-box" id="' + boxId + '"></div>').insertBefore(cur);
+        //生成隐藏域
+        var hidName = cur.attr('hidden-name');
+        if (hidName) {
+            var hiddenId = 'hidden' + Math.floor(Math.random() * 1000000);
+            cur.attr('hiddenId', hiddenId);
+            $('<input type="hidden" name="' + hidName + '" id="' + hiddenId + '" value="' + data + '"  />').insertBefore(cur)
+        }
+        addImg(box, data);
+    })
 })
 //追加显示的图片 obj:按钮对象，data:要追加的图片地址
 function addImg(box, data) {
