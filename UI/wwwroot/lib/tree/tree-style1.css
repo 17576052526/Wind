@@ -1,3 +1,0 @@
-﻿.tree-box {padding-left: 20px;border-left: 2px solid #ccc;margin-left: 10px;}
-.tree-btn {padding: 5px 10px;border: 1px solid #ddd;border-radius: 3px;position: relative;}
-.tree-btn:after {content: "";height: 2px;width: 20px;background-color: #ccc;position: absolute;left: -21px;top: 15px;}

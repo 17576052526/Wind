@@ -1,0 +1,33 @@
+﻿/* 
+    原子类css，这里更多的是定义一套命名规范
+    设计原则：
+    1.不封装原本的css含义
+    2.可读性：不能太长（样式很多就不能一眼看出有哪些样式），也不能太简洁（太简洁，看到单个词汇不能立马想到是什么意思）
+    3.可写性：方便记忆，方便编辑器提示
+    3.不常用的可以考虑不加进来
+    
+    几种命名方案：
+    center、hidden 在多个css属性中有用到的命名方案：
+    0.单值命名：flex   block
+    1.以值为主的命名 o-hidden   t-center
+    2.以属性为主的命名 overflow-h text-c
+    3.值和属性都写上的命名 overflow-hidden  text-center
+    4.带-和骆驼峰命名 text-center textCenter
+    5.考虑用 marginLR5c  还是  margin-lr-5-c
+    6.非常常用的可以简短，不常用的可以全名
+
+    所有的命名：
+    display:block 命名： d-block   display-b    block   display-block   displayBlock
+    text-align:center 命名： text-c     t-center   text-center   textCenter
+    padding-left:10px 命名： padding-l-10  paddingL10   pl-10  pl10  
+
+    目前采用的方式：ml-auto p-10  block   text-center   f-13
+        3.1 数值类的，margin，margin-left，margin-right，width，左边的为主，margin-lr-5-c   
+        3.2 非数值类的 display:block，命名以右边的值为主，例如 .block   
+        3.3 非数值类的 text-align:center，center 在多个属性中有用到，所以此处  .text-center
+
+    1.数值类的命名：margin,padding,width,margin-left:auto ，怎么写 margin-left-auto（太长了）  marginLeft-auto   ml-auto
+    2.非数值类的命名：position:absolute 怎么写  positionA position-a absolute
+    3.非数值类命名，且值存在多个属性中：text-align:center，怎么写 textCenter text-center   t-center
+
+*/
