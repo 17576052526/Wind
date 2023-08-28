@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/globalCss/global.css" />
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/font/css/fontello.css" />
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/AdminUI2/UI.css" />
+    <script type="text/javascript" src="/Admin/lib/jquery.js"></script>
+    <!--固定表格-->
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/table-fixed/table-fixed.css" />
+    <script type="text/javascript" src="/Admin/lib/table-fixed/table-fixed.js"></script>
+    <!--收缩表格-->
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/table-resize/table-resize.css" />
+    <script type="text/javascript" src="/Admin/lib/table-resize/table-resize.js"></script>
+    <!--提示框-->
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/alert/alert.css" />
+    <script type="text/javascript" src="/Admin/lib/alert/alert.js"></script>
+    <!--确认框-->
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/confirm/confirm.css" />
+    <script type="text/javascript" src="/Admin/lib/confirm/confirm.js"></script>
+    <!--移动框-->
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/box-move/box-move.css" />
+    <script type="text/javascript" src="/Admin/lib/box-move/box-move.js"></script>
+    <script type="text/javascript">
+        //批量删除
+        function checkDelete(obj) {
+            if (obj) {
+                $('#form [name="checkID"]:checked').prop('checked', false);
+                $(obj).parents('tr').find('[name=checkID]').prop('checked', true);
+            }
+            var check = $('#form [name="checkID"]:checked');
+            if (check.length == 0) {
+                $.alert('请选择删除的行');
+            } else {
+                $.confirm('确定删除？', function () {
+                    $('#form').submit();
+                })
+            }
+        }
+    </script>
+    @RenderSection("head",false)
+</head>
+<body class="p-7.5">
+    @RenderBody()
+</body>
+</html>

@@ -1,5 +1,5 @@
 ﻿@page
-@model Wind.UI.Pages.Admin.defaultModel
+@model UI.Pages.Admin.DefaultModel
 
 <!DOCTYPE html>
 <html>
@@ -7,88 +7,87 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/lib/global.css" />
-    <link rel="stylesheet" type="text/css" href="/lib/AdminUI/UI.css" />
-    <link rel="stylesheet" type="text/css" href="/lib/font/css/fontello.css" />
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/globalCss/global.css" />
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/font/css/fontello.css" />
+    <link rel="stylesheet" type="text/css" href="/Admin/lib/AdminUI2/UI.css" />
+    <script type="text/javascript" src="/Admin/lib/jquery.js"></script>
 </head>
-<body>
-    <div class="padding10 marginB10g">
-        <div class="flexWrap marginLR5g marginB10g">
-            <div class="box-info flex1" style="min-width:300px;">
-                <div class="box-head">登录信息</div>
-                <div class="box-body">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>上一次登录名</td>
-                                <td>7654561231.Q</td>
-                            </tr>
-                            <tr>
-                                <td>上一次登陆的时间</td>
-                                <td>2016-06-08</td>
-                            </tr>
-                            <tr>
-                                <td>上一次登陆的IP</td>
-                                <td>192.168.0.132</td>
-                            </tr>
-                            <tr>
-                                <td>上一次登陆的地区</td>
-                                <td>192.168.0.132</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="box-success flex1" style="min-width:300px;">
-                <div class="box-head">技术支持</div>
-                <div class="box-body">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>QQ</td>
-                                <td>123456</td>
-                            </tr>
-                            <tr>
-                                <td>联系人</td>
-                                <td>王工</td>
-                            </tr>
-                            <tr>
-                                <td>手机</td>
-                                <td>1341111111</td>
-                            </tr>
-                            <tr>
-                                <td>微信</td>
-                                <td>2312321443</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="box-danger">
-            <div class="box-head">系统信息</div>
+<body class="p-7.5">
+    <div class="flex-wrap">
+        <div class="box-info flex-1" style="min-width:300px;">
+            <div class="box-head">登录信息</div>
             <div class="box-body">
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td>数据库</td>
-                            <td>Sql Server 2008 R2</td>
+                            <td>上一次登录名</td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         </tr>
                         <tr>
-                            <td>编程语言</td>
-                            <td>.net core 5.0</td>
+                            <td>上一次登陆的时间</td>
+                            <td></td>
                         </tr>
                         <tr>
-                            <td>服务器地址</td>
-                            <td>192.168.0.132</td>
+                            <td>上一次登陆的IP</td>
+                            <td></td>
                         </tr>
                         <tr>
-                            <td>服务器操作系统</td>
-                            <td>Windows Server 2008企业版</td>
+                            <td>上一次登陆的地区</td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="box-success flex-1 ml-10" style="min-width:300px;">
+            <div class="box-head">技术支持</div>
+            <div class="box-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>QQ</td>
+                            <td>727863984</td>
+                        </tr>
+                        <tr>
+                            <td>联系人</td>
+                            <td>邓工</td>
+                        </tr>
+                        <tr>
+                            <td>手机</td>
+                            <td>17576052526</td>
+                        </tr>
+                        <tr>
+                            <td>微信</td>
+                            <td>17576052526</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="box-danger mt-10">
+        <div class="box-head">系统信息</div>
+        <div class="box-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>数据库</td>
+                        <td>Sql Server 2008 R2/Sqlite</td>
+                    </tr>
+                    <tr>
+                        <td>编程语言</td>
+                        <td>.net core 6.0</td>
+                    </tr>
+                    <tr>
+                        <td>服务器地址</td>
+                        <td>***.***.*.***</td>
+                    </tr>
+                    <tr>
+                        <td>服务器操作系统</td>
+                        <td>Windows Server 2008企业版</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>

@@ -1,81 +1,75 @@
-﻿@page
-@model Wind.UI.Pages.Admin.Test.Test_MainEditModel
+﻿@page "{handler:?}"
 @using DbOrm
 @using DbOrm.Model
+@model UI.Pages.Admin.Test.Test_MainEditModel
+@{
+    Layout = "_Layout_Edit";
+}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="/lib/global.css" />
-    <link rel="stylesheet" type="text/css" href="/Admin/Css/listedit-merge.min.css" />
-    <link rel="stylesheet" type="text/css" href="/Admin/Css/edit-merge.min.css" />
-</head>
-<body>
-    <div class="padding10 height100">
-        <form method="post">
-            <div class="box height100">
-                <div class="box-head flex">
-                    <div class="flex1">销售订单编辑</div>
-                    <div class="marginLR3g">
-                        <input type="submit" value="提交" class="btn-primary h-pre" />
-                        <input type="reset" value="重置" class="btn h-pre" />
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="form-row">
-                        <label class="form-item">
-                            <span>编号</span>
-                            @Html.TextBoxFor(s => s.Model.MainID, new { @class = "input-text" })
-                        </label>
-                        <label class="form-item">
-                            <span>名称</span>
-                            @Html.TextBoxFor(s => s.Model.MainName, new { @class = "input-text" })
-                        </label>
-                        <label class="form-item">
-                            <span>类型</span>
-                            @Html.DropDownListFor(s => s.Model.Sys_Type_ID, DB.Selects<Sys_Type>("ID,Name").Query().Select<Sys_Type, SelectListItem>(s => new SelectListItem(s.Name, s.ID.ToString(), s.ID.ToString() == Request.Query["Sys_Type_ID"])), "请选择", new { @class = "input-text" })
-                        </label>
-                        <label class="form-item">
-                            <span>数量</span>
-                            @Html.TextBoxFor(s => s.Model.Quantity, new { @class = "input-text" })
-                        </label>
-                        <label class="form-item">
-                            <span>金额</span>
-                            @Html.TextBoxFor(s => s.Model.Amount, new { @class = "input-text" })
-                        </label>
-                        <label class="form-item">
-                            <span>是否离职</span>
-                            @Html.CheckBox("Model.IsShow",Model.Model!=null&&Model.Model.IsShow!=null?Model.Model.IsShow.Value:false)
-                        </label>
-                        <label class="form-item">
-                            <span>图片</span>
-                            <span>
-                                <span class="upload-img btn-success" url="/common/upload" hidden-name="Model.Img" multiple="multiple" data="@(Model.Model!=null?@Model.Model.Img:"")">图片上传</span>
-                            </span>
-                        </label>
-                        <label class="form-item">
-                            <span>文件</span>
-                            @Html.TextBoxFor(s => s.Model.Files, new { @class = "input-text" })
-                        </label>
-                        <label class="form-item">
-                            <span>备注</span>
-                            @Html.TextAreaFor(s => s.Model.Remark, new { @class = "input-text" })
-                        </label>
-                        <label class="form-item">
-                            <span>日期</span>
-                            <input type="date" value="@(Model.Model!=null?Model.Model.CreateTime.ToString("yyyy-MM-dd"):"")" class="input-text" />
-                        </label>
-                    </div>
-                </div>
+<div class="box h-100">
+    <div class="box-head">修改</div>
+    <div class="box-body">
+        <form method="post" id="form">
+            <div class="form-row">
+                <label class="form-item">
+                    <span>编号</span>
+                    @Html.TextBoxFor(s => s.Model.MainID, new { @class = "input-text" })
+                </label>
+                <label class="form-item">
+                    <span>名称</span>
+                    @Html.TextBoxFor(s => s.Model.MainName, new { @class = "input-text" })
+                </label>
+                <label class="form-item">
+                    <span>类型</span>
+                    @Html.DropDownListFor(s => s.Model.Sys_Type_ID, DB.Selects<Sys_Type>("ID,Name").Query().Select<Sys_Type, SelectListItem>(s => new SelectListItem(s.Name, s.ID.ToString(), s.ID.ToString() == Request.Query["Sys_Type_ID"])), "请选择", new { @class = "input-text" })
+                </label>
+                <label class="form-item">
+                    <span>数量</span>
+                    @Html.TextBoxFor(s => s.Model.Quantity, new { @class = "input-text" })
+                </label>
+                <label class="form-item">
+                    <span>金额</span>
+                    @Html.TextBoxFor(s => s.Model.Amount, new { @class = "input-text" })
+                </label>
+                <label class="form-item">
+                    <span>是否离职</span>
+                    @Html.CheckBox("Model.IsShow",Model.Model!=null&&Model.Model.IsShow!=null?Model.Model.IsShow.Value:false)
+                </label>
+                <label class="form-item">
+                    <span>图片</span>
+                    <span>
+                        <input type="button" value="图片上传" class="upload-img btn-success" url="/common/upload" hidden-name="Model.Img" multiple="multiple" data="@(Model.Model!=null?@Model.Model.Img:"")" />
+                    </span>
+                </label>
+                <label class="form-item">
+                    <span>文件</span>
+                    <span>
+                        <input type="button" value="上传" class="btn-success" onclick="upload(this)" />
+                        @Html.TextBoxFor(s => s.Model.Files, new { @class = "input-text fileTxt" ,style="border:none",@readonly="readonly"})
+                    </span>
+                </label>
+                <label class="form-item w-100">
+                    <span>备注</span>
+                    <span id="editor"></span>
+                    @Html.HiddenFor(s=>s.Model.Remark)<!---------------------------只需改此处-------------------------------->
+                    <script type="text/javascript" src="/Admin/lib/Editor/wangEditor.min.js"></script>
+                    <script type="text/javascript">
+                        const editor = new window.wangEditor('#editor')
+                        editor.config.uploadImgShowBase64 = true;
+                        editor.create()
+                        editor.txt.html($('#editor').parent().children('[type=hidden]').val())
+                        editor.config.onchange = function (newHtml) { $('#editor').parent().children('[type=hidden]').val(newHtml); }
+                    </script>
+                </label>
+                <label class="form-item">
+                    <span>日期</span>
+                    <input type="date" value="@(Model.Model!=null?Model.Model.CreateTime.ToString("yyyy-MM-dd"):"")" class="input-text" />
+                </label>
             </div>
         </form>
     </div>
-
-    <script type="text/javascript" src="/lib/jquery.js"></script>
-    <script type="text/javascript" src="/Admin/Js/listedit-merge.min.js"></script>
-    <script type="text/javascript" src="/Admin/Js/edit-merge.min.js"></script>
-</body>
-</html>
+    <div class="box-foot">
+        <input type="button" class="btn-primary mlr-10" value="提交" onclick="$('#form').submit()" />
+        <input type="button" class="btn-default mlr-10" value="取消" onclick="history.go(-1);" />
+    </div>
+</div>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -7,8 +8,9 @@ using DbOrm;
 using DbOrm.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UI.Pages.Admin;
 
-namespace Wind.UI.Pages.Admin.Test
+namespace UI.Pages.Admin.Test
 {
     public class Test_MainModel : ListPageModel
     {
@@ -60,10 +62,7 @@ namespace Wind.UI.Pages.Admin.Test
                     .Where(Where, Param);
                 this.DataCount = Convert.ToInt32(sql.QueryScalar());
 
-                if (Request.Query["orderby"].Count > 0)
-                {
-                    sql = sql.OrderBy(Request.Query["orderby"]);
-                }
+                sql = sql.OrderBy("Test_Main.ID Desc");
                 this.List = sql.Select("Test_Main.*,Sys_Type.Name")
                     .Query((PageIndex - 1) * PageSize, PageSize);
             }
@@ -83,7 +82,7 @@ namespace Wind.UI.Pages.Admin.Test
                     }
                     db.CommitTransaction();
                 }
-                catch { db.RollbackTransaction();throw; }
+                catch { db.RollbackTransaction(); throw; }
             }
             return Redirect(Request.Path.Value.Remove(Request.Path.Value.LastIndexOf('/')) + Request.QueryString);
         }
