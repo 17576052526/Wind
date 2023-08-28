@@ -1,4 +1,5 @@
 
+.icon-spin4:before { content: '\e834'; } /* '' */
 .icon-search:before { content: '\f002'; } /* '' */
 .icon-envelope:before { content: '\f003'; } /* '' */
 .icon-user:before { content: '\f007'; } /* '' */
@@ -28,4 +29,3 @@
 .icon-sort_up:before { content: '\f0de'; } /* '' */
 .icon-angle_left:before { content: '\f104'; } /* '' */
 .icon-circle_blank:before { content: '\f10c'; } /* '' */
-.icon-spinner:before { content: '\f110'; } /* '' */
