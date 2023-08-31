@@ -28,7 +28,6 @@
         说明：
         interval: 5000,   //间隔5秒切换一次
         speed: 500,    //0.5秒切换完成
-        isHoverStop: false,    //鼠标悬浮其上停止计时器
         switchStop: 30000,    //手动切换后暂停多久重新启动计时器
         子节点设置动画：
         animate="动画类样式"
@@ -49,11 +48,13 @@
     </div>
 
     <script type="text/javascript">
-        var [a, b] = $('.banner-slide').bannerSlide();
+        var [a, b, c] = $('.banner-slide').bannerSlide();
     </script>
 
     <!--非必要代码-->
     <button onclick="a()">上一个</button>
     <button onclick="b()">下一个</button>
+    <button onclick="c(false)">暂停</button>
+    <button onclick="c(true)">启动</button>
 </body>
 </html>

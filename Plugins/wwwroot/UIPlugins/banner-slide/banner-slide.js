@@ -2,7 +2,6 @@
     var param = $.extend({
         interval: 5000,   //间隔5秒切换一次
         speed: 500,    //0.5秒切换完成
-        isHoverStop: false,    //鼠标悬浮其上停止计时器
         switchStop: 30000,    //手动切换后暂停多久重新启动计时器
     }, settings || {});
 
@@ -85,11 +84,6 @@
         }, param.interval)
     }
     setTime();
-    //悬浮其上停止计时器
-    if (param.isHoverStop) {
-        box.on('mouseenter', function () { clearInterval(time) });
-        box.on('mouseleave', function () { setTime(); });
-    }
     //上一个
     function previous() {
         index--;
@@ -128,5 +122,5 @@
         }
     })
 
-    return [previous, next];//上一个，下一个
+    return [previous, next, (a) => a ? setTime() : clearInterval(time)];//上一个，下一个
 }
