@@ -8,14 +8,18 @@
         * {margin: 0;padding: 0;}
         ul {list-style: none;}
         .hidden{visibility:hidden;}
-        @keyframes fadeInDown{
-            0%{opacity:0;transform:translateY(-30%);}
-            100%{opacity:1;transform:translateY(0px);}
-        }
-        .fadeInDown {
-            animation: fadeInDown 0.6s;
-            visibility: visible;
-        }
+
+        [class^="animate-"], [class*=" animate-"] {
+    animation-duration: 0.6s;
+    animation-fill-mode: both;
+}
+@keyframes fadeInDown{
+    0%{opacity:0;transform:translateY(-30%);}
+    100%{opacity:1;transform:none;}
+}
+.animate-fadeInDown {animation-name: fadeInDown;visibility:visible;}
+
+.animate-delay-600{animation-delay:600ms}
 
     </style>
     <script type="text/javascript" src="../jquery.js"></script>
@@ -31,17 +35,16 @@
         switchStop: 30000,    //手动切换后暂停多久重新启动计时器
         子节点设置动画：
         animate="动画类样式"
-        delay="动画延迟时间"
         -->
     <div class="banner-slide" style="width:500px;height:300px;">
         <ul class="banner-slide-box">
             <li class="banner-slide-item" style="background-color:#eee;">
-                <div class="hidden" animate="fadeInDown">动画1</div>
-                <div class="hidden" animate="fadeInDown" delay="0.5">动画2</div>
+                <div class="hidden" animate="animate-fadeInDown">动画1</div>
+                <div class="hidden" animate="animate-fadeInDown animate-delay-600">动画2</div>
             </li>
             <li class="banner-slide-item" style="background-color:#4cff00;">
-                <div class="hidden" animate="fadeInDown">动画3</div>
-                <div class="hidden" animate="fadeInDown" delay="0.5">动画4</div>
+                <div class="hidden" animate="animate-fadeInDown">动画3</div>
+                <div class="hidden" animate="animate-fadeInDown animate-delay-600">动画4</div>
             </li>
             <li class="banner-slide-item" style="background-color:blue;"></li>
         </ul>
