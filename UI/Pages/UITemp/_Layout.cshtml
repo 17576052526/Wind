@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>@Html.Raw(ViewBag.title)</title>
+    <meta name="keywords" content="@Html.Raw(ViewBag.keywords)" />
+    <meta name="description" content="@Html.Raw(ViewBag.description)" />
+    <!--<link rel="shortcut icon" href="/img/ico.ico">-->
+    <link rel="stylesheet" type="text/css" href="/_plugins/atomCss/atom.css" />
+    <script type="text/javascript" src="/_plugins/jquery.js"></script>
+    <style type="text/css">
+        .container {max-width:1280px;margin-left:auto;margin-right:auto;padding-left:0.75rem;padding-right:0.75rem;}
+    </style>
+</head>
+<body>
+    @RenderBody()
+
+
+    <script type="text/javascript" src="/_plugins/hover/hover.js"></script>
+    <script type="text/javascript" src="/_plugins/hover-to/hover-to.js"></script>
+    <script type="text/javascript" src="/_plugins/click-to/click-to.js"></script>
+    <script type="text/javascript" src="/_plugins/scroll-to/scroll-to.js"></script>
+</body>
+</html>
