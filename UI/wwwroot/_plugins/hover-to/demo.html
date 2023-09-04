@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        /*非不要样式*/
+        .display-none{display:none;}
+        .block{display:block;}
+    </style>
+</head>
+<body>
+    <!--
+        hover-to 属性
+            1.属性所在的节点，即是悬浮其上触发事件的节点
+            2.属性值为空,则是找子节点中有 in-add、out-add、in-remove、out-remove 的节点
+            3.属性值不为空，则是根据属性值去找节点，例如：hover-to="$(this).find('[in-add],[in-remove]')"，   hover-to="$('#aaa')"
+
+        in-add 鼠标移入时当前节点要添加的类样式
+        out-add 鼠标移出时当前节点要添加的类样式
+        in-remove 鼠标移入时当前节点要删除的类样式
+        out-remove 鼠标移出时当前节点要删除的类样式
+        -->
+    <div hover-to>
+        悬浮其上当前节点，给其他的节点加或减类样式
+        <div class="display-none" in-add="block" out-add="" in-remove="" out-remove="block">此节点改变类样式</div>
+    </div>
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="hover-to.js"></script>
+</body>
+</html>

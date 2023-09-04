@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        .hidden{visibility:hidden;}
+
+        [class^="animate-"], [class*=" animate-"] {
+    animation-duration: 0.6s;
+    animation-fill-mode: both;
+}
+@keyframes fadeInDown{
+    0%{opacity:0;transform:translateY(-30%);}
+    100%{opacity:1;transform:none;}
+}
+.animate-fadeInDown {animation-name: fadeInDown;visibility:visible;}
+
+@keyframes fadeOutUp{
+    0%{opacity:1;visibility:visible;}
+    100%{opacity:0;transform:translateY(-30%);visibility:hidden;}
+}
+.animate-fadeOutUp {animation-name: fadeOutUp;}
+
+.animate-delay-600{animation-delay:600ms}
+    </style>
+</head>
+<body>
+    <!--
+    说明：滚动条滚动到某块或离开某块，对该块添加或删除类样式
+        scroll-in-add 进入时要添加的类样式
+        scroll-in-remove 进入时要删除的类样式
+        scroll-out-add 离开时要添加的类样式
+        scroll-out-remove 离开时要删除的类样式
+
+        -->
+    <div style="height:1000px;">
+        往下滚动看效果
+    </div>
+
+    <div class="hidden" style="height:100px;border:1px solid #ccc;" scroll-in-add="animate-fadeInDown" scroll-out-add="animate-fadeOutUp" scroll-out-remove="animate-fadeInDown" scroll-in-remove="animate-fadeOutUp">动画效果</div>
+    <div class="hidden" style="height:100px;border:1px solid #ccc;" scroll-in-add="animate-fadeInDown animate-delay-600" scroll-out-add="animate-fadeOutUp animate-delay-600" scroll-out-remove="animate-fadeInDown" scroll-in-remove="animate-fadeOutUp">动画效果</div>
+
+
+    <div style="height:500px;">
+        
+    </div>
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="scroll-to.js"></script>
+</body>
+</html>
