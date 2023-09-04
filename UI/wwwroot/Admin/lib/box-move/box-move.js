@@ -32,8 +32,11 @@ $(document).on('mousedown', '.box-move-switch', function (e) {
     $(document.body).css({ 'user-select': 'none', 'cursor': 'move' });
     //鼠标移动
     function mousemove(e) { box.css({ 'left': e.clientX - x, 'top': e.clientY - y > 0 ? e.clientY - y : 0 }); }//往上移动不能超出边界（不然移动不回来）
+    //加入透明遮罩层，在有iframe的时候要加入
+    var zzc = $('<div style="width:100vw;height:100vh;position:fixed;top:0;left:0;z-index:99999;"></div>').appendTo(document.body);
     //鼠标松开
     function mouseup(e) {
+        zzc.remove();//删除透明遮罩层
         $(document.body).css({ 'user-select': '', 'cursor': '' });
         $(document).off({ 'mousemove': mousemove, 'mouseup': mouseup });
     }
