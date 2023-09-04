@@ -80,6 +80,7 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .box-info {border-top:3px solid #00c0ef;}
 .box-danger {border-top:3px solid #dd4b39;}
 .box-warning {border-top:3px solid #f39c12;}
+.box-p-none{padding:0;}
 /*选项卡*/
 .tab-box{display:flex;border-bottom: 1px solid #dee2e6;}
 .tab-item{padding:0.8rem 1.5rem 0.5rem 1.5rem;border-bottom:3px solid transparent;cursor:pointer;user-select: none;}
