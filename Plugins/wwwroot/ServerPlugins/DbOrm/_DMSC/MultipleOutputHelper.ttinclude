@@ -1,6 +1,5 @@
 <#@ assembly name="System.Core"
 #><#@ assembly name="System.Data.Linq"
-#><#@ assembly name="EnvDTE"
 #><#@ assembly name="System.Xml"
 #><#@ assembly name="System.Xml.Linq"
 #><#@ import namespace="System.Collections.Generic"
@@ -146,7 +145,7 @@ class Manager {
             var hostServiceProvider = (IServiceProvider)host;
             if (hostServiceProvider == null)
                 throw new ArgumentNullException("Could not obtain IServiceProvider");
-            dte = (EnvDTE.DTE) hostServiceProvider.GetService(typeof(EnvDTE.DTE));
+            dte = (EnvDTE.DTE) hostServiceProvider.GetCOMService(typeof(EnvDTE.DTE));
             if (dte == null)
                 throw new ArgumentNullException("Could not obtain DTE from host");
             templateProjectItem = dte.Solution.FindProjectItem(host.TemplateFile);

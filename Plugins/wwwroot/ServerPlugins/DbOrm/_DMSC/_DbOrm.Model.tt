@@ -13,9 +13,9 @@
     DbHelper.ConnString=Regex.Match(File.ReadAllText(projectDir + "_DMSC/appsettings.json"), "(?<=\"ConnString\"\\s*:\\s*\")[^\"]+(?=\")").Value;
     List<Table> list=DMSC.Main();  //获取表集合
 	var manager = Manager.Create(Host, GenerationEnvironment);
+    string outputDirectory=Regex.Match(File.ReadAllText(projectDir + "_DMSC/appsettings.json"), "(?<=\"outputDirectory\"\\s*:\\s*\")[^\"]+(?=\")").Value;
 	foreach(Table table in list){
-        int index=table.Name.IndexOf('_');
-		string dire=projectDir+(index==-1?"":table.Name.Substring(0,index)+"\\");//如果表名中有下划线就按模块划分文件夹
+		string dire=projectDir+outputDirectory;
         string path=dire+table.Name+".Designer.cs";
 		if (!Directory.Exists(dire)) { Directory.CreateDirectory(dire); }
         if(File.Exists(path)){File.Delete(path);}
@@ -37,7 +37,7 @@ namespace DbOrm.Model
     /// <summary>
     /// <#=table.Description#>
     /// </summary>
-    public partial class <#=table.Name#> : IDAL
+    public partial class <#=table.Name#> : IModel
     {
 <#        foreach(Column column in table.Column){ #>
         /// <summary>
@@ -48,7 +48,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 新增
         /// </summary>
-        internal override string Insert()
+        internal override string InsertSql()
         {
             return "insert into <#=table.Name#>(<#bool b=true;foreach(Column c in table.Column.Where(s=>!s.IsIdentity)){if(b){Write(c.Name);b=false;}else{Write(','+c.Name);}} #>) values(<#b=true;foreach(Column c in table.Column.Where(s=>!s.IsIdentity)){if(b){Write('@'+c.Name);b=false;}else{Write(",@"+c.Name);}} #>)";
         }
@@ -56,10 +56,10 @@ namespace DbOrm.Model
         /// <summary>
         /// 修改
         /// </summary>
-        internal override string Update()
+        internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
-<#        foreach(Column c in table.Column){ #>
+<#        foreach(Column c in table.Column.Where(s=>!s.IsIdentity)){ #>
             if (<#=c.Name#> != null) { str.AppendLine(",<#=c.Name#>=@<#=c.Name#>"); }
 <#        }#>
 
