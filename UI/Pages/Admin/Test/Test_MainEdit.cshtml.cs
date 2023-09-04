@@ -1,16 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Drawing.Printing;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using DbOrm;
 using DbOrm.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UI.Pages.Admin;
 
-namespace UI.Pages.Admin.Test
+namespace UI.Pages.Admin
 {
     public class Test_MainEditModel : EditPageModel
     {
