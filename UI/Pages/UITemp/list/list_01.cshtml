@@ -1,5 +1,18 @@
 ﻿<div class="container">
     <ul class="flex flex-wrap col-4-c lg-col-6-c sm-col-12-c pl-8-c -ml-8 mb-3-c">
+        @foreach (var m in Model)
+        {
+            <li class="hidden" hover-to scroll-in-add="animate-fadeInUp">
+                <a href="/@m.ID" class="block overflow-hidden"><img src="@m.Img" class="h-64 w-full transition-600" in-add="scale-105" out-remove="scale-105" /></a>
+                <a href="/@m.ID" class="block font-bold text-center ptb-4" in-add="color-666" out-remove="color-666">@m.Name</a>
+            </li>
+        }
+    </ul>
+</div>
+
+@*
+<div class="container">
+    <ul class="flex flex-wrap col-4-c lg-col-6-c sm-col-12-c pl-8-c -ml-8 mb-3-c">
         <li class="hidden" hover-to scroll-in-add="animate-fadeInUp">
             <a href="#" class="block overflow-hidden"><img src="/img/list_01.jpg" class="h-64 w-full transition-600" in-add="scale-105" out-remove="scale-105" /></a>
             <a href="#" class="block font-bold text-center ptb-4" in-add="color-666" out-remove="color-666">华德安</a>
@@ -26,3 +39,4 @@
         </li>
     </ul>
 </div>
+*@
