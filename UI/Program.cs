@@ -89,6 +89,12 @@ namespace UI
             //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Areas/admin")),
             //    RequestPath = new PathString(value: "/admin")
             //});
+            //配置 Pages目录下所有静态资源都可以访问，且不需要输入/Pages，例如 http://localhost:34066/aa.html，会访问 /Pages/aa.html
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Pages")),
+                RequestPath = new PathString(value: "")
+            });
 
             app.UseAuthentication();//+ 认证
             app.UseAuthorization();//+ 授权
