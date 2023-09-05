@@ -4,30 +4,30 @@
 }
 @await Html.PartialAsync("UITemp/head/head_01", new{
     Logo="/img/temp_logo.png",
-    Nav=new List<NavModel>(){
-        new NavModel{ Name="首页", Url="/UItemp",Target=""},
-        new NavModel{ Name="关于我们", Url="/",Target=""},
-        new NavModel{ Name="相关案例", Url="/",Target=""},
-        new NavModel{ Name="新闻动态", Url="/",Target="",Children=new List<NavModel>(){
-            new NavModel{ Name="品牌设计", Url="/",Target=""},
-            new NavModel{ Name="印刷设计", Url="/",Target=""},
+    Nav=new List<dynamic>(){
+        new { Name="首页", Url="/UItemp",Target="",Children=new List<dynamic>()},
+        new { Name="关于我们", Url="/",Target="",Children=new List<dynamic>()},
+        new { Name="相关案例", Url="/",Target="",Children=new List<dynamic>()},
+        new { Name="新闻动态", Url="/",Target="",Children=new List<dynamic>(){
+            new { Name="品牌设计", Url="/",Target=""},
+            new { Name="印刷设计", Url="/",Target=""},
             }
         },
-        new NavModel{ Name="联系我们", Url="/",Target=""},
+        new { Name="联系我们", Url="/",Target="",Children=new List<dynamic>()},
     }
 })
 @await Html.PartialAsync("UITemp/head/head_mobile_01", new{
     Logo="/img/temp_logo.png",
-    Nav=new List<NavModel>(){
-        new NavModel{ Name="首页", Url="/UItemp",Target=""},
-        new NavModel{ Name="关于我们", Url="/",Target=""},
-        new NavModel{ Name="相关案例", Url="/",Target=""},
-        new NavModel{ Name="新闻动态", Url="/",Target="",Children=new List<NavModel>(){
-            new NavModel{ Name="品牌设计", Url="/",Target=""},
-            new NavModel{ Name="印刷设计", Url="/",Target=""},
+    Nav=new List<dynamic>(){
+        new { Name="首页", Url="/UItemp",Target="",Children=new List<dynamic>()},
+        new { Name="关于我们", Url="/",Target="",Children=new List<dynamic>()},
+        new { Name="相关案例", Url="/",Target="",Children=new List<dynamic>()},
+        new { Name="新闻动态", Url="/",Target="",Children=new List<dynamic>(){
+            new { Name="品牌设计", Url="/",Target=""},
+            new { Name="印刷设计", Url="/",Target=""},
             }
         },
-        new NavModel{ Name="联系我们", Url="/",Target=""},
+        new { Name="联系我们", Url="/",Target="",Children=new List<dynamic>()},
     }
 })
 @await Html.PartialAsync("UITemp/title/title_01","产品中心")
