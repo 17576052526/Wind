@@ -30,6 +30,7 @@
         new { Name="联系我们", Url="/",Target="",Children=new List<dynamic>()},
     }
 })
+@await Html.PartialAsync("UITemp/banner/banner_01")
 @await Html.PartialAsync("UITemp/title/title_01","产品中心")
 @await Html.PartialAsync("UITemp/title/title_02","产品中心")
 @await Html.PartialAsync("UITemp/type/type_01",new List<dynamic>(){

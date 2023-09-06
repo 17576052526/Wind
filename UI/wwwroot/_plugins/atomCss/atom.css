@@ -510,6 +510,8 @@ a{color: inherit;text-decoration: inherit;}
 .h-72{height:18rem;}
 .h-80{height:20rem;}
 .h-96{height:24rem;}
+.h-112{height:28rem;}
+.h-128{height:32rem;}
 .h-full{height:100%;}
 .h-1px{height:1px;}
 @media(max-width:1024px) {
