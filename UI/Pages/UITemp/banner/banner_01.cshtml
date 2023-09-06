@@ -1,5 +1,19 @@
 ﻿<div class="banner-slide h-128 lg-h-96 sm-h-64">
     <ul class="banner-slide-box">
+        @foreach (var m in Model)
+        {
+            <li class="banner-slide-item" style="background:url(@m.Img) no-repeat;background-size: 100% 100%;">
+                <a href="@(m.Url==null||m.Url.Length==0?"javascript:void(0)":m.Url)" target="@m.Target" class="block h-full">
+                    @Html.Raw(m.Content)
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+@*
+<div class="banner-slide h-128 lg-h-96 sm-h-64">
+    <ul class="banner-slide-box">
         <li class="banner-slide-item" style="background:url(/img/banner_01.jpg) no-repeat;background-size: 100% 100%;">
             <div class="container color-fff pt-36">
                 <div class="hidden font-24" animate="animate-fadeInDown">为企业解决痛点难点·为梦想者创造梦想品牌</div>
@@ -20,3 +34,4 @@
         </li>
     </ul>
 </div>
+*@
