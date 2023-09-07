@@ -187,6 +187,9 @@ a{color: inherit;text-decoration: inherit;}
 .sm-text-right{text-align:right;}
 }
 
+.aspect-square{aspect-ratio: 1/1;}
+.aspect-video{aspect-ratio: 16/9;}
+
 .color-000{color:#000;}
 .color-111{color:#111;}
 .color-222{color:#222;}
