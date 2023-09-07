@@ -1,4 +1,15 @@
-﻿<div class="banner-slide h-128 lg-h-96 sm-h-64">
+﻿@using (Html.Section())
+{
+    <link rel="stylesheet" type="text/css" href="/_plugins/banner-slide/banner-slide.css" />
+    <script type="text/javascript" src="/_plugins/banner-slide/banner-slide.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var [a, b, c] = $('.banner-slide').bannerSlide();
+        })
+    </script>
+}
+
+<div class="banner-slide h-128 lg-h-96 sm-h-64">
     <ul class="banner-slide-box">
         @foreach (var m in Model)
         {
