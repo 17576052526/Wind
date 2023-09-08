@@ -1,9 +1,7 @@
 
-.icon-location:before { content: '\e800'; } /* '' */
-.icon-phone:before { content: '\e801'; } /* '' */
-.icon-mail:before { content: '\e802'; } /* '' */
 .icon-spin4:before { content: '\e834'; } /* '' */
 .icon-search:before { content: '\f002'; } /* '' */
+.icon-envelope:before { content: '\f003'; } /* '' */
 .icon-user:before { content: '\f007'; } /* '' */
 .icon-ok:before { content: '\f00c'; } /* '' */
 .icon-remove:before { content: '\f00d'; } /* '' */
@@ -30,8 +28,4 @@
 .icon-sort_down:before { content: '\f0dd'; } /* '' */
 .icon-sort_up:before { content: '\f0de'; } /* '' */
 .icon-angle_left:before { content: '\f104'; } /* '' */
-.icon-desktop:before { content: '\f108'; } /* '' */
-.icon-tablet:before { content: '\f10a'; } /* '' */
-.icon-mobile:before { content: '\f10b'; } /* '' */
 .icon-circle_blank:before { content: '\f10c'; } /* '' */
-.icon-qq:before { content: '\f1d6'; } /* '' */
