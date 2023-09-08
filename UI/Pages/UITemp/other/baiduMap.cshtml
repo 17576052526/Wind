@@ -1,10 +1,17 @@
-﻿@using (Html.Section())
+﻿@*
+根据地址查询坐标：https://api.map.baidu.com/lbsapi/getpoint/index.html
+
+*@
+
+@using (Html.Section())
 {
     <style type="text/css">
         #dituContent img{max-width:none;}
+        .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+    .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
     </style>
 }
-<div style="height:550px;border:1px solid #ccc;" id="dituContent"></div>
+<div style="height:550px;border:#ccc solid 1px;" id="dituContent"></div>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=87uqZ4ZL89FtkdViUbzbiX0DBu7jeg7q"></script>
 <script type="text/javascript">
     //创建和初始化地图函数：
@@ -18,7 +25,7 @@
     //创建地图函数：
     function createMap() {
         var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
-        var point = new BMap.Point(112.898515, 28.214116);//定义一个中心点坐标
+        var point = new BMap.Point(@Model.Point_x, @Model.Point_y);//定义一个中心点坐标
         map.centerAndZoom(point, 17);//设定地图的中心点和坐标并将地图显示在地图容器中
         window.map = map;//将map变量存储在全局
     }
@@ -45,7 +52,7 @@
     }
 
     //标注点数组
-    var markerArr = [{ title: "思普长沙办事处", content: "303A", point: "112.896862|28.214967", isOpen: 1, icon: { w: 23, h: 25, l: 46, t: 21, x: 9, lb: 12 } }
+    var markerArr = [{ title: "@Model.Name", content: "@Model.Content", point: "@Model.Point_x|@Model.Point_y", isOpen: 1, icon: { w: 23, h: 25, l: 46, t: 21, x: 9, lb: 12 } }
     ];
     //创建marker
     function addMarker() {
@@ -92,7 +99,7 @@
     //创建InfoWindow
     function createInfoWindow(i) {
         var json = markerArr[i];
-        var iw = new BMap.InfoWindow("<b style='color:#CC5522;font-weight:bold;'>" + json.title + "</b><div style='font-size:12px;'>" + json.content + "</div>");
+        var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>" + json.content + "</div>");
         return iw;
     }
     //创建一个Icon
