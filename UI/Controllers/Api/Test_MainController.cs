@@ -55,7 +55,7 @@ namespace UI.Controllers.Api
                 //表连接查询
                 sql.LeftJoin<Sys_Type>("Test_Main.Sys_Type_ID=Sys_Type.ID");
                 //查询总数据量
-                int total = (int)sql.QueryScalar();
+                int total = Convert.ToInt32(sql.QueryScalar());
                 //设置查询列
                 sql.Select("Test_Main.*,Sys_Type.Name");
                 //排序
