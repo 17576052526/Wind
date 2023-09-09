@@ -15,7 +15,7 @@ namespace UI.Pages.Admin
             using (DB db = new DB())
             {
                 var sql = db.Select<Test_Main>("count(*)");
-                //构造条件，注意参数赋值要转类型
+                //构造条件
                 if (Request.Query["MainID"].ToString().Length > 0) { sql.WhereAnd("MainID like @MainID", new { MainID = '%' + Request.Query["MainID"] + '%' }); }
 
                 //表连接查询
