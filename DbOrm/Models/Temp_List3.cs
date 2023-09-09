@@ -6,7 +6,7 @@ using System;
 namespace DbOrm.Model
 {
     /// <summary>
-    /// 备用表
+    /// 杂项表
     /// </summary>
     public partial class Temp_List3
     {

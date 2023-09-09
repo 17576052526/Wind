@@ -23,7 +23,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 
         /// </summary>
-        public int? ParentID { set; get; }
+        public int? TypeID { set; get; }
         /// <summary>
         /// 
         /// </summary>
@@ -45,7 +45,7 @@ namespace DbOrm.Model
         /// </summary>
         internal override string InsertSql()
         {
-            return "insert into Sys_Type(ParentID,Name,Temp1,Temp2,Temp3) values(@ParentID,@Name,@Temp1,@Temp2,@Temp3)";
+            return "insert into Sys_Type(TypeID,Name,Temp1,Temp2,Temp3) values(@TypeID,@Name,@Temp1,@Temp2,@Temp3)";
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace DbOrm.Model
         internal override string UpdateSql()
         {
             StringBuilder str = new StringBuilder();
-            if (ParentID != null) { str.AppendLine(",ParentID=@ParentID"); }
+            if (TypeID != null) { str.AppendLine(",TypeID=@TypeID"); }
             if (Name != null) { str.AppendLine(",Name=@Name"); }
             if (Temp1 != null) { str.AppendLine(",Temp1=@Temp1"); }
             if (Temp2 != null) { str.AppendLine(",Temp2=@Temp2"); }

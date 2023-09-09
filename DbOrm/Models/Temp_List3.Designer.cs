@@ -12,7 +12,7 @@ using System.Text;
 namespace DbOrm.Model
 {
     /// <summary>
-    /// 备用表
+    /// 杂项表
     /// </summary>
     public partial class Temp_List3 : IModel
     {
@@ -35,7 +35,11 @@ namespace DbOrm.Model
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? CreateTime { set; get; }
+        public string Img { set; get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Url { set; get; }
         /// <summary>
         /// 
         /// </summary>
@@ -57,31 +61,11 @@ namespace DbOrm.Model
         /// </summary>
         public string Temp5 { set; get; }
         /// <summary>
-        /// 
-        /// </summary>
-        public string Temp6 { set; get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Temp7 { set; get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Temp8 { set; get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Temp9 { set; get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Temp10 { set; get; }
-        /// <summary>
         /// 新增
         /// </summary>
         internal override string InsertSql()
         {
-            return "insert into Temp_List3(TypeID,Name,Content,CreateTime,Temp1,Temp2,Temp3,Temp4,Temp5,Temp6,Temp7,Temp8,Temp9,Temp10) values(@TypeID,@Name,@Content,@CreateTime,@Temp1,@Temp2,@Temp3,@Temp4,@Temp5,@Temp6,@Temp7,@Temp8,@Temp9,@Temp10)";
+            return "insert into Temp_List3(TypeID,Name,Content,Img,Url,Temp1,Temp2,Temp3,Temp4,Temp5) values(@TypeID,@Name,@Content,@Img,@Url,@Temp1,@Temp2,@Temp3,@Temp4,@Temp5)";
         }
 
         /// <summary>
@@ -93,17 +77,13 @@ namespace DbOrm.Model
             if (TypeID != null) { str.AppendLine(",TypeID=@TypeID"); }
             if (Name != null) { str.AppendLine(",Name=@Name"); }
             if (Content != null) { str.AppendLine(",Content=@Content"); }
-            if (CreateTime != null) { str.AppendLine(",CreateTime=@CreateTime"); }
+            if (Img != null) { str.AppendLine(",Img=@Img"); }
+            if (Url != null) { str.AppendLine(",Url=@Url"); }
             if (Temp1 != null) { str.AppendLine(",Temp1=@Temp1"); }
             if (Temp2 != null) { str.AppendLine(",Temp2=@Temp2"); }
             if (Temp3 != null) { str.AppendLine(",Temp3=@Temp3"); }
             if (Temp4 != null) { str.AppendLine(",Temp4=@Temp4"); }
             if (Temp5 != null) { str.AppendLine(",Temp5=@Temp5"); }
-            if (Temp6 != null) { str.AppendLine(",Temp6=@Temp6"); }
-            if (Temp7 != null) { str.AppendLine(",Temp7=@Temp7"); }
-            if (Temp8 != null) { str.AppendLine(",Temp8=@Temp8"); }
-            if (Temp9 != null) { str.AppendLine(",Temp9=@Temp9"); }
-            if (Temp10 != null) { str.AppendLine(",Temp10=@Temp10"); }
 
             return "update Temp_List3 set " + str.Remove(0, 1);
         }
