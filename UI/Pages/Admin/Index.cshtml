@@ -56,6 +56,7 @@
                     <div class="search-btn"><i class="icon-search"></i></div>
                 </div>
                 <ul class="nav">
+                    <!--
                     <li class="tree-active tree">
                         <div class="nav-switch icon-folder_open tree-switch">一级菜单</div>
                         <ol class="tree-box">
@@ -64,12 +65,35 @@
                             <li><a class="nav-btn-active nav-btn icon-circle_blank" href="#">编辑页</a></li>
                         </ol>
                     </li>
+                    -->
+                    @foreach (var m in Model.List)
+                    {
+                        <li class="tree">
+                            @if (m.Children.Count > 0)
+                            {
+                                <div class="nav-switch icon-folder_open tree-switch">@m.Name</div>
+                            }
+                            else if (m.Temp2 != null && m.Temp2.Length > 0)
+                            {
+                                <a class="nav-btn icon-circle_blank" href="@m.Temp2?typeID=@m.ID&navName=@m.Name" target="main">@m.Name</a>
+                            }
+                            <ol class="tree-box">
+                                @if (m.Children.Count > 0)
+                                {
+                                    @foreach (var c in m.Children)
+                                    {
+                                        <li><a class="nav-btn icon-circle_blank" href="@c.Temp2?typeID=@c.ID&navName=@m.Name" target="main">@c.Name</a></li>
+                                    }
+                                }
+                            </ol>
+                        </li>
+                    }
                     <li class="tree">
-                        <div class="nav-switch icon-folder_open tree-switch">一级菜单</div>
+                        <div class="nav-switch icon-folder_open tree-switch">系统管理</div>
                         <ol class="tree-box">
-                            <li><a class="nav-btn icon-circle_blank" href="#">编辑页</a></li>
-                            <li><a class="nav-btn icon-circle_blank" href="#">编辑页</a></li>
-                            <li><a class="nav-btn icon-circle_blank" href="#">编辑页</a></li>
+                            <li><a class="nav-btn icon-circle_blank" href="/admin/sys/Types" target="main">类型管理</a></li>
+                            <li><a class="nav-btn icon-circle_blank" href="/admin/sys/Nav" target="main">栏目管理</a></li>
+                            <li><a class="nav-btn icon-circle_blank" href="/admin/test/test_main" target="main">系统测试</a></li>
                         </ol>
                     </li>
                 </ul>
