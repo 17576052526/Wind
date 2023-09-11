@@ -51,7 +51,7 @@
     new { Name="周边" ,ID="3" },
     new { Name="一体机" ,ID="4" },
 })
-@await Html.PartialAsync("UITemp/list/list_01",new List<dynamic>{
+@await Html.PartialAsync("UITemp/list/list_01",new{Url="/pruduct",Target="_blank" , List=new List<dynamic>{
     new{  Name="高科技成果交易会" ,ID="1",Img="/img/list_01.jpg" },
     new{  Name="航天华拓" ,ID="2",Img="/img/list_02.jpg" },
     new{  Name="同力通讯" ,ID="3",Img="/img/list_03.jpg" },
@@ -64,7 +64,8 @@
     new{  Name="稳健童鞋" ,ID="10",Img="/img/list_01.jpg" },
     new{  Name="银达担保" ,ID="11",Img="/img/list_02.jpg" },
     new{  Name="中检实验室技术" ,ID="12",Img="/img/list_03.jpg" },
-})
+}})
+@await Html.PartialAsync("UITemp/list_content/list_content_01")
 <div class="container">
     @await Html.PartialAsync("UITemp/button/button_01",new{Name="浏览更多",Url="http://www.baidu.com" ,Target="_blank"})
     @await Html.PartialAsync("UITemp/button/button_02",new{Name="浏览更多",Url="http://www.baidu.com" ,Target="_blank"})
