@@ -43,6 +43,10 @@ namespace DbOrm.Model
         /// <summary>
         /// 
         /// </summary>
+        public DateTime? Time { set; get; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Temp1 { set; get; }
         /// <summary>
         /// 
@@ -65,7 +69,7 @@ namespace DbOrm.Model
         /// </summary>
         internal override string InsertSql()
         {
-            return "insert into Temp_List3(TypeID,Name,Content,Img,Url,Temp1,Temp2,Temp3,Temp4,Temp5) values(@TypeID,@Name,@Content,@Img,@Url,@Temp1,@Temp2,@Temp3,@Temp4,@Temp5)";
+            return "insert into Temp_List3(TypeID,Name,Content,Img,Url,Time,Temp1,Temp2,Temp3,Temp4,Temp5) values(@TypeID,@Name,@Content,@Img,@Url,@Time,@Temp1,@Temp2,@Temp3,@Temp4,@Temp5)";
         }
 
         /// <summary>
@@ -79,6 +83,7 @@ namespace DbOrm.Model
             if (Content != null) { str.AppendLine(",Content=@Content"); }
             if (Img != null) { str.AppendLine(",Img=@Img"); }
             if (Url != null) { str.AppendLine(",Url=@Url"); }
+            if (Time != null) { str.AppendLine(",Time=@Time"); }
             if (Temp1 != null) { str.AppendLine(",Temp1=@Temp1"); }
             if (Temp2 != null) { str.AppendLine(",Temp2=@Temp2"); }
             if (Temp3 != null) { str.AppendLine(",Temp3=@Temp3"); }
