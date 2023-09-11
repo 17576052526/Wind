@@ -159,8 +159,8 @@ a{color: inherit;text-decoration: inherit;}
 .font-extrabold{font-weight:800;}
 .font-black{font-weight:900;}
 
+.line-h-1{line-height:1;}
 .line-h-1\.25{line-height:1.25;}
-.line-h-1\.375{line-height:1.375;}
 .line-h-1\.5{line-height:1.5;}
 .line-h-1\.75{line-height:1.75;}
 .line-h-2{line-height:2;}
@@ -207,8 +207,8 @@ a{color: inherit;text-decoration: inherit;}
 .color-eee{color:#eee;}
 .color-fff{color:#fff;}
 
-.line-clamp-2,.line-clamp-3,.line-clamp-4,.line-clamp-5{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;}
-.line-clamp-1{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.line-clamp-1,.line-clamp-2,.line-clamp-3,.line-clamp-4,.line-clamp-5{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;}
+.line-clamp-1{-webkit-line-clamp:1;}
 .line-clamp-2{-webkit-line-clamp:2;}
 .line-clamp-3{-webkit-line-clamp:3;}
 .line-clamp-4{-webkit-line-clamp:4;}
