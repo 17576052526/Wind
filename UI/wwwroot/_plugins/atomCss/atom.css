@@ -207,7 +207,13 @@ a{color: inherit;text-decoration: inherit;}
 .color-eee{color:#eee;}
 .color-fff{color:#fff;}
 
-.text-overflow-ellipsis{white-space:nowrap; text-overflow: ellipsis;overflow: hidden;}
+.line-clamp-2,.line-clamp-3,.line-clamp-4,.line-clamp-5{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;}
+.line-clamp-1{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.line-clamp-2{-webkit-line-clamp:2;}
+.line-clamp-3{-webkit-line-clamp:3;}
+.line-clamp-4{-webkit-line-clamp:4;}
+.line-clamp-5{-webkit-line-clamp:5;}
+
 .fixed-center {position: fixed;top: 50%;left: 50%;z-index:100;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 10px #aaa!important;}
 
 .vertical-middle{vertical-align:middle;}
