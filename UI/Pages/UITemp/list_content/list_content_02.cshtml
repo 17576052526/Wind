@@ -17,7 +17,7 @@
 <ul class="container ptb-8-c">
     @foreach(var m in Model.List)
     {
-        <li class="flex border-ccc border-b-1 list_content_02-item">
+        <li class="flex border-ccc border-b-1 list_content_02-item hidden" scroll-in-add="animate-fadeInUp">
             <div class="w-56 md-display-none">
                 <div class="font-italic font-bold color-ccc font-48">@m.Time.ToString("MM-dd")</div>
                 <div class="font-italic color-ccc font-20 font-bold">@m.Time.ToString("yyyy")</div>

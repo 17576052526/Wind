@@ -1,7 +1,7 @@
 ﻿<ul class="container flex flex-wrap col-6-c md-col-12-c mb-7-c pr-6-c -ml-6">
     @foreach (var m in Model.List)
     {
-        <li class="flex">
+        <li class="flex hidden" scroll-in-add="animate-fadeInUp">
             <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
                 @if (m.Time != null)
                 {
