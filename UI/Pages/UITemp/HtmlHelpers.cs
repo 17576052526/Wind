@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Text.RegularExpressions;
+using System.Text;
 
 public static class HtmlHelpers
 {
@@ -30,7 +32,27 @@ public static class HtmlHelpers
     {
         List<string> list = (List<string>)context.Items[ScriptsKey];
         if (list == null) { return null; }
-        return string.Join(Environment.NewLine, list.Distinct());//List 去重复了
+        //return string.Join(Environment.NewLine, list.Distinct());//List 去重复了
+        //多个<style>标签的内容合并到一个里面去
+        StringBuilder style = new StringBuilder();
+        StringBuilder other = new StringBuilder();
+        foreach (var m in list.Distinct())//List 去重复了
+        {
+            //获取所有的<style>
+            string str = Regex.Match(m, @"(?<=^\s*<style[^>]*>)[\s\S]*(?=</style>\s*$)").Value;
+            if (str.Length > 0)
+            {
+                style.Append(str);
+            }
+            else
+            {
+                other.Append(m);
+            }
+        }
+        other.Append("<style type=\"text/css\">");
+        other.Append(style);
+        other.Append("</style>");
+        return other.ToString();
     }
 
     private class ScriptBlock : IDisposable
