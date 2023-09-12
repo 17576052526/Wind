@@ -32,7 +32,8 @@ namespace UI
                     //配置 Razor路由
                     //s.Conventions.AddPageRoute("/admin/index", "/");//参数一：实际地址，参数二：浏览器输入的地址  ，根据参数二的地址去匹配参数一的路径，参数一不支持通配符，参数二支持通配符
                 });
-
+            //设置中文不自动 Unicode编码，解决查看源代码的时候中文是 &#x9AD8;这种字符
+            builder.Services.Configure<Microsoft.Extensions.WebEncoders.WebEncoderOptions>(s => { s.TextEncoderSettings = new System.Text.Encodings.Web.TextEncoderSettings(System.Text.Unicode.UnicodeRanges.All); });
             //配置身份认证
             builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
             {
