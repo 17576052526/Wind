@@ -1,63 +1,67 @@
-﻿<ul class="container flex flex-wrap col-6-c md-col-12-c mb-7-c pr-6-c -ml-6">
-    @foreach (var m in Model.List)
-    {
-        <li class="flex hidden" scroll-in-add="animate-fadeInUp">
-            <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
-                @if (m.Time != null)
-                {
-                    <span class="font-48 line-h-1">@m.Time.ToString("dd")</span>
-                    @m.Time.ToString("yyyy-MM")
-                }
-            </div>
-            <div class="flex-1 ml-5">
-                <a href="@Model.Url/@m.ID" target="@Model.Target" class="line-clamp-1">@m.Name</a>
-                <a href="@Model.Url/@m.ID" target="@Model.Target" class="line-clamp-2 mt-3 font-14 color-666">@m.Content</a>
-            </div>
-        </li>
-    }
-</ul>
+﻿<div class="container">
+    <ul class="flex flex-wrap col-6-c md-col-12-c mb-7-c pl-6-c -ml-6">
+        @foreach (var m in Model.List)
+        {
+            <li class="flex hidden" scroll-in-add="animate-fadeInUp">
+                <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
+                    @if (m.Time != null)
+                    {
+                        <span class="font-48 line-h-1">@m.Time.ToString("dd")</span>
+                        @m.Time.ToString("yyyy-MM")
+                    }
+                </div>
+                <div class="flex-1 ml-5">
+                    <a href="@Model.Url/@m.ID" target="@Model.Target" class="line-clamp-1">@m.Name</a>
+                    <a href="@Model.Url/@m.ID" target="@Model.Target" class="line-clamp-2 mt-3 font-14 color-666">@m.Content</a>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
 
 @*
-<ul class="container flex flex-wrap col-6-c md-col-12-c mb-7-c pr-6-c -ml-6">
-    <li class="flex">
-        <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
-            <span class="font-48 line-h-1">05</span>
-            2022-03
-        </div>
-        <div class="flex-1 ml-5">
-            <a href="#" class="line-clamp-1">细节决定品质-设计就是不断打磨，用心体验的一种过</a>
-            <a href="#" class="line-clamp-2 mt-3 font-14 color-666">首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，那个师傅慢慢修，慢慢剪，理发师自己本身就穿着整齐头发干净很精致，干了10年了，很多年轻人理发2侧是用推子直接铲的，但是他是慢慢用剪子和梳子修的，剪好，人整个精致了很多，更有气质了，突然发现很多事情都是想通的!</a>
-        </div>
-    </li>
-    <li class="flex">
-        <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
-            <span class="font-48 line-h-1">05</span>
-            2022-03
-        </div>
-        <div class="flex-1 ml-5">
-            <a href="#" class="line-clamp-1">细节决定品质-设计就是不断打磨，用心体验的一种过</a>
-            <a href="#" class="line-clamp-2 mt-3 font-14 color-666">首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，那个师傅慢慢修，慢慢剪，理发师自己本身就穿着整齐头发干净很精致，干了10年了，很多年轻人理发2侧是用推子直接铲的，但是他是慢慢用剪子和梳子修的，剪好，人整个精致了很多，更有气质了，突然发现很多事情都是想通的!</a>
-        </div>
-    </li>
-    <li class="flex">
-        <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
-            <span class="font-48 line-h-1">05</span>
-            2022-03
-        </div>
-        <div class="flex-1 ml-5">
-            <a href="#" class="line-clamp-1">细节决定品质-设计就是不断打磨，用心体验的一种过</a>
-            <a href="#" class="line-clamp-2 mt-3 font-14 color-666">首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，那个师傅慢慢修，慢慢剪，理发师自己本身就穿着整齐头发干净很精致，干了10年了，很多年轻人理发2侧是用推子直接铲的，但是他是慢慢用剪子和梳子修的，剪好，人整个精致了很多，更有气质了，突然发现很多事情都是想通的!</a>
-        </div>
-    </li>
-    <li class="flex">
-        <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
-            <span class="font-48 line-h-1">05</span>
-            2022-03
-        </div>
-        <div class="flex-1 ml-5">
-            <a href="#" class="line-clamp-1">细节决定品质-设计就是不断打磨，用心体验的一种过</a>
-            <a href="#" class="line-clamp-2 mt-3 font-14 color-666">首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，那个师傅慢慢修，慢慢剪，理发师自己本身就穿着整齐头发干净很精致，干了10年了，很多年轻人理发2侧是用推子直接铲的，但是他是慢慢用剪子和梳子修的，剪好，人整个精致了很多，更有气质了，突然发现很多事情都是想通的!</a>
-        </div>
-    </li>
-</ul>
+<div class="container">
+    <ul class="flex flex-wrap col-6-c md-col-12-c mb-7-c pl-6-c -ml-6">
+        <li class="flex">
+            <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
+                <span class="font-48 line-h-1">05</span>
+                2022-03
+            </div>
+            <div class="flex-1 ml-5">
+                <a href="#" class="line-clamp-1">细节决定品质-设计就是不断打磨，用心体验的一种过</a>
+                <a href="#" class="line-clamp-2 mt-3 font-14 color-666">首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，那个师傅慢慢修，慢慢剪，理发师自己本身就穿着整齐头发干净很精致，干了10年了，很多年轻人理发2侧是用推子直接铲的，但是他是慢慢用剪子和梳子修的，剪好，人整个精致了很多，更有气质了，突然发现很多事情都是想通的!</a>
+            </div>
+        </li>
+        <li class="flex">
+            <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
+                <span class="font-48 line-h-1">05</span>
+                2022-03
+            </div>
+            <div class="flex-1 ml-5">
+                <a href="#" class="line-clamp-1">细节决定品质-设计就是不断打磨，用心体验的一种过</a>
+                <a href="#" class="line-clamp-2 mt-3 font-14 color-666">首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，那个师傅慢慢修，慢慢剪，理发师自己本身就穿着整齐头发干净很精致，干了10年了，很多年轻人理发2侧是用推子直接铲的，但是他是慢慢用剪子和梳子修的，剪好，人整个精致了很多，更有气质了，突然发现很多事情都是想通的!</a>
+            </div>
+        </li>
+        <li class="flex">
+            <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
+                <span class="font-48 line-h-1">05</span>
+                2022-03
+            </div>
+            <div class="flex-1 ml-5">
+                <a href="#" class="line-clamp-1">细节决定品质-设计就是不断打磨，用心体验的一种过</a>
+                <a href="#" class="line-clamp-2 mt-3 font-14 color-666">首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，那个师傅慢慢修，慢慢剪，理发师自己本身就穿着整齐头发干净很精致，干了10年了，很多年轻人理发2侧是用推子直接铲的，但是他是慢慢用剪子和梳子修的，剪好，人整个精致了很多，更有气质了，突然发现很多事情都是想通的!</a>
+            </div>
+        </li>
+        <li class="flex">
+            <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
+                <span class="font-48 line-h-1">05</span>
+                2022-03
+            </div>
+            <div class="flex-1 ml-5">
+                <a href="#" class="line-clamp-1">细节决定品质-设计就是不断打磨，用心体验的一种过</a>
+                <a href="#" class="line-clamp-2 mt-3 font-14 color-666">首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，那个师傅慢慢修，慢慢剪，理发师自己本身就穿着整齐头发干净很精致，干了10年了，很多年轻人理发2侧是用推子直接铲的，但是他是慢慢用剪子和梳子修的，剪好，人整个精致了很多，更有气质了，突然发现很多事情都是想通的!</a>
+            </div>
+        </li>
+    </ul>
+</div>
 *@
