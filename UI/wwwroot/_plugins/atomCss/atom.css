@@ -10,7 +10,7 @@ a{color: inherit;text-decoration: inherit;}
 .container{max-width:80rem;margin-left:auto;margin-right:auto;padding-left:0.75rem;padding-right:0.75rem;}
 /*此处先禁用，宽度发生变化，其他块是否要调整？目前没有宽屏的显示器可测试*/
 /*
-@media(max-width:1536px) {
+@media(min-width:1536px) {
     .container{max-width:96rem;}
 }
 */
