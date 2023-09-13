@@ -1,20 +1,24 @@
-﻿<div class="container">
-    <div class="flex flex-wrap font-bold ml-16-c -ml-16 ptb-8-c">
-        @foreach (var m in Model)
-        {
-            <a href="?type=@m.ID" style="@(Context.Request.Query["type"]==m.ID.ToString()?"color:#ff5d33;border-bottom:3px solid #ff5d33":"")">@m.Name</a>
-        }
+﻿<div class=" border-b-1 border-ccc">
+    <div class="container">
+        <div class="flex flex-wrap font-bold ml-16-c -ml-16 ptb-8-c">
+            @foreach (var m in Model)
+            {
+                <a href="?type=@m.ID" style="@(Context.Request.Query["type"]==m.ID.ToString()?"color:#ff5d33;border-bottom:3px solid #ff5d33":"")">@m.Name</a>
+            }
+        </div>
     </div>
 </div>
 
 @*
-<div class="container">
-    <div class="flex flex-wrap font-bold ml-16-c -ml-16 ptb-8-c">
-        <a href="#" class="" style="color:#ff5d33;border-bottom:3px solid #ff5d33">全部</a>
-        <a href="#">酷开电视</a>
-        <a href="#">影音</a>
-        <a href="#">周边</a>
-        <a href="#">一体机</a>
+<div class=" border-b-1 border-ccc">
+    <div class="container">
+        <div class="flex flex-wrap font-bold ml-16-c -ml-16 ptb-8-c">
+            <a href="#" class="" style="color:#ff5d33;border-bottom:3px solid #ff5d33">全部</a>
+            <a href="#">酷开电视</a>
+            <a href="#">影音</a>
+            <a href="#">周边</a>
+            <a href="#">一体机</a>
+        </div>
     </div>
 </div>
 *@
