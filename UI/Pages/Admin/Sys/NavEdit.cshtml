@@ -20,7 +20,11 @@
                 </label>
                 <label class="form-item">
                     <span>后台Url</span>
-                    @Html.TextBoxFor(s => s.Model.Temp2, new { @class = "input-text" })
+                    <select class="input-text" name="Model.Temp2">
+                        <option>后台栏目不显示</option>
+                        <option value="/admin/Sys/Types">分类页面</option>
+                        <option value="/admin/Sys/Temp_List1">列表页面</option>
+                    </select>
                 </label>
             </div>
         </form>
