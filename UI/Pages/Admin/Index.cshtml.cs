@@ -16,13 +16,13 @@ namespace UI.Pages.Admin
             {
                 var sql = db.Select<Sys_Type>();
                 //构造条件
-                sql.WhereAnd("TypeID = @TypeID", new { TypeID = 1 });
-                this.List = sql.Query();
+                sql.WhereAnd("TypeID = @TypeID", new { TypeID = 0 });
+                this.List = sql.OrderBy("Sort asc").Query();
 
                 //查询子集
                 foreach (var m in List)
                 {
-                    m.Children = db.Select<Sys_Type>().Where("TypeID=@TypeID", new { TypeID = m.ID }).Query();
+                    m.Children = db.Select<Sys_Type>().Where("TypeID=@TypeID", new { TypeID = m.ID }).OrderBy("Sort asc").Query();
 
                 }
             }

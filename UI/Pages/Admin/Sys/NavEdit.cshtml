@@ -5,21 +5,21 @@
 }
 
 <div class="box h-100">
-    <div class="box-head">@(Request.Query["id"].ToString().Length>0?"修改":"新建")</div>
+    <div class="box-head">@(Request.Query["id"].ToString().Length > 0 ? "修改" : "新建")</div>
     <div class="box-body">
         <form method="post" id="form">
+            <input type="hidden" value="@Request.Query["typeID"]" name="Model.TypeID" />
             <div class="form-row">
                 <label class="form-item">
                     <span>名称</span>
                     @Html.TextBoxFor(s => s.Model.Name, new { @class = "input-text" })
-                    <input type="hidden" value="@Request.Query["typeId"]" name="Model.TypeID" />
                 </label>
                 <label class="form-item">
-                    <span>前台URL</span>
+                    <span>前台Url</span>
                     @Html.TextBoxFor(s => s.Model.Temp1, new { @class = "input-text" })
                 </label>
                 <label class="form-item">
-                    <span>后台URL</span>
+                    <span>后台Url</span>
                     @Html.TextBoxFor(s => s.Model.Temp2, new { @class = "input-text" })
                 </label>
             </div>

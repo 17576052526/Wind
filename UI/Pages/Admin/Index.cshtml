@@ -78,24 +78,15 @@
                                 <a class="nav-btn icon-circle_blank" href="@m.Temp2?typeID=@m.ID&navName=@m.Name" target="main">@m.Name</a>
                             }
                             <ol class="tree-box">
-                                @if (m.Children.Count > 0)
+                                @foreach (var c in m.Children)
                                 {
-                                    @foreach (var c in m.Children)
-                                    {
-                                        <li><a class="nav-btn icon-circle_blank" href="@c.Temp2?typeID=@c.ID&navName=@m.Name" target="main">@c.Name</a></li>
-                                    }
+                                    <li><a class="nav-btn icon-circle_blank" href="@c.Temp2?typeID=@c.ID&navName=@m.Name" target="main">@c.Name</a></li>
                                 }
                             </ol>
                         </li>
                     }
-                    <li class="tree">
-                        <div class="nav-switch icon-folder_open tree-switch">系统管理</div>
-                        <ol class="tree-box">
-                            <li><a class="nav-btn icon-circle_blank" href="/admin/sys/Types" target="main">类型管理</a></li>
-                            <li><a class="nav-btn icon-circle_blank" href="/admin/sys/Nav" target="main">栏目管理</a></li>
-                            <li><a class="nav-btn icon-circle_blank" href="/admin/test/test_main" target="main">系统测试</a></li>
-                        </ol>
-                    </li>
+                    <li class="tree"><a class="nav-btn icon-circle_blank" href="/admin/sys/Nav" target="main">栏目管理</a></li>
+                    <!--<li class="tree"><a class="nav-btn icon-circle_blank" href="/admin/test/test_main" target="main">系统测试</a></li>-->
                 </ul>
             </div>
             <!--右边块-->

@@ -8,15 +8,10 @@
     <div class="box-head flex">
         <div class="flex-1">栏目管理</div>
         <div class="-mlr-5">
-            <a href="NavEdit?typeId=1&url=@System.Net.WebUtility.UrlEncode(Request.Path)" class="btn-primary h-pre mlr-5"><i class="icon-plus"></i>新建</a>
+            <a href="NavEdit?typeID=0&url=@System.Net.WebUtility.UrlEncode(Request.Path)" class="btn-primary h-pre mlr-5"><i class="icon-plus"></i>新建</a>
         </div>
     </div>
     <div class="box-body flex-column">
-        <div class="mb-10">
-            <form method="get">
-                
-            </form>
-        </div>
         <div class="table-fixed flex-1">
             <form method="post" action="@Request.Path/Delete@(Request.QueryString)" id="form">
                 <table class="table">
@@ -24,6 +19,7 @@
                         <tr>
                             <th class="table-resize table-fixed-col"><div class="table-resize-item"><input type="checkbox" /></div></th>
                             <th class="table-resize"><div class="table-resize-item">ID</div></th>
+                            <th class="table-resize"><div class="table-resize-item">序号</div></th>
                             <th class="table-resize"><div class="table-resize-item text-left">名称</div></th>
                             <th class="table-resize"><div class="table-resize-item">前台URL</div></th>
                             <th class="table-resize"><div class="table-resize-item">后台URL</div></th>
@@ -36,12 +32,15 @@
                             <tr>
                                 <td class="table-fixed-col"><div class="table-resize-item"><input type="checkbox" name="checkID" value="@m.ID" /></div></td>
                                 <td><div class="table-resize-item">@m.ID</div></td>
+                                <td><div class="table-resize-item">@m.Sort</div></td>
                                 <td><div class="table-resize-item text-left">@m.Name</div></td>
                                 <td><div class="table-resize-item">@m.Temp1</div></td>
                                 <td><div class="table-resize-item">@m.Temp2</div></td>
                                 <td class="white-nowrap">
+                                    <a class="btn-primary h-pre mlr-5 btn-xs" href="@Request.Path/Move?id=@m.ID&isTop=1">上移</a>
+                                    <a class="btn-primary h-pre mlr-5 btn-xs" href="@Request.Path/Move?id=@m.ID&isTop=0">下移</a>
                                     <input type="button" class="btn-danger h-pre mlr-5 btn-xs" value="删除" onclick="checkDelete(this)" />
-                                    <a class="btn-primary h-pre mlr-5 btn-xs" href="NavEdit?typeId=@m.ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">新建子级</a>
+                                    <a class="btn-primary h-pre mlr-5 btn-xs" href="NavEdit?typeID=@m.ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">新建子栏目</a>
                                     <a class="btn-primary h-pre mlr-5 btn-xs" href="NavEdit?id=@m.ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">修改</a>
                                 </td>
                             </tr>
@@ -50,29 +49,17 @@
                                 <tr>
                                     <td class="table-fixed-col"><div class="table-resize-item"><input type="checkbox" name="checkID" value="@c.ID" /></div></td>
                                     <td><div class="table-resize-item">@c.ID</div></td>
-                                    <td><div class="table-resize-item text-left pl-20">@c.Name</div></td>
+                                    <td><div class="table-resize-item">@c.Sort</div></td>
+                                    <td><div class="table-resize-item text-left" style="padding-left:30px;">@c.Name</div></td>
                                     <td><div class="table-resize-item">@c.Temp1</div></td>
-                                <td><div class="table-resize-item">@c.Temp2</div></td>
+                                    <td><div class="table-resize-item">@c.Temp2</div></td>
                                     <td class="white-nowrap">
+                                        <a class="btn-primary h-pre mlr-5 btn-xs" href="@Request.Path/Move?id=@c.ID&isTop=1">上移</a>
+                                        <a class="btn-primary h-pre mlr-5 btn-xs" href="@Request.Path/Move?id=@c.ID&isTop=0">下移</a>
                                         <input type="button" class="btn-danger h-pre mlr-5 btn-xs" value="删除" onclick="checkDelete(this)" />
-                                        <a class="btn-primary h-pre mlr-5 btn-xs" href="NavEdit?typeId=@c.ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">新建子级</a>
                                         <a class="btn-primary h-pre mlr-5 btn-xs" href="NavEdit?id=@c.ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">修改</a>
                                     </td>
                                 </tr>
-                                @foreach (var k in c.Children)
-                                {
-                                    <tr>
-                                        <td class="table-fixed-col"><div class="table-resize-item"><input type="checkbox" name="checkID" value="@k.ID" /></div></td>
-                                        <td><div class="table-resize-item">@k.ID</div></td>
-                                        <td><div class="table-resize-item text-left" style="padding-left:40px;">@k.Name</div></td>
-                                        <td><div class="table-resize-item">@k.Temp1</div></td>
-                                        <td><div class="table-resize-item">@k.Temp2</div></td>
-                                        <td class="white-nowrap">
-                                            <input type="button" class="btn-danger h-pre mlr-5 btn-xs" value="删除" onclick="checkDelete(this)" />
-                                            <a class="btn-primary h-pre mlr-5 btn-xs" href="NavEdit?id=@k.ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">修改</a>
-                                        </td>
-                                    </tr>
-                                }
                             }
                         }
                         @if (Model.List.Count == 0)
