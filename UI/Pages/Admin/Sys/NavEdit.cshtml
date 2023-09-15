@@ -20,11 +20,11 @@
                 </label>
                 <label class="form-item">
                     <span>后台Url</span>
-                    <select class="input-text" name="Model.Temp2">
-                        <option>后台栏目不显示</option>
-                        <option value="/admin/Sys/Types">分类页面</option>
-                        <option value="/admin/Sys/Temp_List1">列表页面</option>
-                    </select>
+                    @Html.DropDownListFor(s=>s.Model.Temp2,new List<SelectListItem>(){
+                    new SelectListItem("后台栏目不显示",""),
+                    new SelectListItem("分类页面","/admin/Sys/Types"),
+                    new SelectListItem("列表页面","/admin/Sys/Temp_List1"),
+                    }, new { @class = "input-text" })
                 </label>
             </div>
         </form>
