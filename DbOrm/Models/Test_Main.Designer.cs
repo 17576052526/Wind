@@ -31,7 +31,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 所属类型（外键）
         /// </summary>
-        public int? Sys_Type_ID { set; get; }
+        public int? TypeID { set; get; }
         /// <summary>
         /// 数量
         /// </summary>
@@ -65,7 +65,7 @@ namespace DbOrm.Model
         /// </summary>
         internal override string InsertSql()
         {
-            return "insert into Test_Main(MainID,MainName,Sys_Type_ID,Quantity,Amount,IsShow,Img,Files,Remark,CreateTime) values(@MainID,@MainName,@Sys_Type_ID,@Quantity,@Amount,@IsShow,@Img,@Files,@Remark,@CreateTime)";
+            return "insert into Test_Main(MainID,MainName,TypeID,Quantity,Amount,IsShow,Img,Files,Remark,CreateTime) values(@MainID,@MainName,@TypeID,@Quantity,@Amount,@IsShow,@Img,@Files,@Remark,@CreateTime)";
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace DbOrm.Model
             StringBuilder str = new StringBuilder();
             if (MainID != null) { str.AppendLine(",MainID=@MainID"); }
             if (MainName != null) { str.AppendLine(",MainName=@MainName"); }
-            if (Sys_Type_ID != null) { str.AppendLine(",Sys_Type_ID=@Sys_Type_ID"); }
+            if (TypeID != null) { str.AppendLine(",TypeID=@TypeID"); }
             if (Quantity != null) { str.AppendLine(",Quantity=@Quantity"); }
             if (Amount != null) { str.AppendLine(",Amount=@Amount"); }
             if (IsShow != null) { str.AppendLine(",IsShow=@IsShow"); }
