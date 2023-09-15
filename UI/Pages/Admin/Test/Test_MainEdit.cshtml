@@ -19,7 +19,7 @@
                 </label>
                 <label class="form-item">
                     <span>类型</span>
-                    @Html.DropDownListFor(s => s.Model.Sys_Type_ID, DB.Selects<Sys_Type>("ID,Name").Query().Select<Sys_Type, SelectListItem>(s => new SelectListItem(s.Name, s.ID.ToString(), s.ID.ToString() == Request.Query["Sys_Type_ID"])), "请选择", new { @class = "input-text" })
+                    @Html.DropDownListFor(s => s.Model.TypeID, DB.Selects<Sys_Type>("ID,Name").Query().Select<Sys_Type, SelectListItem>(s => new SelectListItem(s.Name, s.ID.ToString(), s.ID.ToString() == Request.Query["TypeID"])), "请选择", new { @class = "input-text" })
                 </label>
                 <label class="form-item">
                     <span>数量</span>

@@ -19,7 +19,7 @@ namespace UI.Pages.Admin
                 if (Request.Query["MainID"].ToString().Length > 0) { sql.WhereAnd("MainID like @MainID", new { MainID = '%' + Request.Query["MainID"] + '%' }); }
 
                 //表连接查询
-                sql.LeftJoin<Sys_Type>("Test_Main.Sys_Type_ID=Sys_Type.ID");
+                sql.LeftJoin<Sys_Type>("Test_Main.TypeID=Sys_Type.ID");
                 //查询总数据量
                 this.DataCount = Convert.ToInt32(sql.QueryScalar());
                 //设置查询列
