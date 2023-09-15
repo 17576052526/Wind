@@ -5,7 +5,7 @@
 }
 
 <div class="box h-100">
-    <div class="box-head">修改</div>
+    <div class="box-head">@(Request.Query["id"].ToString().Length > 0 ? "修改" : "新建")</div>
     <div class="box-body">
         <form method="post" id="form">
             <input type="hidden" value="@Request.Query["TypeID"]" name="Model.TypeID" />
