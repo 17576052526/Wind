@@ -8,7 +8,7 @@
     <div class="box-head flex">
         <div class="flex-1">@Request.Query["navName"]</div>
         <div class="-mlr-5">
-            <a href="Temp_List1Edit?typeID=@Request.Query["typeID"]&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)" class="btn-primary h-pre mlr-5"><i class="icon-plus"></i>新建</a>
+            <a href="@(Request.Path)Edit?typeID=@Request.Query["typeID"]&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)" class="btn-primary h-pre mlr-5"><i class="icon-plus"></i>新建</a>
             <input type="button" class="btn-danger h-pre mlr-5" value="删除" onclick="checkDelete()" />
         </div>
     </div>
@@ -57,7 +57,7 @@
                                 <td><div class="table-resize-item">@Model.List[i].Temp5</div></td>
                                 <td class="white-nowrap">
                                     <input type="button" class="btn-danger h-pre mlr-5 btn-xs" value="删除" onclick="checkDelete(this)" />
-                                    <a class="btn-primary h-pre mlr-5 btn-xs" href="Temp_List1Edit?id=@Model.List[i].ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">修改</a>
+                                    <a class="btn-primary h-pre mlr-5 btn-xs" href="@(Request.Path)Edit?id=@Model.List[i].ID&url=@System.Net.WebUtility.UrlEncode(Request.Path+Request.QueryString)">修改</a>
                                 </td>
                             </tr>
                         }
