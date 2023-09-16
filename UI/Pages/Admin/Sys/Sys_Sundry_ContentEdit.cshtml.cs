@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UI.Pages.Admin
 {
-    public class ContentEditModel : EditPageModel
+    public class Sys_Sundry_ContentEditModel : EditPageModel
     {
         public Sys_Sundry Model;
         public void OnGet(string typeID)
