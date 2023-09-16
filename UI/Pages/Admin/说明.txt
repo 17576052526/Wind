@@ -7,6 +7,9 @@ Sys_Sundry 用来存放杂项数据的表，TypeID 指向 Sys_Type 的ID
 Temp_List1、Temp_List2、Temp_List3、Temp_List4、Temp_List5 存放列表数据的表，TypeID 指向 Sys_Type 的ID
 
 注意事项：
-1.所有表都有 TypeID，TypeID 都是指向 Sys_Type 的ID
-2.Admin/Sys 文件夹存放标准文件，里面的文件不能改，如果不满足业务，请复制出来放到别的文件夹在改
+1.Admin/Sys 文件夹存放标准文件，里面的文件不能改，如果不满足业务，另外在加一个文件
+2.Admin/Test 标准模板文件，要加新文件的时候，则可以复制Admin/Test/Temp_List1 过来，改下表名和字段就可以用了
 3.在修改时，如果要某个值能清空，则 model.Temp1 = Request.Form["Model.Temp1"];   //获取原始值，OnPost() 接收的值会把空字符串转换为null，从而导致不能清空值，因为DbOrm 为null的不参与修改
+4.Sys_Sundry 用于存放单条数据，例如，关于我们，联系方式
+5.Sys_Type 用于存放分类数据，且所有表的 TypeID一定都是指向 Sys_Type 的ID，否则有可能数据错乱，因为一张表中存了不同业务的数据，例如新闻数据，案例数据可能都存放在同一张表中
+6.Temp_List1，Temp_List2，Temp_List3，Temp_List4，Temp_List5，用于存放列表数据，

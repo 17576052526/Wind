@@ -36,7 +36,7 @@
             } else {
                 $.confirm('确定删除？', function () {
                     $('#form').submit();
-                })
+                }, "", function () { check.prop('checked', false); })
             }
         }
     </script>
