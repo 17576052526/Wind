@@ -21,9 +21,13 @@
                 <label class="form-item">
                     <span>后台Url</span>
                     @Html.DropDownListFor(s=>s.Model.Temp2,new List<SelectListItem>(){
-                    new SelectListItem("后台栏目不显示",""),
-                    new SelectListItem("分类页面","/admin/Sys/Sys_Type"),
-                    new SelectListItem("列表页面","/admin/Sys/Temp_List1"),
+                    new SelectListItem("请选择",""),
+                    new SelectListItem("分类列表页","/admin/Sys/Sys_Type"),
+                    new SelectListItem("内容列表页","/admin/Sys/Temp_List1_Content"),
+                    new SelectListItem("图片列表页","/admin/Sys/Temp_List1_Img"),
+                    new SelectListItem("图片内容列表页","/admin/Sys/Temp_List1_ImgContent"),
+                    new SelectListItem("内容编辑页","/admin/Sys/Sys_Sundry_ContentEdit"),
+                    new SelectListItem("地址编辑页","/admin/Sys/Sys_Sundry_ContactEdit"),
                     }, new { @class = "input-text" })
                 </label>
             </div>

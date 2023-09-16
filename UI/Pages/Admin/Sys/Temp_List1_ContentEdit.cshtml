@@ -1,0 +1,41 @@
+﻿@page "{handler:?}"
+@model Temp_List1_ContentEditModel
+@{
+    Layout = "_Layout_Edit";
+}
+
+<div class="box h-100">
+    <div class="box-head">@(Request.Query["id"].ToString().Length > 0 ? "修改" : "新建")</div>
+    <div class="box-body">
+        <form method="post" id="form">
+            <input type="hidden" value="@Request.Query["TypeID"]" name="Model.TypeID" />
+            <div class="form-row">
+                <label class="form-item">
+                    <span>名称</span>
+                    @Html.TextBoxFor(s => s.Model.Name, new { @class = "input-text" })
+                </label>
+                <label class="form-item w-100">
+                    <span>内容</span>
+                    <span id="editor"></span>
+                    @Html.HiddenFor(s=>s.Model.Content)<!---------------------------只需改此处-------------------------------->
+                    <script type="text/javascript" src="/Admin/_lib/Editor/wangEditor.min.js"></script>
+                    <script type="text/javascript">
+                        const editor = new window.wangEditor('#editor')
+                        editor.config.uploadImgShowBase64 = true;
+                        editor.create()
+                        editor.txt.html($('#editor').parent().children('[type=hidden]').val())
+                        editor.config.onchange = function (newHtml) { $('#editor').parent().children('[type=hidden]').val(newHtml); }
+                    </script>
+                </label>
+                <label class="form-item">
+                    <span>创建时间</span>
+                    <input type="date" value="@(Model.Model!=null?Model.Model.Time.ToString("yyyy-MM-dd"):DateTime.Now.ToString("yyyy-MM-dd"))" name="Model.CreateTime" class="input-text" />
+                </label>
+            </div>
+        </form>
+    </div>
+    <div class="box-foot">
+        <input type="button" class="btn-primary mlr-10" value="提交" onclick="$('#form').submit()" />
+        <input type="button" class="btn-default mlr-10" value="取消" onclick="history.go(-1);" />
+    </div>
+</div>
