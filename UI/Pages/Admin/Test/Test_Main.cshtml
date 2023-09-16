@@ -21,10 +21,10 @@
         </div>
         <div class="table-fixed flex-1">
             <form method="post" action="@Request.Path/Delete@(Request.QueryString)" id="form">
-                <table class="table">
+                <table class="table check-box">
                     <thead>
                         <tr>
-                            <th class="table-resize table-fixed-col"><div class="table-resize-item"><input type="checkbox" /></div></th>
+                            <th class="table-resize table-fixed-col"><div class="table-resize-item"><input type="checkbox" class="check-all" /></div></th>
                             <th class="table-resize"><div class="table-resize-item">序号</div></th>
                             <th class="table-resize"><div class="table-resize-item">编号</div></th>
                             <th class="table-resize"><div class="table-resize-item">名称</div></th>
@@ -43,7 +43,7 @@
                         @for (int i = 0; i < Model.List.Count; i++)
                         {
                             <tr>
-                                <td class="table-fixed-col"><div class="table-resize-item"><input type="checkbox" name="checkID" value="@Model.List[i].ID" /></div></td>
+                                <td class="table-fixed-col"><div class="table-resize-item"><input type="checkbox" class="check-item" name="checkID" value="@Model.List[i].ID" /></div></td>
                                 <td><div class="table-resize-item">@(Model.PageSize * (Model.PageIndex - 1) + i + 1)</div></td>
                                 <td><div class="table-resize-item">@Model.List[i].MainID</div></td>
                                 <td><div class="table-resize-item">@Model.List[i].MainName</div></td>
