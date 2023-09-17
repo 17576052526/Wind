@@ -39,7 +39,7 @@ public static class HtmlHelpers
         foreach (var m in list.Distinct())//List 去重复了
         {
             //获取所有的<style>
-            string str = Regex.Match(m, @"(?<=^\s*<style[^>]*>)[\s\S]*(?=</style>\s*$)").Value;
+            string str = Regex.Match(m, @"(?<=^\s*<style[^>]*>)[^<]*(?=</style>\s*$)").Value;
             if (str.Length > 0)
             {
                 style.Append(str);
