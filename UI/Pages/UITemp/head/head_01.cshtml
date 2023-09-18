@@ -1,6 +1,6 @@
 ﻿<div class="container flex justify-between align-items-center lg-display-none">
     <a href="/"><img src="@Model.Logo" class="h-11" /></a>
-    <div class="flex color-777 ml-6-c">
+    <div class="flex ml-6-c">
         @foreach (var m in Model.Nav)
         {
             <div class="relative @(Context.Request.Path.Value==m.Url?"color-333 border-b-2 border-000":"")" hover="color-333 border-b-2 border-000" hover-to>
@@ -24,7 +24,7 @@
 @*
 <div class="container flex justify-between align-items-center lg-display-none">
     <a href="/"><img src="/img/temp_logo.png" class="h-11" /></a>
-    <div class="flex color-777 ml-6-c">
+    <div class="flex ml-6-c">
         <div class="color-333 border-b-2 border-000" hover="color-333 border-b-2 border-000"><a href="#" class="block plr-7 ptb-7">首页</a></div>
         <div hover="color-333 border-b-2 border-000"><a href="#" class="block plr-7 ptb-7">关于我们</a></div>
         <div hover="color-333 border-b-2 border-000"><a href="#" class="block plr-7 ptb-7">相关案例</a></div>

@@ -1,7 +1,7 @@
 ﻿/*html {font-size:100%;}*//*调整html的font-size大小可以改变整体大小*/
 *,::before,::after {box-sizing: border-box;}/*高度和宽度包括border-width和padding的值*/
 html,body{height:100%;}
-body{line-height:1.5;font-family: "Microsoft YaHei";}
+body{color:#333;line-height:1.5;font-family: "Microsoft YaHei";}
 body,h1,h2,h3,h4,h5,h6,dl,dd,p,input{margin: 0;}
 ol,ul, menu{padding:0;margin:0;list-style:none;}
 img,video{max-width:100%;}
