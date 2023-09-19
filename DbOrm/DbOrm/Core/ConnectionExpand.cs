@@ -125,11 +125,15 @@ namespace DbOrm
             using (IDataReader reader = conn.ExecuteReader(sql, param, transaction))
             {
                 List<dynamic> list = new List<dynamic>();
-                var table = new DbTable(Enumerable.Range(0, reader.FieldCount).Select(s => reader.GetName(s)).ToArray());
+                int fieldCount = reader.FieldCount;
+                var table = new DbTable(Enumerable.Range(0, fieldCount).Select(s => reader.GetName(s)).ToArray());
                 while (reader.Read())
                 {
-                    object[] values = new object[reader.FieldCount];//不要放到外边
-                    reader.GetValues(values);
+                    object[] values = new object[fieldCount];//不要放到外边
+                    for (int i = 0; i < fieldCount; i++)
+                    {
+                        if (!reader.IsDBNull(i)) { values[i] = reader.GetValue(i); }
+                    }
                     list.Add(new DbRow(table, values));
                 }
                 return list;
