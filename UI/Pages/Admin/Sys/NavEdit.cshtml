@@ -19,6 +19,11 @@
                     @Html.TextBoxFor(s => s.Model.Temp1, new { @class = "input-text" })
                 </label>
                 <label class="form-item">
+                    <span>是否新窗口打开</span>
+                    <input type="checkbox" value="_blank" name="Model.Temp3" @(Model.Model.Temp3 == "_blank" ? "checked" : "") />
+                    <input type="hidden" name="Model.Temp3" />
+                </label>
+                <label class="form-item">
                     <span>后台Url</span>
                     @Html.DropDownListFor(s=>s.Model.Temp2,new List<SelectListItem>(){
                     new SelectListItem("请选择",""),
