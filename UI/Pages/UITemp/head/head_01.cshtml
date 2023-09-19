@@ -1,10 +1,10 @@
 ﻿<div class="container flex justify-between align-items-center lg-display-none">
     <a href="/"><img src="@Model.Logo" class="h-11" /></a>
-    <div class="flex ml-6-c">
+    <div class="flex ml-12-c">
         @foreach (var m in Model.Nav)
         {
             <div class="relative @(Context.Request.Path.Value==m.Url?"color-333 border-b-2 border-000":"")" hover="color-333 border-b-2 border-000" hover-to>
-                <a href="@m.Url" class="block plr-7 ptb-7" target="@m.Target">@m.Name</a>
+                <a href="@m.Url" class="block ptb-7" target="@m.Target">@m.Name</a>
                 @if (m.Children != null && m.Children.Count > 0)
                 {
                     <div class="absolute z-1 top-full w-40 -ml-20 left-half pt-3 hidden" in-add="animate-fadeInDown" out-add="animate-fadeOutUp" in-remove="animate-fadeOutUp" out-remove="animate-fadeInDown">
