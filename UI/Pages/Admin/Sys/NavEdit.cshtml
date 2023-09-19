@@ -20,19 +20,20 @@
                 </label>
                 <label class="form-item">
                     <span>是否新窗口打开</span>
-                    <input type="checkbox" value="_blank" name="Model.Temp3" @(Model.Model.Temp3 == "_blank" ? "checked" : "") />
+                    <input type="checkbox" value="_blank" name="Model.Temp3" @(Model.Model != null && Model.Model.Temp3 == "_blank" ? "checked" : "") />
                     <input type="hidden" name="Model.Temp3" />
                 </label>
                 <label class="form-item">
                     <span>后台Url</span>
                     @Html.DropDownListFor(s=>s.Model.Temp2,new List<SelectListItem>(){
                     new SelectListItem("请选择",""),
-                    new SelectListItem("分类列表页","/admin/Sys/Sys_Type"),
                     new SelectListItem("内容列表页","/admin/Sys/Temp_List1_Content"),
                     new SelectListItem("图片列表页","/admin/Sys/Temp_List1_Img"),
                     new SelectListItem("图片内容列表页","/admin/Sys/Temp_List1_ImgContent"),
                     new SelectListItem("内容编辑页","/admin/Sys/Sys_Sundry_ContentEdit"),
                     new SelectListItem("地址编辑页","/admin/Sys/Sys_Sundry_ContactEdit"),
+                    new SelectListItem("Banner图","/admin/Sys/Sys_Sundry_Banner"),
+                    new SelectListItem("分类列表页","/admin/Sys/Sys_Type"),
                     }, new { @class = "input-text" })
                 </label>
             </div>
