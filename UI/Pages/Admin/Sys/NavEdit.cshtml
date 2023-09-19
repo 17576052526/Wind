@@ -20,8 +20,8 @@
                 </label>
                 <label class="form-item">
                     <span>是否新窗口打开</span>
-                    <input type="checkbox" value="_blank" name="Model.Temp3" @(Model.Model != null && Model.Model.Temp3 == "_blank" ? "checked" : "") />
-                    <input type="hidden" name="Model.Temp3" />
+                    <input type="checkbox" value="1" name="Model.Temp3" checked="@(Model.Model != null && Model.Model.Temp3 == "1")" />
+                    <input type="hidden" name="Model.Temp3" value="0" />
                 </label>
                 <label class="form-item">
                     <span>后台Url</span>

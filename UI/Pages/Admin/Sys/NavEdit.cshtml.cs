@@ -30,7 +30,6 @@ namespace UI.Pages.Admin
             {
                 model.Temp1 = Request.Form["Model.Temp1"];//获取原始值，OnPost() 接收的值会把空字符串转换为null，从而导致不能清空值，因为DbOrm 为null的不参与修改
                 model.Temp2 = Request.Form["Model.Temp2"];
-                model.Temp3 = Request.Form["Model.Temp3"];
                 DB.Updates(model, "ID=@ID", new { ID = id });
             }
             return Redirect(Request.Query["url"]);
