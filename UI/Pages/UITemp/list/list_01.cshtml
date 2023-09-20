@@ -3,8 +3,8 @@
         @foreach (var m in Model.List)
         {
             <li class="hidden" hover-to scroll-in-add="animate-fadeInUp">
-                <a href="@Model.Url/@m.ID" target="@Model.Target" class="block overflow-hidden"><img src="@m.Img" class="h-64 w-full transition-600" in-add="scale-105" out-remove="scale-105" /></a>
-                <a href="@Model.Url/@m.ID" target="@Model.Target" class="block font-bold text-center ptb-4" in-add="color-666" out-remove="color-666">@m.Name</a>
+                <a href="@Model.Url@m.ID" target="@Model.Target" class="block overflow-hidden"><img src="@m.Img" class="h-64 w-full transition-600" in-add="scale-105" out-remove="scale-105" /></a>
+                <a href="@Model.Url@m.ID" target="@Model.Target" class="block font-bold text-center ptb-4" in-add="color-666" out-remove="color-666">@m.Name</a>
             </li>
         }
     </ul>

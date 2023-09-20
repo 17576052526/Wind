@@ -37,21 +37,31 @@
 })
 @await Html.PartialAsync("UITemp/title/title_01","产品中心")
 @await Html.PartialAsync("UITemp/title/title_02","产品中心")
-@await Html.PartialAsync("UITemp/type/type_01",new List<dynamic>(){
-    new { Name="全部" ,ID="" },
-    new { Name="酷开电视" ,ID="1" },
-    new { Name="影音" ,ID="2" },
-    new { Name="周边" ,ID="3" },
-    new { Name="一体机" ,ID="4" },
+@await Html.PartialAsync("UITemp/type/type_01",new{
+    Url="?type=",
+    Target="" ,
+    Value=HttpContext.Request.Query["type"].ToString(),
+    List=new List<dynamic>(){
+        new { Name="全部" ,ID="" },
+        new { Name="酷开电视" ,ID="1" },
+        new { Name="影音" ,ID="2" },
+        new { Name="周边" ,ID="3" },
+        new { Name="一体机" ,ID="4" },
+    }
 })
-@await Html.PartialAsync("UITemp/type/type_02",new List<dynamic>(){
-    new { Name="全部" ,ID="" },
-    new { Name="酷开电视" ,ID="1" },
-    new { Name="影音" ,ID="2" },
-    new { Name="周边" ,ID="3" },
-    new { Name="一体机" ,ID="4" },
+@await Html.PartialAsync("UITemp/type/type_02",new{
+    Url="?type=",
+    Target="" ,
+    Value=HttpContext.Request.Query["type"].ToString(),
+    List=new List<dynamic>(){
+        new { Name="全部" ,ID="" },
+        new { Name="酷开电视" ,ID="1" },
+        new { Name="影音" ,ID="2" },
+        new { Name="周边" ,ID="3" },
+        new { Name="一体机" ,ID="4" },
+    }
 })
-@await Html.PartialAsync("UITemp/list/list_01",new{Url="/pruduct",Target="_blank" , List=new List<dynamic>{
+@await Html.PartialAsync("UITemp/list/list_01",new{Url="/pruduct/",Target="_blank" , List=new List<dynamic>{
     new{  Name="高科技成果交易会" ,ID="1",Img="/img/list_01.jpg" },
     new{  Name="航天华拓" ,ID="2",Img="/img/list_02.jpg" },
     new{  Name="同力通讯" ,ID="3",Img="/img/list_03.jpg" },
@@ -65,13 +75,13 @@
     new{  Name="银达担保" ,ID="11",Img="/img/list_02.jpg" },
     new{  Name="中检实验室技术" ,ID="12",Img="/img/list_03.jpg" },
 }})
-@await Html.PartialAsync("UITemp/list_content/list_content_01",new{Url="/news",Target="_blank" , List=new List<dynamic>(){
+@await Html.PartialAsync("UITemp/list_content/list_content_01",new{Url="/news/",Target="_blank" , List=new List<dynamic>(){
     new{  Time=Convert.ToDateTime("2022-02-06"), Name="高科技成果交易会" ,ID="1",Content="首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，" },
     new{  Time=Convert.ToDateTime("2022-02-07"), Name="高科技成果交易会" ,ID="2",Content="首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，" },
     new{  Time=Convert.ToDateTime("2022-02-06"), Name="高科技成果交易会" ,ID="3",Content="首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，" },
     new{  Time=Convert.ToDateTime("2022-02-06"), Name="高科技成果交易会" ,ID="4",Content="首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，" },
 }})
-@await Html.PartialAsync("UITemp/list_content/list_content_02",new{Url="/news",Target="_blank" , List=new List<dynamic>(){
+@await Html.PartialAsync("UITemp/list_content/list_content_02",new{Url="/news/",Target="_blank" , List=new List<dynamic>(){
     new{  Time=Convert.ToDateTime("2022-02-06"), Name="高科技成果交易会" ,ID="1",Content="首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，" },
     new{  Time=Convert.ToDateTime("2022-02-07"), Name="高科技成果交易会" ,ID="2",Content="首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，" },
     new{  Time=Convert.ToDateTime("2022-02-06"), Name="高科技成果交易会" ,ID="3",Content="首先不谈设计我想谈下剪头发，我们每个人都要修剪头发，特别是男人，以前我的头发是妈妈剪的，那时的她是以节约为目的的，她觉得她剪的很好，我也这么认为，所以我一直觉得我不适合短发，不是她剪的不好，而是我不适合，直到过了二十多年，我在深圳发现大家都是短发很潮，于是决心在试次，结果是令我自己满意的，" },

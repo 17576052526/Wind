@@ -1,9 +1,9 @@
 ﻿<div class=" border-b-1 border-ccc">
     <div class="container">
         <div class="flex flex-wrap font-bold ml-16-c -ml-16 ptb-8-c">
-            @foreach (var m in Model)
+            @foreach (var m in Model.List)
             {
-                <a href="?type=@m.ID" style="@(Context.Request.Query["type"]==m.ID.ToString()?"color:#ff5d33;border-bottom:3px solid #ff5d33":"")">@m.Name</a>
+                <a href="@Model.Url@m.ID" target="@Model.Target" style="@(Model.Value==m.ID.ToString()?"color:#ff5d33;border-bottom:3px solid #ff5d33":"")">@m.Name</a>
             }
         </div>
     </div>
