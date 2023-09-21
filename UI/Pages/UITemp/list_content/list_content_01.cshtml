@@ -6,13 +6,13 @@
                 <div class="text-center w-24 h-24 br-full color-fff pt-3" style="background-color:#00A1F1;">
                     @if (m.Time != null)
                     {
-                        <span class="font-48 line-h-1">@m.Time.ToString("dd")</span>
-                        @m.Time.ToString("yyyy-MM")
+                        <span class="font-48 line-h-1">@Convert.ToDateTime(m.Time).ToString("dd")</span>
+                        @Convert.ToDateTime(m.Time).ToString("yyyy-MM")
                     }
                 </div>
                 <div class="flex-1 ml-5">
                     <a href="@Model.Url@m.ID" target="@Model.Target" class="line-clamp-1">@m.Name</a>
-                    <a href="@Model.Url@m.ID" target="@Model.Target" class="line-clamp-2 mt-3 font-14 color-666">@m.Content</a>
+                    <a href="@Model.Url@m.ID" target="@Model.Target" class="line-clamp-2 mt-3 font-14 color-666">@Html.Raw(m.Content)</a>
                 </div>
             </li>
         }
