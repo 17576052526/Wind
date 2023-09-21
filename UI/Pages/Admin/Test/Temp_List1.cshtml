@@ -47,7 +47,7 @@
                                 <td><div class="table-resize-item">@(Model.PageSize * (Model.PageIndex - 1) + i + 1)</div></td>
                                 <td><div class="table-resize-item">@Model.List[i].Name</div></td>
                                 <td><div class="table-resize-item">@Model.List[i].Content</div></td>
-                                <td><div class="table-resize-item"><a target="_blank" href="@(Model.List[i].Img!=null?Model.List[i].Img.Split('|')[0]:"")"><img src="@(Model.List[i].Img!=null?Model.List[i].Img.Split('|')[0]:"")" /></a></div></td>
+                                <td><div class="table-resize-item"><img src="@(Model.List[i].Img!=null?Model.List[i].Img.Split('|')[0]:"")" class="img-show" /></div></td>
                                 <td><div class="table-resize-item">@Model.List[i].Temp1</div></td>
                                 <td><div class="table-resize-item">@Model.List[i].Temp2</div></td>
                                 <td><div class="table-resize-item">@Model.List[i].Temp3</div></td>
