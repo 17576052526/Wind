@@ -33,7 +33,7 @@ $(function () {
 //追加显示的图片 obj:按钮对象，data:要追加的图片地址
 function addImg(box, data) {
     data && data.split('|').forEach(function (m) {
-        box.append('<a href="' + m + '" target="_blank"><img src="' + m + '" /><span class="upload-img-remove"></span></a>');
+        box.append('<a href="javascript:void(0)"><img src="' + m + '" class="img-show" /><span class="upload-img-remove"></span></a>');
     })
 }
 //根据显示的图片重构值
