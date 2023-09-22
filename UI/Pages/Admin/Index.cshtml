@@ -56,7 +56,6 @@
                     <div class="search-btn"><i class="icon-search"></i></div>
                 </div>
                 <ul class="nav">
-                    <!--
                     <li class="tree-active tree">
                         <div class="nav-switch icon-folder_open tree-switch">一级菜单</div>
                         <ol class="tree-box">
@@ -65,31 +64,6 @@
                             <li><a class="nav-btn-active nav-btn icon-circle_blank" href="#">编辑页</a></li>
                         </ol>
                     </li>
-                    -->
-                    @foreach (var m in Model.List)
-                    {
-                        <li class="tree">
-                            @if (m.Children.Count > 0)
-                            {
-                                <div class="nav-switch icon-folder_open tree-switch">@m.Name</div>
-                            }
-                            else if (m.Temp2 != null && m.Temp2.Length > 0)
-                            {
-                                <a class="nav-btn icon-circle_blank" href="@m.Temp2?typeID=@m.ID&navName=@m.Name" target="main">@m.Name</a>
-                            }
-                            <ol class="tree-box">
-                                @foreach (var c in m.Children)
-                                {
-                                    if (c.Temp2 != null && c.Temp2.Length > 0)
-                                    {
-                                        <li><a class="nav-btn icon-circle_blank" href="@c.Temp2?typeID=@c.ID&navName=@c.Name" target="main">@c.Name</a></li>
-                                    }
-                                }
-                            </ol>
-                        </li>
-                    }
-                    <li class="tree"><a class="nav-btn icon-circle_blank" href="/admin/sys/Nav" target="main">栏目管理</a></li>
-                    <!--<li class="tree"><a class="nav-btn icon-circle_blank" href="/admin/test/Temp_List1?typeID=-1" target="main">系统测试，写死的栏目typeID可用负值</a></li>-->
                 </ul>
             </div>
             <!--右边块-->
