@@ -22,8 +22,8 @@ namespace DbOrm
         //创建数据库连接对象，通过创建不同类型的实例来达到调用不同类型的数据库
         public override IDbConnection CreateConnection()
         {
-            //return new Microsoft.Data.SqlClient.SqlConnection(ConnString);
-            return new Microsoft.Data.Sqlite.SqliteConnection(ConnString);
+            return new Microsoft.Data.SqlClient.SqlConnection(ConnString);
+            //return new Microsoft.Data.Sqlite.SqliteConnection(ConnString);
         }
 
 

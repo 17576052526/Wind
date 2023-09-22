@@ -29,27 +29,11 @@ namespace DbOrm.Model
         /// </summary>
         public string Name { set; get; }
         /// <summary>
-        /// 
-        /// </summary>
-        public int? Sort { set; get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Temp1 { set; get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Temp2 { set; get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Temp3 { set; get; }
-        /// <summary>
         /// 新增
         /// </summary>
         internal override string InsertSql()
         {
-            return "insert into Sys_Type(TypeID,Name,Sort,Temp1,Temp2,Temp3) values(@TypeID,@Name,@Sort,@Temp1,@Temp2,@Temp3)";
+            return "insert into Sys_Type(TypeID,Name) values(@TypeID,@Name)";
         }
 
         /// <summary>
@@ -60,10 +44,6 @@ namespace DbOrm.Model
             StringBuilder str = new StringBuilder();
             if (TypeID != null) { str.AppendLine(",TypeID=@TypeID"); }
             if (Name != null) { str.AppendLine(",Name=@Name"); }
-            if (Sort != null) { str.AppendLine(",Sort=@Sort"); }
-            if (Temp1 != null) { str.AppendLine(",Temp1=@Temp1"); }
-            if (Temp2 != null) { str.AppendLine(",Temp2=@Temp2"); }
-            if (Temp3 != null) { str.AppendLine(",Temp3=@Temp3"); }
 
             return "update Sys_Type set " + str.Remove(0, 1);
         }
