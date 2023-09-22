@@ -7,6 +7,14 @@ ol,ul, menu{padding:0;margin:0;list-style:none;}
 img,video{max-width:100%;}
 a{color: inherit;text-decoration: inherit;}
 
+.container{max-width:80rem;margin-left:auto;margin-right:auto;padding-left:0.75rem;padding-right:0.75rem;}
+/*此处先禁用，宽度发生变化，其他块是否要调整？目前没有宽屏的显示器可测试*/
+/*
+@media(min-width:1536px) {
+    .container{max-width:96rem;}
+}
+*/
+
 .display-none{display:none;}
 .flex{display:flex;}
 .block{display:block;}
@@ -104,6 +112,31 @@ a{color: inherit;text-decoration: inherit;}
 .sm-flex-initial{flex:0 1 auto;}
 }
 
+.column-1,.column-2,.column-3,.column-4,.column-5{column-gap:0;}
+.column-1{columns:1;}
+.column-2{columns:2;}
+.column-3{columns:3;}
+.column-4{columns:4;}
+.column-5{columns:5;}
+@media(max-width:1024px) {
+.lg-column-1{columns:1;}
+.lg-column-2{columns:2;}
+.lg-column-3{columns:3;}
+.lg-column-4{columns:4;}
+}
+@media(max-width:768px) {
+.md-column-1{columns:1;}
+.md-column-2{columns:2;}
+.md-column-3{columns:3;}
+.md-column-4{columns:4;}
+}
+@media(max-width:640px) {
+.sm-column-1{columns:1;}
+.sm-column-2{columns:2;}
+.sm-column-3{columns:3;}
+.sm-column-4{columns:4;}
+}
+
 .font-12{font-size:0.75rem;}
 .font-14{font-size:0.875rem;}
 .font-16{font-size:1rem;}
@@ -159,8 +192,8 @@ a{color: inherit;text-decoration: inherit;}
 .font-extrabold{font-weight:800;}
 .font-black{font-weight:900;}
 
+.line-h-1{line-height:1;}
 .line-h-1\.25{line-height:1.25;}
-.line-h-1\.375{line-height:1.375;}
 .line-h-1\.5{line-height:1.5;}
 .line-h-1\.75{line-height:1.75;}
 .line-h-2{line-height:2;}
@@ -207,8 +240,12 @@ a{color: inherit;text-decoration: inherit;}
 .color-eee{color:#eee;}
 .color-fff{color:#fff;}
 
-.text-overflow-ellipsis{white-space:nowrap; text-overflow: ellipsis;overflow: hidden;}
-.fixed-center {position: fixed;top: 50%;left: 50%;z-index:100;transform: translateX(-50%) translateY(-50%);box-shadow:0px 0px 10px #aaa!important;}
+.line-clamp-1,.line-clamp-2,.line-clamp-3,.line-clamp-4,.line-clamp-5{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;}
+.line-clamp-1{-webkit-line-clamp:1;}
+.line-clamp-2{-webkit-line-clamp:2;}
+.line-clamp-3{-webkit-line-clamp:3;}
+.line-clamp-4{-webkit-line-clamp:4;}
+.line-clamp-5{-webkit-line-clamp:5;}
 
 .vertical-middle{vertical-align:middle;}
 .vertical-top{vertical-align:top;}
@@ -285,6 +322,7 @@ a{color: inherit;text-decoration: inherit;}
 .border-l-5{border-width:5px;border-left-style:solid;}
 .border-solid{border-style:solid;}
 .border-dashed{border-style:dashed;}
+.border-none{border:none;}
 
 .shadow-sm{box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);}
 .shadow{box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);}
