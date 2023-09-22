@@ -1,10 +1,6 @@
 ﻿@using (Html.Section())
 {
     <style type="text/css">
-        
-        .list_content_02-item:hover a{
-        color:red;
-        }
         @@media(max-width:768px) {
             .list_content_02-item{padding-top:1rem;padding-bottom:1rem;}
             .list_content_02-content  {
@@ -17,15 +13,15 @@
 <ul class="container ptb-8-c">
     @foreach(var m in Model.List)
     {
-        <li class="flex border-ccc border-b-1 list_content_02-item hidden" scroll-in-add="animate-fadeInUp">
+        <li class="flex border-ccc border-b-1 list_content_02-item hidden" hover-to scroll-in-add="animate-fadeInUp">
             <div class="w-56 md-display-none">
-                <div class="font-italic font-bold color-ccc font-48">@Convert.ToDateTime(m.Time).ToString("MM-dd")</div>
-                <div class="font-italic color-ccc font-20 font-bold">@Convert.ToDateTime(m.Time).ToString("yyyy")</div>
+                <div class="font-italic font-bold color-white-3 font-48">@Convert.ToDateTime(m.Time).ToString("MM-dd")</div>
+                <div class="font-italic color-white-3 font-20 font-bold">@Convert.ToDateTime(m.Time).ToString("yyyy")</div>
             </div>
-            <div class="flex-1">
+            <div class="flex-1" in-add="color-active" out-remove="color-active">
                 <a href="@Model.Url@m.ID" target="@Model.Target" class="font-24 md-font-16 font-bold line-clamp-1">@m.Name</a>
-                <div class="font-14 color-888 display-none md-block ptb-1">@Convert.ToDateTime(m.Time).ToString("yyyy-MM-dd")</div>
-                <a href="@Model.Url@m.ID" target="@Model.Target" class="color-888 line-h-1.75 mt-5 line-clamp-3 list_content_02-content">
+                <div class="font-14 color-black-3 display-none md-block ptb-1">@Convert.ToDateTime(m.Time).ToString("yyyy-MM-dd")</div>
+                <a href="@Model.Url@m.ID" target="@Model.Target" class="color-black-3 line-h-1.75 mt-5 line-clamp-3 list_content_02-content">
                     @Html.Raw(m.Content)
                 </a>
             </div>
