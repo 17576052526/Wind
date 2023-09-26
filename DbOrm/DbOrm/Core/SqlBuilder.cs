@@ -110,7 +110,7 @@ namespace DbOrm
 with _tab as(
 {str}
 )
-select * from _tab where _RowNum between @_start and @_end
+select * from _tab where _RowNum between @_skipCount+1 and @_skipCount+@_takeCount
 ";
                 }
             }
@@ -121,7 +121,7 @@ select * from _tab where _RowNum between @_start and @_end
                 str.AppendLine(this.Join);
                 if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
                 if (_OrderBy != null) { str.Append(" order by ").Append(_OrderBy.TrimEnd(',')); }
-                if (TakeCount > 0) { str.Append($" LIMIT {SkipCount},{TakeCount}"); }
+                if (TakeCount > 0) { str.Append(" LIMIT @_skipCount,@_takeCount"); }
             }
             else
             {
@@ -162,18 +162,19 @@ select * from _tab where _RowNum between @_start and @_end
         {
             this.SkipCount = skipCount;
             this.TakeCount = takeCount;
-            Params.Add("@_start", SkipCount + 1);
-            Params.Add("@_end", SkipCount + TakeCount);
+            Params.Add("@_skipCount", SkipCount);
+            Params.Add("@_takeCount", TakeCount);
             return Query();
         }
         /// <summary>
         /// 查询第一行
         /// </summary>
-        public T QueryFirstRow()
+        public T QuerySingle()
         {
+            this.SkipCount = 0;
             this.TakeCount = 1;
-            Params.Add("@_start", SkipCount + 1);
-            Params.Add("@_end", SkipCount + TakeCount);
+            Params.Add("@_skipCount", SkipCount);
+            Params.Add("@_takeCount", TakeCount);
             List<T> list = Query();
             return list.Count > 0 ? list[0] : default(T);
         }
@@ -235,9 +236,9 @@ select * from _tab where _RowNum between @_start and @_end
         /// <summary>
         /// 查询第一行，先找缓存，如果没找到去数据库查然后在存入缓存
         /// </summary>
-        public T QueryFirstRowCache()
+        public T QuerySingleCache()
         {
-            return GetCache<T>(this.ToString(), () => QueryFirstRow());
+            return GetCache<T>(this.ToString(), () => QuerySingle());
         }
         #endregion
     }

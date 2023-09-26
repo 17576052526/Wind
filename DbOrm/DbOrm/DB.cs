@@ -144,6 +144,49 @@ namespace DbOrm
                 return db.Query<T1, T2, T3, T4, T5>(sql, param);
             }
         }
+
+        public static dynamic QuerySingles(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle(sql, param);
+            }
+        }
+        public static T QuerySingles<T>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T>(sql, param);
+            }
+        }
+        public static T1 QuerySingles<T1, T2>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T1, T2>(sql, param);
+            }
+        }
+        public static T1 QuerySingles<T1, T2, T3>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T1, T2, T3>(sql, param);
+            }
+        }
+        public static T1 QuerySingles<T1, T2, T3, T4>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T1, T2, T3, T4>(sql, param);
+            }
+        }
+        public static T1 QuerySingles<T1, T2, T3, T4, T5>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T1, T2, T3, T4, T5>(sql, param);
+            }
+        }
         #endregion
     }
 }

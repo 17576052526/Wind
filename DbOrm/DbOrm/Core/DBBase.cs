@@ -109,5 +109,54 @@ namespace DbOrm
         {
             return Connection.Query<T1>(sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, Transaction);
         }
+
+        /// <summary>
+        /// 查询单条数据
+        /// </summary>
+        public dynamic QuerySingle(string sql, object param = null)
+        {
+            var list = Connection.Query(sql, param, Transaction);
+            return list.Count == 1 ? list[0] : list.Count == 0 ? null : throw new Exception("查询的结果集为多条");
+        }
+        /// <summary>
+        /// 查询单条数据
+        /// </summary>
+        public T QuerySingle<T>(string sql, object param = null)
+        {
+            var list = Connection.Query<T>(sql, param, new Type[] { typeof(T) }, Transaction);
+            return list.Count == 1 ? list[0] : list.Count == 0 ? default(T) : throw new Exception("查询的结果集为多条");
+        }
+        /// <summary>
+        /// 查询单条数据，多表联查
+        /// </summary>
+        public T1 QuerySingle<T1, T2>(string sql, object param = null)
+        {
+            var list = Connection.Query<T1>(sql, param, new Type[] { typeof(T1), typeof(T2) }, Transaction);
+            return list.Count == 1 ? list[0] : list.Count == 0 ? default(T1) : throw new Exception("查询的结果集为多条");
+        }
+        /// <summary>
+        /// 查询单条数据，多表联查
+        /// </summary>
+        public T1 QuerySingle<T1, T2, T3>(string sql, object param = null)
+        {
+            var list = Connection.Query<T1>(sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3) }, Transaction);
+            return list.Count == 1 ? list[0] : list.Count == 0 ? default(T1) : throw new Exception("查询的结果集为多条");
+        }
+        /// <summary>
+        /// 查询单条数据，多表联查
+        /// </summary>
+        public T1 QuerySingle<T1, T2, T3, T4>(string sql, object param = null)
+        {
+            var list = Connection.Query<T1>(sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, Transaction);
+            return list.Count == 1 ? list[0] : list.Count == 0 ? default(T1) : throw new Exception("查询的结果集为多条");
+        }
+        /// <summary>
+        /// 查询单条数据，多表联查
+        /// </summary>
+        public T1 QuerySingle<T1, T2, T3, T4, T5>(string sql, object param = null)
+        {
+            var list = Connection.Query<T1>(sql, param, new Type[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, Transaction);
+            return list.Count == 1 ? list[0] : list.Count == 0 ? default(T1) : throw new Exception("查询的结果集为多条");
+        }
     }
 }

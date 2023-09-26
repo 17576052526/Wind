@@ -13,7 +13,7 @@ namespace UI.Pages.Admin
         {
             if (id != null)
             {
-                Model = DB.Selects<Test_Main>().Where("ID=@ID", new { ID = id }).QueryFirstRow();
+                Model = DB.Selects<Test_Main>().Where("ID=@ID", new { ID = id }).QuerySingle();
             }
         }
 

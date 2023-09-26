@@ -22,8 +22,8 @@ namespace DbOrm
         //创建数据库连接对象，通过创建不同类型的实例来达到调用不同类型的数据库
         public override IDbConnection CreateConnection()
         {
-            //return new Microsoft.Data.SqlClient.SqlConnection(ConnString);
-            return new Microsoft.Data.Sqlite.SqliteConnection(ConnString);
+            return new Microsoft.Data.SqlClient.SqlConnection(ConnString);
+            //return new Microsoft.Data.Sqlite.SqliteConnection(ConnString);
         }
 
 
@@ -142,6 +142,49 @@ namespace DbOrm
             using (var db = NewThis())
             {
                 return db.Query<T1, T2, T3, T4, T5>(sql, param);
+            }
+        }
+
+        public static dynamic QuerySingles(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle(sql, param);
+            }
+        }
+        public static T QuerySingles<T>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T>(sql, param);
+            }
+        }
+        public static T1 QuerySingles<T1, T2>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T1, T2>(sql, param);
+            }
+        }
+        public static T1 QuerySingles<T1, T2, T3>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T1, T2, T3>(sql, param);
+            }
+        }
+        public static T1 QuerySingles<T1, T2, T3, T4>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T1, T2, T3, T4>(sql, param);
+            }
+        }
+        public static T1 QuerySingles<T1, T2, T3, T4, T5>(string sql, object param = null)
+        {
+            using (var db = NewThis())
+            {
+                return db.QuerySingle<T1, T2, T3, T4, T5>(sql, param);
             }
         }
         #endregion
