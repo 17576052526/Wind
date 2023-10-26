@@ -71,6 +71,6 @@ $(document).on('click', '.upload-img-remove', function (e) {
     e.preventDefault();
     var cur = $(this);
     var obj = $('.upload-img[boxId=' + cur.closest('.upload-img-box').attr('id') + ']')
-    cur.closest('a').remove();//此代码位置不能改
+    cur.closest('div').remove();//此代码位置不能改
     imgToVal(obj);
 })
