@@ -55,7 +55,7 @@ $(document).on('click', '.upload-img', function () {
     var cur = $(this);
     $.upload({
         url: cur.attr('url'),
-        accept: cur.attr('accept') || "image/gif,image/jpeg,image/jpg,image/png,image/svg",
+        accept: cur.attr('accept') || "image/gif,image/jpeg,image/jpg,image/png,image/svg,image/webp",
         multiple: cur.attr('multiple'),
         data: cur.attr('upload-param'),
         success: function (msg) {
