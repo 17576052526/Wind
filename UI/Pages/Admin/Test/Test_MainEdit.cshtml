@@ -33,19 +33,19 @@
                     <span>是否离职</span>
                     @Html.CheckBox("Model.IsShow",Model.Model!=null&&Model.Model.IsShow!=null?Model.Model.IsShow.Value:false)
                 </label>
-                <label class="form-item">
+                <div class="form-item">
                     <span>图片</span>
                     <span>
                         <input type="button" value="图片上传" class="upload-img btn-success" url="/common/upload" hidden-name="Model.Img" multiple="multiple" data="@(Model.Model!=null?@Model.Model.Img:"")" />
                     </span>
-                </label>
-                <label class="form-item">
+                </div>
+                <div class="form-item">
                     <span>文件</span>
                     <span>
                         <input type="button" value="上传" class="btn-success" onclick="upload(this)" />
                         @Html.TextBoxFor(s => s.Model.Files, new { @class = "input-text fileTxt" ,style="border:none",@readonly="readonly"})
                     </span>
-                </label>
+                </div>
                 <label class="form-item w-100">
                     <span>备注</span>
                     <span id="editor"></span>
