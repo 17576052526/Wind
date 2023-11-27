@@ -15,7 +15,7 @@
 $(function () {
     $('.upload-img').each(function () {
         var cur = $(this);
-        var data = cur.attr('data');
+        var data = cur.attr('data') || '';
         //生成box
         var boxId = 'imgBox' + Math.floor(Math.random() * 1000000);
         cur.attr('boxId', boxId);
