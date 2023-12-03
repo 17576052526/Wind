@@ -66,11 +66,10 @@ namespace DbOrm
         /// <param name="param">实体类、匿名类、Dictionary<string, object> 类型</param>
         public static void AddParameter(this IDbCommand cmd, object param)
         {
-            var list = param as Dictionary<string, object>;
-            if (list != null)
+            if (param is Dictionary<string, object>)
             {
                 //Dictionary<string, object> 类型
-                foreach (var m in list)
+                foreach (var m in (Dictionary<string, object>)param)
                 {
                     cmd.AddParameter(m.Key, m.Value);
                 }

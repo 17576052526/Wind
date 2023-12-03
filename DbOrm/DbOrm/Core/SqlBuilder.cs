@@ -34,9 +34,12 @@ namespace DbOrm
             Types = new List<Type>() { typeof(T) };
             IsClose = isClose;
         }
-        public void AddParameter(string name, object value)
+        public void AddParams(object param)
         {
-            this.Params.Add(name, value);
+            foreach (var p in param.GetType().GetProperties())
+            {
+                this.Params.Add('@' + p.Name, p.GetValue(param));
+            }
         }
         public SqlBuilder<T> Select(string column)
         {
@@ -50,23 +53,21 @@ namespace DbOrm
         }
         public SqlBuilder<T> Where(string where, object param = null)
         {
-            if (param != null)
-            {
-                foreach (var p in param.GetType().GetProperties())
-                {
-                    this.Params.Add('@' + p.Name, p.GetValue(param));
-                }
-            }
+            if (param != null) { AddParams(param); }
             this._Where = where;
             return this;
         }
         public SqlBuilder<T> WhereAnd(string where, object param = null)
         {
-            return Where(this._Where != null && this._Where.Length > 0 ? this._Where + " and " + where : where, param);
+            if (param != null) { AddParams(param); }
+            this._Where = this._Where != null && this._Where.Length > 0 ? this._Where + " and " + where : where;
+            return this;
         }
         public SqlBuilder<T> WhereOr(string where, object param = null)
         {
-            return Where(this._Where != null && this._Where.Length > 0 ? this._Where + " or " + where : where, param);
+            if (param != null) { AddParams(param); }
+            this._Where = this._Where != null && this._Where.Length > 0 ? this._Where + " or " + where : where;
+            return this;
         }
         public SqlBuilder<T> LeftJoin<TJoin>(string joinWhere)
         {
@@ -89,7 +90,7 @@ namespace DbOrm
         public SqlBuilder<T> OrderBy(string orderByColumn)
         {
             if (!Regex.IsMatch(orderByColumn, @"^(\w+|\[\w+\]|\w+\.(\w+|\[\w+\]))(\s+(asc|desc))?$", RegexOptions.IgnoreCase)) { throw new Exception($"字符串”{orderByColumn}“存在sql注入风险"); }
-            this._OrderBy += orderByColumn + ',';
+            _OrderBy = _OrderBy != null && _OrderBy.Length > 0 ? _OrderBy + ',' + orderByColumn : orderByColumn;
             return this;
         }
         public override string ToString()
@@ -98,11 +99,11 @@ namespace DbOrm
             if (Connection is Microsoft.Data.SqlClient.SqlConnection)
             {
                 str.Append("select ").Append(Column);
-                if (TakeCount > 0) { str.Append($",row_number() over(order by {(_OrderBy == null ? "(select 0)" : _OrderBy.TrimEnd(','))}) as _RowNum"); }//分页的序号列
+                if (TakeCount > 0) { str.Append($",row_number() over(order by {(_OrderBy == null ? "(select 0)" : _OrderBy)}) as _RowNum"); }//分页的序号列
                 str.Append(" from ").Append(Table);
                 str.AppendLine(this.Join);
                 if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
-                if (TakeCount == 0 && _OrderBy != null) { str.Append(" order by ").Append(_OrderBy.TrimEnd(',')); }//如果有分页排序则在上面构建好了
+                if (TakeCount == 0 && _OrderBy != null) { str.Append(" order by ").Append(_OrderBy); }//如果有分页排序则在上面构建好了
                                                                                                                    //分页必须在最后构造
                 if (TakeCount > 0)
                 {
@@ -120,7 +121,7 @@ select * from _tab where _RowNum between @_skipCount+1 and @_skipCount+@_takeCou
                 str.Append(" from ").Append(Table);
                 str.AppendLine(this.Join);
                 if (_Where != null && _Where.Length > 0) { str.Append(" where ").Append(_Where); }
-                if (_OrderBy != null) { str.Append(" order by ").Append(_OrderBy.TrimEnd(',')); }
+                if (_OrderBy != null) { str.Append(" order by ").Append(_OrderBy); }
                 if (TakeCount > 0) { str.Append(" LIMIT @_skipCount,@_takeCount"); }
             }
             else
@@ -178,68 +179,42 @@ select * from _tab where _RowNum between @_skipCount+1 and @_skipCount+@_takeCou
             List<T> list = Query();
             return list.Count > 0 ? list[0] : default(T);
         }
-
-        #region 缓存
-        private static MemoryCache _Cache;
-        //使用 MemoryCache需要安装 Microsoft.Extensions.Caching.Memory
-        private static MemoryCache Cache
+        /// <summary>
+        /// 查询
+        /// </summary>
+        public List<dynamic> QueryDynamic()
         {
-            get
+            if (IsClose)
             {
-                if (_Cache == null)
-                {
-                    _Cache = new MemoryCache(new MemoryCacheOptions()
-                    {
-                        //SizeLimit = 1000,//缓存最大为份数
-                        //CompactionPercentage = 0.2,//缓存满了时，压缩20%（即删除 SizeLimit*CompactionPercentage份优先级低的缓存项）
-                        //ExpirationScanFrequency = TimeSpan.FromSeconds(60)//每隔多久查找一次过期项，默认一分钟查找一次
-                    });
-                }
-                return _Cache;
+                try { return Connection.Query(this.ToString(), Params, Transaction); }
+                finally { Connection.Close(); }
             }
-        }
-        //获取缓存，func：取数据方法
-        private static TCache GetCache<TCache>(object key, Func<TCache> func)
-        {
-            TCache list;
-            if (!Cache.TryGetValue(key, out list))
-            {
-                list = func();
-                Cache.Set(key, list, new MemoryCacheEntryOptions
-                {
-                    SlidingExpiration = TimeSpan.FromMinutes(20),//相对过期时间，此处固定使用20分钟过期
-                });
-            }
-            return list;
+            return Connection.Query(this.ToString(), Params, Transaction);
         }
         /// <summary>
-        /// 查询，先找缓存，如果没找到去数据库查然后在存入缓存
+        /// 查询 跳过 skipCount条，返回连续的 takeCount条
         /// </summary>
-        public List<T> QueryCache()
+        /// <param name="skipCount">跳过的条数</param>
+        /// <param name="takeCount">返回连续的条数</param>
+        public List<dynamic> QueryDynamic(int skipCount, int takeCount)
         {
-            return GetCache<List<T>>(this.ToString(), () => Query());
+            this.SkipCount = skipCount;
+            this.TakeCount = takeCount;
+            Params.Add("@_skipCount", SkipCount);
+            Params.Add("@_takeCount", TakeCount);
+            return QueryDynamic();
         }
         /// <summary>
-        /// 查询，跳过 skipCount条，返回连续的 takeCount条，先找缓存，如果没找到去数据库查然后在存入缓存
+        /// 查询第一行
         /// </summary>
-        public List<T> QueryCache(int skipCount, int takeCount)
+        public dynamic QuerySingleDynamic()
         {
-            return GetCache<List<T>>(this.ToString(), () => Query(skipCount, takeCount));
+            this.SkipCount = 0;
+            this.TakeCount = 1;
+            Params.Add("@_skipCount", SkipCount);
+            Params.Add("@_takeCount", TakeCount);
+            List<dynamic> list = QueryDynamic();
+            return list.Count > 0 ? list[0] : null;
         }
-        /// <summary>
-        /// 查询第一行第一列，先找缓存，如果没找到去数据库查然后在存入缓存
-        /// </summary>
-        public object QueryScalarCache<TReturn>()
-        {
-            return GetCache(this.ToString(), () => QueryScalar());
-        }
-        /// <summary>
-        /// 查询第一行，先找缓存，如果没找到去数据库查然后在存入缓存
-        /// </summary>
-        public T QuerySingleCache()
-        {
-            return GetCache<T>(this.ToString(), () => QuerySingle());
-        }
-        #endregion
     }
 }
