@@ -45,7 +45,11 @@ namespace DbOrm
         }
         public SqlBuilder<T> Select<T>(string column = "*") where T : IModel
         {
-            return new SqlBuilder<T>(Connection, Transaction).Select(column).From(typeof(T).Name);
+            return new SqlBuilder<T>(Connection, false, Transaction).Select(column).From(typeof(T).Name);
+        }
+        public SqlBuilder Select(string table, string column = "*")
+        {
+            return new SqlBuilder(Connection, false, Transaction).Select(column).From(table);
         }
     }
 }
