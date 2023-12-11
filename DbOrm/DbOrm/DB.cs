@@ -85,6 +85,12 @@ namespace DbOrm
             DBBase db = NewThis();
             return new SqlBuilder<T>(db.Connection, true, null).Select(column).From(typeof(T).Name);
         }
+        public static SqlBuilder Selects(string table, string column = "*")
+        {
+            //此处不用using，此方法返回的是SqlBuilder，外面要调用数据库查询，所以此方法不能关闭数据库连接
+            DBBase db = NewThis();
+            return new SqlBuilder(db.Connection, true, null).Select(column).From(table);
+        }
         #endregion
 
         #region 对应 DBBase 静态方法
