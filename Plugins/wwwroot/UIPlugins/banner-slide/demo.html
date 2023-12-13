@@ -30,7 +30,7 @@
 
     -->
 
-    <div class="banner-slide" style="width:500px;height:300px;" interval="5000" speed="500" switchStop="30000">
+    <div class="banner-slide" style="width:500px;height:300px;">
         <ul class="banner-slide-box">
             <li class="banner-slide-item" style="background-color:#eee;">
                 <div class="hidden" animate="animate-fadeInDown">动画1</div>
@@ -43,6 +43,8 @@
             <li class="banner-slide-item" style="background-color:blue;"></li>
         </ul>
     </div>
-
+    <script type="text/javascript">
+        let [previous, next, stopSwitch] = $('.banner-slide').bannerSlide(5000, 500, 30000);
+    </script>
 </body>
 </html>

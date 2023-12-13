@@ -90,25 +90,3 @@ $.fn.bannerSlide = function (interval, speed, switchStop) {
 
     return [previous, next, (a) => a ? setTime() : clearInterval(time)];
 }
-
-$(function () {
-    //启动方法，可以在启动方法里面写扩展
-    function start(th) {
-        let [previous, next, startOrPause] = th.bannerSlide(parseInt(th.attr('interval')), parseInt(th.attr('speed')), parseInt(th.attr('switchStop')));
-
-    }
-    //同时支持数据后端渲染，和ajax渲染
-    $('.banner-slide').each(function () {
-        let th = $(this);
-        if (th.children('.banner-slide-box').children().length > 0) {
-            start(th);
-        } else {
-            let time = setInterval(function () {
-                if (th.children('.banner-slide-box').children().length > 0) {
-                    start(th);
-                    clearInterval(time);
-                }
-            }, 1000)
-        }
-    });
-})
