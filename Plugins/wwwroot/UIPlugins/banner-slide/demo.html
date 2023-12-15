@@ -44,7 +44,13 @@
         </ul>
     </div>
     <script type="text/javascript">
-        let [previous, next, stopSwitch] = $('.banner-slide').bannerSlide(5000, 500, 30000);
+        let [previous, next, stopOrStart] = $('.banner-slide').bannerSlide(5000, 500, 30000);
     </script>
+
+    <!--示例代码-->
+    <input type="button" value="上一个" onclick="previous()" />
+    <input type="button" value="下一个" onclick="next()" />
+    <input type="button" value="启动" onclick="stopOrStart(true)" />
+    <input type="button" value="暂停" onclick="stopOrStart(false)" />
 </body>
 </html>
