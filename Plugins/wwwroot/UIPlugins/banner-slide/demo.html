@@ -15,13 +15,13 @@
         .animate-fadeInDown {animation-name: fadeInDown;visibility:visible;}
         .animate-delay-600{animation-delay:600ms}
     </style>
-    <script type="text/javascript" src="../jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="banner-slide.css" />
     <script type="text/javascript" src="banner-slide.js"></script>
 </head>
 <body>
     <!--
         说明：
+        dom: '.banner-slide'//查找的节点（如果有多个只会找第一个）
         interval: 5000,   //间隔5秒切换一次
         speed: 500,    //0.5秒切换完成
         switchStop: 30000,    //手动切换后暂停多久重新启动计时器
@@ -44,7 +44,7 @@
         </ul>
     </div>
     <script type="text/javascript">
-        let [previous, next, stopOrStart] = $('.banner-slide').bannerSlide(5000, 500, 30000);
+        let [previous, next, stopOrStart] = window.bannerSlide({ dom: '.banner-slide', interval: 5000, speed: 500, switchStop: 30000 });
     </script>
 
     <!--示例代码-->
