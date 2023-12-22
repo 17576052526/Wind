@@ -10,7 +10,7 @@ window.bannerSlide = function ({ dom, interval, speed, switchStop }) {
     //设置第一个显示
     box.style.transform = 'translateX(-100%)';
     //设置过渡效果
-    box.style.transition = 'all ' + speed + 'ms';
+    setTimeout(() => box.style.transition = 'all ' + speed + 'ms', 100);
     //生成按钮
     var btnBox = document.createElement('div');
     btnBox.className = "banner-slide-btnBox";
