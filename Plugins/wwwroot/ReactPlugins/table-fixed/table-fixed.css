@@ -1,0 +1,6 @@
+﻿.table-fixed{overflow:auto;border:1px solid #ddd;}
+.table-fixed>table{border-spacing:0;border:none;}
+.table-fixed>table>thead{position:sticky;top:0px;}
+.table-fixed>table>tfoot{position:sticky;bottom:0px;}
+.table-fixed-left{position:sticky;left:0px;}
+.table-fixed-right{position:sticky;right:0px;}
