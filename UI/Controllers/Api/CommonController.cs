@@ -19,7 +19,12 @@ namespace UI.Controllers.Api
             _hostEnvironment = hostEnvironment;
         }
 
-        //文件上传，可以接收多个上传的文件
+        /*
+        文件上传（方案一和方案二同时使用）
+            方案一：直接上传到正式文件夹，缺点：如果用户多次上传就会存在垃圾文件
+            方案二：先上传到临时文件夹，调用新增或修改接口时从临时文件夹移动到正式文件夹，缺点：需要在新增或修改接口里面写代码，把文件移动到正式文件夹
+         */
+        //上传到正式文件夹
         public async Task<Result> Upload()
         {
             string path = _hostEnvironment.WebRootPath;//wwwroot文件夹的绝对路径
@@ -39,6 +44,49 @@ namespace UI.Controllers.Api
                 filePaths.Append(direct + newFileName + '|');
             }
             return Result.OK(filePaths.ToString().TrimEnd('|'));
+        }
+        //上传到临时文件夹
+        private static string AbsolutePath;//wwwroot文件夹的绝对路径
+        public async Task<Result> UploadCache()
+        {
+            if (AbsolutePath == null) { AbsolutePath = _hostEnvironment.WebRootPath; }
+            //构造保存目录
+            string direct = "/uploadCache/";
+            if (!System.IO.Directory.Exists(AbsolutePath + direct)) { System.IO.Directory.CreateDirectory(AbsolutePath + direct); } //不存在目录就创建目录
+            //遍历文件
+            StringBuilder filePaths = new StringBuilder();
+            foreach (var item in Request.Form.Files)
+            {
+                string fileExt = item.FileName.Substring(item.FileName.LastIndexOf('.')); //文件后缀名
+                string newFileName = Convert.ToInt64((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds).ToString() + (new Random().Next(100000, 1000000)) + fileExt;  //构造文件名，规则：时间戳+随机数6位
+                using (var stream = new FileStream(AbsolutePath + direct + newFileName, FileMode.Create))
+                {
+                    await item.CopyToAsync(stream);
+                }
+                filePaths.Append(direct + newFileName + '|');
+            }
+            return Result.OK(filePaths.ToString().TrimEnd('|'));
+        }
+        /// <summary>
+        /// 临时文件夹文件移动到正式文件夹，并返回新路径
+        /// </summary>
+        public static string MoveToUpload(string path)
+        {
+            if (path == null || path.Length == 0) { return null; }
+            string direct = "/upload/" + DateTime.Now.ToString("yyyyMMdd/");
+            if (!System.IO.Directory.Exists(AbsolutePath + direct)) { System.IO.Directory.CreateDirectory(AbsolutePath + direct); } //不存在目录就创建目录
+            string fileName = path.Substring(path.LastIndexOf("/") + 1);
+            System.IO.File.Move(AbsolutePath + path, AbsolutePath + direct + fileName);
+            //删除临时文件夹文件
+            foreach (var m in Directory.GetFiles(AbsolutePath + "/uploadCache/"))
+            {
+                //根据临时文件的创建时间删除文件
+                if ((DateTime.Now - System.IO.File.GetCreationTime(m)).TotalMinutes > 300)
+                {
+                    System.IO.File.Delete(m);
+                }
+            }
+            return direct + fileName;
         }
 
         [HttpPost]

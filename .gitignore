@@ -14,3 +14,4 @@
 /UI/.config
 /UI/UI.csproj.user
 /UI/Properties/PublishProfiles
+/UI/wwwroot/uploadCache
