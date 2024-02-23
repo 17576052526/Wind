@@ -88,7 +88,11 @@ namespace UI.Controllers.Api
             }
             return direct + fileName;
         }
-
+        //下载文件，若要浏览器打开文件可以用<a>标签连接文件地址（但是有的浏览器还是会下载而不是打开）
+        public IActionResult Download(string path)
+        {
+            return File(new FileStream(_hostEnvironment.WebRootPath + path, FileMode.Open), "application/octet-stream", path.Substring(path.LastIndexOf('/') + 1));
+        }
         [HttpPost]
         public Result Login(object param)
         {
