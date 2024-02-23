@@ -17,7 +17,7 @@ axios.interceptors.request.use(config => {
 //对返回结果做统一处理
 axios.interceptors.response.use(response => {
     let data = response.data;
-    if (data.code == -1 || data.code == 401) {//普通错误（不做特殊处理的，直接弹框提示）
+    if (data.code == 510 || data.code == 401) {//普通错误（不做特殊处理的，直接弹框提示）
         $.alert ? $.alert(data.msg) : alert(data.msg)
         return Promise.reject(response);//标识为失败状态，并且不会进入到axios的回调函数里面
     }
@@ -26,9 +26,9 @@ axios.interceptors.response.use(response => {
         window.location.href = '#/login';//此处用不了 useNavigate()跳转
         return Promise.reject(response);
     }
-    return data;
+    return data;//200 和自定义状态码就返回
 }, (error) => {
-    $.alert ? $.alert(error) : alert(error);
+    $.alert ? $.alert(error) : alert(error);//500错误会自动进入此处
     return Promise.reject(error);
 });
 /****************************************************************************************************************/

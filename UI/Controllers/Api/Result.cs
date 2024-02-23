@@ -1,5 +1,14 @@
 ﻿namespace UI.Controllers.Api
 {
+    /*
+状态码：
+    请求成功  200
+	未授权，需要跳转到登陆页面   403
+	权限不够   401
+	服务器报错   500
+	请求失败，前端弹框提示（例如：字段格式不对，数据验证失败）     510
+	自定义状态码，针对单个接口的状态码，非公共状态码   -xxx
+     */
     //属性首字母小写，是因为 js 命名规范是小写
     /// <summary>
     /// 接口返回结果
@@ -26,7 +35,7 @@
         {
             return new Result()
             {
-                code = 1,
+                code = 200,
                 data = data,
                 msg = "OK",
             };
@@ -35,12 +44,13 @@
         /// <summary>
         /// 失败的结果
         /// </summary>
-        public static Result Fail(string msg, int code = -1)
+        public static Result Fail(string msg, int code = 510, object data = null)
         {
             return new Result()
             {
                 code = code,
                 msg = msg,
+                data = data
             };
         }
     }

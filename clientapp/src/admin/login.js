@@ -35,7 +35,7 @@ export default function () {
             verifyCode: verifyCode.current ? verifyCode.current.value : '',
         }
         axios.post("/api/common/login", obj).then(msg => {
-            if (msg.code == 1) {
+            if (msg.code == 200) {
                 //记住密码
                 if (remember.current && remember.current.checked) {
                     common.setLocalStorage("rememberUserName", userName.current.value);
