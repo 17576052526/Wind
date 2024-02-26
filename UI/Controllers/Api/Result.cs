@@ -6,7 +6,7 @@
 	未授权，需要跳转到登陆页面   403
 	权限不够   401
 	服务器报错   500
-	请求失败，前端弹框提示（例如：字段格式不对，数据验证失败）     510
+	前端弹框提示  210
 	自定义状态码，针对单个接口的状态码，非公共状态码   -xxx
      */
     //属性首字母小写，是因为 js 命名规范是小写
@@ -40,11 +40,21 @@
                 msg = "OK",
             };
         }
-
         /// <summary>
-        /// 失败的结果
+        /// 弹框提示
         /// </summary>
-        public static Result Fail(string msg, int code = 510, object data = null)
+        public static Result Alert(string msg)
+        {
+            return new Result()
+            {
+                code = 210,
+                msg = msg
+            };
+        }
+        /// <summary>
+        /// 自定义返回结果
+        /// </summary>
+        public static Result Custom(int code, string msg, object data = null)
         {
             return new Result()
             {

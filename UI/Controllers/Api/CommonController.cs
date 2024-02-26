@@ -106,7 +106,7 @@ namespace UI.Controllers.Api
             {
                 if (verifyCode == null || verifyCode.Length == 0 || verifyCode.ToUpper() != (string)Base.GetCache("VerifyCode" + HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString()))
                 {
-                    return Result.Fail("验证码错误", -2);
+                    return Result.Custom(-2, "验证码错误");
                 }
             }
             //验证用户名密码
@@ -127,9 +127,9 @@ namespace UI.Controllers.Api
                 Base.SetCache("LoginCount" + userName, errorCount, 5, false);
                 if (errorCount >= 3)
                 {
-                    return Result.Fail("用户名或密码错误", -2);
+                    return Result.Custom(-2, "验证码错误");
                 }
-                return Result.Fail("用户名或密码错误");
+                return Result.Alert("用户名或密码错误");
             }
         }
 
