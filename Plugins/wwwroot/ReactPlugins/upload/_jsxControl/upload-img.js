@@ -40,14 +40,18 @@ export default function ({ multiple, data, getData, isFormal = true }) {
                 headers: null,
                 success: function (msg) {
                     var msg = JSON.parse(msg);
-                    if (multiple) {
-                        list.push(msg.data);
-                        setList([...list]);
+                    if (msg.code == 200) {
+                        if (multiple) {
+                            list.push(msg.data);
+                            setList([...list]);
+                        } else {
+                            setList(msg.data.split('|'));
+                        }
                     } else {
-                        setList(msg.data.split('|'));
+                        alert(msg.msg)
                     }
                 },
-                progress: function (msg) { e.target.value = msg == '100%' ? '上传成功' : msg; }
+                progress: function (msg) { e.target.innerHTML = msg == '100%' ? '上传成功' : msg; }
             })}>图片上传</button>
         </>
     );
