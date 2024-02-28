@@ -12,27 +12,26 @@
 </head>
 <body>
     <!--
-        tree.js 树结构显示隐藏插件
-            .tree 每一个项（项的类样式）
-            .tree-switch 触发显示隐藏的按钮
-            .tree-box 子项的父级
-            .tree-active 激活（显示）的样式
+           tree.js 树结构显示隐藏插件
+               .tree 每一个项（项的类样式）
+               .tree-switch 触发显示隐藏的按钮
+               .tree-box 子项的父级
+               .tree-active 激活（显示）的样式
 
-        tree-search.js 树结构搜索插件
-            .tree-search 搜索输入框
-            .tree 树的项
-            .tree-box 子级的父级.
-            .tree-active 打开子节点
-            注意：不能在节点用 style设置display，如果要设置 display 用类样式设置
-        
-        tree-style.css 树结构布局css
-            .tree-box 子项的父级
-            .tree-active 激活（显示）的样式
-            .tree-btn 按钮样式
-            .tree-switch 触发显示隐藏的按钮样式
-    -->
+           tree-search.js 树结构搜索插件
+                .tree 树的项
+                .tree-box 子级的父级.
+                .tree-active 打开子节点
+               注意：不能在节点用 style设置display，如果要设置 display 用类样式设置
+
+           tree-style.css 树结构布局css
+               .tree-box 子项的父级
+               .tree-active 激活（显示）的样式
+               .tree-btn 按钮样式
+               .tree-switch 触发显示隐藏的按钮样式
+       -->
     <input type="text" placeholder="搜索..." class="tree-search" />
-
+    <input type="button" value="搜索" onclick="treeSearch(document, document.querySelector('.tree-search').value)" />
     <div class="tree tree-active">
         <div class="tree-btn tree-switch">点击文字显示</div>
         <div class="tree-box">
@@ -79,7 +78,7 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="../jquery.js"></script>
+    <!--树结构插件-->
     <script type="text/javascript" src="tree.js"></script>
     <!--树结构搜索插件-->
     <script type="text/javascript" src="tree-search.js"></script>

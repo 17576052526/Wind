@@ -1,22 +1,15 @@
-﻿/* eslint-disable *///此处不是注释，react当中不校验代码，不加此句react当中会报错
-/*
-    树结构显示隐藏
-        .tree 每一个项（项的类样式）
-        .tree-switch 触发显示隐藏的按钮
-        .tree-box 子项的父级
-        .tree-active 激活（显示）的样式
-*/
-$(document).on('click', '.tree-switch', function () {
-    var box = $(this).closest('.tree');
-    var child = box.children('.tree-box');
-    if (box.hasClass('tree-active')) {
-        //当前隐藏
-        child.css('display', 'block');
-        box.removeClass('tree-active');
-        child.slideUp(300);
+﻿document.addEventListener('click', function (e) {
+    if (!e.target.closest('.tree-switch')) { return }
+    var box = e.target.closest('.tree');
+    var child = box.querySelector('.tree-box');
+    if (box.classList.contains('tree-active')) {
+        child.style.height = window.getComputedStyle(child).height;//auto 转换为实际高度，css动画不支持auto高度
+        setTimeout(() => { box.classList.remove('tree-active'); child.style.height = '0px'; }, 10);//延迟执行，css动画才会生效
     } else {
-        //当前显示
-        child.slideDown(300);
-        box.addClass('tree-active');
+        box.classList.add('tree-active');
+        child.style.height = 'auto';//设置为auto，是为了要获取高度
+        var height = window.getComputedStyle(child).height;
+        child.style.height = '0px';//因为前面设置为auto了，现在要设置回去
+        setTimeout(() => child.style.height = height, 10);//延迟执行，css动画才会生效
     }
-});
+})

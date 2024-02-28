@@ -1,2 +1,2 @@
-﻿.tree-box{display: none;}
-.tree-active > .tree-box {display: block;}
+﻿.tree-box{height:0px;overflow:hidden;transition: height 0.3s;}
+.tree-active > .tree-box {height:auto;}
