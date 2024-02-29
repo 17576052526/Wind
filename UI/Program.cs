@@ -66,9 +66,9 @@ namespace UI
                         }
                     });
                 });
-                app.UseStatusCodePagesWithReExecute("/Error/404.html");//404错误页面配置
                 //app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());//http重定向到https
             }
+            app.UseStatusCodePagesWithReExecute("/Error/404.html");//404页面配置，react中的 BrowserRouter路由（不带#号）需要配置此处
 
             app.UseRouting();//+ 此句代码作用未知，但其他示例中都有
 
