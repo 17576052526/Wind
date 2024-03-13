@@ -33,7 +33,7 @@ function tableResizeAuto(table) {
     table.style.tableLayout = 'fixed';
 }
 document.addEventListener('DOMNodeInserted', function (e) {
-    if (!e.target.closest('.table-resize') || e.target.parentNode.tagName != 'TBODY') { return }
+    if (!e.target.closest || !e.target.closest('.table-resize') || e.target.parentNode.tagName != 'TBODY') { return }
     var table = e.target.closest('.table-resize');
     if (table.getAttribute('__tableResizeWidthInit')) { return }
     table.setAttribute('__tableResizeWidthInit', '1');
