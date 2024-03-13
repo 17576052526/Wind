@@ -5,7 +5,7 @@
  .tree-active 打开子节点
  注意：不能在节点用 style设置display，如果要设置 display 用类样式设置
  */
-function treeSearch(dom, str) {
+window.treeSearch = function (dom, str) {
     dom.querySelectorAll('.tree').forEach(root => {
         var box = root.querySelector('.tree-box');
         for (let m of box.children) { m.style.display = '' }//子级都设置为显示，不设的innerText拿不到
