@@ -1092,7 +1092,7 @@ a{color: inherit;text-decoration: inherit;}
 .mlr-80,.mlr-80-c>*{margin-left:20rem;margin-right:20rem;}
 .mlr-96,.mlr-96-c>*{margin-left:24rem;margin-right:24rem;}
 
-.h-pre{margin-top:-102px;margin-bottom:-100px;}/*预防高度撑开，top、bottom的差值由body的font-size决定*/
+.mtb-pre{margin-top:-102px;margin-bottom:-100px;}/*预防高度撑开，top、bottom的差值由body的font-size决定*/
 
 .-mlr-0\.5{margin-left:-0.125rem;margin-right:-0.125rem;}
 .-mlr-1{margin-left:-0.25rem;margin-right:-0.25rem;}
