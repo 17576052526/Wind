@@ -23,3 +23,4 @@ CSS 属性参照 https://www.tailwindcss.cn/docs/place-self
 -ml,-mt  用于设置居中用的，目前由于用的太少所以没有加
 body{overflow-x:hidden;} 此处是为了应对-mlr出现滚动条的问题，overflow-x:hidden;不能设置在 .container 上，因为y轴如果有内容溢出会出现纵向滚动条
 aspect-ratio 低版本浏览器不兼容，目前还是用响应式高度，后面可以考虑把响应式高度换成 aspect-ratio，同时css中去掉响应式高度
+.p-0{padding:0!important;} 常用于 UI.css
