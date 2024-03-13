@@ -14,6 +14,27 @@ a{color: inherit;text-decoration: inherit;}
 }
 */
 
+.flex-column,.flex-wrap,.flex-between,.flex-around,.flex-center,.flex-items-center{display:flex;}
+.flex-column{flex-direction:column;}
+.flex-wrap{flex-wrap:wrap;}
+.flex-between{justify-content:space-between;}
+.flex-around{justify-content:space-around;}
+.flex-center{justify-content:center;}
+.flex-items-center{align-items:center;}
+.flex-1{flex:1;min-width:0;min-height:0;}/*此处加min-width:0，是为了解决子元素超出宽度，父元素宽度也会溢出*/
+@media(max-width:1024px) {
+.lg-flex-1{flex:1;min-width:0;min-height:0;}
+.lg-flex-initial{flex:0 1 auto;}
+}
+@media(max-width:768px) {
+.md-flex-1{flex:1;min-width:0;min-height:0;}
+.md-flex-initial{flex:0 1 auto;}
+}
+@media(max-width:640px) {
+.sm-flex-1{flex:1;min-width:0;min-height:0;}
+.sm-flex-initial{flex:0 1 auto;}
+}
+
 .display-none{display:none;}
 .flex{display:flex;}
 .block{display:block;}
@@ -92,26 +113,6 @@ a{color: inherit;text-decoration: inherit;}
 .z-30{z-index:30;}
 .z-40{z-index:40;}
 .z-50{z-index:50;}
-
-.flex-column{flex-direction:column;}
-.flex-wrap{flex-wrap:wrap;}
-.flex-1{flex:1;min-width:0;min-height:0;}/*此处加min-width:0，是为了解决子元素超出宽度，父元素宽度也会溢出*/
-.flex-between{justify-content:space-between;}
-.flex-around{justify-content:space-around;}
-.flex-center{justify-content:center;}
-.flex-items-center{align-items:center;}
-@media(max-width:1024px) {
-.lg-flex-1{flex:1;min-width:0;min-height:0;}
-.lg-flex-initial{flex:0 1 auto;}
-}
-@media(max-width:768px) {
-.md-flex-1{flex:1;min-width:0;min-height:0;}
-.md-flex-initial{flex:0 1 auto;}
-}
-@media(max-width:640px) {
-.sm-flex-1{flex:1;min-width:0;min-height:0;}
-.sm-flex-initial{flex:0 1 auto;}
-}
 
 .column-1,.column-2,.column-3,.column-4,.column-5{column-gap:0;}
 .column-1>*,.column-2>*,.column-3>*,.column-4>*,.column-5>*{overflow:auto;}/*解决对不齐问题*/
