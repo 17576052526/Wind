@@ -11,11 +11,11 @@ document.addEventListener('click', function (e) {
         let outClass = node.getAttribute('click-out');
         if (inClass || outClass) {
             if (mark) {
-                if (inClass) { node.className = node.className + ' ' + inClass; }
-                if (outClass) { node.className = node.className.replace(' ' + outClass, ''); }
+                inClass && inClass.split(' ').forEach(m => node.classList.add(m));
+                outClass && outClass.split(' ').forEach(m => node.classList.remove(m));
             } else {
-                if (outClass) { node.className = node.className + ' ' + outClass; }
-                if (inClass) { node.className = node.className.replace(' ' + inClass, ''); }
+                outClass && outClass.split(' ').forEach(m => node.classList.add(m));
+                inClass && inClass.split(' ').forEach(m => node.classList.remove(m));
             }
         }
     }
