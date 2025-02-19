@@ -9,11 +9,11 @@ function __hover9175(e) {
         let outClass = node.getAttribute('hover-out');
         if (inClass || outClass) {
             if (mark) {
-                inClass && node.classList.add(inClass)
-                outClass && node.classList.remove(outClass)
+                if (inClass) { node.className = node.className + ' ' + inClass; }
+                if (outClass) { node.className = node.className.replace(' ' + outClass, ''); }
             } else {
-                outClass && node.classList.add(outClass)
-                inClass && node.classList.remove(inClass)
+                if (outClass) { node.className = node.className + ' ' + outClass; }
+                if (inClass) { node.className = node.className.replace(' ' + inClass, ''); }
             }
         }
     }
