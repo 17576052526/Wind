@@ -21,8 +21,8 @@ document.addEventListener('click', function (e) {
     }
 
     //递归查找子集，此处不能用querySelectorAll，因为子集中如果有 click 就不能在往里面找了
-    function find(box) {
-        for (let child of box.children) {
+    function find(parent) {
+        for (let child of parent.children) {
             if (child.hasAttribute('click')) { continue; }
             addClassByNode(child);
             find(child);
