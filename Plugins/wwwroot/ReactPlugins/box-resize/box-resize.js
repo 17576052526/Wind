@@ -33,20 +33,20 @@ document.addEventListener('mouseover', function (e) {
         var windowHeight = window.innerHeight;//获取浏览器高度
 
         function mousemove(e) {
-            if (cur.className.indexOf('box-resize-top') != -1) {
+            if (cur.classList.contains('box-resize-top')) {
                 var curY = e.clientY < y - side.top ? y - side.top : e.clientY;
                 box.style.height = height - (curY - y) + 'px';
                 box.style.top = top + (curY - y) + 'px';
             }
-            if (cur.className.indexOf('box-resize-right') != -1) {
+            if (cur.classList.contains('box-resize-right')) {
                 var curX = e.clientX > windowWidth - (side.left + side.width - x) ? windowWidth - (side.left + side.width - x) : e.clientX;
                 box.style.width = width + (curX - x) + 'px';
             }
-            if (cur.className.indexOf('box-resize-bottom') != -1) {
+            if (cur.classList.contains('box-resize-bottom')) {
                 var curY = e.clientY > windowHeight - (side.top + side.height - y) ? windowHeight - (side.top + side.height - y) : e.clientY;
                 box.style.height = height + (curY - y) + 'px';
             }
-            if (cur.className.indexOf('box-resize-left') != -1) {
+            if (cur.classList.contains('box-resize-left')) {
                 var curX = e.clientX < x - side.left ? x - side.left : e.clientX;
                 box.style.width = width - (curX - x) + 'px';
                 box.style.left = left + (curX - x) + 'px';
