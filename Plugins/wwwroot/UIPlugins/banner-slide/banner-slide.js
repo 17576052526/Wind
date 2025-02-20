@@ -13,10 +13,10 @@ window.bannerSlide = function ({ dom, interval, speed, switchStop }) {
     setTimeout(() => box.style.transition = 'all ' + speed + 'ms', 100);
     //生成按钮
     var btnBox = document.createElement('div');
-    btnBox.className = "banner-slide-btnBox";
+    btnBox.classList.add("banner-slide-btnBox");
     for (let i = 0; i < length; i++) {
         var btn = document.createElement('div');
-        btn.className = "banner-slide-btn";
+        btn.classList.add("banner-slide-btn");
         btnBox.appendChild(btn);
         btn.onclick = function (e) {
             exec(i);
@@ -26,7 +26,7 @@ window.bannerSlide = function ({ dom, interval, speed, switchStop }) {
     btnBox.children[0].classList.add('banner-slide-btnActive');
     cur.appendChild(btnBox);
     //第一个添加类样式（动画）
-    items[1].querySelectorAll('[animate]').forEach(function (e) { e.className += ' ' + e.getAttribute('animate'); });
+    items[1].querySelectorAll('[animate]').forEach(e => e.getAttribute('animate') && e.getAttribute('animate').trim().split(/\s+/).forEach(s => e.classList.add(s)));
     //手动切换事件
     function handSwitch() {
         clearInterval(time);
@@ -48,8 +48,8 @@ window.bannerSlide = function ({ dom, interval, speed, switchStop }) {
                 setTimeout(() => box.style.transition = 'all ' + speed + 'ms', 100);
             }
             //动画类样式添加
-            box.querySelectorAll('[animate]').forEach(e => e.className = e.className.replace(' ' + e.getAttribute('animate'), ''))
-            items[index + 1].querySelectorAll('[animate]').forEach(function (e) { e.className += ' ' + e.getAttribute('animate'); });
+            box.querySelectorAll('[animate]').forEach(e => e.getAttribute('animate') && e.getAttribute('animate').trim().split(/\s+/).forEach(s => e.classList.remove(s)));
+            items[index + 1].querySelectorAll('[animate]').forEach(e => e.getAttribute('animate') && e.getAttribute('animate').trim().split(/\s+/).forEach(s => e.classList.add(s)));
         }, speed);
     }
     //计时器
