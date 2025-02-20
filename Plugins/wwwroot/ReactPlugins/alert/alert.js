@@ -4,13 +4,13 @@ export default function (msg) {
     var box = document.getElementById('__alert435');
     if (box == null) {
         box = document.createElement('div');
-        box.className = "alert-box";
+        box.classList.add("alert-box");
         box.id = "__alert435";
         document.body.appendChild(box);
     }
     //创建alert 框
     var al = document.createElement('div');
-    al.className = "alert";
+    al.classList.add("alert");
     box.appendChild(al);
     //创建内容框
     var content = document.createElement('div');
@@ -20,7 +20,7 @@ export default function (msg) {
     al.appendChild(content);
     //创建删除按钮
     var removeBtn = document.createElement('span');
-    removeBtn.className = "alert-remove";
+    removeBtn.classList.add("alert-remove");
     removeBtn.innerHTML = '+';
     removeBtn.onclick = () => {
         al.classList.add('alert-hide');
