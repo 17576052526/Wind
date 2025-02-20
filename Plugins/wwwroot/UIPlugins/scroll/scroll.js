@@ -7,11 +7,11 @@
             let inClass = th.getAttribute('scroll-in');
             let outClass = th.getAttribute('scroll-out');
             if (scrollY > scrollTop && th.getBoundingClientRect().top + th.offsetHeight > height) {
-                outClass && outClass.split(' ').forEach(m => th.classList.add(m));
-                inClass && inClass.split(' ').forEach(m => th.classList.remove(m));
+                outClass && outClass.trim().split(/\s+/).forEach(m => th.classList.add(m));
+                inClass && inClass.trim().split(/\s+/).forEach(m => th.classList.remove(m));
             } else if (th.getBoundingClientRect().top < height) {
-                inClass && inClass.split(' ').forEach(m => th.classList.add(m));
-                outClass && outClass.split(' ').forEach(m => th.classList.remove(m));
+                inClass && inClass.trim().split(/\s+/).forEach(m => th.classList.add(m));
+                outClass && outClass.trim().split(/\s+/).forEach(m => th.classList.remove(m));
             }
         }
         scrollY = scrollTop;
