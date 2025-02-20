@@ -6,10 +6,10 @@
         for (let th of document.querySelectorAll('[scroll-in],[scroll-out]')) {
             let inClass = th.getAttribute('scroll-in');
             let outClass = th.getAttribute('scroll-out');
-            if (scrollY > scrollTop && th.getBoundingClientRect().top + scrollTop + th.offsetHeight > scrollTop + height) {
+            if (scrollY > scrollTop && th.getBoundingClientRect().top + th.offsetHeight > height) {
                 outClass && outClass.split(' ').forEach(m => th.classList.add(m));
                 inClass && inClass.split(' ').forEach(m => th.classList.remove(m));
-            } else if (th.getBoundingClientRect().top + scrollTop < scrollTop + height) {
+            } else if (th.getBoundingClientRect().top < height) {
                 inClass && inClass.split(' ').forEach(m => th.classList.add(m));
                 outClass && outClass.split(' ').forEach(m => th.classList.remove(m));
             }
