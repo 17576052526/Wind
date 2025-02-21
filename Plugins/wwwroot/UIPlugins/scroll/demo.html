@@ -29,16 +29,17 @@
 <body>
     <!--
     说明：滚动条滚动到某块或离开某块，对该块添加或删除类样式
-        scroll-in 滚动到某处要添加的类样式，并删除 scroll-out 指定的类样式
-        scroll-out 离开某处要添加的类样式，并删除 scroll-in 指定的类样式
-
+        scroll-in-add 滚动进来要添加的类样式
+        scroll-out-add 滚动离开要添加的类样式
+        scroll-in-remove 滚动进来要删除的类样式
+        scroll-out-remove 滚动离开要删除的类样式
     -->
     <div style="height:1000px;">
         往下滚动看效果
     </div>
 
-    <div class="hidden" style="height:100px;background-color:#ccc;" scroll-in="animate-fadeInDown" scroll-out="animate-fadeOutUp">动画效果</div>
-    <div class="hidden" style="height:100px;background-color:#aaa;" scroll-in="animate-fadeInDown animate-delay-600" scroll-out="animate-fadeOutUp animate-delay-600">动画效果</div>
+    <div class="hidden" style="height:100px;background-color:#ccc;" scroll-in-add="animate-fadeInDown" scroll-out-add="animate-fadeOutUp" scroll-in-remove="animate-fadeOutUp" scroll-out-remove="animate-fadeInDown">动画效果</div>
+    <div class="hidden" style="height:100px;background-color:#aaa;" scroll-in-add="animate-fadeInDown animate-delay-600" scroll-out-add="animate-fadeOutUp animate-delay-600" scroll-in-remove="animate-fadeOutUp" scroll-out-remove="animate-fadeInDown">动画效果</div>
 
 
     <div style="height:500px;">

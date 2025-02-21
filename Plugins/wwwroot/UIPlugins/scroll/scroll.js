@@ -1,28 +1,32 @@
 (function () {
-    var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
-    function scroll() {
+    var __previousScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    function __scrollTo() {
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        var height = window.innerHeight;
-        for (let th of document.querySelectorAll('[scroll-in],[scroll-out]')) {
-            let inClass = th.getAttribute('scroll-in');
-            let outClass = th.getAttribute('scroll-out');
-            if (scrollY > scrollTop && th.getBoundingClientRect().top + th.offsetHeight > height) {
-                outClass && outClass.trim().split(/\s+/).forEach(m => th.classList.add(m));
-                inClass && inClass.trim().split(/\s+/).forEach(m => th.classList.remove(m));
-            } else if (th.getBoundingClientRect().top < height) {
-                inClass && inClass.trim().split(/\s+/).forEach(m => th.classList.add(m));
-                outClass && outClass.trim().split(/\s+/).forEach(m => th.classList.remove(m));
+        var height = document.documentElement.clientHeight;
+        document.querySelectorAll('[scroll-in-add],[scroll-in-remove],[scroll-out-add],[scroll-out-remove]').forEach(cur => {
+            var obj = cur.getBoundingClientRect();
+            var top = obj.top + scrollTop;//绝对位置
+            if (__previousScroll > scrollTop && top + obj.height > scrollTop + height) {
+                var outAdd = cur.getAttribute('scroll-out-add');
+                var outRemove = cur.getAttribute('scroll-out-remove');
+                outAdd && outAdd.trim().split(/\s+/).forEach(s => cur.classList.add(s));
+                outRemove && outRemove.trim().split(/\s+/).forEach(s => cur.classList.remove(s));
+            } else if (top < scrollTop + height) {
+                var inAdd = cur.getAttribute('scroll-in-add');
+                var inRemove = cur.getAttribute('scroll-in-remove');
+                inAdd && inAdd.trim().split(/\s+/).forEach(s => cur.classList.add(s));
+                inRemove && inRemove.trim().split(/\s+/).forEach(s => cur.classList.remove(s));
             }
-        }
-        scrollY = scrollTop;
+        })
+        __previousScroll = scrollTop;
     }
-    document.addEventListener('load', scroll);
-    //减少代码执行频率，滑动过程中也会执行
+    window.addEventListener('load', __scrollTo);
+    //减少代码执行频率
     var __scroll_is;
-    document.addEventListener('scroll', function () {
+    window.addEventListener('scroll', function () {
         if (!__scroll_is) {
             __scroll_is = true;
-            setTimeout(() => { __scroll_is = false; scroll(); }, 50);
+            setTimeout(() => { __scroll_is = false; __scrollTo(); }, 50);
         }
-    });
+    })
 })();
