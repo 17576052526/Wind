@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿/*
+用途：把视图页或布局页中的js,css 放到<head>中去
+用法：
+    1._Layout.cshtml 中的<head>中加入 @Html.RenderPartialSection()
+    2.Razor页面或视图中加入 @using (Html.Section()){ }，{}所包含的内容就会自动到 @Html.RenderPartialSection() 所在位置
+ */
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Text.RegularExpressions;
