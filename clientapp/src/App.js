@@ -10,7 +10,7 @@ axios.defaults.baseURL = common.apiUrl;
 
 //设置token
 axios.interceptors.request.use(config => {
-    config.headers.Authorization = common.get('user') && common.get('user').token;
+    config.headers.Authorization = (common.get('user') || {}).token;
     return config
 });
 
@@ -23,7 +23,7 @@ axios.interceptors.response.use(response => {
     }
     else if (data.code == 403) {//访问未认证的接口处理
         $.alert ? $.alert(data.msg) : alert(data.msg);
-        window.location.href = '#/login';//此处用不了 useNavigate()跳转
+        window.location.href = Router.name == 'HashRouter' ? '#/login' : '/login';//此处用不了 useNavigate()跳转
         return Promise.reject(response);
     }
     return data;//200 和自定义状态码就返回
