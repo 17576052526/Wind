@@ -127,9 +127,12 @@ namespace UI.Controllers.Api
                 Base.SetCache("LoginCount" + userName, errorCount, 5, false);
                 if (errorCount >= 3)
                 {
-                    return Result.Custom(-2, "验证码错误");
+                    return Result.Custom(-2, "用户名或密码错误");//-2：标识前端登录失败并刷新验证码
                 }
-                return Result.Alert("用户名或密码错误");
+                else
+                {
+                    return Result.Custom(-1, "用户名或密码错误");//-1：标识前端登录失败
+                }
             }
         }
 
