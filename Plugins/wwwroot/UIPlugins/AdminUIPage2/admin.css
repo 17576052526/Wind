@@ -45,6 +45,7 @@
     background-color:#3F474E;
 }
 .admin-nav{flex:1;overflow:auto;margin-top:5px;font-size:14px;font-weight:500;}
+.admin-nav a{color:inherit;}
 /*设置滚动条*/
 .admin-nav::-webkit-scrollbar {width: 8px;height: 1px;}
 .admin-nav::-webkit-scrollbar-thumb {border-radius: 10px;background: rgba(255,255,255,0.4);}
