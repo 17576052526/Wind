@@ -721,6 +721,8 @@ a{color: inherit;text-decoration: inherit;}
 .left-full{left:100%;}
 
 .p-0{padding:0!important;}
+.ptb-0{padding-top:0!important;padding-bottom:0!important;}
+.plr-0{padding-left:0!important;padding-right:0!important;}
 
 .pt-0\.5,.pt-0\.5-c>*{padding-top:0.125rem;}
 .pt-1,.pt-1-c>*{padding-top:0.25rem;}
