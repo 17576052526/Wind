@@ -5,7 +5,7 @@ import { useStates } from '../../common'
 import '../importShare'
 import { pageSize } from '../config'
 import usePager from '../../_hooks/pager/usePager'
-import useCheck from '../../_hooks/check/useCheck'
+import useChecked from '../../_hooks/checked/useChecked'
 import Test_Main_insert from './Test_Main_insert'
 import Test_Main_update from './Test_Main_update'
 
@@ -18,7 +18,7 @@ export default function () {
     //分页hooks
     let { Pager, pageIndex, setPageIndex, setDataCount, setPageSize, setPageBtnNum, pageCount } = usePager(pageSize);
     //选中，全选
-    let [checks, setChecks, sync] = useCheck();
+    let [checked, setChecked] = useChecked();
     //搜索，变量定义
     let MainName = useRef();
 
@@ -31,7 +31,6 @@ export default function () {
             MainName: MainName.current.value,
         }
         axios.post("/api/test_main/select", param).then(msg => {
-            sync(msg.data.list, isMatchDel);
             setDataCount(msg.data.total);
             setState({ data: msg.data.list });
         });
@@ -41,11 +40,12 @@ export default function () {
 
     //删除
     function remove() {
-        if (checks.length == 0) { $.alert('请先勾选'); return; }
+        if (checked.length == 0) { $.alert('请先勾选'); return; }
         $.confirm('确定删除？', () => {
-            let param = checks.map(s => s.ID);
+            let param = checked.map(s => s.ID);
             axios.post("/api/test_main/delete", param).then(msg => {
                 load();
+                setChecked(checked, false);
             });
         })
     }
@@ -70,7 +70,7 @@ export default function () {
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th className="table-resize"><div className="table-resize-item"><input type="checkbox" onChange={(e) => setChecks(state.data, e.target.checked ? '+' : '-')} checked={state.data && state.data.every(s => checks.some(c => s == c))} /></div></th>
+                                    <th className="table-resize"><div className="table-resize-item"><input type="checkbox" onChange={(e) => setChecked(state.data, e.target.checked)} checked={state.data && state.data.every(m => checked.some(s => JSON.stringify(s) == JSON.stringify(m)))} /></div></th>
                                     <th className="table-resize"><div className="table-resize-item">序号</div></th>
                                     <th className="table-resize"><div className="table-resize-item">编号</div></th>
                                     <th className="table-resize"><div className="table-resize-item">名称</div></th>
@@ -87,9 +87,9 @@ export default function () {
                             <tbody>
                                 {state.data && state.data.map((m, i) =>
                                     <tr>
-                                        <td><div className="table-resize-item"><input type="checkbox" checked={checks.some(s => s == m)} onChange={() => setChecks(m)} /></div></td>
+                                        <td><div className="table-resize-item"><input type="checkbox" checked={checked.some(s => JSON.stringify(s) == JSON.stringify(m))} onChange={(e) => setChecked(m, e.target.checked)} /></div></td>
                                         <td><div className="table-resize-item">{pageSize * (pageIndex - 1) + i + 1}</div></td>
-                                        <td><div className="table-resize-item"><a className="cursor-pointer" onClick={() => { setState({ isTest_Main_update: true }); setChecks([m]) }}>{m.MainID}</a></div></td>
+                                        <td><div className="table-resize-item"><a className="cursor-pointer" onClick={() => { setState({ isTest_Main_update: true }); setChecked(checked, false); setChecked(m, true); }}>{m.MainID}</a></div></td>
                                         <td><div className="table-resize-item">{m.MainName}</div></td>
                                         <td><div className="table-resize-item">{m.Type.Name}</div></td>
                                         <td><div className="table-resize-item">{m.Quantity}</div></td>
@@ -111,7 +111,7 @@ export default function () {
             {/*新建*/}
             {state.isTest_Main_insert && <Test_Main_insert close={() => { setState({ isTest_Main_insert: null }); load() }}></Test_Main_insert>}
             {/*修改*/}
-            {state.isTest_Main_update && <Test_Main_update close={() => { setState({ isTest_Main_update: null }); load() }} checks={checks}></Test_Main_update>}
+            {state.isTest_Main_update && <Test_Main_update close={() => { setState({ isTest_Main_update: null }); load(); setChecked(checked, false); }} checks={checked}></Test_Main_update>}
         </>
     );
 }
