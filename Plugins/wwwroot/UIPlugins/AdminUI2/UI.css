@@ -50,9 +50,9 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .btn-warning:active{background-color: #d58512;border-color: #985f0d;}
 
 /* 表单布局 */
-.form-row{display:flex;flex-wrap:wrap;}
-.form-row>.form-item{flex-grow:1;min-width:25%;}
-.form-row>.form-item:nth-child(4n+3):last-child{width:100%;flex-basis:auto;}
+.form-box{display:flex;flex-wrap:wrap;}
+.form-box>.form-item{flex-grow:1;min-width:25%;}
+.form-box>.form-item:nth-child(4n+3):last-child{width:100%;flex-basis:auto;}
 .form-item{padding:0.25rem 0.5rem;display:flex;align-items:center;}
 .form-item>span:first-child{width:5rem;padding-right:0.625rem;}
 .form-item>*:nth-child(2){flex:1;min-width:11.875rem;width:0;/* width:0防止<select>超长时，布局错乱 */}
