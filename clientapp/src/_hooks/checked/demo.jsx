@@ -3,7 +3,7 @@
  checked 选中的项
  setChecked(data,isAdd) 设置选中的项
     data：选中或取消选中的项，可以是单个对象，也可以是数组
-    isAdd：true选中，false取消选中
+    isAdd：true选中，false取消选中，不传isAdd就以data为当前选中项
  注意：jsx列表修改或删除数据后应清空选中项 setChecked(checked, false);
  */
 import React, { useState, useEffect } from 'react';

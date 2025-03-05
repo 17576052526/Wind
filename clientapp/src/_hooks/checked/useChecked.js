@@ -7,18 +7,22 @@ export default function () {
         if (!data) { return; }
         if (!Array.isArray(data)) { data = [data]; }
 
-        for (let m of data) {
-            let jsonStr = JSON.stringify(m);
-            let index = checked.findIndex(s => JSON.stringify(s) == jsonStr);
-            if (isAdd) {
-                if (index == -1) {
-                    checked.push(m);
+        if (isAdd === undefined) {
+            setChecked(data);
+        } else {
+            for (let m of data) {
+                let jsonStr = JSON.stringify(m);
+                let index = checked.findIndex(s => JSON.stringify(s) == jsonStr);
+                if (isAdd) {
+                    if (index == -1) {
+                        checked.push(m);
+                    }
+                } else {
+                    if (index != -1) { checked.splice(index, 1); }
                 }
-            } else {
-                if (index != -1) { checked.splice(index, 1); }
             }
+            setChecked([...checked])
         }
-        setChecked([...checked])
     }
 
     return [checked, set];
