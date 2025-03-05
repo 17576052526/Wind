@@ -105,7 +105,7 @@ export default function () {
                             </tbody>
                         </table>
                     </div>
-                    <Pager className="pager mt-5" previousPage={<i className="icon-chevron_left"></i>} nextPage={<i className="icon-chevron_right"></i>} noneClass="pager-none" activeClass="pager-active"></Pager>
+                    <Pager className="pager mt-5" lastPage={<i className="icon-chevron_left"></i>} nextPage={<i className="icon-chevron_right"></i>} noneClass="pager-none" activeClass="pager-active"></Pager>
                 </div>
             </div>
             {/*新建*/}

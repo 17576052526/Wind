@@ -10,7 +10,7 @@ export default function () {
      Pager 分页控件
             style：设置内联样式
             className：最外层 div的类样式
-            previousPage：设置上一页显示的文本
+            lastPage：设置上一页显示的文本
             nextPage：设置下一页显示的文本
             noneClass：上一页、下一页不能点时的类样式
             activeClass：当前页的类样式
@@ -43,7 +43,7 @@ export default function () {
 
     return (
         <>
-            {/*<Pager className="pager" previousPage={<i className="icon-chevron_left"></i>} nextPage={<i className="icon-chevron_right"></i>} noneClass="pager-none" activeClass="pager-active"></Pager>*/}
+            {/*<Pager className="pager" lastPage={<i className="icon-chevron_left"></i>} nextPage={<i className="icon-chevron_right"></i>} noneClass="pager-none" activeClass="pager-active"></Pager>*/}
             <Pager className="pager" noneClass="pager-none" activeClass="pager-active"></Pager>
         </>
     );

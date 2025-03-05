@@ -23,13 +23,13 @@ export default function (_size) {
     }
 
 
-    function Pager({ style, className, noneClass, activeClass, previousPage, nextPage }) {
+    function Pager({ style, className, noneClass, activeClass, lastPage, nextPage }) {
         let btnNum = pageCount < pageBtnNum.current ? pageCount : pageBtnNum.current;
 
         return (
             <div style={style} className={className}>
-                <a className={pageIndex == 1 && noneClass} onClick={() => setIndex(pageIndex - 1)}>{previousPage || '上一页'}</a>
-                <a className={pageIndex == 1 && activeClass} onClick={() => setPageIndex(1)}>1</a>
+                <a className={pageIndex == 1 ? noneClass : undefined} onClick={() => setIndex(pageIndex - 1)}>{lastPage || '上一页'}</a>
+                <a className={pageIndex == 1 ? activeClass : undefined} onClick={() => setPageIndex(1)}>1</a>
 
                 {(() => {
                     //构建中间页码
@@ -38,14 +38,14 @@ export default function (_size) {
                     let arr = [];
                     for (let i = start; i <= start + btnNum - 3; i++) {
                         arr.push(
-                            <a className={pageIndex == i && activeClass} onClick={() => setPageIndex(i)}>{(i == start && i > 2) || (i == start + btnNum - 3 && i < pageCount - 1) ? '...' : i}</a>
+                            <a className={pageIndex == i ? activeClass : undefined} onClick={() => setPageIndex(i)}>{(i == start && i > 2) || (i == start + btnNum - 3 && i < pageCount - 1) ? '...' : i}</a>
                         );
                     }
                     return arr;
                 })()}
 
-                {pageCount > 1 && <a className={pageIndex == pageCount && activeClass} onClick={() => setPageIndex(pageCount)}>{pageCount}</a>}
-                <a className={(pageIndex == pageCount || pageCount == 0) && noneClass} onClick={() => setIndex(pageIndex + 1)}>{nextPage || '下一页'}</a>
+                {pageCount > 1 && <a className={pageIndex == pageCount ? activeClass : undefined} onClick={() => setPageIndex(pageCount)}>{pageCount}</a>}
+                <a className={(pageIndex == pageCount || pageCount == 0) ? noneClass : undefined} onClick={() => setIndex(pageIndex + 1)}>{nextPage || '下一页'}</a>
             </div>
         );
     }
