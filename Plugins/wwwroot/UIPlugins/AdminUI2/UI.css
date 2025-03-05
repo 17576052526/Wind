@@ -8,7 +8,6 @@ img,video{max-width:100%;}
 a{color:#337ab7;text-decoration: none;}
 select[disabled], button[disabled], input[type="button"][disabled], input[type="checkbox"][disabled], input[type="radio"][disabled] {cursor: not-allowed;}
 
-.h-pre,.h-pre-c>*{margin-top:-102px;margin-bottom:-100px;}/*预防高度撑开，top、bottom的差值由body的font-size决定*/
 /* 按钮 */
 .btn-default,.btn-primary,.btn-success,.btn-info,.btn-danger,.btn-warning{
     line-height: 1.3;
