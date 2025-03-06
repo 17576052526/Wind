@@ -23,7 +23,7 @@ namespace DbOrm.Model
         /// <summary>
         /// 
         /// </summary>
-        public int? TypeID { set; get; }
+        public string TypeID { set; get; }
         /// <summary>
         /// 
         /// </summary>
