@@ -65,7 +65,7 @@ namespace DbOrm
                 }
             }
         }
-        public static int Updates<T>(dynamic model, string where, object param = null) where T : IModel
+        public static int Updates<T>(object model, string where, object param = null) where T : IModel
         {
             using (var db = NewThis())
             {

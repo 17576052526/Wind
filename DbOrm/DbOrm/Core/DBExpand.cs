@@ -24,7 +24,7 @@ namespace DbOrm
             return this.ExecuteNonQuery(model.InsertSql(), model);
         }
         //model参数中有哪些字段数据库就改哪些字段
-        public int Update<T>(dynamic model, string where, object param = null) where T : IModel
+        public int Update<T>(object model, string where, object param = null) where T : IModel
         {
             Dictionary<string, object> paramList = new Dictionary<string, object>();
             StringBuilder sql = new StringBuilder();

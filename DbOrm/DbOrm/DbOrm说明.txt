@@ -61,7 +61,7 @@ public class DB : DBExpand
                 ////根据实体类插入数据
                 //db.Insert(new Test_Main() { MainName = "名称A", Quantity = 2 });
                 //修改
-                db.Update(new Test_Main() { MainName = "名称B1", Quantity = 55 }, "ID=@ID", new { ID = 13 });
+                db.Update<Test_Main>(new { MainName = "名称B1", Quantity = 55 }, "ID=@ID", new { ID = 13 });
                 //删除
                 db.Delete<Test_Main>("ID=@ID", new { ID = 16 });
                 //查询
