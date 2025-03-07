@@ -16,11 +16,6 @@ namespace DbOrm
         /// </summary>
         /// <returns></returns>
         internal abstract string InsertSql();
-        /// <summary>
-        /// 返回 update sql语句
-        /// </summary>
-        /// <returns></returns>
-        internal abstract string UpdateSql();
     }
 
 }
