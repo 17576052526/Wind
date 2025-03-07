@@ -67,26 +67,6 @@ namespace DbOrm.Model
         {
             return "insert into Test_Main(MainID,MainName,TypeID,Quantity,Amount,IsShow,Img,Files,Remark,CreateTime) values(@MainID,@MainName,@TypeID,@Quantity,@Amount,@IsShow,@Img,@Files,@Remark,@CreateTime)";
         }
-
-        /// <summary>
-        /// 修改
-        /// </summary>
-        internal override string UpdateSql()
-        {
-            StringBuilder str = new StringBuilder();
-            if (MainID != null) { str.AppendLine(",MainID=@MainID"); }
-            if (MainName != null) { str.AppendLine(",MainName=@MainName"); }
-            if (TypeID != null) { str.AppendLine(",TypeID=@TypeID"); }
-            if (Quantity != null) { str.AppendLine(",Quantity=@Quantity"); }
-            if (Amount != null) { str.AppendLine(",Amount=@Amount"); }
-            if (IsShow != null) { str.AppendLine(",IsShow=@IsShow"); }
-            if (Img != null) { str.AppendLine(",Img=@Img"); }
-            if (Files != null) { str.AppendLine(",Files=@Files"); }
-            if (Remark != null) { str.AppendLine(",Remark=@Remark"); }
-            if (CreateTime != null) { str.AppendLine(",CreateTime=@CreateTime"); }
-
-            return "update Test_Main set " + str.Remove(0, 1);
-        }
     }
 }
 

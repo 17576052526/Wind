@@ -23,13 +23,19 @@ namespace DbOrm
         {
             return this.ExecuteNonQuery(model.InsertSql(), model);
         }
-        public int Update(IModel model, string where, object param = null)
+        //model参数中有哪些字段数据库就改哪些字段
+        public int Update<T>(dynamic model, string where, object param = null) where T : IModel
         {
             Dictionary<string, object> paramList = new Dictionary<string, object>();
+            StringBuilder sql = new StringBuilder();
+            sql.Append("update ").Append(typeof(T).Name).Append(" set ");
             foreach (var p in model.GetType().GetProperties())
             {
+                sql.Append(p.Name).Append("=").Append("@").Append(p.Name).Append(",");
                 paramList['@' + p.Name] = p.GetValue(model);
             }
+            sql.Length--;//删除最后一个字符
+            sql.Append(" where ").Append(where);
             if (param != null)
             {
                 foreach (var p in param.GetType().GetProperties())
@@ -37,7 +43,7 @@ namespace DbOrm
                     paramList['@' + p.Name] = p.GetValue(param);
                 }
             }
-            return this.ExecuteNonQuery(model.UpdateSql() + " where " + where, paramList);
+            return this.ExecuteNonQuery(sql.ToString(), paramList);
         }
         public int Delete<T>(string where, object param = null) where T : IModel
         {

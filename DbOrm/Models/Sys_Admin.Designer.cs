@@ -35,18 +35,6 @@ namespace DbOrm.Model
         {
             return "insert into Sys_Admin(UserName,UserPwd) values(@UserName,@UserPwd)";
         }
-
-        /// <summary>
-        /// 修改
-        /// </summary>
-        internal override string UpdateSql()
-        {
-            StringBuilder str = new StringBuilder();
-            if (UserName != null) { str.AppendLine(",UserName=@UserName"); }
-            if (UserPwd != null) { str.AppendLine(",UserPwd=@UserPwd"); }
-
-            return "update Sys_Admin set " + str.Remove(0, 1);
-        }
     }
 }
 

@@ -26,7 +26,7 @@ namespace UI.Pages.Admin
             }
             else
             {
-                DB.Updates(model, "ID=@ID", new { ID = id });
+                DB.Updates<Test_Main>(model, "ID=@ID", new { ID = id });
             }
             return Redirect(Request.Query["url"]);
         }

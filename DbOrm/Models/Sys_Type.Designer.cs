@@ -35,18 +35,6 @@ namespace DbOrm.Model
         {
             return "insert into Sys_Type(TypeID,Name) values(@TypeID,@Name)";
         }
-
-        /// <summary>
-        /// 修改
-        /// </summary>
-        internal override string UpdateSql()
-        {
-            StringBuilder str = new StringBuilder();
-            if (TypeID != null) { str.AppendLine(",TypeID=@TypeID"); }
-            if (Name != null) { str.AppendLine(",Name=@Name"); }
-
-            return "update Sys_Type set " + str.Remove(0, 1);
-        }
     }
 }
 
