@@ -39,7 +39,21 @@ namespace UI.Controllers.Api
         [HttpPost]
         public Result Update(Test_Main param)
         {
-            DB.Updates(param, "ID=@ID", new { ID = param.ID });
+            //传哪些字段更新哪些字段
+            var data = new
+            {
+                MainID = param.MainID,
+                MainName = param.MainName,
+                TypeID = param.TypeID,
+                Quantity = param.Quantity,
+                Amount = param.Amount,
+                IsShow = param.IsShow,
+                Img = param.Img,
+                Files = param.Files,
+                Remark = param.Remark,
+                CreateTime = param.CreateTime,
+            };
+            DB.Updates<Test_Main>(data, "ID=@ID", new { ID = param.ID });
             return Result.OK();
         }
 
