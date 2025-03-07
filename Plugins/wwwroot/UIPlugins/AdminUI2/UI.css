@@ -67,7 +67,7 @@ select[disabled], button[disabled], input[type="button"][disabled], input[type="
 .table th {white-space: nowrap;/*th不换行，最小宽度为th内容宽度*/}
 .table tbody tr:hover>td {background-color:#f5f5f5;}
 .table td img{max-width:100%;max-height:1.875rem;margin-top:-12px;margin-bottom:-10px;}
-.table tbody tr.table-checked{background-color:#eee;}
+.table tbody tr.table-checked>td{background-color:#eee;}
 /* box 框 */
 .box,.box-default,.box-primary,.box-success,.box-info,.box-danger,.box-warning {box-shadow: 0px 0px 1px rgba(0,0,0,0.125), 0px 1px 3px rgba(0,0,0,0.2);border-radius: 3px;/*不要overflow:hidden;*/background-color: #fff;display: flex;flex-direction: column;}
 .box-head {min-height:2.375rem;padding:0.25rem 0.625rem;display:flex;align-items:center;border-bottom: 1px solid rgba(0,0,0,.125);color:#444;}
