@@ -59,25 +59,5 @@ namespace DbOrm.Model
         {
             return "insert into Test(TypesID,Title,Dates,Img,Num,Price,Che,Desc,Files) values(@TypesID,@Title,@Dates,@Img,@Num,@Price,@Che,@Desc,@Files)";
         }
-
-        /// <summary>
-        /// 修改
-        /// </summary>
-        internal override string UpdateSql()
-        {
-            StringBuilder str = new StringBuilder();
-            if (ID != null) { str.AppendLine(",ID=@ID"); }
-            if (TypesID != null) { str.AppendLine(",TypesID=@TypesID"); }
-            if (Title != null) { str.AppendLine(",Title=@Title"); }
-            if (Dates != null) { str.AppendLine(",Dates=@Dates"); }
-            if (Img != null) { str.AppendLine(",Img=@Img"); }
-            if (Num != null) { str.AppendLine(",Num=@Num"); }
-            if (Price != null) { str.AppendLine(",Price=@Price"); }
-            if (Che != null) { str.AppendLine(",Che=@Che"); }
-            if (Desc != null) { str.AppendLine(",Desc=@Desc"); }
-            if (Files != null) { str.AppendLine(",Files=@Files"); }
-
-            return "update Test set " + str.Remove(0, 1);
-        }
     }
 }
