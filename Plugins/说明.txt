@@ -1,4 +1,20 @@
-﻿Plugins 是一个网站项目，用来说明 UIPlugins和 UIBlock的
+﻿插件存放位置说明
+Plugins项目：
+	ReactPlugins ：重新写的插件，或者 react写法的插件放在此文件夹
+	UIPlugins ：旧版的插件，或非react插件，放在此文件夹
+
+react-app项目：
+	_hooks中的插件（以此文件夹的为准）：react hook放在此文件夹，且 Plugins项目下无备份
+	_jsx中的插件（以此文件夹的为准）：react jsx组件放在此文件夹，且 Plugins项目下无备份
+	_plugins中的插件（以Plugins项目下的 ReactPlugins或 UIPlugins为准）：非react hooks和react jsx的插件放在此文件夹，Plugins项目下的 ReactPlugins 或 UIPlugins 有备份
+
+
+
+
+
+
+
+Plugins 是一个网站项目，用来说明 UIPlugins和 UIBlock的
 Plugins不引用 UIPlugins、UIBlock的任何东西
 Plugins和 Wind无任何关联，Wind不引用此类库
 lib是库，用来存放第三方插件的（项目中用到的第三方插件）,lib文件不应该手动修改，如果某个插件不满足需求，应该手动修改好放入手写文件
