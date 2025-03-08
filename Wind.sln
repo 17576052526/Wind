@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugins", "Plugins\Plugins.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{E440C017-7A4D-4878-AD74-21018FF7AB72}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "react-app", "react-app\react-app.esproj", "{9730EFBE-A265-45C6-B37B-F7F1A735729E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{E440C017-7A4D-4878-AD74-21018FF7AB72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E440C017-7A4D-4878-AD74-21018FF7AB72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E440C017-7A4D-4878-AD74-21018FF7AB72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9730EFBE-A265-45C6-B37B-F7F1A735729E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9730EFBE-A265-45C6-B37B-F7F1A735729E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9730EFBE-A265-45C6-B37B-F7F1A735729E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9730EFBE-A265-45C6-B37B-F7F1A735729E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9730EFBE-A265-45C6-B37B-F7F1A735729E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9730EFBE-A265-45C6-B37B-F7F1A735729E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
