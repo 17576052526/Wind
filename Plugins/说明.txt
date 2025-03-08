@@ -1,7 +1,7 @@
 ﻿插件存放位置说明
 Plugins项目：
 	ReactPlugins ：新写的插件，或者 react写法的插件放在此文件夹
-	UIPlugins ：旧版的插件，或非react插件，放在此文件夹
+	UIPlugins ：旧版的插件，或非react写法的插件，放在此文件夹
 
 react-app项目：
 	_hooks中的插件（以此文件夹的为准）：react hook放在此文件夹，且 Plugins项目下无备份
