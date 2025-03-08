@@ -34,7 +34,7 @@ export function UploadImage({ value, name, readOnly, multiple }) {
         <div>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {data.map((m, i) =>
-                    <div style={{ marginRight: '10px', position: 'relative' }}>
+                    <div key={i} style={{ marginRight: '10px', position: 'relative' }}>
                         <img src={apiUrl + m} className="img-show" style={{ width: '80px', height: '80px', objectFit: 'contain', border: '1px solid #eee' }} />
                         {!readOnly && <div style={{ position: 'absolute', right: '0px', top: '-5px', fontSize: '18px', color: '#aaa', fontWeight: 'bold', transform: 'rotate(45deg)', cursor: 'pointer' }} onClick={() => { data.splice(i, 1); setData([...data]) }}>+</div>}
                     </div>
@@ -76,7 +76,7 @@ export function UploadFile({ value, name, readOnly, multiple }) {
         <div>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {data.map((m, i) =>
-                    <div style={{ marginRight: '15px', position: 'relative' }}>
+                    <div key={i} style={{ marginRight: '15px', position: 'relative' }}>
                         <a href={apiUrl + '/api/common/download?path=' + m}>{m.substring(m.lastIndexOf('/') + 1)}</a>
                         {!readOnly && <div style={{ position: 'absolute', right: '-8px', top: '-8px', fontSize: '18px', color: '#aaa', fontWeight: 'bold', transform: 'rotate(45deg)', cursor: 'pointer' }} onClick={() => { data.splice(i, 1); setData([...data]) }}>+</div>}
                     </div>
