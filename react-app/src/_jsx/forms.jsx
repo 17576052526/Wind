@@ -29,7 +29,7 @@ export function InputText(props) {
 export function Checkbox(props) {
     let [checked, setChecked] = useState(props.checked)
     useEffect(() => setChecked(props.checked), [props.checked])
-    return (<input onChange={(e) => !props.readOnly && setChecked(e.target.checked)} {...props} type="checkbox" checked={checked || false} value={props.value || true} className={'input-text ' + (props.className || '')} />)
+    return (<input onChange={(e) => !props.readOnly && setChecked(e.target.checked)} {...props} type="checkbox" checked={checked || false} value={props.value || true} />)
 }
 
 export function TextArea(props) {
