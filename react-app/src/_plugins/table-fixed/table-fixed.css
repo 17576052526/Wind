@@ -1,5 +1,5 @@
 ﻿.table-fixed{overflow:auto;border:1px solid #ddd;}
-.table-fixed>table{border-collapse:collapse;/*必须设置，不然边框对不齐*/border-width:0;}
+.table-fixed>table{border-spacing: 0;border-width:0;}
 .table-fixed>table>thead{position:sticky;top:0px;z-index:2;background-color:#fff;}
 .table-fixed>table>tfoot{position:sticky;bottom:0px;z-index:2;background-color:#fff;}
 .table-fixed-left{position:sticky;left:0px;z-index:1;background-color:#fff;}
