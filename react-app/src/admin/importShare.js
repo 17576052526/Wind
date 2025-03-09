@@ -7,6 +7,8 @@ import '../_plugins/AdminUI2/UI.css'
 import '../_plugins/table-fixed/table-fixed.css'
 import '../_plugins/box-move/box-move'
 import '../_plugins/img-show/img-show'
+import '../_plugins/table-resize/table-resize'
+import '../_plugins/table-resize/table-resize.css'
 import { useStates, formToJSON } from '../_utils/base';
 import alert from '../_plugins/alert/alert';
 import confirm from '../_plugins/confirm/confirm'
