@@ -54,7 +54,9 @@
             let children = cur.parentNode.children;
             let index = Array.prototype.indexOf.call(children, cur);
             if (index < children.length - 1) {//最后一个th不能按住拖拽
-                cur.style.position = 'relative';
+                if (window.getComputedStyle(cur).position == 'static') {
+                    cur.style.position = 'relative';
+                }
                 let node = document.createElement('span')
                 node.classList.add('table-resize-move');
                 node.style = "cursor:col-resize;width:8px;position:absolute;right:0px;top:0px;bottom:0px;z-index:1;";
