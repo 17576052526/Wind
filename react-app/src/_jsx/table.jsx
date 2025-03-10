@@ -15,11 +15,11 @@ export function Tbody(props) {
 export function Tr(props) {
     return (<tr {...props}></tr>)
 }
-
+//div层设 class和style ，其他的设给td th
 export function Th(props) {
-    return (<th {...props}><div className="table-resize-item" style={props.style && props.style.width ? { width: props.style.width } : {}}>{props.children}</div></th>)
+    return (<th {...props} className="" style={props.style && props.style.width ? { width: props.style.width } : {}}><div className={'table-resize-item ' + (props.className || '')} style={props.style}>{props.children}</div></th>)
 }
 
 export function Td(props) {
-    return (<td {...props}><div className="table-resize-item" style={props.style && props.style.width ? { width: props.style.width } : {}}>{props.children}</div></td>)
+    return (<td {...props} className="" style={props.style && props.style.width ? { width: props.style.width } : {}}><div className={'table-resize-item ' + (props.className || '')} style={props.style}>{props.children}</div></td>)
 }

@@ -69,7 +69,7 @@ export default function () {
                     <Table className="flex-1">
                         <Thead>
                             <Tr>
-                                <Th className="table-fixed-left"><Checkbox onChange={(e) => setChecked(state.data, e.target.checked)} checked={(state.data || []).every(m => checked.some(s => JSON.stringify(s) == JSON.stringify(m)))}></Checkbox></Th>
+                                <Th><Checkbox onChange={(e) => setChecked(state.data, e.target.checked)} checked={(state.data || []).every(m => checked.some(s => JSON.stringify(s) == JSON.stringify(m)))}></Checkbox></Th>
                                 <Th>序号</Th>
                                 <Th>编号</Th>
                                 <Th>名称</Th>
@@ -87,7 +87,7 @@ export default function () {
                         <Tbody>
                             {state.data && state.data.map((m, i) =>
                                 <Tr key={i}>
-                                    <Td className="table-fixed-left"><Checkbox checked={checked.some(s => JSON.stringify(s) == JSON.stringify(m))} onChange={(e) => setChecked(m, e.target.checked)}></Checkbox></Td>
+                                    <Td><Checkbox checked={checked.some(s => JSON.stringify(s) == JSON.stringify(m))} onChange={(e) => setChecked(m, e.target.checked)}></Checkbox></Td>
                                     <Td>{pageSize * (pageIndex - 1) + i + 1}</Td>
                                     <Td>{m.MainID}</Td>
                                     <Td>{m.MainName}</Td>
@@ -99,7 +99,7 @@ export default function () {
                                     <Td><Download href={m.Files}></Download></Td>
                                     <Td>{m.Remark}</Td>
                                     <Td>{m.CreateTime}</Td>
-                                    <Td className="mlr-1-c h-pre-c">
+                                    <Td className="mlr-1-c h-pre-c" style={{ overflow: 'visible' }}>
                                         <BtnPrimary className="btn-xs" onClick={() => { setChecked(m); setState({ isTest_Main_update: true }) }}>修改</BtnPrimary>
                                         <BtnDanger className="btn-xs" onClick={() => remove(m)}>删除</BtnDanger>
                                     </Td>
