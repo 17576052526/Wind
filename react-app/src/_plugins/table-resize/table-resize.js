@@ -9,9 +9,14 @@
         let table = th.closest('.table-resize')
         //初始化列宽，因为数据可能是后面才获取的，所以按下才初始化
         if (!table.dataset.tableResizeInit) {
+            //最后一列自适应缩放最小内容宽度
+            let width = table.style.width;
+            table.style.width = 'auto';//table宽度自适应后，每一列就是内容宽度
+            thLast.dataset.tableResizeMinWidth = thLast.offsetWidth;//获取最后一列内容宽度
+            table.style.width = width;//值还原
+            //设置为 table-layout:fixed，并每一列设置列宽
             for (let s of ths) { s.style.width = s.offsetWidth + 'px' }
             table.style.tableLayout = 'fixed';
-            thLast.dataset.tableResizeMinWidth = thLastWidth;//最后一列的最小缩小宽度
             table.dataset.tableResizeInit = '1';
         }
         //拖拽
