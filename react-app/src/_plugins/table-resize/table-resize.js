@@ -35,6 +35,8 @@
                 if (thLastWidth - (e.clientX - x) > thLastMinWidth) {//拖拽时最后一列宽度自适应，但宽度不能小于初始宽度
                     thLast.style.width = (thLastWidth - (e.clientX - x)) + 'px';
                 }
+            } else {
+                th.style.width = thLR + 'px';
             }
         }
 
