@@ -17,9 +17,9 @@ export function Tr(props) {
 }
 //div层设 class和style ，其他的设给td th
 export function Th(props) {
-    return (<th {...props} className="" style={props.style && props.style.width ? { width: props.style.width } : {}}><div className={'table-resize-item ' + (props.className || '')} style={props.style}>{props.children}</div></th>)
+    return (<th {...props} className={props.thClassName} style={props.style && props.style.width ? { width: props.style.width } : {}}><div className={'table-resize-item ' + (props.className || '')} style={props.style}>{props.children}</div></th>)
 }
 
 export function Td(props) {
-    return (<td {...props} className="" style={props.style && props.style.width ? { width: props.style.width } : {}}><div className={'table-resize-item ' + (props.className || '')} style={props.style}>{props.children}</div></td>)
+    return (<td {...props} className={props.tdClassName} style={props.style && props.style.width ? { width: props.style.width } : {}}><div className={'table-resize-item ' + (props.className || '')} style={props.style}>{props.children}</div></td>)
 }
