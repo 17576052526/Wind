@@ -1,7 +1,0 @@
-﻿.tab-pager{display:flex;background-color:#f4f4f4;border-bottom:2px solid #5E9FC7;}
-.tab-pager-item{position:relative;flex:1;max-width:150px;height:36px;line-height:36px;overflow:hidden;padding-left:10px;color:#444;border-left:1px solid #fff;border-right:1px solid #dbdbdb;}
-.tab-pager-item::before{content:'';position:absolute;top:0px;right:0px;height:100%;width:30px;background:linear-gradient(to right,rgba(244,244,244,0.1) 0%,rgba(244,244,244,1) 70%);}
-.tab-pager-remove::before{content:'\f00d';font-family:'fontello';line-height:1;padding:2px 3px;position:absolute;right:0px;top:0px;font-style:normal;color:#aaa;}
-.tab-pager-remove:hover::before{background-color:#DCDCDD;border-radius:50%;}
-.tab-pager-active{background-color:#5E9FC7;border-color:#5E9FC7;color:#fff;}
-.tab-pager-active.tab-pager-item::before{background:linear-gradient(to right,rgba(94,159,199,0.1) 0%,rgba(94,159,199,1) 70%);}

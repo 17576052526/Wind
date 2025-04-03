@@ -1,3 +1,0 @@
-1.ReactPlugins 整合到 clientApp中去
-2.后续项目不在用jquery，原生js代替jquery
-3.以react为主要开发技术（后台用react不用.net）

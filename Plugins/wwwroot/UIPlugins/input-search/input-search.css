@@ -1,5 +1,0 @@
-﻿/*输入框输入搜索下拉显示*/
-.inputSearchBox {border: 1px solid #ccc;background-color: #fff;overflow: auto;max-height:200px;}
-.inputSearchBox li {white-space: nowrap;padding: 5px 5px;cursor:pointer;}
-.inputSearchBox li span{color:#888;}
-.inputSearchBox li:hover span,.inputSearchBox li:hover {background-color: #1E90FF;color: #fff;}
