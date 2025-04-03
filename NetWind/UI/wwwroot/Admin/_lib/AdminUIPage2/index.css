@@ -1,0 +1,62 @@
+﻿body{background-color:#F4F6F9;}
+.logo{
+    width:230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: rgba(255,255,255,.8);
+    background-color:#343A40;
+    border-bottom:1px solid #4B545C;
+    box-shadow: 0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22);
+}
+.head-nav-item{
+    color:rgba(0,0,0,0.5);
+    cursor:pointer;
+    position:relative;
+    font-weight:bold;
+}
+.head-nav-item:hover{color:rgba(0,0,0,0.7);}
+
+.head-nav-mark {
+    font-size: 12px;
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 3px;
+    padding: 0px 2px;
+    position: absolute;
+    top: -5px;
+    right: -8px;
+}
+
+/**/
+.left-body{padding:12px 8px;width:230px;overflow:auto;background-color:#343A40;color: rgba(255,255,255,.8);box-shadow: 0 28px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22);}
+/*设置滚动条*/
+.left-body::-webkit-scrollbar {width: 8px;height: 1px;}
+.left-body::-webkit-scrollbar-thumb {border-radius: 10px;background: rgba(255,255,255,0.4);}
+.search-text{
+    padding:8px;
+    color:#fff;
+    border-top-left-radius:4px;
+    border-bottom-left-radius:4px;
+    background-color:#3F474E;
+    border:1px solid #56606A;
+}
+.search-text:focus{border-color:#7A8793;outline:none;}
+.search-btn{
+    padding:8px;
+    border-top-right-radius:4px;
+    border-bottom-right-radius:4px;
+    border:1px solid #56606A;
+    border-left:none;
+    background-color:#3F474E;
+}
+.nav {padding-top:5px;font-size:14px;font-weight:500;}
+.nav a{color:inherit;}
+.nav-switch,.nav-btn{margin-top:5px;padding:8px 10px;border-radius:4px;position:relative;display:block;cursor:pointer;user-select:none;}
+.nav-switch::before,.nav-btn::before{margin-right:10px;}
+.nav-switch::after{font-size:12px;content:'\f053';font-family: "fontello";position: absolute;right: 12px;top: 50%;margin-top: -6px;transition:all 0.3s;}
+.tree-active .nav-switch,.nav-switch:hover,.nav-btn:hover{background-color:#494E53;}
+.tree-active .nav-switch::after{transform: rotate(-90deg);}
+.tree-box a{padding-left:25px;}
+.nav-btn-active.nav-btn{background-color:#EBECEC;color:#343a40;}

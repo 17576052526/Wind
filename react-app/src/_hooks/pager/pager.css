@@ -1,0 +1,8 @@
+﻿/*此css可以随意改*/
+.pager{display:flex;}
+.pager>a{padding:6px 12px;border:1px solid #ccc;border-left:none;cursor:pointer;user-select:none;text-decoration:none;color:#666;}
+.pager>a:hover{background-color:#f5f5f5;}
+.pager>a:first-child{border-left:1px solid #ccc;border-top-left-radius:3px;border-bottom-left-radius:3px;}
+.pager>a:last-child{border-top-right-radius:3px;border-bottom-right-radius:3px;}
+.pager>a.pager-none{background-color:#fff;opacity: 0.65;cursor: not-allowed;}/*上一页下一页按钮不能点的时候的样式*/
+.pager>a.pager-active{background-color:#eee;cursor: default;}/*页码按钮被激活时的样式*/

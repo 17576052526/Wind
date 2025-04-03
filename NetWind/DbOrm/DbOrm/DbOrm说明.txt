@@ -1,0 +1,101 @@
+DbOrm 是一个实体映射框架
+DbOrm用法说明：
+1.自定义一个类继承 DBExpand，以下DB类为自定义类，例如：
+public class DB : DBExpand
+    {
+        public static string ConnString;    //"Data Source=.;Initial Catalog=Wind;uid=sa;pwd=As727863984;TrustServerCertificate=True;"      //TrustServerCertificate=True; 解决 “证书链由不受信任的颁发机构颁发”错误
+        //创建数据库连接对象，通过创建不同类型的实例来达到调用不同类型的数据库
+        public override IDbConnection CreateConnection()
+        {
+            return new Microsoft.Data.SqlClient.SqlConnection(ConnString);
+        }
+    }
+
+2.实例化DB类，using() 关闭数据库连接
+//基本用法
+            using (DB db = new DB())
+            {
+                //执行sql，返回受影响的行
+                db.ExecuteNonQuery("update Test_Main set MainName=@MainName where ID=@ID", new { MainName = "777", ID = 12 });
+                //执行sql查询，返回第一行第一列
+                int count = (int)db.ExecuteScalar("select count(*) from Test_Main where ID>@ID", new { ID = "1" });
+                //查询，返回匿名类型集合
+                List<dynamic> list = db.Query("select * from Test_Main where ID>@ID", new { ID = "1" });
+                //查询，返回实体类集合
+                List<Test_Main> list1 = db.Query<Test_Main>("select * from Test_Main where ID>@ID", new { ID = "1" });
+                //多表联查，返回实体类集合，Test_Type的字段会赋值到 Test_Main 的属性类型为 Test_Type的字段上
+                List<Test_Main> list2 = db.Query<Test_Main, Test_Type>("select * from Test_Main left join Test_Type on(Test_Main.Test_Type_ID=Test_Type.ID) where Test_Main.ID>@ID", new { ID = "1" });
+            }
+
+            //事务用法
+            using (DB db = new DB())
+            {
+                try
+                {
+                    db.BeginTransaction();
+
+
+                    //执行第一条语句
+                    db.ExecuteNonQuery("update Test_Main set MainName=@MainName where ID=@ID", new { MainName = "888", ID = 12 });
+                    //执行第二条语句
+                    db.ExecuteNonQuery("update Test_Main set MainName=@MainName where ID=@ID", new { MainName = "777", ID = "a1" });
+                    
+
+                    db.CommitTransaction();
+                }
+                catch
+                {
+                    db.RollbackTransaction();
+                    throw;
+                }
+            }
+
+            //进阶用法，根据实体类增、删、改、查，实体类要继承 IModel，且实体类是和数据库表一一对应的，实体类是由T4模板生成的
+            using (DB db = new DB())
+            {
+                ////批量插入
+                //db.Insert(new List<Test_Main>() {
+                //    new Test_Main() {  MainName = "名称B", Quantity = 3 },
+                //    new Test_Main() {  MainName = "名称C", Quantity = 4 }
+                //});
+                ////根据实体类插入数据
+                //db.Insert(new Test_Main() { MainName = "名称A", Quantity = 2 });
+                //修改
+                db.Update<Test_Main>(new { MainName = "名称B1", Quantity = 55 }, "ID=@ID", new { ID = 13 });
+                //删除
+                db.Delete<Test_Main>("ID=@ID", new { ID = 16 });
+                //查询
+                List<Test_Main> list = db.Select<Test_Main>()
+                    .LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID")
+                    .Where("Test_Main.ID>@ID", new { ID = 1 })
+                    .Query();
+                //查询返回实体
+                Test_Main model = db.Select<Test_Main>("Test_Main.*,Test_Type.TypeID,Test_Type.TypeName")
+                    .LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID")
+                    .Where("Test_Main.ID=@ID", new { ID = 12 })
+                    .QueryFirstRow();
+                //查询 第一行第一列
+                int count = (int)db.Select<Test_Main>("count(*)")
+                    .LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID")
+                    .Where("Test_Main.ID>@ID", new { ID = 1 })
+                    .QueryScalar();
+                //分页查询
+                List<Test_Main> list1 = db.Select<Test_Main>("Test_Main.*,Test_Type.TypeID,Test_Type.TypeName")
+                    .LeftJoin<Test_Type>("Test_Main.Test_Type_ID=Test_Type.ID")
+                    .Where("Test_Main.ID>@ID", new { ID = 1 })
+                    .Query(2,4);//跳过多少条，返回连续的多少条
+
+                //查询数据放入缓存，再次查找时查找缓存数据，QueryCache()，QueryScalarCache()，QueryFirstRowCache() 对应Query(),QueryScalar(),QueryFirstRow()
+                List<Test_Main> list2 = db.Select<Test_Main>().QueryCache();
+                //调用存储过程，用 exec调用
+                List<Test_Main> list6 = db.Query<Test_Main>("exec SelectTest_Main @MainName", new { MainName = "aa" });
+            }
+
+
+代码说明：
+最底层（ConnectionExpand）：，对 IDbConnection对象方法的扩展
+在上一层（DBBase）：对 IDbConnection对象实例的管理
+在上一层（DBExpand）：在DBBase基础上，增加根据实体类来进行增删改查
+在上一层（DB）：此类由用户定义和实现，主要是继承 DBExpand类 重写 CreateConnection()
+
+SqlBuilder：查询Sql语句构造，DBExpand类有用到

@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        /*非必要样式*/
+        html,body{height:100%;}
+    </style>
+</head>
+<body>
+    <div style="border:1px solid #ccc;" class="ctrl-mousedown">按住此处</div>
+    <div style="border:1px solid red;" class="ctrl-mouseup">接收的节点</div>
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="ctrl-mouse.js"></script>
+    <script type="text/javascript">
+        /*
+         * 按下ctrl+鼠标左键拖拽
+         * 参数一：按住的节点，参数二：接收的节点，参数三：接收事件
+         */
+        $.ctrlMouse('.ctrl-mousedown', '.ctrl-mouseup', function (downNode, upNode) {
+            alert("按下节点：" + downNode.innerHTML + ",弹出节点：" + upNode.innerHTML);
+        });
+    </script>
+</body>
+</html>

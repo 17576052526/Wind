@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        /*非必要样式*/
+        .hidden {visibility: hidden;}
+        .visible {visibility: visible;}
+        .red{color:red;}
+        .blue{color:blue;}
+    </style>
+</head>
+<body>
+    <!--
+    点入点出插件，例如：点击显示导航栏再次点击隐藏导航栏
+        click 父级节点标识，用于标识查找范围，如果没有 click，则把 click-trigger当作 click
+        click-trigger 触发事件的节点标识
+        click-in 点进来要添加的类样式，并删除 click-out 指定的类样式
+        click-out 点出去要添加的类样式，并删除 click-in 指定的类样式
+
+    -->
+    <div click>
+        <button type="button" click-trigger>点击</button>
+        <div click-in="red" click-out="blue">div1</div>
+        <div click-in="visible" click-out="" class="hidden">div2</div>
+    </div>
+
+    <script type="text/javascript" src="click.js"></script>
+</body>
+</html>

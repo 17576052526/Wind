@@ -1,0 +1,17 @@
+/.vs
+/UI/bin
+/UI/obj
+/Common/bin
+/Common/obj
+/DbOrm/bin
+/DbOrm/obj
+/DbOrm/_CacheFile
+/Plugins/bin
+/Plugins/obj
+/Plugins/Properties/PublishProfiles
+/Plugins/wwwroot/upload
+/UI/wwwroot/upload
+/UI/.config
+/UI/UI.csproj.user
+/UI/Properties/PublishProfiles
+/UI/wwwroot/uploadCache

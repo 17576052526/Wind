@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="upload-img.css" />
+</head>
+<body>
+    <!--
+图片上传参数：
+        class ="upload-img"（必填）： 绑定图片上传点击事件
+        url（必填）：图片上传接口地址
+        hidden-name：隐藏域的 name，存在值会自动生成隐藏域，用于form提交图片地址，如果无form提交可不理会此属性
+        multiple：是否可以允许上传多张图片，true：允许，默认值（null值）：不允许
+        data：页面加载时显示已上传的图片
+        upload-param：上传图片时body参数，格式：aa=11&bb=22，如果没有则不管此参数
+        accept：可选文件类型，默认值：image/gif,image/jpeg,image/jpg,image/png,image/svg
+获取图片地址：
+        $(按钮对象).attr('data') 获取图片地址
+    -->
+
+    <input type="button" value="图片上传" class="upload-img" url="/common/upload" hidden-name="img" multiple="multiple" data="/upload/20210326/a.jpg|/upload/20210326/b.jpg" upload-param="aa=11&bb=22" />
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <!--图片查看器-->
+    <script type="text/javascript" src="../img-show/img-show.js"></script>
+    <script type="text/javascript" src="upload.js"></script>
+    <script type="text/javascript" src="upload-img.js"></script>
+</body>
+</html>

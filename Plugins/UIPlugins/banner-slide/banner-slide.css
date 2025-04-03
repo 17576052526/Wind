@@ -1,0 +1,9 @@
+﻿.banner-slide {overflow: hidden;position:relative;}
+.banner-slide-box {display: flex;height: 100%;}
+.banner-slide-item {flex: 1 0 100%;}
+/*按钮，按钮有两层，让按钮更容易点中*/
+.banner-slide-btnBox{position:absolute;left:50%;bottom:5px;transform:translateX(-50%);display:flex;}
+.banner-slide-btn{padding:10px 5px;cursor:pointer;}
+.banner-slide-btn::before{content:'';display:block;width:8px;height:8px;background-color:hsla(0,0%,90%,.4);border-radius:999px;transition:all 0.3s;}
+.banner-slide-btn:hover::before{background-color:#e5e5e5;}
+.banner-slide-btnActive::before{background-color:#e5e5e5;width:16px;}

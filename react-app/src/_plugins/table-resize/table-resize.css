@@ -1,0 +1,2 @@
+﻿.table-resize-item{overflow:hidden;min-width:100%;/*浏览器从收缩到扩大的表格宽度会加大*/max-width:100%;/*无论何时都以td th的宽度为准*/}
+td .table-resize-item{white-space:nowrap; text-overflow: ellipsis;}/*溢出部分...*/

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/Admin/_lib/globalCss/global.css" />
+    <link rel="stylesheet" type="text/css" href="/Admin/_lib/font/css/fontello.css" />
+    <link rel="stylesheet" type="text/css" href="/Admin/_lib/AdminUI2/UI.css" />
+    <script type="text/javascript" src="/Admin/_lib/jquery.js"></script>
+    
+    <!--提示框-->
+    <link rel="stylesheet" type="text/css" href="/Admin/_lib/alert/alert.css" />
+    <script type="text/javascript" src="/Admin/_lib/alert/alert.js"></script>
+    <!--确认框-->
+    <link rel="stylesheet" type="text/css" href="/Admin/_lib/confirm/confirm.css" />
+    <script type="text/javascript" src="/Admin/_lib/confirm/confirm.js"></script>
+    <!--图片查看器-->
+    <script type="text/javascript" src="/Admin/_lib/img-show/img-show.js"></script>
+    <!--图片、文件上传-->
+    <link rel="stylesheet" type="text/css" href="/Admin/_lib/upload/upload-img.css" />
+    <script type="text/javascript" src="/Admin/_lib/upload/upload.js"></script>
+    <script type="text/javascript" src="/Admin/_lib/upload/upload-img.js"></script>
+    <script type="text/javascript">
+        function upload(obj) {
+            $.upload({
+                url: "/common/upload",
+                success: function (msg) {
+                    $(obj).parent().find('.fileTxt').val(msg)
+                    $(obj).val('上传成功');
+                },
+                progress: function (progress) {
+                    $(obj).val(progress);
+                }
+            });
+        }
+    </script>
+    @RenderSection("head",false)
+</head>
+<body class="p-7.5">
+    @RenderBody()
+</body>
+</html>

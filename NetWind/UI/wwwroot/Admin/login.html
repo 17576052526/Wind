@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="/admin/_lib/globalCss/global.css" />
+    <link rel="stylesheet" type="text/css" href="/admin/_lib/font/css/fontello.css" />
+    <style type="text/css">
+        .animate-spin {animation: spin 2s infinite linear;display: inline-block;}
+@keyframes spin {0% {transform: rotate(0deg);}100% {transform: rotate(359deg);}}
+    </style>
+    <script type="text/javascript">
+        //读取cookie
+        function getCookie(name) { var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)"); if (arr = document.cookie.match(reg)) { return unescape(arr[2]); } else { return null; } }
+        //写入cookie  保存30天
+        function setCookie(name, value) { var exp = new Date(); exp.setTime(exp.getTime() + 30 * 24 * 60 * 60 * 1000); document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString(); }
+        //获取url参数
+        function queryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        //ajax
+        function ajax(url, data, fn) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            // 添加http头，发送信息至服务器时内容编码类型
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200 || xhr.status == 304) {
+                        fn(xhr.responseText);
+                    }
+                }
+            }
+            xhr.send(data);
+        }
+        //判断浏览器版本（不支持IE11以下版本）
+        var userAgent = navigator.userAgent;
+        if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1) { alert('不支持IE11以下版本的浏览器，请升级至IE11或使用谷歌浏览器、Edge浏览器打开'); window.location.href = 'about:blank'; }
+        //回车触发登录
+        document.addEventListener('keyup', function (e) { if (e.keyCode == 13) { document.getElementById('btnLogin').click(); } });
+
+        /*****以下为业务逻辑相关代码*****/
+        onload = function () {
+            //读取 Cookie中的用户名和密码
+            document.getElementById('userName').value = getCookie('LoginUserName');
+            var cookiePwd = getCookie('LoginUserPwd');
+            if (cookiePwd) {
+                document.getElementById('chePwd').checked = 'checked';
+                document.getElementById('userPwd').value = cookiePwd;
+            }
+        }
+        //登录，ajax请求地址，参数名
+        function login() {
+            var userName = document.getElementById('userName').value;
+            var userPwd = document.getElementById('userPwd').value;
+            var verifyCode = document.getElementById('verifyCode').value;
+            if (userName.length == 0) {
+                alert('请输入用户名');
+            } else if (userPwd.length == 0) {
+                alert('请输入密码');
+            } else if (document.getElementById('verifyCodeBox').style.display != 'none' && verifyCode.length == 0) {
+                alert('请输入验证码');
+            } else {
+                document.getElementById('loading').style.display = 'inline-block';
+                //ajax调用
+                ajax('/Common/Login', 'userName=' + userName + '&userPwd=' + userPwd+'&verifyCode='+verifyCode, function (msg) {
+                    document.getElementById('loading').style.display = 'none';
+                    if (msg == -1) {
+                        alert('用户名或密码错误');
+                    } else if (msg == -2) {
+                        alert('验证码错误');
+                    } else if (msg == -3) {
+                        alert('用户名或密码错误');
+                        document.getElementById('verifyCodeBox').style.display = 'flex';
+                    } else if (msg == 1) {
+                        //记住账号
+                        setCookie('LoginUserName', userName);
+                        //记住密码
+                        if (document.getElementById('chePwd').checked) { setCookie('LoginUserPwd', userPwd); } else { setCookie('LoginUserPwd', ''); }
+                        location.href = queryString('ReturnUrl') || '/Admin/Index';
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="plr-15 flex-center" style="height:100vh;background-color:#E9ECEF;">
+        <div class="max-w-100 bg-white plr-30 ptb-30 mlr-auto" style="width:360px;box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);">
+            <div class="font-bold font-16 text-center" style="color:#666">数据管理中心-登录</div>
+            <label class="br-4 plr-10 mt-20 flex-center" style="height:38px;border:1px solid #CED4DA;"><input type="text" class="border-none flex-1" placeholder="登录名" id="userName" /><i class="icon-user font-16"></i></label>
+            <label class="br-4 plr-10 mt-20 flex-center" style="height:38px;border:1px solid #CED4DA;"><input type="password" class="border-none flex-1" placeholder="密码" id="userPwd" /><i class="icon-lock font-16"></i></label>
+            <div class="br-4 plr-10 mt-20 flex-center" style="height:38px;border:1px solid #CED4DA;display:none;" id="verifyCodeBox"><input type="text" class="border-none flex-1 h-100" placeholder="验证码" id="verifyCode" /><img src="/Common/VerifyCode" title="看不清，换一张" onclick="this.src='/Common/VerifyCode?id='+Math.random()" /></div>
+            <label class="mt-20 inline-block"><input type="checkbox" class="vertical-middle" id="chePwd" /><span class="vertical-middle">记住密码</span></label>
+            <button class="w-100 mt-20 ptb-10 border-none br-4 color-white" style="background-color:#007BFF;" id="btnLogin" onclick="login()"><i class="icon-spin4 animate-spin" id="loading" style="display:none;"></i>登录</button>
+        </div>
+    </div>
+</body>
+</html>
