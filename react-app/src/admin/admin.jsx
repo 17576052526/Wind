@@ -34,10 +34,8 @@ export default function () {
     //注销
     function cancel() {
         confirm('确定注销？', () => {
-            axios.get('/api/common/cancel').then(msg => {
-                base.set('user', null);
-                navigate('/login')
-            });
+            base.set('user', null);
+            navigate('/login')
         })
     }
 

@@ -24,16 +24,16 @@ export default function ({ close, checked }) {
         setState({ data: checked[0] });
 
         //查询类型数据
-        axios.post("/api/sys_type/SelectAll").then(msg => {
+        axios.post("/api/testtype/select").then(msg => {
             setState({ typeData: msg.data });
         });
     }, []);
 
     //提交
     function submit() {
-        axios.post("/api/test_main/update", {
+        axios.post("/api/testmain/update", {
             ...{
-                ID: state.data.ID,
+                id: state.data.id,
 
             },...formToJSON(form.current)
         }).then(msg => {
@@ -51,16 +51,16 @@ export default function ({ close, checked }) {
                 </>
             }>
                 <FormBox ref={form}>
-                    <FormItem title="编号"><InputText name="MainID" value={state.data && state.data.MainID}></InputText></FormItem>
-                    <FormItem title="名称"><InputText name="MainName" value={state.data && state.data.MainName}></InputText></FormItem>
-                    <FormItem title="类型"><Select data={state.typeData && state.typeData.map(s => ({ value: s.ID, text: s.Name }))} value={state.data && state.data.TypeID} name="TypeID"></Select></FormItem>
-                    <FormItem title="数量"><InputText name="Quantity" value={state.data && state.data.Quantity}></InputText></FormItem>
-                    <FormItem title="金额"><InputText name="Amount" value={state.data && state.data.Amount}></InputText></FormItem>
-                    <FormItem title="是否离职"><Checkbox name="IsShow" checked={state.data && state.data.IsShow}></Checkbox></FormItem>
-                    <FormItem title="图片"><UploadImage name="Img" value={state.data && state.data.Img}></UploadImage></FormItem>
-                    <FormItem title="文件"><UploadFile name="Files" value={state.data && state.data.Files}></UploadFile></FormItem>
-                    <FormItem title="备注"><TextArea name="Remark" value={state.data && state.data.Remark}></TextArea></FormItem>
-                    <FormItem title="日期"><Date name="CreateTime" value={state.data && state.data.CreateTime}></Date></FormItem>
+                    <FormItem title="编号"><InputText name="mainId" value={state.data && state.data.mainId}></InputText></FormItem>
+                    <FormItem title="名称"><InputText name="mainName" value={state.data && state.data.mainName}></InputText></FormItem>
+                    <FormItem title="类型"><Select data={state.typeData && state.typeData.map(s => ({ value: s.id, text: s.name }))} value={state.data && state.data.testTypeId} name="testTypeId"></Select></FormItem>
+                    <FormItem title="数量"><InputText name="quantity" value={state.data && state.data.quantity}></InputText></FormItem>
+                    <FormItem title="金额"><InputText name="amount" value={state.data && state.data.amount}></InputText></FormItem>
+                    <FormItem title="是否离职"><Checkbox name="isShow" checked={state.data && state.data.isShow}></Checkbox></FormItem>
+                    <FormItem title="图片"><UploadImage name="img" value={state.data && state.data.img}></UploadImage></FormItem>
+                    <FormItem title="文件"><UploadFile name="files" value={state.data && state.data.files}></UploadFile></FormItem>
+                    <FormItem title="备注"><TextArea name="remark" value={state.data && state.data.remark}></TextArea></FormItem>
+                    <FormItem title="日期"><Date name="createTime" value={state.data && state.data.createTime}></Date></FormItem>
                 </FormBox>
             </FixedBox>
         </>

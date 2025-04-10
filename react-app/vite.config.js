@@ -12,7 +12,7 @@ export default defineConfig({
         // 代理解决跨域
         proxy: {
             '/server': {
-                target: 'http://localhost:34066',  // 接口源地址
+                target: 'http://localhost:8080',  // 接口源地址
                 changeOrigin: true,   // 开启跨域
                 rewrite: (path) => path.replace(/^\/server/, ''),
             }

@@ -10,4 +10,4 @@ export const apiUrl = process.env.NODE_ENV == 'development' ? '/server' : ''
 export const pageSize = 15;
 
 //文件，图片上传接口地址
-export const uploadPath = '/api/common/Upload';
+export const uploadPath = '/api/common/upload';

@@ -24,14 +24,14 @@ export default function () {
 
     //加载数据
     function load() {
-        axios.post("/api/test_main/select", {
+        axios.post("/api/testmain/selectPage", {
             ...{
                 pageIndex,
                 pageSize
             }, ...state.searchObj
         }).then(msg => {
             setDataCount(msg.data.total);
-            setState({ data: msg.data.list });
+            setState({ data: msg.data.records });
         });
     }
     //搜索
@@ -47,7 +47,7 @@ export default function () {
         if (obj) { checked = [obj]; setChecked(checked); }
         if (checked.length == 0) { alert('请先勾选'); return; }
         confirm('当前选中' + checked.length + '条，确定删除？', () => {
-            axios.post("/api/test_main/delete", checked.map(s => s.ID)).then(msg => {
+            axios.post("/api/testmain/delete", checked.map(s => s.id)).then(msg => {
                 load();
             });
             setChecked([]);//清空选中项
@@ -89,16 +89,16 @@ export default function () {
                                 <Tr key={i}>
                                     <Td tdClassName="table-fixed-left"><Checkbox checked={checked.some(s => JSON.stringify(s) == JSON.stringify(m))} onChange={(e) => setChecked(m, e.target.checked)}></Checkbox></Td>
                                     <Td>{pageSize * (pageIndex - 1) + i + 1}</Td>
-                                    <Td>{m.MainID}</Td>
-                                    <Td>{m.MainName}</Td>
-                                    <Td>{m.Type.Name}</Td>
-                                    <Td>{m.Quantity}</Td>
-                                    <Td>{m.Amount}</Td>
-                                    <Td><Checkbox checked={m.IsShow} readOnly={true}></Checkbox></Td>
-                                    <Td><Image src={m.Img && m.Img.split('|')[0]}></Image></Td>
-                                    <Td><Download href={m.Files}></Download></Td>
-                                    <Td>{m.Remark}</Td>
-                                    <Td>{m.CreateTime}</Td>
+                                    <Td>{m.mainId}</Td>
+                                    <Td>{m.mainName}</Td>
+                                    <Td>{m.name}</Td>
+                                    <Td>{m.quantity}</Td>
+                                    <Td>{m.amount}</Td>
+                                    <Td><Checkbox checked={m.isShow} readOnly={true}></Checkbox></Td>
+                                    <Td><Image src={m.img && m.img.split('|')[0]}></Image></Td>
+                                    <Td><Download href={m.files}></Download></Td>
+                                    <Td>{m.remark}</Td>
+                                    <Td>{m.createTime}</Td>
                                     <Td tdClassName="table-fixed-right" className="mlr-1-c h-pre-c" style={{ overflow: 'visible' }}>
                                         <BtnPrimary className="btn-xs" onClick={() => { setChecked(m); setState({ isTest_Main_update: true }) }}>修改</BtnPrimary>
                                         <BtnDanger className="btn-xs" onClick={() => remove(m)}>删除</BtnDanger>

@@ -18,7 +18,7 @@ export default function ({ close }) {
 
     useEffect(() => {
         //查询类型数据
-        axios.post("/api/sys_type/SelectAll").then(msg => {
+        axios.post("/api/testtype/select").then(msg => {
             setState({ typeData: msg.data });
         });
 
@@ -26,7 +26,7 @@ export default function ({ close }) {
 
     //提交
     function submit() {
-        axios.post("/api/test_main/insert", {
+        axios.post("/api/testmain/insert", {
             ...{
 
             }, ...formToJSON(form.current)
@@ -45,16 +45,16 @@ export default function ({ close }) {
                 </>
             }>
                 <FormBox ref={form}>
-                    <FormItem title="编号"><InputText name="MainID"></InputText></FormItem>
-                    <FormItem title="名称"><InputText name="MainName"></InputText></FormItem>
-                    <FormItem title="类型"><Select data={state.typeData && state.typeData.map(s => ({ value: s.ID, text: s.Name }))} name="TypeID"></Select></FormItem>
-                    <FormItem title="数量"><InputText name="Quantity"></InputText></FormItem>
-                    <FormItem title="金额"><InputText name="Amount"></InputText></FormItem>
-                    <FormItem title="是否离职"><Checkbox name="IsShow"></Checkbox></FormItem>
-                    <FormItem title="图片"><UploadImage name="Img"></UploadImage></FormItem>
-                    <FormItem title="文件"><UploadFile name="Files"></UploadFile></FormItem>
-                    <FormItem title="备注"><TextArea name="Remark"></TextArea></FormItem>
-                    <FormItem title="日期"><Date name="CreateTime"></Date></FormItem>
+                    <FormItem title="编号"><InputText name="mainId"></InputText></FormItem>
+                    <FormItem title="名称"><InputText name="mainName"></InputText></FormItem>
+                    <FormItem title="类型"><Select data={state.typeData && state.typeData.map(s => ({ value: s.id, text: s.name }))} name="testTypeId"></Select></FormItem>
+                    <FormItem title="数量"><InputText name="quantity"></InputText></FormItem>
+                    <FormItem title="金额"><InputText name="amount"></InputText></FormItem>
+                    <FormItem title="是否离职"><Checkbox name="isShow"></Checkbox></FormItem>
+                    <FormItem title="图片"><UploadImage name="img"></UploadImage></FormItem>
+                    <FormItem title="文件"><UploadFile name="files"></UploadFile></FormItem>
+                    <FormItem title="备注"><TextArea name="remark"></TextArea></FormItem>
+                    <FormItem title="日期"><Date name="createTime"></Date></FormItem>
                 </FormBox>
             </FixedBox>
         </>
