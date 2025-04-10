@@ -7,8 +7,8 @@ import {
     BtnDefault, BtnPrimary, BtnSuccess, BtnInfo, BtnDanger, InputText, Checkbox, TextArea, Select, Date, DateTime, UploadImage, UploadFile,
     Table, Thead, Tbody, Tr, Th, Td
 } from '../importJsx'
-import Test_Main_insert from './Test_Main_insert'
-import Test_Main_update from './Test_Main_update'
+import TestMain_insert from './testMain_insert'
+import TestMain_update from './testMain_update'
 
 export default function () {
     //状态
@@ -58,7 +58,7 @@ export default function () {
         <>
             <Box className="h-full">
                 <BoxHead title="用户列表">
-                    <BtnPrimary onClick={() => setState({ isTest_Main_insert: true })}>新建</BtnPrimary>
+                    <BtnPrimary onClick={() => setState({ isTestMain_insert: true })}>新建</BtnPrimary>
                     <BtnDanger onClick={() => remove()}>删除</BtnDanger>
                 </BoxHead>
                 <BoxBody className="flex-column">
@@ -100,7 +100,7 @@ export default function () {
                                     <Td>{m.remark}</Td>
                                     <Td>{m.createTime}</Td>
                                     <Td tdClassName="table-fixed-right" className="mlr-1-c h-pre-c" style={{ overflow: 'visible' }}>
-                                        <BtnPrimary className="btn-xs" onClick={() => { setChecked(m); setState({ isTest_Main_update: true }) }}>修改</BtnPrimary>
+                                        <BtnPrimary className="btn-xs" onClick={() => { setChecked(m); setState({ isTestMain_update: true }) }}>修改</BtnPrimary>
                                         <BtnDanger className="btn-xs" onClick={() => remove(m)}>删除</BtnDanger>
                                     </Td>
                                 </Tr>
@@ -111,8 +111,8 @@ export default function () {
                     <Pager className="pager mt-1.5" lastPage={<i className="icon-chevron_left"></i>} nextPage={<i className="icon-chevron_right"></i>} noneClass="pager-none" activeClass="pager-active"></Pager>
                 </BoxBody>
             </Box>
-            {state.isTest_Main_insert && <Test_Main_insert close={() => { setState({ isTest_Main_insert: null }); load() }}></Test_Main_insert>}
-            {state.isTest_Main_update && <Test_Main_update close={() => { setState({ isTest_Main_update: null }); load(); setChecked([]) }} checked={checked}></Test_Main_update>}
+            {state.isTestMain_insert && <TestMain_insert close={() => { setState({ isTestMain_insert: null }); load() }}></TestMain_insert>}
+            {state.isTestMain_update && <TestMain_update close={() => { setState({ isTestMain_update: null }); load(); setChecked([]) }} checked={checked}></TestMain_update>}
         </>
     )
 }

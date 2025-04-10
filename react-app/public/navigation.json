@@ -12,7 +12,7 @@
       },
       {
         "name": "测试页",
-        "src": "/admin/test_main",
+        "src": "/admin/testmain",
         "icon": "icon-circle_blank"
       },
       {

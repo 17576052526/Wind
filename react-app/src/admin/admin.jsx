@@ -10,7 +10,7 @@ import confirm from '../_plugins/confirm/confirm'
 import { findTree, findTreeBatUpdate } from '../_utils/findTree'
 import './assets/admin.css'
 
-let Test_Main = lazy(() => import('./Test_Main/Test_Main'))
+let TestMain = lazy(() => import('./test/testMain'))
 let Index = lazy(() => import('./index'))
 
 export default function () {
@@ -115,7 +115,7 @@ export default function () {
                     <Suspense fallback="">
                         <Routes>
                             <Route path="" exact element={<Index />}></Route>{/*设置主页*/}
-                            <Route path="Test_Main" element={<Test_Main />}></Route>
+                            <Route path="TestMain" element={<TestMain />}></Route>
                             <Route path="*" element={<div>404--页面不存在</div>}></Route>
                         </Routes>
                     </Suspense>
