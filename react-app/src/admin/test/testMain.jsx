@@ -69,7 +69,7 @@ export default function () {
                     <Table className="flex-1">
                         <Thead>
                             <Tr>
-                                <Th thClassName="table-fixed-left"><Checkbox onChange={(e) => setChecked(state.data, e.target.checked)} checked={(state.data || []).every(m => checked.some(s => JSON.stringify(s) == JSON.stringify(m)))}></Checkbox></Th>
+                                <Th className="table-fixed-left"><Checkbox onChange={(e) => setChecked(state.data, e.target.checked)} checked={(state.data || []).every(m => checked.some(s => JSON.stringify(s) == JSON.stringify(m)))}></Checkbox></Th>
                                 <Th>序号</Th>
                                 <Th>编号</Th>
                                 <Th>名称</Th>
@@ -81,13 +81,13 @@ export default function () {
                                 <Th>文件</Th>
                                 <Th>备注</Th>
                                 <Th>创建时间</Th>
-                                <Th thClassName="table-fixed-right">操作</Th>
+                                <Th className="table-fixed-right">操作</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
                             {state.data && state.data.map((m, i) =>
                                 <Tr key={i}>
-                                    <Td tdClassName="table-fixed-left"><Checkbox checked={checked.some(s => JSON.stringify(s) == JSON.stringify(m))} onChange={(e) => setChecked(m, e.target.checked)}></Checkbox></Td>
+                                    <Td className="table-fixed-left"><Checkbox checked={checked.some(s => JSON.stringify(s) == JSON.stringify(m))} onChange={(e) => setChecked(m, e.target.checked)}></Checkbox></Td>
                                     <Td>{pageSize * (pageIndex - 1) + i + 1}</Td>
                                     <Td>{m.mainId}</Td>
                                     <Td>{m.mainName}</Td>
@@ -99,7 +99,7 @@ export default function () {
                                     <Td><Download href={m.files}></Download></Td>
                                     <Td>{m.remark}</Td>
                                     <Td>{m.createTime}</Td>
-                                    <Td tdClassName="table-fixed-right" className="mlr-1-c h-pre-c" style={{ overflow: 'visible' }}>
+                                    <Td className="table-fixed-right" childclass="mlr-1-c h-pre-c" style={{ overflow: 'visible' }}>
                                         <BtnPrimary className="btn-xs" onClick={() => { setChecked(m); setState({ isTestMain_update: true }) }}>修改</BtnPrimary>
                                         <BtnDanger className="btn-xs" onClick={() => remove(m)}>删除</BtnDanger>
                                     </Td>
