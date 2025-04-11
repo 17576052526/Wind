@@ -146,6 +146,7 @@ a{color: inherit;text-decoration: inherit;}
 }
 
 .font-12{font-size:0.75rem;}
+.font-13{font-size:0.8125rem;}
 .font-14{font-size:0.875rem;}
 .font-16{font-size:1rem;}
 .font-18{font-size:1.125rem;}
@@ -157,6 +158,7 @@ a{color: inherit;text-decoration: inherit;}
 .font-60{font-size:3.75rem;}
 @media(max-width:1024px) {
 .lg-font-12{font-size:0.75rem;}
+.lg-font-13{font-size:0.8125rem;}
 .lg-font-14{font-size:0.875rem;}
 .lg-font-16{font-size:1rem;}
 .lg-font-18{font-size:1.125rem;}
@@ -169,6 +171,7 @@ a{color: inherit;text-decoration: inherit;}
 }
 @media(max-width:768px) {
 .md-font-12{font-size:0.75rem;}
+.md-font-13{font-size:0.8125rem;}
 .md-font-14{font-size:0.875rem;}
 .md-font-16{font-size:1rem;}
 .md-font-18{font-size:1.125rem;}
@@ -181,6 +184,7 @@ a{color: inherit;text-decoration: inherit;}
 }
 @media(max-width:640px) {
 .sm-font-12{font-size:0.75rem;}
+.sm-font-13{font-size:0.8125rem;}
 .sm-font-14{font-size:0.875rem;}
 .sm-font-16{font-size:1rem;}
 .sm-font-18{font-size:1.125rem;}
