@@ -529,6 +529,7 @@ a{color: inherit;text-decoration: inherit;}
 .sm-col-6>*{width:16.66666667%;}
 }
 
+.max-h-full{max-height:100%;}
 .h-auto{height:auto;}
 .h-0{height:0;}
 .h-0\.5{height:0.125rem;}
