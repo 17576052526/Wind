@@ -8,7 +8,7 @@ export function UploadImage({ value, name, readOnly, multiple }) {
     let [data, setData] = useState([])
     useEffect(() => setData(value ? value.split('|') : []), [value])
 
-    function up() {
+    function up(e) {
         upload({
             url: apiUrl + uploadPath,
             formData: null,
@@ -50,7 +50,7 @@ export function UploadFile({ value, name, readOnly, multiple }) {
     let [data, setData] = useState([])
     useEffect(() => setData(value ? value.split('|') : []), [value])
 
-    function up() {
+    function up(e) {
         upload({
             url: apiUrl + uploadPath,
             formData: null,
