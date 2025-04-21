@@ -252,6 +252,7 @@ a{color: inherit;text-decoration: inherit;}
 .bg-contain{background-size:contain;}
 .bg-cover{background-size:cover;}
 .bg-fixed{background-attachment:fixed;}
+.bg-center{background-position:center center;}
 /*颜色等级，外面可覆盖*/
 .bg-black{background-color:#000;}
 .bg-black-1{background-color:#333;}
