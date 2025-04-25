@@ -1166,3 +1166,17 @@ a{color: inherit;text-decoration: inherit;}
 .-mlr-72{margin-left:-18rem;margin-right:-18rem;}
 .-mlr-80{margin-left:-20rem;margin-right:-20rem;}
 .-mlr-96{margin-left:-24rem;margin-right:-24rem;}
+
+
+@media(max-width:1024px) {
+    .lg-pt-0{padding-top: 0;}
+    .lg-mt-0{margin-top: 0;}
+}
+@media(max-width:768px) {
+    .md-pt-0{padding-top: 0;}
+    .md-mt-0{margin-top: 0;}
+}
+@media(max-width:640px) {
+    .sm-pt-0{padding-top: 0;}
+    .sm-mt-0{margin-top: 0;}
+}
