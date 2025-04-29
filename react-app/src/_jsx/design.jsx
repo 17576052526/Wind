@@ -5,7 +5,7 @@ export function Box(props) {
     return (<div {...props} className={'box ' + (props.className || '')}></div>)
 }
 
-//²ÎÊı£ºtitle ±êÌâ   children ÓÒ±ßÏÔÊ¾µÄ½Úµã
+//å‚æ•°ï¼štitle æ ‡é¢˜   children å³è¾¹æ˜¾ç¤ºçš„èŠ‚ç‚¹
 export function BoxHead(props) {
     return (
         <div {...props} className={"box-head " + (props.className || '')} title="">
@@ -39,14 +39,14 @@ export function FormBox(props) {
 
 export function FormItem(props) {
     return (
-        <div {...props} className={'form-item ' + (props.className || '')}>
+        <div {...props} className={'form-item ' + (props.className || '')} title="">
             <span>{props.title}</span>
             {props.children}
         </div>
     )
 }
 
-//µ¯³ö¿ò
+//å¼¹å‡ºæ¡†
 export function FixedBox({ className, style, title, foot, close, children }) {
     return (
         <Box className={"box-move fixed-center " + (className || '')} style={{ ...{ width: '800px', height: '500px' }, ...style }}>
@@ -63,7 +63,7 @@ export function FixedBox({ className, style, title, foot, close, children }) {
     )
 }
 
-//´Ë×é¼şÊÇÓÃÓÚÏÔÊ¾Êı¾İ¿âÖĞµÄÊı¾İ¶ÔÓ¦µÄÍ¼Æ¬£¬ÀıÈç²úÆ·Í¼Æ¬£¬²»ÊÇÓÃÀ´ÏÔÊ¾Ò³Ãæ²¼¾ÖÍ¼Æ¬µÄ
+//æ­¤ç»„ä»¶æ˜¯ç”¨äºæ˜¾ç¤ºæ•°æ®åº“ä¸­çš„æ•°æ®å¯¹åº”çš„å›¾ç‰‡ï¼Œä¾‹å¦‚äº§å“å›¾ç‰‡ï¼Œä¸æ˜¯ç”¨æ¥æ˜¾ç¤ºé¡µé¢å¸ƒå±€å›¾ç‰‡çš„
 export function Image(props) {
     return (
         props.src && <img {...props} src={apiUrl + props.src} className={"img-show " + (props.className || '')} />
