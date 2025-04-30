@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useLayoutEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import axios from 'axios'
 import { useStates, formToJSON, alert, confirm, usePager, useChecked } from '../importShare'
 import { apiUrl, pageSize } from '../../config'
@@ -16,22 +16,18 @@ export default function ({ close, checked }) {
 
     let form = useRef();
 
-    //页面加载，useLayoutEffect有防抖动效果，例如页面加载事件中关闭当前组件
-    useLayoutEffect(() => {
-        if (checked.length == 0) { alert('请先勾选'); close(); return; }
-        if (checked.length > 1) { alert('一次只能修改一条'); close(); return; }
-
+    useEffect(() => {
         setState({ data: checked[0] });
 
         //查询类型数据
-        axios.post("/api/testtype/select").then(msg => {
+        axios.post("/api/TestType/select").then(msg => {
             setState({ typeData: msg.data });
         });
     }, []);
 
     //提交
     function submit() {
-        axios.post("/api/testmain/update", {
+        axios.post("/api/TestMain/update", {
             ...{
                 id: state.data.id,
 

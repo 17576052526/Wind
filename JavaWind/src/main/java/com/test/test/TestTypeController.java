@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController//接口方法返回对象并转换成json
-@RequestMapping("/api/testtype")
+@RequestMapping("/api/TestType")
 public class TestTypeController {
     @Autowired
     private TestTypeMapper mapper;

@@ -18,7 +18,7 @@ export default function ({ close }) {
 
     useEffect(() => {
         //查询类型数据
-        axios.post("/api/testtype/select").then(msg => {
+        axios.post("/api/TestType/select").then(msg => {
             setState({ typeData: msg.data });
         });
 
@@ -26,7 +26,7 @@ export default function ({ close }) {
 
     //提交
     function submit() {
-        axios.post("/api/testmain/insert", {
+        axios.post("/api/TestMain/insert", {
             ...{
 
             }, ...formToJSON(form.current)

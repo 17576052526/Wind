@@ -15,13 +15,20 @@ export default function () {
     let [state, setState] = useStates({
 
     })
-    //分页hooks
-    let { Pager, pageIndex, setPageIndex, setDataCount, setPageSize, setPageBtnNum, pageCount } = usePager(pageSize);
     //选中，全选
     let [checked, setChecked] = useChecked();
+    
+    //分页hooks
+    let { Pager, pageIndex, setPageIndex, setDataCount, setPageSize, setPageBtnNum, pageCount } = usePager(pageSize);
+    //页码改变查询数据
+    useEffect(() => load(), [pageIndex]);
 
+    //搜索
     let form = useRef();
-
+    function search() {
+        state.searchObj = formToJSON(form.current);
+        load();
+    }
     //加载数据
     function load() {
         axios.post("/api/TestMain/selectPage", {
@@ -34,13 +41,6 @@ export default function () {
             setState({ data: msg.data.records });
         });
     }
-    //搜索
-    function search() {
-        state.searchObj = formToJSON(form.current);
-        load();
-    }
-    //页码改变查询数据
-    useEffect(() => load(), [pageIndex]);
 
     //删除
     function remove(obj) {
