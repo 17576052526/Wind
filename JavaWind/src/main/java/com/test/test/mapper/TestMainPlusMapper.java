@@ -1,4 +1,4 @@
-package com.wind.test.mapper;
+package com.test.test.mapper;
 
 public interface TestMainPlusMapper {
 

@@ -1,4 +1,4 @@
-package com.projectname.order;
+package com.test.other;
 
 import com.codegeneration.mapper.TestMainMapper;
 import com.wind.Result;

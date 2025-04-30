@@ -1,4 +1,4 @@
-package com.projectname.order.model;
+package com.test.other.model;
 
 import com.codegeneration.model.TestMain;
 import lombok.Data;

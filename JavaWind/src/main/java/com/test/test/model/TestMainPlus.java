@@ -1,4 +1,4 @@
-package com.wind.test.model;
+package com.test.test.model;
 
 import com.codegeneration.model.TestMain;
 import lombok.Data;

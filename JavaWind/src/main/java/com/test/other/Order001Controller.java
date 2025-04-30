@@ -1,4 +1,4 @@
-package com.projectname.order;
+package com.test.other;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

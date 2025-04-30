@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.wind","com.projectname"})
-@MapperScan({"com.codegeneration.mapper","com.projectname"})
+@ComponentScan({"com.wind","com.test"})
+@MapperScan({"com.codegeneration.mapper","com.test"})
 public class JavaWindApplication {
 
     public static void main(String[] args) {

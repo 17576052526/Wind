@@ -1,4 +1,4 @@
-package com.wind.test;
+package com.test.test;
 
 import com.codegeneration.mapper.TestTypeMapper;
 import com.codegeneration.model.TestMain;

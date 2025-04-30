@@ -1,4 +1,4 @@
-package com.wind.test;
+package com.test.test;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -6,8 +6,8 @@ import com.codegeneration.mapper.TestMainMapper;
 import com.codegeneration.model.TestMain;
 import com.codegeneration.model.TestType;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import com.test.test.model.TestMainPlus;
 import com.wind.Result;
-import com.wind.test.model.TestMainPlus;
 import com.wind.util.Base;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

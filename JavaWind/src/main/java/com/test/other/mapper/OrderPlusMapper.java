@@ -1,4 +1,4 @@
-package com.projectname.order.mapper;
+package com.test.other.mapper;
 
 public interface OrderPlusMapper {
 
