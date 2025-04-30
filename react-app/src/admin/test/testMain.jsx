@@ -7,8 +7,8 @@ import {
     BtnDefault, BtnPrimary, BtnSuccess, BtnInfo, BtnDanger, InputText, Checkbox, TextArea, Select, Date, DateTime, UploadImage, UploadFile,
     Table, Thead, Tbody, Tr, Th, Td
 } from '../importJsx'
-import TestMain_insert from './testMain_insert'
-import TestMain_update from './testMain_update'
+import TestMain_insert from './TestMain_insert'
+import TestMain_update from './TestMain_update'
 
 export default function () {
     //状态
@@ -24,7 +24,7 @@ export default function () {
 
     //加载数据
     function load() {
-        axios.post("/api/testmain/selectPage", {
+        axios.post("/api/TestMain/selectPage", {
             ...{
                 pageIndex,
                 pageSize
@@ -47,7 +47,7 @@ export default function () {
         if (obj) { checked = [obj]; setChecked(checked); }
         if (checked.length == 0) { alert('请先勾选'); return; }
         confirm('当前选中' + checked.length + '条，确定删除？', () => {
-            axios.post("/api/testmain/delete", checked.map(s => s.id)).then(msg => {
+            axios.post("/api/TestMain/delete", checked.map(s => s.id)).then(msg => {
                 load();
             });
             setChecked([]);//清空选中项
@@ -91,7 +91,7 @@ export default function () {
                                     <Td>{pageSize * (pageIndex - 1) + i + 1}</Td>
                                     <Td>{m.mainId}</Td>
                                     <Td>{m.mainName}</Td>
-                                    <Td>{m.name}</Td>
+                                    <Td>{m.testTypeName}</Td>
                                     <Td>{m.quantity}</Td>
                                     <Td>{m.amount}</Td>
                                     <Td><Checkbox checked={m.isShow} readOnly={true}></Checkbox></Td>

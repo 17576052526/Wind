@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class TestMainPlus extends TestMain {
-    private String name;
+    private String testTypeName;
 }
