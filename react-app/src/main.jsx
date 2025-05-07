@@ -56,7 +56,7 @@ axios.interceptors.response.use(res => {
 
 let Test = lazy(() => import('./admin/test'))
 let Login = lazy(() => import('./admin/login'))
-let Admin = lazy(() => import('./admin/admin'))
+let Admin = lazy(() => import('./admin/layout'))
 
 createRoot(document.getElementById('root')).render(
     //禁用严格模式，因为开发环境下 useEffect 会调用两次，打包后不会调用两次
@@ -66,7 +66,7 @@ createRoot(document.getElementById('root')).render(
             <Routes>
                 {/*<Route path="/page1/*" element={<Page1 />}></Route>*/}{/*二级路由写法，父路由要加/*  ，子路由<Route path="Test_Main" element={<Test_Main />}></Route> */}
                 {/*<Route path="/" element={<Navigate to="/page2" />}></Route>*/}{/*重定向*/}
-                {/*<Route path="/" exact element={<Login />}></Route>*/}{/*设置主页*/}
+                <Route path="/" exact element={<Login />}></Route>{/*设置主页*/}
                 <Route path="/test" element={<Test />}></Route>
                 <Route path="/login" element={<Login />}></Route>
                 <Route path="/admin/*" element={<Admin />}></Route>
