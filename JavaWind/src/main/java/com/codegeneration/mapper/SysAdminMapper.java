@@ -1,8 +1,7 @@
 package com.codegeneration.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.codegeneration.model.SysAdmin;
-import com.codegeneration.model.TestMain;
+import com.github.yulichang.base.MPJBaseMapper;
 
-public interface SysAdminMapper extends BaseMapper<SysAdmin> {
+public interface SysAdminMapper extends MPJBaseMapper<SysAdmin> {
 }
