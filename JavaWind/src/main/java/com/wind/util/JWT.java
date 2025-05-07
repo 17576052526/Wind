@@ -7,6 +7,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 /*
 * 加密算法 HS256和 RS256：
 HS256 对称加密算法，签名和验签使用同一个密钥，计算速度快，适合单服务器使用
@@ -20,11 +23,15 @@ public class JWT {
     private static final long EXPIRATION_TIME = 60 * 60 * 1000;
 
     // 生成 JWT
-    public static String generateToken(String userID,String subject) {
+    public static String generateToken(String userID,String subject,String role) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + EXPIRATION_TIME);
 
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role", role);//角色存入进去
+
         return Jwts.builder()
+                .setClaims(claims)
                 .setId(userID)
                 .setSubject(subject)
                 .setIssuedAt(now)

@@ -58,7 +58,7 @@ public class CommonController {
                 return Result.Fail(-1, "用户名或密码错误");
             }
         }
-        String token = JWT.generateToken(admin.getId().toString(), admin.getUserName());
+        String token = JWT.generateToken(admin.getId().toString(), admin.getUserName(), "");
         return Result.OK(token);
     }
 
