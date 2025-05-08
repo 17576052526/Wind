@@ -32,7 +32,7 @@ export function formToJSON(form) {
                 if (element.checked) {
                     obj[name] = value;
                 } else {
-                    obj[name] = element.getAttribute('data-defaultValue') || '';;
+                    obj[name] = element.getAttribute('data-defaultValue') || '';
                 }
             } else {
                 obj[name] = value;
