@@ -1,6 +1,6 @@
 package com.test.test;
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.codegeneration.mapper.TestMainMapper;
 import com.codegeneration.model.TestMain;
@@ -39,19 +39,19 @@ public class TestMainController {
 
     @PostMapping("/update")
     public Result update(@RequestBody TestMain param) {
-        UpdateWrapper<TestMain> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("id", param.getId())
-                .set("main_id", param.getMainId())
-                .set("main_name", param.getMainName())
-                .set("test_type_id", param.getTestTypeId())
-                .set("quantity", param.getQuantity())
-                .set("amount", param.getAmount())
-                .set("is_show", param.getIsShow())
-                .set("img", param.getImg())
-                .set("files", param.getFiles())
-                .set("remark", param.getRemark())
-                .set("create_time", param.getCreateTime());
-        mapper.update(null, updateWrapper);
+        LambdaUpdateWrapper<TestMain> wrapper = new LambdaUpdateWrapper();
+        wrapper.eq(TestMain::getId, param.getId())
+                .set(TestMain::getMainId, param.getMainId())
+                .set(TestMain::getMainName, param.getMainName())
+                .set(TestMain::getTestTypeId, param.getTestTypeId())
+                .set(TestMain::getQuantity, param.getQuantity())
+                .set(TestMain::getAmount, param.getAmount())
+                .set(TestMain::getIsShow, param.getIsShow())
+                .set(TestMain::getImg, param.getImg())
+                .set(TestMain::getFiles, param.getFiles())
+                .set(TestMain::getRemark, param.getRemark())
+                .set(TestMain::getCreateTime, param.getCreateTime());
+        mapper.update(null, wrapper);
         return Result.OK();
     }
 
