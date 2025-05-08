@@ -4,6 +4,6 @@ import com.codegeneration.model.TestMain;
 import lombok.Data;
 
 @Data
-public class OrderPlus extends TestMain {
+public class TestMainTest extends TestMain {
     private String name;
 }
