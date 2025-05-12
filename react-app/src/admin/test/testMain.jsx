@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react'
 import axios from 'axios'
-import { useStates, formToJSON, alert, confirm, usePager, useChecked } from '../importShare'
-import { apiUrl, pageSize } from '../../config'
+import { useStates, formToJSON, alert, confirm, usePager, useChecked } from '@/admin/importShare'
+import { apiUrl, pageSize } from '@/config'
 import {
     Box, BoxHead, BoxBody, BoxFoot, Tab, TabItem, FormBox, FormItem, FixedBox, Image, Download,
     BtnDefault, BtnPrimary, BtnSuccess, BtnInfo, BtnDanger, InputText, Checkbox, TextArea, Select, Date, DateTime, UploadImage, UploadFile,
     Table, Thead, Tbody, Tr, Th, Td
-} from '../importJsx'
+} from '@/admin/importJsx'
 import TestMain_insert from './TestMain_insert'
 import TestMain_update from './TestMain_update'
 
