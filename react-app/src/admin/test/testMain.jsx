@@ -100,7 +100,7 @@ export default function () {
                                     <Td>{m.remark}</Td>
                                     <Td>{m.createTime}</Td>
                                     <Td className="table-fixed-right" childclass="mlr-1-c h-pre-c" style={{ overflow: 'visible' }}>
-                                        <BtnPrimary className="btn-xs" onClick={() => { setChecked(m); setState({ isTestMain_update: true }) }}>修改</BtnPrimary>
+                                        <BtnPrimary className="btn-xs" onClick={() => { setChecked(m); setState({ isTestMain_update: true }) }}>编辑</BtnPrimary>
                                         <BtnDanger className="btn-xs" onClick={() => remove(m)}>删除</BtnDanger>
                                     </Td>
                                 </Tr>
