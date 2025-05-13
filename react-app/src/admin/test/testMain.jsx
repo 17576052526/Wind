@@ -112,7 +112,7 @@ export default function () {
                 </BoxBody>
             </Box>
             {state.isTestMain_insert && <TestMain_insert close={() => { setState({ isTestMain_insert: null }); load() }}></TestMain_insert>}
-            {state.isTestMain_update && <TestMain_update close={() => { setState({ isTestMain_update: null }); load(); setChecked([]) }} checked={checked}></TestMain_update>}
+            {state.isTestMain_update && <TestMain_update close={() => { setState({ isTestMain_update: null }); load(); setChecked([]) }} model={checked[0]}></TestMain_update>}
         </>
     )
 }

@@ -8,7 +8,7 @@ import {
     Table, Thead, Tbody, Tr, Th, Td
 } from '@/admin/importJsx'
 
-export default function ({ close, checked }) {
+export default function ({ close, model }) {
     //状态
     let [state, setState] = useStates({
 
@@ -17,7 +17,7 @@ export default function ({ close, checked }) {
     let form = useRef();
 
     useEffect(() => {
-        setState({ data: checked[0] });
+        setState({ data: model });
 
         //查询类型数据
         axios.post("/api/TestType/select").then(msg => {
