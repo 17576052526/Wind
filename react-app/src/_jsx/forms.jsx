@@ -23,7 +23,7 @@ export function BtnDanger(props) {
 export function InputText(props) {
     let [value, setValue] = useState(props.value)
     useEffect(() => setValue(props.value), [props.value])
-    return (<input onChange={(e) => setValue(e.target.value)} type="text" {...props} value={value || ''} className={'input-text ' + (props.className || '')} />)
+    return (<input onChange={(e) => setValue(e.target.value)} type="text" {...props} value={value} className={'input-text ' + (props.className || '')} />)
 }
 
 export function Checkbox(props) {
@@ -35,7 +35,7 @@ export function Checkbox(props) {
 export function TextArea(props) {
     let [value, setValue] = useState(props.value)
     useEffect(() => setValue(props.value), [props.value])
-    return (<textarea onChange={(e) => setValue(e.target.value)} {...props} value={value || ''} className={'input-text ' + (props.className || '')}></textarea>)
+    return (<textarea onChange={(e) => setValue(e.target.value)} {...props} value={value} className={'input-text ' + (props.className || '')}></textarea>)
 }
 
 //参数：data 下拉的数据
@@ -43,7 +43,7 @@ export function Select(props) {
     let [value, setValue] = useState(props.value)
     useEffect(() => setValue(props.value), [props.value])
     return (
-        <select onChange={(e) => !props.readOnly && setValue(e.target.value)} {...props} value={value || ''} className={'input-text ' + (props.className || '')} data="">
+        <select onChange={(e) => !props.readOnly && setValue(e.target.value)} {...props} value={value} className={'input-text ' + (props.className || '')} data="">
             <option value="">请选择</option>
             {props.data && props.data.map((s, i) => <option key={i} value={s.value}>{s.text}</option>)}
         </select>
@@ -53,11 +53,11 @@ export function Select(props) {
 export function Date(props) {
     let [value, setValue] = useState(props.value)
     useEffect(() => setValue(props.value && props.value.substring(0, 10)), [props.value])
-    return (<input onChange={(e) => setValue(e.target.value)} {...props} type="date" value={value || ''} className={'input-text ' + (props.className || '')} />)
+    return (<input onChange={(e) => setValue(e.target.value)} {...props} type="date" value={value} className={'input-text ' + (props.className || '')} />)
 }
 
 export function DateTime(props) {
     let [value, setValue] = useState(props.value)
     useEffect(() => setValue(props.value), [props.value])
-    return (<input onChange={(e) => setValue(e.target.value)} {...props} type="datetime-local" value={value || ''} className={'input-text ' + (props.className || '')} />)
+    return (<input onChange={(e) => setValue(e.target.value)} {...props} type="datetime-local" value={value} className={'input-text ' + (props.className || '')} />)
 }
