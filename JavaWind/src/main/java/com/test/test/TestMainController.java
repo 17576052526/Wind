@@ -6,7 +6,7 @@ import com.codegeneration.mapper.TestMainMapper;
 import com.codegeneration.model.TestMain;
 import com.codegeneration.model.TestType;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
-import com.test.test.model.TestMainPlus;
+import com.test.model.TestMainTestType;
 import com.wind.Result;
 import com.wind.util.Base;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,8 +66,8 @@ public class TestMainController {
         }
         //多表联查
         wrapper.leftJoin(TestType.class, TestType::getId, TestMain::getTestTypeId);
-        wrapper.selectAs(TestType::getName,TestMainPlus::getTestTypeName);//多表联查字段
-        Page<TestMainPlus> data = mapper.selectJoinPage(new Page((int)param.get("pageIndex"), (int)param.get("pageSize")), TestMainPlus.class, wrapper);
+        wrapper.selectAs(TestType::getName, TestMainTestType::getTestTypeName);//多表联查字段
+        Page<TestMainTestType> data = mapper.selectJoinPage(new Page((int)param.get("pageIndex"), (int)param.get("pageSize")), TestMainTestType.class, wrapper);
         //单表查询
         //Page<TestMain> data = mapper.selectPage(new Page((int)param.get("pageIndex"), (int)param.get("pageSize")), wrapper);
         return Result.OK(data);
