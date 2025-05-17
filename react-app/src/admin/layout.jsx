@@ -23,7 +23,7 @@ export default function () {
         isLeftShow: 1,//左边块是否显示 ，存在值则显示
     });
     useEffect(() => {
-        if (!base.get('user')) { navigate('/login'); }//没登录就跳转到登录页面
+        if (!base.get('user')) { navigate('/login'); return; }//没登录就跳转到登录页面
 
         axios.create({ baseURL: null }).get('./navigation.json').then(response => {
             state.sourceNavData = response.data;
